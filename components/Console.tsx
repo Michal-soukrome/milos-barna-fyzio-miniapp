@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import {
   AGE_GROUP_LABELS,
   AgeGroup,
@@ -92,28 +93,6 @@ export default function Console() {
 
   return (
     <div className="min-h-screen">
-      <header className="bg-[var(--navy)] text-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--clinical)] text-xl font-bold">
-              +
-            </div>
-            <div>
-              <div className="text-sm font-bold tracking-[0.18em] text-[#a7dfe2]">
-                ORTHOCARE
-              </div>
-              <div className="text-xs text-[#bed0d8]">
-                Materiály pro ordinaci
-              </div>
-            </div>
-          </div>
-          <div className="hidden items-center gap-2 text-sm text-[#bed0d8] sm:flex">
-            <span className="h-2 w-2 rounded-full bg-[#72d4bb]" /> Připraveno k
-            použití
-          </div>
-        </div>
-      </header>
-
       <div className="dashboard-grid mx-auto max-w-7xl gap-8 px-5 py-7 sm:px-8 sm:py-10">
         <aside className="mb-7 sm:mb-0">
           <div className="mb-7">
@@ -199,25 +178,41 @@ export default function Console() {
           <ul className="grid gap-3 sm:grid-cols-2">
             {filtered.map((t) => (
               <li key={t.slug} className="topic-card">
-                <button
-                  onClick={() => setSelected(t)}
-                  className="group flex min-h-44 w-full flex-col rounded-2xl border border-[var(--line)] bg-white p-5 text-left shadow-[0_8px_24px_rgba(18,50,71,0.04)] transition-all hover:-translate-y-0.5 hover:border-[var(--clinical)] hover:shadow-[0_14px_30px_rgba(8,126,139,0.12)]"
-                >
-                  <div className="mb-5 flex items-center justify-between">
-                    <span className="rounded-full bg-[var(--clinical-soft)] px-2.5 py-1 text-xs font-bold text-[var(--clinical-deep)]">
-                      {t.bodyPart}
+                <div className="flex min-h-52 w-full flex-col rounded-2xl border border-[var(--line)] bg-white p-4 text-left shadow-[0_8px_24px_rgba(18,50,71,0.04)] transition-all hover:-translate-y-0.5 hover:border-[var(--clinical)] hover:shadow-[0_14px_30px_rgba(8,126,139,0.12)] sm:p-5">
+                  <Link
+                    href={`/t/${t.slug}`}
+                    className="group flex flex-1 flex-col rounded-xl p-1 text-left focus-visible:ring-2 focus-visible:ring-[var(--clinical)]"
+                  >
+                    <div className="mb-5 flex items-center justify-between">
+                      <span className="rounded-full bg-[var(--clinical-soft)] px-2.5 py-1 text-xs font-bold text-[var(--clinical-deep)]">
+                        {t.bodyPart}
+                      </span>
+                      <span className="text-lg text-[var(--clinical)] transition-transform group-hover:translate-x-1">
+                        →
+                      </span>
+                    </div>
+                    <span className="font-serif-display text-xl leading-tight text-[var(--navy)] group-hover:text-[var(--clinical-deep)]">
+                      {t.title}
                     </span>
-                    <span className="text-lg text-[var(--clinical)] transition-transform group-hover:translate-x-1">
-                      →
+                    <span className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
+                      {t.summary}
                     </span>
+                  </Link>
+                  <div className="mt-3 flex items-center gap-3">
+                    <Link href={`/t/${t.slug}`} className="min-h-11 w-full">
+                      <button className="min-h-11 w-full rounded-xl bg-[var(--clinical-deep)] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--clinical-deep)] focus-visible:ring-2 focus-visible:ring-[var(--clinical)] focus-visible:ring-offset-2">
+                        Více informací
+                      </button>
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => setSelected(t)}
+                      className="min-h-11 w-full rounded-xl bg-[var(--clinical)] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--clinical-deep)] focus-visible:ring-2 focus-visible:ring-[var(--clinical)] focus-visible:ring-offset-2"
+                    >
+                      Sdílet
+                    </button>
                   </div>
-                  <div className="font-serif-display text-xl leading-tight text-[var(--navy)]">
-                    {t.title}
-                  </div>
-                  <div className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
-                    {t.summary}
-                  </div>
-                </button>
+                </div>
               </li>
             ))}
             {filtered.length === 0 && (
