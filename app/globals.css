@@ -1,36 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --bone: #f4f7f8;
-  --ink: #172b3a;
-  --ink-soft: #637482;
-  --clinical: #087e8b;
-  --clinical-deep: #075c68;
-  --clinical-soft: #dff2f3;
-  --navy: #123247;
-  --navy-soft: #e8f0f4;
-  --caution: #c46a3a;
-  --caution-soft: #fff0e8;
-  --line: #d8e3e8;
-
   --font-serif: Georgia, "Times New Roman", serif;
   --font-sans: "Trebuchet MS", "Segoe UI", sans-serif;
 }
 
 html {
-  background: var(--bone);
+  @apply bg-slate-50;
 }
 
 body {
-  color: var(--ink);
+  @apply bg-slate-50 text-slate-800;
   font-family: var(--font-sans);
-  background:
-    radial-gradient(
-      circle at 90% 0%,
-      rgba(8, 126, 139, 0.1),
-      transparent 30rem
-    ),
-    var(--bone);
 }
 
 .font-serif-display {
@@ -45,7 +26,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--clinical);
+  @apply outline-2 outline-teal-600;
   outline-offset: 2px;
 }
 
