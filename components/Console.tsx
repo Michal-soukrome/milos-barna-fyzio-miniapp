@@ -80,11 +80,11 @@ export default function Console() {
       <div className="min-h-screen px-5 py-6 sm:px-8">
         <button
           onClick={() => setSelected(null)}
-          className="mx-auto mb-5 block max-w-4xl text-sm font-semibold text-[var(--clinical-deep)] hover:text-[var(--ink)]"
+          className="mx-auto mb-5 block max-w-4xl text-sm font-semibold text-blue-400 hover:text-gray-800"
         >
           ← Zpět na přehled materiálů
         </button>
-        <main className="mx-auto max-w-4xl rounded-2xl border border-[var(--line)] bg-white p-5 shadow-[0_18px_50px_rgba(18,50,71,0.08)] sm:p-10">
+        <main className="mx-auto max-w-4xl rounded-2xl border border-gray-600 bg-white p-5 shadow-[0_18px_50px_rgba(18,50,71,0.08)] sm:p-10">
           <TopicActions topic={selected} />
         </main>
       </div>
@@ -96,27 +96,27 @@ export default function Console() {
       <div className="dashboard-grid mx-auto max-w-7xl gap-8 px-5 py-7 sm:px-8 sm:py-10">
         <aside className="mb-7 sm:mb-0">
           <div className="mb-7">
-            <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-[var(--clinical)]">
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-blue-600">
               Knihovna
             </p>
-            <h1 className="font-serif-display text-3xl leading-tight text-[var(--navy)]">
+            <h1 className="font-serif-display text-3xl leading-tight text-blue-800">
               Pomůcky pro pacienty
             </h1>
-            <p className="mt-3 text-sm leading-relaxed text-[var(--ink-soft)]">
+            <p className="mt-3 text-sm leading-relaxed text-gray-300">
               Vyberte téma a sdílejte ověřené pokyny přes QR kód nebo e-mailem.
             </p>
           </div>
 
-          <div className="rounded-2xl border border-[var(--line)] bg-white p-4 shadow-[0_12px_30px_rgba(18,50,71,0.05)]">
+          <div className="rounded-2xl border border-gray-600 bg-white p-4 shadow-[0_12px_30px_rgba(18,50,71,0.05)]">
             <div className="mb-3 flex items-center justify-between gap-3">
-              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-gray-300">
                 Filtrovat podle oblasti
               </p>
               <button
                 type="button"
                 onClick={clearFilters}
                 disabled={!hasActiveFilters}
-                className="text-xs font-semibold text-[var(--clinical-deep)] underline decoration-[var(--clinical-soft)] underline-offset-4 transition-opacity disabled:cursor-not-allowed disabled:opacity-35"
+                className="text-xs font-semibold text-blue-400 underline decoration-blue-200 underline-offset-4 transition-opacity disabled:cursor-not-allowed disabled:opacity-35"
               >
                 Vymazat filtry
               </button>
@@ -132,8 +132,8 @@ export default function Console() {
                 />
               ))}
             </div>
-            <div className="my-4 border-t border-[var(--line)]" />
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
+            <div className="my-4 border-t border-gray-600" />
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-gray-300">
               Věková skupina
             </p>
             <div className="flex flex-wrap gap-2 sm:flex-col sm:items-start">
@@ -153,16 +153,16 @@ export default function Console() {
         <main>
           <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
-              <p className="text-sm font-semibold text-[var(--clinical)]">
+              <p className="text-sm font-semibold text-blue-600">
                 Dostupné materiály
               </p>
-              <p className="mt-1 text-sm text-[var(--ink-soft)]">
+              <p className="mt-1 text-sm text-gray-300">
                 {filtered.length} {filtered.length === 1 ? "téma" : "témat"} k
                 dispozici
               </p>
             </div>
             <div className="relative w-full sm:max-w-xs">
-              <span className="pointer-events-none absolute left-3 top-2.5 text-[var(--ink-soft)]">
+              <span className="pointer-events-none absolute left-3 top-2.5 text-gray-300">
                 ⌕
               </span>
               <input
@@ -170,7 +170,7 @@ export default function Console() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Hledat příznak nebo téma…"
-                className="w-full rounded-xl border border-[var(--line)] bg-white py-2.5 pl-9 pr-3 text-sm outline-none transition-shadow focus:border-[var(--clinical)] focus:shadow-[0_0_0_3px_var(--clinical-soft)]"
+                className="w-full rounded-xl border border-gray-600 bg-white py-2.5 pl-9 pr-3 text-sm outline-none transition-shadow focus:border-blue-600 focus:shadow-[0_0_0_3px_var(--clinical-soft)]"
               />
             </div>
           </div>
@@ -178,36 +178,36 @@ export default function Console() {
           <ul className="grid gap-3 sm:grid-cols-2">
             {filtered.map((t) => (
               <li key={t.slug} className="topic-card">
-                <div className="flex min-h-52 w-full flex-col rounded-2xl border border-[var(--line)] bg-white p-4 text-left shadow-[0_8px_24px_rgba(18,50,71,0.04)] transition-all hover:-translate-y-0.5 hover:border-[var(--clinical)] hover:shadow-[0_14px_30px_rgba(8,126,139,0.12)] sm:p-5">
+                <div className="flex min-h-52 w-full flex-col rounded-2xl border border-gray-600 bg-white p-4 text-left shadow-[0_8px_24px_rgba(18,50,71,0.04)] transition-all hover:-translate-y-0.5 hover:border-blue-600 hover:shadow-[0_14px_30px_rgba(8,126,139,0.12)] sm:p-5">
                   <Link
                     href={`/t/${t.slug}`}
-                    className="group flex flex-1 flex-col rounded-xl p-1 text-left focus-visible:ring-2 focus-visible:ring-[var(--clinical)]"
+                    className="group flex flex-1 flex-col rounded-xl p-1 text-left focus-visible:ring-2 focus-visible:ring-blue-600"
                   >
                     <div className="mb-5 flex items-center justify-between">
-                      <span className="rounded-full bg-[var(--clinical-soft)] px-2.5 py-1 text-xs font-bold text-[var(--clinical-deep)]">
+                      <span className="rounded-full bg-blue-200 px-2.5 py-1 text-xs font-bold text-blue-400">
                         {t.bodyPart}
                       </span>
-                      <span className="text-lg text-[var(--clinical)] transition-transform group-hover:translate-x-1">
+                      <span className="text-lg text-blue-600 transition-transform group-hover:translate-x-1">
                         →
                       </span>
                     </div>
-                    <span className="font-serif-display text-xl leading-tight text-[var(--navy)] group-hover:text-[var(--clinical-deep)]">
+                    <span className="font-serif-display text-xl leading-tight text-blue-800 group-hover:text-blue-400">
                       {t.title}
                     </span>
-                    <span className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
+                    <span className="mt-2 text-sm leading-relaxed text-gray-300">
                       {t.summary}
                     </span>
                   </Link>
                   <div className="mt-3 flex items-center gap-3">
                     <Link href={`/t/${t.slug}`} className="min-h-11 w-full">
-                      <button className="min-h-11 w-full rounded-xl bg-[var(--clinical-deep)] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--clinical-deep)] focus-visible:ring-2 focus-visible:ring-[var(--clinical)] focus-visible:ring-offset-2">
+                      <button className="min-h-11 w-full rounded-xl bg-blue-400 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-400 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2">
                         Více informací
                       </button>
                     </Link>
                     <button
                       type="button"
                       onClick={() => setSelected(t)}
-                      className="min-h-11 w-full rounded-xl bg-[var(--clinical)] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--clinical-deep)] focus-visible:ring-2 focus-visible:ring-[var(--clinical)] focus-visible:ring-offset-2"
+                      className="min-h-11 w-full rounded-xl bg-blue-600 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-400 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
                     >
                       Sdílet
                     </button>
@@ -216,7 +216,7 @@ export default function Console() {
               </li>
             ))}
             {filtered.length === 0 && (
-              <li className="rounded-2xl border border-dashed border-[var(--line)] px-4 py-10 text-center text-sm text-[var(--ink-soft)] sm:col-span-2">
+              <li className="rounded-2xl border border-dashed border-gray-600 px-4 py-10 text-center text-sm text-gray-300 sm:col-span-2">
                 Žádné téma neodpovídá filtru. Zkuste některý zrušit.
               </li>
             )}
@@ -244,8 +244,8 @@ function FilterChip({
       disabled={disabled}
       className={`rounded-lg border px-3 py-1.5 text-left text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
         active
-          ? "border-[var(--clinical)] bg-[var(--clinical-soft)] font-semibold text-[var(--clinical-deep)]"
-          : "border-[var(--line)] bg-white text-[var(--ink-soft)] hover:border-[var(--clinical)] hover:text-[var(--clinical-deep)]"
+          ? "border-blue-600 bg-blue-200 font-semibold text-blue-400"
+          : "border-gray-600 bg-white text-gray-300 hover:border-blue-600 hover:text-blue-400"
       }`}
     >
       {label}

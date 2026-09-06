@@ -64,14 +64,14 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
       <div className="mt-8">
         <div className="mb-6 flex items-center justify-between">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--clinical)]">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-blue-600">
               Dokončeno
             </p>
-            <h2 className="font-serif-display mt-1 text-2xl text-[var(--navy)]">
+            <h2 className="font-serif-display mt-1 text-2xl text-blue-800">
               Vaše odpovědi
             </h2>
           </div>
-          <span className="rounded-full bg-[var(--clinical-soft)] px-3 py-1 text-xs font-bold text-[var(--clinical-deep)]">
+          <span className="rounded-full bg-blue-200 px-3 py-1 text-xs font-bold text-blue-400">
             {answers.length} odpovědí
           </span>
         </div>
@@ -80,7 +80,7 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
           {answers.map((answer, index) => (
             <div
               key={`${answer}-${index}`}
-              className="rounded-xl border border-[var(--line)] bg-white p-4 text-sm leading-relaxed text-[var(--ink-soft)]"
+              className="rounded-xl border border-gray-600 bg-white p-4 text-sm leading-relaxed text-gray-300"
             >
               {answer}
             </div>
@@ -90,7 +90,7 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
         <button
           type="button"
           onClick={restart}
-          className="mt-6 rounded-xl border border-[var(--clinical)] px-4 py-2.5 text-sm font-semibold text-[var(--clinical-deep)] transition-colors hover:bg-[var(--clinical-soft)]"
+          className="mt-6 rounded-xl border border-blue-600 px-4 py-2.5 text-sm font-semibold text-blue-400 transition-colors hover:bg-blue-200"
         >
           Zopakovat průchod
         </button>
@@ -99,30 +99,30 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
   }
 
   return (
-    <section className="mt-8 border-t border-[var(--line)] pt-8">
+    <section className="mt-8 border-t border-gray-600 pt-8">
       <div className="mb-5 flex items-center justify-between gap-4">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--clinical)]">
+          <p className="text-xs font-bold uppercase tracking-[0.14em] text-blue-600">
             Průvodce
           </p>
-          <h2 className="font-serif-display mt-1 text-2xl text-[var(--navy)]">
+          <h2 className="font-serif-display mt-1 text-2xl text-blue-800">
             Projděme si vaše potíže
           </h2>
         </div>
-        <span className="text-sm font-semibold text-[var(--ink-soft)]">
+        <span className="text-sm font-semibold text-gray-300">
           {step + 1} / {questions.length}
         </span>
       </div>
 
       <div className="mb-6 h-1.5 overflow-hidden rounded-full bg-[var(--navy-soft)]">
         <div
-          className="h-full rounded-full bg-[var(--clinical)] transition-all"
+          className="h-full rounded-full bg-blue-600 transition-all"
           style={{ width: `${((step + 1) / questions.length) * 100}%` }}
         />
       </div>
 
-      <div className="rounded-2xl border border-[var(--line)] bg-[var(--bone)] p-5 sm:p-6">
-        <h3 className="font-serif-display text-xl leading-tight text-[var(--navy)]">
+      <div className="rounded-2xl border border-gray-600 bg-[var(--bone)] p-5 sm:p-6">
+        <h3 className="font-serif-display text-xl leading-tight text-blue-800">
           {question.prompt}
         </h3>
         <div className="mt-5 flex flex-col gap-2">
@@ -136,9 +136,9 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
                 className={`rounded-xl border px-4 py-3 text-left text-sm font-semibold transition-colors ${
                   active
                     ? option.urgent
-                      ? "border-[var(--caution)] bg-[var(--caution-soft)] text-[var(--caution)]"
-                      : "border-[var(--clinical)] bg-[var(--clinical-soft)] text-[var(--clinical-deep)]"
-                    : "border-[var(--line)] bg-white text-[var(--ink)] hover:border-[var(--clinical)]"
+                      ? "border-ornage-300 bg-[var(--caution-soft)] text-ornage-300"
+                      : "border-blue-600 bg-blue-200 text-blue-400"
+                    : "border-gray-600 bg-white text-gray-800 hover:border-blue-600"
                 }`}
               >
                 {option.label}
@@ -151,12 +151,12 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
           <div
             className={`mt-5 rounded-xl border p-4 text-sm leading-relaxed ${
               selectedOption.urgent
-                ? "border-[var(--caution)] bg-[var(--caution-soft)] text-[var(--ink)]"
-                : "border-[var(--line)] bg-white text-[var(--ink-soft)]"
+                ? "border-ornage-300 bg-[var(--caution-soft)] text-gray-800"
+                : "border-gray-600 bg-white text-gray-300"
             }`}
           >
             {selectedOption.urgent && (
-              <strong className="mb-1 block text-[var(--caution)]">
+              <strong className="mb-1 block text-ornage-300">
                 Kontaktujte svého lékaře, pokud se vás některý příznak týká.
               </strong>
             )}
@@ -168,7 +168,7 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
           type="button"
           onClick={continueFlow}
           disabled={!selectedOption}
-          className="mt-5 w-full rounded-xl bg-[var(--clinical)] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--clinical-deep)] disabled:cursor-not-allowed disabled:opacity-40"
+          className="mt-5 w-full rounded-xl bg-blue-600 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-400 disabled:cursor-not-allowed disabled:opacity-40"
         >
           {step === questions.length - 1 ? "Zobrazit shrnutí" : "Pokračovat"}
         </button>

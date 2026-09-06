@@ -15,10 +15,10 @@ export default function RootLayout({
   return (
     <html lang="cs">
       <body className="flex min-h-screen flex-col antialiased">
-        <header className="bg-[var(--navy)] text-white">
+        <header className="bg-blue-800 text-white">
           <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-5 sm:px-8">
             <Link href="/" className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--clinical)] text-xl font-bold">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-xl font-bold">
                 +
               </div>
               <div>
@@ -47,8 +47,8 @@ export default function RootLayout({
 
         <div className="flex-1">{children}</div>
 
-        <footer className="border-t border-[var(--line)] bg-white">
-          <div className="mx-auto flex w-full max-w-7xl flex-col gap-2 px-5 py-5 text-xs text-[var(--ink-soft)] sm:flex-row sm:items-center sm:justify-between sm:px-8">
+        <footer className="border-t border-gray-600 bg-white">
+          <div className="mx-auto flex w-full max-w-7xl flex-col gap-2 px-5 py-5 text-xs text-gray-300 sm:flex-row sm:items-center sm:justify-between sm:px-8">
             <span>OrthoCare · Informační materiály pro pacienty</span>
             <span>V případě nejistoty kontaktujte svou ordinaci.</span>
           </div>
