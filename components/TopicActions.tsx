@@ -17,11 +17,11 @@ export default function TopicActions({ topic }: { topic: Topic }) {
 
   return (
     <div>
-      <div className="mb-1 text-sm text-[var(--ink-soft)]">{topic.bodyPart}</div>
-      <h1 className="font-serif-display text-2xl leading-tight">{topic.title}</h1>
+      <div className="mb-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--clinical)]">{topic.bodyPart}</div>
+      <h1 className="font-serif-display text-3xl leading-tight text-[var(--navy)]">{topic.title}</h1>
       <p className="mt-2 text-sm text-[var(--ink-soft)]">{topic.summary}</p>
 
-      <div className="mt-6 flex gap-1 rounded-lg bg-[var(--clinical-soft)] p-1">
+      <div className="mt-7 flex gap-1 rounded-xl bg-[var(--navy-soft)] p-1">
         <TabButton active={tab === "qr"} onClick={() => setTab("qr")}>
           Zobrazit QR kód
         </TabButton>
@@ -65,8 +65,8 @@ function TabButton({
 
 function QrPane({ url, title }: { url: string; title: string }) {
   return (
-    <div className="flex flex-col items-center rounded-lg border border-[var(--line)] bg-white px-4 py-6">
-      <QRCodeSVG value={url} size={200} level="M" fgColor="#1f2b2e" />
+    <div className="flex flex-col items-center rounded-2xl border border-[var(--line)] bg-[var(--bone)] px-4 py-8">
+      <QRCodeSVG value={url} size={200} level="M" fgColor="#123247" />
       <p className="mt-4 text-center text-sm text-[var(--ink-soft)]">
         Ať si pacient naskenuje kód pro téma &bdquo;{title}&ldquo;.
       </p>
@@ -128,7 +128,7 @@ function EmailPane({ topic }: { topic: Topic }) {
   return (
     <form
       onSubmit={handleSend}
-      className="rounded-lg border border-[var(--line)] bg-white px-4 py-5"
+      className="rounded-2xl border border-[var(--line)] bg-[var(--bone)] px-4 py-6"
     >
       <label className="mb-1 block text-sm text-[var(--ink-soft)]" htmlFor="patient-email">
         E-mail pacienta

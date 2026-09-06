@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "OrthoCare Console",
+  title: "OrthoCare | Ordinace",
   description: "Rychlé informační materiály pro pacienty ordinace",
 };
 

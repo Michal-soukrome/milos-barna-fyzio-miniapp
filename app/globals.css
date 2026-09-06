@@ -1,17 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --bone: #f6f3ec;
-  --ink: #1f2b2e;
-  --ink-soft: #4a5a5c;
-  --clinical: #3f6659;
-  --clinical-soft: #dfe8e2;
-  --caution: #b5622a;
-  --caution-soft: #f3e2d3;
-  --line: #d9d2c2;
+  --bone: #f4f7f8;
+  --ink: #172b3a;
+  --ink-soft: #637482;
+  --clinical: #087e8b;
+  --clinical-deep: #075c68;
+  --clinical-soft: #dff2f3;
+  --navy: #123247;
+  --navy-soft: #e8f0f4;
+  --caution: #c46a3a;
+  --caution-soft: #fff0e8;
+  --line: #d8e3e8;
 
-  --font-serif: Charter, "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-  --font-sans: "Segoe UI", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-sans: "Trebuchet MS", "Segoe UI", sans-serif;
 }
 
 html {
@@ -21,6 +24,9 @@ html {
 body {
   color: var(--ink);
   font-family: var(--font-sans);
+  background:
+    radial-gradient(circle at 90% 0%, rgba(8, 126, 139, 0.1), transparent 30rem),
+    var(--bone);
 }
 
 .font-serif-display {
@@ -37,4 +43,30 @@ body {
 :focus-visible {
   outline: 2px solid var(--clinical);
   outline-offset: 2px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+}
+
+.topic-card {
+  animation: rise-in 420ms ease both;
+}
+
+.topic-card:nth-child(2) { animation-delay: 45ms; }
+.topic-card:nth-child(3) { animation-delay: 90ms; }
+.topic-card:nth-child(4) { animation-delay: 135ms; }
+.topic-card:nth-child(5) { animation-delay: 180ms; }
+.topic-card:nth-child(6) { animation-delay: 225ms; }
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 760px) {
+  .dashboard-grid {
+    display: block;
+  }
 }
