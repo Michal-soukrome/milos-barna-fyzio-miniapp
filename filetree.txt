@@ -13,6 +13,7 @@ C:\Users\Jirak\Github\milos-barna-fyzio-miniapp
 ├── components/
 │   ├── Console.tsx
 │   └── TopicActions.tsx
+├── filetree.txt
 ├── lib/
 │   └── content.ts
 ├── next-env.d.ts
@@ -29,4 +30,5 @@ C:\Users\Jirak\Github\milos-barna-fyzio-miniapp
 ├── README.md
 ├── scripts/
 │   └── generate-tree.js
+├── TopicActions.tsx
 └── tsconfig.json
