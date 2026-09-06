@@ -64,14 +64,14 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
       <div className="mt-8">
         <div className="mb-6 flex items-center justify-between">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-blue-600">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-teal-700">
               Dokončeno
             </p>
-            <h2 className="font-serif-display mt-1 text-2xl text-blue-800">
+            <h2 className="font-serif-display mt-1 text-2xl text-slate-800">
               Vaše odpovědi
             </h2>
           </div>
-          <span className="rounded-full bg-blue-200 px-3 py-1 text-xs font-bold text-blue-400">
+          <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-bold text-teal-800">
             {answers.length} odpovědí
           </span>
         </div>
@@ -80,7 +80,7 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
           {answers.map((answer, index) => (
             <div
               key={`${answer}-${index}`}
-              className="rounded-xl border border-gray-600 bg-white p-4 text-sm leading-relaxed text-gray-300"
+              className="rounded-xl border border-slate-200 bg-white p-4 text-sm leading-relaxed text-slate-600"
             >
               {answer}
             </div>
@@ -90,7 +90,7 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
         <button
           type="button"
           onClick={restart}
-          className="mt-6 rounded-xl border border-blue-600 px-4 py-2.5 text-sm font-semibold text-blue-400 transition-colors hover:bg-blue-200"
+          className="mt-6 rounded-xl border border-teal-700 px-4 py-2.5 text-sm font-semibold text-teal-800 transition-colors hover:bg-teal-50"
         >
           Zopakovat průchod
         </button>
@@ -99,30 +99,30 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
   }
 
   return (
-    <section className="mt-8 border-t border-gray-600 pt-8">
+    <section className="mt-8 border-t border-slate-200 pt-8">
       <div className="mb-5 flex items-center justify-between gap-4">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.14em] text-blue-600">
+          <p className="text-xs font-bold uppercase tracking-[0.14em] text-teal-700">
             Průvodce
           </p>
-          <h2 className="font-serif-display mt-1 text-2xl text-blue-800">
+          <h2 className="font-serif-display mt-1 text-2xl text-slate-800">
             Projděme si vaše potíže
           </h2>
         </div>
-        <span className="text-sm font-semibold text-gray-300">
+        <span className="text-sm font-semibold text-slate-500">
           {step + 1} / {questions.length}
         </span>
       </div>
 
-      <div className="mb-6 h-1.5 overflow-hidden rounded-full bg-[var(--navy-soft)]">
+      <div className="mb-6 h-1.5 overflow-hidden rounded-full bg-slate-200">
         <div
-          className="h-full rounded-full bg-blue-600 transition-all"
+          className="h-full rounded-full bg-teal-700 transition-all"
           style={{ width: `${((step + 1) / questions.length) * 100}%` }}
         />
       </div>
 
-      <div className="rounded-2xl border border-gray-600 bg-[var(--bone)] p-5 sm:p-6">
-        <h3 className="font-serif-display text-xl leading-tight text-blue-800">
+      <div className="rounded-2xl border border-slate-200 bg-teal-50/50 p-5 sm:p-6">
+        <h3 className="font-serif-display text-xl leading-tight text-slate-800">
           {question.prompt}
         </h3>
         <div className="mt-5 flex flex-col gap-2">
@@ -136,9 +136,9 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
                 className={`rounded-xl border px-4 py-3 text-left text-sm font-semibold transition-colors ${
                   active
                     ? option.urgent
-                      ? "border-ornage-300 bg-[var(--caution-soft)] text-ornage-300"
-                      : "border-blue-600 bg-blue-200 text-blue-400"
-                    : "border-gray-600 bg-white text-gray-800 hover:border-blue-600"
+                      ? "border-rose-300 bg-rose-50 text-rose-800"
+                      : "border-teal-600 bg-teal-50 text-teal-800"
+                    : "border-slate-200 bg-white text-slate-800 hover:border-teal-600"
                 }`}
               >
                 {option.label}
@@ -151,12 +151,12 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
           <div
             className={`mt-5 rounded-xl border p-4 text-sm leading-relaxed ${
               selectedOption.urgent
-                ? "border-ornage-300 bg-[var(--caution-soft)] text-gray-800"
-                : "border-gray-600 bg-white text-gray-300"
+                ? "border-rose-300 bg-rose-50 text-slate-800"
+                : "border-slate-200 bg-white text-slate-600"
             }`}
           >
             {selectedOption.urgent && (
-              <strong className="mb-1 block text-ornage-300">
+              <strong className="mb-1 block text-rose-800">
                 Kontaktujte svého lékaře, pokud se vás některý příznak týká.
               </strong>
             )}
@@ -168,7 +168,7 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
           type="button"
           onClick={continueFlow}
           disabled={!selectedOption}
-          className="mt-5 w-full rounded-xl bg-blue-600 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-400 disabled:cursor-not-allowed disabled:opacity-40"
+          className="mt-5 w-full rounded-xl bg-teal-700 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800 disabled:cursor-not-allowed disabled:opacity-40"
         >
           {step === questions.length - 1 ? "Zobrazit shrnutí" : "Pokračovat"}
         </button>
