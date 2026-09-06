@@ -1,151 +1,152 @@
 // ---------------------------------------------------------------------------
-// All patient-facing content lives in this one file.
-// To add or edit a topic, add/edit an entry below — no other code changes needed.
+// Veškerý text pro pacienty je v tomto jediném souboru.
+// Pro přidání nebo úpravu tématu stačí upravit pole "topics" níže —
+// žádný jiný soubor není potřeba měnit.
 // ---------------------------------------------------------------------------
 
 export type AgeGroup = "child" | "adult" | "senior";
 
 export type Topic = {
-  slug: string; // used in the URL: /t/<slug>
-  title: string; // shown to the patient
-  bodyPart: string; // e.g. "Knee", "Ankle", "Wrist / Hand", "Spine", "General"
-  ageGroups: AgeGroup[]; // who this applies to
-  symptoms: string[]; // tags used by the quick-find filter
-  summary: string; // one-line description shown in doctor's list
-  sections: { heading: string; text: string }[]; // PLACEHOLDER — replace with the doctor's real guidance
-  warningSigns: string[]; // "Seek care immediately if..." — PLACEHOLDER
+  slug: string; // použito v URL: /t/<slug>
+  title: string; // zobrazeno pacientovi
+  bodyPart: string; // např. "Koleno", "Kotník", "Zápěstí / ruka", "Páteř", "Obecné"
+  ageGroups: AgeGroup[]; // pro koho platí
+  symptoms: string[]; // štítky pro rychlé vyhledávání
+  summary: string; // jednořádkový popis v seznamu lékaře
+  sections: { heading: string; text: string }[]; // PLACEHOLDER — doplní lékař
+  warningSigns: string[]; // "Ihned vyhledejte péči, pokud..." — PLACEHOLDER
 };
 
 export const AGE_GROUP_LABELS: Record<AgeGroup, string> = {
-  child: "Child",
-  adult: "Adult",
+  child: "Dítě",
+  adult: "Dospělý",
   senior: "Senior",
 };
 
-// NOTE: All body text below is placeholder copy so the app is demoable.
-// Replace every "sections" and "warningSigns" entry with the doctor's actual,
-// reviewed medical guidance before this goes live with real patients.
+// POZNÁMKA: Veškerý text níže je pouze placeholder, aby šla aplikace předvést.
+// Před nasazením pro skutečné pacienty je potřeba nahradit "sections" a
+// "warningSigns" opravdovými, lékařem ověřenými informacemi.
 export const topics: Topic[] = [
   {
     slug: "cast-care",
-    title: "Caring for your cast",
-    bodyPart: "General",
+    title: "Péče o sádru",
+    bodyPart: "Obecné",
     ageGroups: ["child", "adult", "senior"],
-    symptoms: ["cast", "swelling", "itching"],
-    summary: "Keeping a cast dry, clean, and what itching/swelling means",
+    symptoms: ["sádra", "otok", "svědění"],
+    summary: "Jak udržet sádru suchou a čistou, co znamená svědění a otok",
     sections: [
       {
-        heading: "Keeping it dry",
-        text: "PLACEHOLDER — doctor to fill in: how to shower/bathe safely, what to do if it gets wet.",
+        heading: "Udržení sucha",
+        text: "PLACEHOLDER — lékař doplní: jak bezpečně sprchovat/koupat, co dělat, když sádra zvlhne.",
       },
       {
-        heading: "Itching",
-        text: "PLACEHOLDER — doctor to fill in: why casts itch, what not to insert inside the cast.",
+        heading: "Svědění",
+        text: "PLACEHOLDER — lékař doplní: proč sádra svědí, co nikdy nestrkat dovnitř.",
       },
       {
-        heading: "Normal vs. not normal swelling",
-        text: "PLACEHOLDER — doctor to fill in: how much swelling of fingers/toes is expected.",
+        heading: "Normální vs. neobvyklý otok",
+        text: "PLACEHOLDER — lékař doplní: jak velký otok prstů je očekávaný.",
       },
     ],
     warningSigns: [
-      "PLACEHOLDER — e.g. fingers/toes turn blue, cold, or numb",
-      "PLACEHOLDER — e.g. pain that keeps increasing despite medication",
+      "PLACEHOLDER — např. prsty zmodrají, jsou studené nebo necitlivé",
+      "PLACEHOLDER — např. bolest, která navzdory lékům stále narůstá",
     ],
   },
   {
     slug: "ankle-sprain-rehab",
-    title: "Recovering from an ankle sprain",
-    bodyPart: "Ankle",
+    title: "Zotavení po podvrtnutí kotníku",
+    bodyPart: "Kotník",
     ageGroups: ["adult", "senior"],
-    symptoms: ["swelling", "bruising", "pain when walking"],
-    summary: "RICE protocol, weight-bearing timeline, when to return to sport",
+    symptoms: ["otok", "modřina", "bolest při chůzi"],
+    summary: "Postup RICE, kdy začít zatěžovat nohu, návrat ke sportu",
     sections: [
       {
-        heading: "The first 48 hours",
-        text: "PLACEHOLDER — doctor to fill in: rest, ice, compression, elevation guidance.",
+        heading: "Prvních 48 hodin",
+        text: "PLACEHOLDER — lékař doplní: klid, led, komprese, poloha nohy výše.",
       },
       {
-        heading: "Getting back on your feet",
-        text: "PLACEHOLDER — doctor to fill in: expected timeline for weight-bearing.",
+        heading: "Návrat na nohy",
+        text: "PLACEHOLDER — lékař doplní: očekávaný časový rámec pro zatěžování nohy.",
       },
     ],
     warningSigns: [
-      "PLACEHOLDER — e.g. unable to bear any weight after 3-4 days",
-      "PLACEHOLDER — e.g. visible deformity",
+      "PLACEHOLDER — např. po 3-4 dnech nelze na nohu vůbec došlápnout",
+      "PLACEHOLDER — např. viditelná deformita",
     ],
   },
   {
     slug: "knee-swelling-post-op",
-    title: "Swelling after knee surgery",
-    bodyPart: "Knee",
+    title: "Otok po operaci kolena",
+    bodyPart: "Koleno",
     ageGroups: ["adult", "senior"],
-    symptoms: ["swelling", "warmth", "post-surgery"],
-    summary: "What's expected after knee surgery vs. signs of infection/clot",
+    symptoms: ["otok", "teplo", "po operaci"],
+    summary: "Co je po operaci kolena normální vs. příznaky infekce/trombózy",
     sections: [
       {
-        heading: "What's normal",
-        text: "PLACEHOLDER — doctor to fill in: expected swelling timeline post-op.",
+        heading: "Co je normální",
+        text: "PLACEHOLDER — lékař doplní: očekávaný průběh otoku po operaci.",
       },
     ],
     warningSigns: [
-      "PLACEHOLDER — e.g. calf pain and swelling on one side (possible clot)",
-      "PLACEHOLDER — e.g. fever, redness spreading, wound discharge",
+      "PLACEHOLDER — např. bolest a otok lýtka jen na jedné straně (možná trombóza)",
+      "PLACEHOLDER — např. horečka, šířící se zarudnutí, výtok z rány",
     ],
   },
   {
     slug: "crutches-how-to",
-    title: "Using crutches safely",
-    bodyPart: "General",
+    title: "Bezpečné používání berlí",
+    bodyPart: "Obecné",
     ageGroups: ["child", "adult", "senior"],
-    symptoms: ["crutches", "balance", "stairs"],
-    summary: "Correct height, walking technique, stairs, avoiding falls",
+    symptoms: ["berle", "rovnováha", "schody"],
+    summary: "Správná výška, technika chůze, schody, jak se vyhnout pádu",
     sections: [
       {
-        heading: "Fitting your crutches",
-        text: "PLACEHOLDER — doctor to fill in: correct crutch height and hand position.",
+        heading: "Nastavení berlí",
+        text: "PLACEHOLDER — lékař doplní: správná výška berlí a poloha rukou.",
       },
       {
-        heading: "Stairs",
-        text: "PLACEHOLDER — doctor to fill in: 'up with the good, down with the bad' technique.",
+        heading: "Schody",
+        text: "PLACEHOLDER — lékař doplní: technika 'nahoru se zdravou, dolů s postiženou'.",
       },
     ],
     warningSigns: [
-      "PLACEHOLDER — e.g. numbness/tingling in hands or armpits (crutch pressure)",
+      "PLACEHOLDER — např. necitlivost nebo brnění v rukou či podpaží (tlak berlí)",
     ],
   },
   {
     slug: "post-op-wound-care",
-    title: "Caring for your surgical wound",
-    bodyPart: "General",
+    title: "Péče o operační ránu",
+    bodyPart: "Obecné",
     ageGroups: ["adult", "senior"],
-    symptoms: ["wound", "dressing", "post-surgery"],
-    summary: "Dressing changes, showering, signs of infection",
+    symptoms: ["rána", "obvaz", "po operaci"],
+    summary: "Převazy, sprchování, příznaky infekce",
     sections: [
       {
-        heading: "Changing the dressing",
-        text: "PLACEHOLDER — doctor to fill in: how often, how to keep it sterile.",
+        heading: "Výměna obvazu",
+        text: "PLACEHOLDER — lékař doplní: jak často a jak udržet sterilitu.",
       },
     ],
     warningSigns: [
-      "PLACEHOLDER — e.g. increasing redness, warmth, or discharge",
-      "PLACEHOLDER — e.g. fever above 38°C / 100.4°F",
+      "PLACEHOLDER — např. narůstající zarudnutí, teplo nebo výtok",
+      "PLACEHOLDER — např. horečka nad 38 °C",
     ],
   },
   {
     slug: "wrist-fracture-basics",
-    title: "After a wrist fracture",
-    bodyPart: "Wrist / Hand",
+    title: "Po zlomenině zápěstí",
+    bodyPart: "Zápěstí / ruka",
     ageGroups: ["child", "adult", "senior"],
-    symptoms: ["fracture", "splint", "swelling"],
-    summary: "Splint care, finger movement, expected healing time",
+    symptoms: ["zlomenina", "dlaha", "otok"],
+    summary: "Péče o dlahu, pohyb prstů, očekávaná doba hojení",
     sections: [
       {
-        heading: "Keeping fingers moving",
-        text: "PLACEHOLDER — doctor to fill in: why gentle finger movement is encouraged.",
+        heading: "Udržování pohyblivosti prstů",
+        text: "PLACEHOLDER — lékař doplní: proč je vhodný šetrný pohyb prsty.",
       },
     ],
     warningSigns: [
-      "PLACEHOLDER — e.g. fingers turning pale or numb",
+      "PLACEHOLDER — např. prsty blednou nebo znecitliví",
     ],
   },
 ];

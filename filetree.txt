@@ -1,0 +1,32 @@
+C:\Users\Jirak\Github\milos-barna-fyzio-miniapp
+├── .env.local
+├── AGENTS.md
+├── app/
+│   ├── api/
+│   │   └── send/
+│   ├── globals.css
+│   ├── page.tsx
+│   └── t/
+│       └── [slug]/
+│           └── page.tsx
+├── CLAUDE.md
+├── components/
+│   ├── Console.tsx
+│   └── TopicActions.tsx
+├── lib/
+│   └── content.ts
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── public/
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+├── README.md
+├── scripts/
+│   └── generate-tree.js
+└── tsconfig.json

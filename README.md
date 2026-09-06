@@ -56,12 +56,13 @@ then redeploy.
 
 ## Before this goes near real patients
 
-All the medical content in `lib/content.ts` is placeholder text so the app
-is demoable. Every `sections` and `warningSigns` field needs to be replaced
-with the doctor's own reviewed guidance before any patient sees it. It's
-worth having him review the disclaimer wording too (in
-`components/TopicActions.tsx` and `app/t/[slug]/page.tsx`) to make sure
-it matches how he wants to frame "this isn't a diagnosis."
+All patient-facing and UI text is in Czech. The medical content in
+`lib/content.ts` is placeholder text so the app is demoable. Every
+`sections` and `warningSigns` field needs to be replaced with the doctor's
+own reviewed guidance before any patient sees it. It's worth having him
+review the disclaimer wording too (in `components/TopicActions.tsx` and
+`app/t/[slug]/page.tsx`) to make sure it matches how he wants to frame
+"tohle není diagnóza."
 
 ## No database, no patient data stored
 
