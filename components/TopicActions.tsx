@@ -17,8 +17,12 @@ export default function TopicActions({ topic }: { topic: Topic }) {
 
   return (
     <div>
-      <div className="mb-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--clinical)]">{topic.bodyPart}</div>
-      <h1 className="font-serif-display text-3xl leading-tight text-[var(--navy)]">{topic.title}</h1>
+      <div className="mb-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--clinical)]">
+        {topic.bodyPart}
+      </div>
+      <h1 className="font-serif-display text-3xl leading-tight text-[var(--navy)]">
+        {topic.title}
+      </h1>
       <p className="mt-2 text-sm text-[var(--ink-soft)]">{topic.summary}</p>
 
       <div className="mt-7 flex gap-1 rounded-xl bg-[var(--navy-soft)] p-1">
@@ -31,7 +35,11 @@ export default function TopicActions({ topic }: { topic: Topic }) {
       </div>
 
       <div className="mt-5">
-        {tab === "qr" ? <QrPane url={url} title={topic.title} /> : <EmailPane topic={topic} />}
+        {tab === "qr" ? (
+          <QrPane url={url} title={topic.title} />
+        ) : (
+          <EmailPane topic={topic} />
+        )}
       </div>
 
       <div className="mt-8 rounded-lg border border-[var(--line)] bg-white px-4 py-3 text-sm text-[var(--ink-soft)]">
@@ -55,7 +63,9 @@ function TabButton({
     <button
       onClick={onClick}
       className={`flex-1 rounded-md py-2 text-sm font-medium transition-colors ${
-        active ? "bg-white text-[var(--clinical)] shadow-sm" : "text-[var(--ink-soft)]"
+        active
+          ? "bg-white text-[var(--clinical)] shadow-sm"
+          : "text-[var(--ink-soft)]"
       }`}
     >
       {children}
@@ -70,7 +80,9 @@ function QrPane({ url, title }: { url: string; title: string }) {
       <p className="mt-4 text-center text-sm text-[var(--ink-soft)]">
         Ať si pacient naskenuje kód pro téma &bdquo;{title}&ldquo;.
       </p>
-      <p className="mt-1 break-all text-center text-xs text-[var(--ink-soft)]">{url}</p>
+      <p className="mt-1 break-all text-center text-xs text-[var(--ink-soft)]">
+        {url}
+      </p>
     </div>
   );
 }
@@ -111,7 +123,9 @@ function EmailPane({ topic }: { topic: Topic }) {
   if (state === "sent") {
     return (
       <div className="rounded-lg border border-[var(--clinical)] bg-[var(--clinical-soft)] px-4 py-6 text-center">
-        <p className="font-medium text-[var(--clinical)]">Odesláno na {email}</p>
+        <p className="font-medium text-[var(--clinical)]">
+          Odesláno na {email}
+        </p>
         <button
           onClick={() => {
             setState("idle");
@@ -130,7 +144,10 @@ function EmailPane({ topic }: { topic: Topic }) {
       onSubmit={handleSend}
       className="rounded-2xl border border-[var(--line)] bg-[var(--bone)] px-4 py-6"
     >
-      <label className="mb-1 block text-sm text-[var(--ink-soft)]" htmlFor="patient-email">
+      <label
+        className="mb-1 block text-sm text-[var(--ink-soft)]"
+        htmlFor="patient-email"
+      >
         E-mail pacienta
       </label>
       <input

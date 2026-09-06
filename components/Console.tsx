@@ -1,7 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { AGE_GROUP_LABELS, AgeGroup, BODY_PARTS, Topic, topics } from "@/lib/content";
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  AGE_GROUP_LABELS,
+  AgeGroup,
+  BODY_PARTS,
+  Topic,
+  topics,
+} from "@/lib/content";
 import TopicActions from "@/components/TopicActions";
 
 const AGE_GROUPS: AgeGroup[] = ["child", "adult", "senior"];
@@ -11,19 +17,62 @@ export default function Console() {
   const [age, setAge] = useState<AgeGroup | null>(null);
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<Topic | null>(null);
+  const skipInitialUrlSync = useRef(true);
+
+  useEffect(() => {
+    function readFiltersFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const urlBodyPart = params.get("bodyPart");
+      const urlAge = params.get("age");
+
+      setBodyPart(BODY_PARTS.includes(urlBodyPart ?? "") ? urlBodyPart : null);
+      setAge(
+        AGE_GROUPS.includes(urlAge as AgeGroup) ? (urlAge as AgeGroup) : null,
+      );
+      setQuery(params.get("q") ?? "");
+    }
+
+    readFiltersFromUrl();
+    window.addEventListener("popstate", readFiltersFromUrl);
+    return () => window.removeEventListener("popstate", readFiltersFromUrl);
+  }, []);
+
+  useEffect(() => {
+    if (skipInitialUrlSync.current) {
+      skipInitialUrlSync.current = false;
+      return;
+    }
+
+    const params = new URLSearchParams();
+    if (bodyPart) params.set("bodyPart", bodyPart);
+    if (age) params.set("age", age);
+    if (query.trim()) params.set("q", query.trim());
+
+    const search = params.toString();
+    window.history.replaceState(
+      window.history.state,
+      "",
+      `${window.location.pathname}${search ? `?${search}` : ""}`,
+    );
+  }, [bodyPart, age, query]);
 
   const filtered = useMemo(() => {
     return topics.filter((t) => {
-      if (bodyPart && t.bodyPart !== bodyPart) return false;
-      if (age && !t.ageGroups.includes(age)) return false;
-      if (query.trim()) {
-        const q = query.trim().toLowerCase();
-        const haystack = `${t.title} ${t.summary} ${t.symptoms.join(" ")}`.toLowerCase();
-        if (!haystack.includes(q)) return false;
-      }
-      return true;
+      return matchesFilters(t, bodyPart, age, query);
     });
   }, [bodyPart, age, query]);
+
+  const hasBodyPartResults = (part: string) =>
+    topics.some((topic) => matchesFilters(topic, part, age, query));
+  const hasAgeResults = (group: AgeGroup) =>
+    topics.some((topic) => matchesFilters(topic, bodyPart, group, query));
+  const hasActiveFilters = Boolean(bodyPart || age || query.trim());
+
+  function clearFilters() {
+    setBodyPart(null);
+    setAge(null);
+    setQuery("");
+  }
 
   if (selected) {
     return (
@@ -46,14 +95,21 @@ export default function Console() {
       <header className="bg-[var(--navy)] text-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--clinical)] text-xl font-bold">+</div>
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--clinical)] text-xl font-bold">
+              +
+            </div>
             <div>
-              <div className="text-sm font-bold tracking-[0.18em] text-[#a7dfe2]">ORTHOCARE</div>
-              <div className="text-xs text-[#bed0d8]">Materiály pro ordinaci</div>
+              <div className="text-sm font-bold tracking-[0.18em] text-[#a7dfe2]">
+                ORTHOCARE
+              </div>
+              <div className="text-xs text-[#bed0d8]">
+                Materiály pro ordinaci
+              </div>
             </div>
           </div>
           <div className="hidden items-center gap-2 text-sm text-[#bed0d8] sm:flex">
-            <span className="h-2 w-2 rounded-full bg-[#72d4bb]" /> Připraveno k použití
+            <span className="h-2 w-2 rounded-full bg-[#72d4bb]" /> Připraveno k
+            použití
           </div>
         </div>
       </header>
@@ -61,23 +117,55 @@ export default function Console() {
       <div className="dashboard-grid mx-auto max-w-7xl gap-8 px-5 py-7 sm:px-8 sm:py-10">
         <aside className="mb-7 sm:mb-0">
           <div className="mb-7">
-            <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-[var(--clinical)]">Knihovna</p>
-            <h1 className="font-serif-display text-3xl leading-tight text-[var(--navy)]">Pomůcky pro pacienty</h1>
-            <p className="mt-3 text-sm leading-relaxed text-[var(--ink-soft)]">Vyberte téma a sdílejte ověřené pokyny přes QR kód nebo e-mailem.</p>
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-[var(--clinical)]">
+              Knihovna
+            </p>
+            <h1 className="font-serif-display text-3xl leading-tight text-[var(--navy)]">
+              Pomůcky pro pacienty
+            </h1>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--ink-soft)]">
+              Vyberte téma a sdílejte ověřené pokyny přes QR kód nebo e-mailem.
+            </p>
           </div>
 
           <div className="rounded-2xl border border-[var(--line)] bg-white p-4 shadow-[0_12px_30px_rgba(18,50,71,0.05)]">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-[var(--ink-soft)]">Filtrovat podle oblasti</p>
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
+                Filtrovat podle oblasti
+              </p>
+              <button
+                type="button"
+                onClick={clearFilters}
+                disabled={!hasActiveFilters}
+                className="text-xs font-semibold text-[var(--clinical-deep)] underline decoration-[var(--clinical-soft)] underline-offset-4 transition-opacity disabled:cursor-not-allowed disabled:opacity-35"
+              >
+                Vymazat filtry
+              </button>
+            </div>
             <div className="flex flex-wrap gap-2 sm:flex-col sm:items-start">
               {BODY_PARTS.map((part) => (
-                <FilterChip key={part} label={part} active={bodyPart === part} onClick={() => setBodyPart(bodyPart === part ? null : part)} />
+                <FilterChip
+                  key={part}
+                  label={part}
+                  active={bodyPart === part}
+                  disabled={bodyPart !== part && !hasBodyPartResults(part)}
+                  onClick={() => setBodyPart(bodyPart === part ? null : part)}
+                />
               ))}
             </div>
             <div className="my-4 border-t border-[var(--line)]" />
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-[var(--ink-soft)]">Věková skupina</p>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
+              Věková skupina
+            </p>
             <div className="flex flex-wrap gap-2 sm:flex-col sm:items-start">
               {AGE_GROUPS.map((g) => (
-                <FilterChip key={g} label={AGE_GROUP_LABELS[g]} active={age === g} onClick={() => setAge(age === g ? null : g)} />
+                <FilterChip
+                  key={g}
+                  label={AGE_GROUP_LABELS[g]}
+                  active={age === g}
+                  disabled={age !== g && !hasAgeResults(g)}
+                  onClick={() => setAge(age === g ? null : g)}
+                />
               ))}
             </div>
           </div>
@@ -86,29 +174,57 @@ export default function Console() {
         <main>
           <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
-              <p className="text-sm font-semibold text-[var(--clinical)]">Dostupné materiály</p>
-              <p className="mt-1 text-sm text-[var(--ink-soft)]">{filtered.length} {filtered.length === 1 ? "téma" : "témat"} k dispozici</p>
+              <p className="text-sm font-semibold text-[var(--clinical)]">
+                Dostupné materiály
+              </p>
+              <p className="mt-1 text-sm text-[var(--ink-soft)]">
+                {filtered.length} {filtered.length === 1 ? "téma" : "témat"} k
+                dispozici
+              </p>
             </div>
             <div className="relative w-full sm:max-w-xs">
-              <span className="pointer-events-none absolute left-3 top-2.5 text-[var(--ink-soft)]">⌕</span>
-              <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Hledat příznak nebo téma…" className="w-full rounded-xl border border-[var(--line)] bg-white py-2.5 pl-9 pr-3 text-sm outline-none transition-shadow focus:border-[var(--clinical)] focus:shadow-[0_0_0_3px_var(--clinical-soft)]" />
+              <span className="pointer-events-none absolute left-3 top-2.5 text-[var(--ink-soft)]">
+                ⌕
+              </span>
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Hledat příznak nebo téma…"
+                className="w-full rounded-xl border border-[var(--line)] bg-white py-2.5 pl-9 pr-3 text-sm outline-none transition-shadow focus:border-[var(--clinical)] focus:shadow-[0_0_0_3px_var(--clinical-soft)]"
+              />
             </div>
           </div>
 
           <ul className="grid gap-3 sm:grid-cols-2">
             {filtered.map((t) => (
               <li key={t.slug} className="topic-card">
-                <button onClick={() => setSelected(t)} className="group flex min-h-44 w-full flex-col rounded-2xl border border-[var(--line)] bg-white p-5 text-left shadow-[0_8px_24px_rgba(18,50,71,0.04)] transition-all hover:-translate-y-0.5 hover:border-[var(--clinical)] hover:shadow-[0_14px_30px_rgba(8,126,139,0.12)]">
+                <button
+                  onClick={() => setSelected(t)}
+                  className="group flex min-h-44 w-full flex-col rounded-2xl border border-[var(--line)] bg-white p-5 text-left shadow-[0_8px_24px_rgba(18,50,71,0.04)] transition-all hover:-translate-y-0.5 hover:border-[var(--clinical)] hover:shadow-[0_14px_30px_rgba(8,126,139,0.12)]"
+                >
                   <div className="mb-5 flex items-center justify-between">
-                    <span className="rounded-full bg-[var(--clinical-soft)] px-2.5 py-1 text-xs font-bold text-[var(--clinical-deep)]">{t.bodyPart}</span>
-                    <span className="text-lg text-[var(--clinical)] transition-transform group-hover:translate-x-1">→</span>
+                    <span className="rounded-full bg-[var(--clinical-soft)] px-2.5 py-1 text-xs font-bold text-[var(--clinical-deep)]">
+                      {t.bodyPart}
+                    </span>
+                    <span className="text-lg text-[var(--clinical)] transition-transform group-hover:translate-x-1">
+                      →
+                    </span>
                   </div>
-                  <div className="font-serif-display text-xl leading-tight text-[var(--navy)]">{t.title}</div>
-                  <div className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">{t.summary}</div>
+                  <div className="font-serif-display text-xl leading-tight text-[var(--navy)]">
+                    {t.title}
+                  </div>
+                  <div className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
+                    {t.summary}
+                  </div>
                 </button>
               </li>
             ))}
-            {filtered.length === 0 && <li className="rounded-2xl border border-dashed border-[var(--line)] px-4 py-10 text-center text-sm text-[var(--ink-soft)] sm:col-span-2">Žádné téma neodpovídá filtru. Zkuste některý zrušit.</li>}
+            {filtered.length === 0 && (
+              <li className="rounded-2xl border border-dashed border-[var(--line)] px-4 py-10 text-center text-sm text-[var(--ink-soft)] sm:col-span-2">
+                Žádné téma neodpovídá filtru. Zkuste některý zrušit.
+              </li>
+            )}
           </ul>
         </main>
       </div>
@@ -119,16 +235,19 @@ export default function Console() {
 function FilterChip({
   label,
   active,
+  disabled,
   onClick,
 }: {
   label: string;
   active: boolean;
+  disabled: boolean;
   onClick: () => void;
 }) {
   return (
     <button
       onClick={onClick}
-      className={`rounded-lg border px-3 py-1.5 text-left text-sm transition-colors ${
+      disabled={disabled}
+      className={`rounded-lg border px-3 py-1.5 text-left text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
         active
           ? "border-[var(--clinical)] bg-[var(--clinical-soft)] font-semibold text-[var(--clinical-deep)]"
           : "border-[var(--line)] bg-white text-[var(--ink-soft)] hover:border-[var(--clinical)] hover:text-[var(--clinical-deep)]"
@@ -137,4 +256,21 @@ function FilterChip({
       {label}
     </button>
   );
+}
+
+function matchesFilters(
+  topic: Topic,
+  bodyPart: string | null,
+  age: AgeGroup | null,
+  query: string,
+) {
+  if (bodyPart && topic.bodyPart !== bodyPart) return false;
+  if (age && !topic.ageGroups.includes(age)) return false;
+  if (query.trim()) {
+    const normalizedQuery = query.trim().toLowerCase();
+    const haystack =
+      `${topic.title} ${topic.summary} ${topic.symptoms.join(" ")}`.toLowerCase();
+    if (!haystack.includes(normalizedQuery)) return false;
+  }
+  return true;
 }
