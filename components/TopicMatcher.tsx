@@ -51,16 +51,10 @@ export default function TopicMatcher() {
     <section className="mb-10 rounded-2xl border border-teal-200 bg-teal-50 p-5 shadow-sm sm:p-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-800">
-            Najít podle situace
-          </p>
           <h2 className="font-serif-display mt-1 text-2xl text-slate-800">
-            Co potřebujete vědět?
+            Napište, co hledáte
           </h2>
         </div>
-        <span className="rounded-full border border-teal-300 px-2.5 py-1 text-xs font-bold text-teal-800">
-          Vyhledání návodu
-        </span>
       </div>
       <p className="mt-2 text-sm leading-relaxed text-slate-600">
         Popište téma nebo situaci a najdeme související návod. Například pokyny

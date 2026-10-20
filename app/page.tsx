@@ -33,7 +33,7 @@ const destinations = [
   {
     href: "/kontakt",
     eyebrow: "Kontakt",
-    title: "Spojit se se mnou",
+    title: "Kontakt",
     description: "Najděte kontaktní údaje a možnosti, jak se na mě obrátit.",
   },
 ];
@@ -73,17 +73,6 @@ export default function HomePage() {
               >
                 O mně
               </Link>
-              <a
-                href="https://www.barnamedical.cz/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center text-sm font-bold text-teal-100 underline decoration-teal-400 underline-offset-4 transition-colors hover:text-white hover:decoration-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              >
-                Web Barna Medical
-                <span aria-hidden="true" className="ml-1">
-                  ↗
-                </span>
-              </a>
             </div>
           </div>
 
@@ -103,64 +92,60 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mt-10">
-        <div className="mb-5">
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
-            Podle toho, co právě potřebujete
-          </p>
-          <h2 className="font-serif-display mt-2 text-3xl text-slate-800">
-            Jak vám mohu pomoci
-          </h2>
-        </div>
-        <ul className="grid gap-4 sm:grid-cols-2">
-          {destinations.map((destination) => (
-            <li key={destination.href}>
-              <Link
-                href={destination.href}
-                className="group block h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-teal-600 hover:shadow-md group"
-              >
-                <p className="text-xs font-bold uppercase tracking-[0.14em] text-teal-700">
-                  {destination.eyebrow}
-                </p>
-                <h3 className="font-serif-display mt-2 text-2xl text-slate-800 group-hover:text-teal-800">
-                  {destination.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                  {destination.description}
-                </p>
-                <span className="mt-4 inline-block text-sm font-bold text-teal-800 group-hover:underline">
-                  Otevřít →
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <div className="space-y-6">
+        <section className="mt-10">
+          <div className="mb-5">
+            <h2 className="font-serif-display mt-2 text-3xl text-slate-800">
+              Jak vám mohu pomoci
+            </h2>
+          </div>
+          <ul className="grid gap-4 sm:grid-cols-2">
+            {destinations.map((destination) => (
+              <li key={destination.href}>
+                <Link
+                  href={destination.href}
+                  className="group block h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-teal-600 hover:shadow-md group"
+                >
+                  <p className="!hidden text-xs font-bold uppercase tracking-[0.14em] text-teal-700">
+                    {destination.eyebrow}
+                  </p>
+                  <h3 className="font-serif-display mt-2 text-2xl text-slate-800 group-hover:text-teal-800">
+                    {destination.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                    {destination.description}
+                  </p>
+                  <span className="mt-4 inline-block text-sm font-bold text-teal-800 group-hover:underline">
+                    Otevřít →
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
 
-      <section className="mt-8 rounded-2xl border border-teal-200 bg-teal-50 p-6 sm:p-8">
-        <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-800">
-          Barna Medical · Praha
-        </p>
-        <h2 className="font-serif-display mt-2 text-2xl text-slate-800">
-          Péče v Barna Medical
-        </h2>
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-slate-700">
-          Pokud se připravujete na léčbu nebo zákrok v Barna Medical, aktuální
-          informace o klinice najdete na jejím webu. Praktické pokyny, které
-          vám posílám, otevřete přímo přes odkaz nebo QR kód.
-        </p>
-        <a
-          href="https://www.barnamedical.cz/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-5 inline-flex min-h-11 items-center rounded-xl bg-teal-800 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-900"
-        >
-          Web Barna Medical
-          <span aria-hidden="true" className="ml-2">
-            ↗
-          </span>
-        </a>
-      </section>
+        <section className="rounded-2xl border border-teal-200 bg-teal-50 p-6 sm:p-8">
+          <h2 className="font-serif-display mt-2 text-2xl text-slate-800">
+            Péče v Barna Medical
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-slate-700">
+            Pokud se připravujete na léčbu nebo zákrok v Barna Medical, aktuální
+            informace o klinice najdete na jejím webu. Praktické pokyny, které
+            vám posílám, otevřete přímo přes odkaz nebo QR kód.
+          </p>
+          <a
+            href="https://www.barnamedical.cz/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex min-h-11 items-center rounded-xl bg-teal-800 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-900"
+          >
+            Web Barna Medical
+            <span aria-hidden="true" className="ml-2">
+              ↗
+            </span>
+          </a>
+        </section>
+      </div>
     </Layout>
   );
 }

@@ -152,9 +152,7 @@ export default function SiteChrome({
 
       <footer className="border-t border-slate-200 bg-white">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-6 text-xs leading-relaxed text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-          <span>
-            Miloš Barna · Praktické pokyny před zákrokem i po něm
-          </span>
+          <span>MUDr. Barna Miloš, Ph.D. - oficiální webové stránky</span>
           <div className="flex flex-col gap-2 sm:items-end">
             <a
               href="https://www.barnamedical.cz/"
@@ -164,7 +162,6 @@ export default function SiteChrome({
             >
               Barna Medical Praha <span aria-hidden="true">↗</span>
             </a>
-            <span>V případě nejistoty kontaktujte svou ordinaci.</span>
           </div>
         </div>
       </footer>

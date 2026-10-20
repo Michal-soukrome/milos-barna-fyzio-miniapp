@@ -25,9 +25,6 @@ export default async function ArticlesPage() {
   return (
     <Layout>
       <section>
-        <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
-          Pro lepší orientaci
-        </p>
         <h1 className="font-serif-display mt-2 text-4xl leading-tight text-slate-800">
           Články
         </h1>

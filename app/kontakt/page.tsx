@@ -20,9 +20,6 @@ export default function ContactPage() {
   return (
     <Layout>
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
-        <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
-          Spojte se se mnou
-        </p>
         <h1 className="font-serif-display mt-2 text-4xl leading-tight text-slate-800">
           Kontakt
         </h1>

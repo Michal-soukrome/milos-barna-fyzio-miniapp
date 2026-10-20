@@ -17,7 +17,7 @@ export default function TopicActions({ topic }: { topic: PatientGuide }) {
 
   return (
     <div>
-      <div className="mb-2 text-xs font-bold uppercase tracking-[0.14em] text-teal-700">
+      <div className="!hidden mb-2 text-xs font-bold uppercase tracking-[0.14em] text-teal-700">
         {topic.bodyPart}
       </div>
       <h2 className="font-serif-display text-3xl leading-tight text-slate-800">
@@ -42,7 +42,7 @@ export default function TopicActions({ topic }: { topic: PatientGuide }) {
         )}
       </div>
 
-      <div className="mt-8 rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500">
+      <div className="mt-4 rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500">
         Tyto pokyny poskytují pouze obecné informace. Nenahrazují osobní
         vyšetření. V případě nejistoty se ozvěte nebo přijďte znovu.
       </div>
@@ -75,9 +75,7 @@ function QrPane({ url, title }: { url: string; title: string }) {
   return (
     <div className="flex flex-col items-center rounded-2xl border border-slate-200 bg-teal-50/50 px-4 py-8">
       <QRCodeSVG value={url} size={200} level="M" fgColor="#123247" />
-      <p className="mt-4 text-center text-sm text-slate-500">
-        Ať si pacient naskenuje kód pro téma &bdquo;{title}&ldquo;.
-      </p>
+
       <p className="mt-1 break-all text-center text-xs text-slate-500">{url}</p>
     </div>
   );
