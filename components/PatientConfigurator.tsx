@@ -8,6 +8,7 @@ type FlowOption = { label: string; answer: string; urgent?: boolean };
 
 type FlowQuestion = {
   prompt: string;
+  details?: string[];
   options: FlowOption[];
 };
 
@@ -17,26 +18,57 @@ type FlowAnswer = {
   answer: string;
 };
 
+const BARNA_MEDICAL_REHABILITATION_URL =
+  "https://www.barnamedical.cz/sluzby/lecba/rehabilitace-po-urazech-a-operaci";
+const BARNA_MEDICAL_CONTACT_URL = "https://www.barnamedical.cz/kontakt";
+
+function formatAnswerCount(count: number) {
+  const plural = new Intl.PluralRules("cs-CZ").select(count);
+  const label =
+    plural === "one" ? "odpověď" : plural === "few" ? "odpovědi" : "odpovědí";
+  return `${count} ${label}`;
+}
+
+function getBarnaMedicalLink(slug: string) {
+  if (slug === "post-op-wound-care") {
+    return {
+      href: BARNA_MEDICAL_CONTACT_URL,
+      label: "Kontaktovat Barna Medical",
+    };
+  }
+
+  return {
+    href: BARNA_MEDICAL_REHABILITATION_URL,
+    label: "Rehabilitace po úrazech a operaci",
+  };
+}
+
 export default function PatientConfigurator({
   topic,
 }: {
   topic: PatientGuide;
 }) {
   const questions: FlowQuestion[] = [
-    {
-      prompt: "Týká se vás některý z těchto varovných příznaků?",
-      options: [
-        {
-          label: "Ano, některý z těchto příznaků mám",
-          answer: topic.warningSigns.join(" "),
-          urgent: true,
-        },
-        {
-          label: "Ne, mohu pokračovat",
-          answer: "Podle vašich odpovědí můžete pokračovat k běžným pokynům.",
-        },
-      ],
-    },
+    ...(!topic.isDemo
+      ? [
+          {
+            prompt: "Týká se vás některý z těchto varovných příznaků?",
+            details: topic.warningSigns,
+            options: [
+              {
+                label: "Ano, některý z těchto příznaků mám",
+                answer: topic.warningSigns.join(" "),
+                urgent: true,
+              },
+              {
+                label: "Ne, mohu pokračovat",
+                answer:
+                  "Podle vašich odpovědí můžete pokračovat k běžným pokynům.",
+              },
+            ],
+          },
+        ]
+      : []),
     ...topic.sections.map((section) => ({
       prompt: `Potřebujete informace k tématu „${section.heading}"?`,
       options: [
@@ -51,6 +83,7 @@ export default function PatientConfigurator({
   const [answers, setAnswers] = useState<FlowAnswer[]>([]);
   const [isUrgent, setIsUrgent] = useState(false);
 
+  const barnaMedicalLink = getBarnaMedicalLink(topic.slug);
   const question = questions[step];
   const isComplete = step >= questions.length;
 
@@ -122,6 +155,14 @@ export default function PatientConfigurator({
           >
             Kontakty ordinace
           </Link>
+          <a
+            href={barnaMedicalLink.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-11 items-center rounded-xl border border-rose-400 px-4 py-2.5 text-sm font-semibold text-rose-900 transition-colors hover:bg-white"
+          >
+            {barnaMedicalLink.label} <span aria-hidden="true">↗</span>
+          </a>
           <button
             type="button"
             onClick={restart}
@@ -147,7 +188,7 @@ export default function PatientConfigurator({
             </h2>
           </div>
           <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-bold text-teal-800">
-            {answers.length} odpovědí
+            {formatAnswerCount(answers.length)}
           </span>
         </div>
 
@@ -181,13 +222,20 @@ export default function PatientConfigurator({
 
   return (
     <section className="mt-8 border-t border-slate-200 pt-8">
+      {topic.isDemo && (
+        <p className="mb-5 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-relaxed text-amber-950">
+          V této ukázce nejsou varovné příznaky odborně ověřené, proto je
+          průvodce nevyhodnocuje. Následující otázky pouze ukazují výběr částí
+          průvodce.
+        </p>
+      )}
       <div className="mb-5 flex items-center justify-between gap-4">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.14em] text-teal-700">
             Průvodce
           </p>
           <h2 className="font-serif-display mt-1 text-2xl text-slate-800">
-            Projděme si vaše potíže
+            Průvodce krok za krokem
           </h2>
         </div>
         <span
@@ -213,6 +261,13 @@ export default function PatientConfigurator({
         >
           {question.prompt}
         </h3>
+        {question.details && (
+          <ul className="mt-3 list-inside list-disc space-y-1 text-sm leading-relaxed text-slate-700">
+            {question.details.map((detail, index) => (
+              <li key={`${detail}-${index}`}>{detail}</li>
+            ))}
+          </ul>
+        )}
         <div className="mt-5 flex flex-col gap-2">
           {question.options.map((option) => {
             const active = selectedOption?.label === option.label;

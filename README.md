@@ -45,6 +45,9 @@ published demo records with a prominent warning or medically reviewed records.
 Article pages show only published documents marked as medically reviewed.
 Article categories are used to prioritize related reading; when no categories
 match, the sidebar falls back to the newest other reviewed articles.
+When a patient confirms a warning sign, the guide links to Barna Medical's
+injury/operation rehabilitation information, except wound-care topics, which
+link to the clinic's contact page.
 
 1. Create a Sanity project and dataset, then copy the project ID and dataset
    name from the Sanity project settings.

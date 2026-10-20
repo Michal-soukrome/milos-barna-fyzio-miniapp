@@ -50,54 +50,66 @@ const destinations = [
 export default function HomePage() {
   return (
     <Layout>
-      <section className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-        <div className="grid md:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)]">
-          <div className="flex flex-col justify-center p-6 sm:p-10 lg:p-14">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
-              Vítejte
-            </p>
-            <h1 className="font-serif-display mt-3 text-4xl leading-tight text-slate-800 sm:text-5xl">
-              MUDr. Barna Miloš, Ph.D.
-            </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">
-              Profesní informace, přehled ordinace a pacientské materiály na
-              jednom místě.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link
-                href="/o-lekari"
-                className="inline-flex min-h-11 items-center rounded-xl bg-teal-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800"
-              >
-                O lékaři
-              </Link>
-              <Link
-                href="/kontakt"
-                className="inline-flex min-h-11 items-center rounded-xl border border-slate-300 px-5 py-3 text-sm font-bold text-slate-700 transition-colors hover:border-teal-700 hover:text-teal-800"
-              >
-                Kontakt
-              </Link>
-              <a
-                href="https://www.barnamedical.cz/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center rounded-xl border border-slate-300 px-5 py-3 text-sm font-bold text-slate-700 transition-colors hover:border-teal-700 hover:text-teal-800"
-              >
-                Web Barna Medical <span aria-hidden="true" className="ml-1">↗</span>
-              </a>
-            </div>
+     <section className="overflow-hidden rounded-3xl bg-teal-900 text-white">
+      <div className="grid items-end md:grid-cols-[minmax(0,1.25fr)_minmax(300px,0.75fr)]">
+        <div className="px-6 pt-10 sm:px-10 sm:pt-14 md:self-center md:py-16 lg:px-14 lg:py-20">
+          <h1 className="font-serif-display text-4xl leading-[1.08] sm:text-5xl lg:text-6xl">
+            <span className="block text-2xl text-teal-200 sm:text-3xl">
+              MUDr.
+            </span>
+            Miloš Barna
+            <span className="block text-2xl text-teal-200 sm:text-3xl">
+              Ph.D.
+            </span>
+          </h1>
+ 
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-teal-50">
+            Profesní informace, přehled ordinace a pacientské materiály na
+            jednom místě.
+          </p>
+ 
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <Link
+              href="/kontakt"
+              className="inline-flex min-h-11 items-center rounded-xl bg-white px-6 py-3 text-sm font-bold text-teal-900 transition-colors hover:bg-teal-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              Kontakt
+            </Link>
+            <Link
+              href="/o-lekari"
+              className="inline-flex min-h-11 items-center rounded-xl border border-teal-300/60 px-6 py-3 text-sm font-bold text-white transition-colors hover:border-white hover:bg-teal-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              O lékaři
+            </Link>
+            <a
+              href="https://www.barnamedical.cz/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center text-sm font-bold text-teal-100 underline decoration-teal-400 underline-offset-4 transition-colors hover:text-white hover:decoration-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              Web Barna Medical
+              <span aria-hidden="true" className="ml-1">
+                ↗
+              </span>
+            </a>
           </div>
-          <div className="relative min-h-72 bg-teal-50 md:min-h-full">
+        </div>
+ 
+        {/* Arched portrait, sitting flush on the bottom edge of the panel */}
+        <div className="px-6 pt-10 sm:px-10 md:px-0 md:pr-10 md:pt-12 lg:pr-14">
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-t-[999px] bg-teal-800 ring-1 ring-inset ring-teal-300/30">
             <Image
               src="/milos/milos_barna_ml.jpeg"
               alt="Portrét MUDr. Barna Miloš, Ph.D."
               fill
               priority
-              sizes="(max-width: 768px) 100vw, 40vw"
+              sizes="(max-width: 768px) 80vw, 30vw"
               className="object-cover object-top"
             />
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       <section className="mt-10">
         <div className="mb-5">

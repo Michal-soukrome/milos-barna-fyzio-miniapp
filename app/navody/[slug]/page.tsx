@@ -43,8 +43,8 @@ export default async function TopicPage({
           {topic.title}
         </h1>
         <p className="mt-3 text-[15px] leading-relaxed text-slate-500">
-          Odpovězte na několik krátkých otázek a zobrazíme vám informace, které
-          se vás týkají.
+          Přečtěte si otázku, vyberte odpověď a pokračujte k příslušným
+          informacím.
         </p>
 
         <PatientConfigurator topic={topic} />
