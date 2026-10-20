@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import Layout from "@/components/Layout";
 
 export const metadata: Metadata = {
@@ -115,8 +116,9 @@ export default function HomePage() {
                   <p className="mt-2 text-sm leading-relaxed text-slate-600">
                     {destination.description}
                   </p>
-                  <span className="mt-4 inline-block text-sm font-bold text-teal-800 group-hover:underline">
-                    Otevřít →
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-teal-800 group-hover:underline">
+                    Otevřít
+                    <ArrowRight aria-hidden="true" className="h-4 w-4" />
                   </span>
                 </Link>
               </li>
@@ -140,9 +142,7 @@ export default function HomePage() {
             className="mt-5 inline-flex min-h-11 items-center rounded-xl bg-teal-800 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-900"
           >
             Web Barna Medical
-            <span aria-hidden="true" className="ml-2">
-              ↗
-            </span>
+            <ExternalLink aria-hidden="true" className="ml-2 h-4 w-4" />
           </a>
         </section>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ExternalLink, Menu, Plus, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -52,9 +53,6 @@ export default function SiteChrome({
             className="flex min-w-0 items-center gap-3"
             onClick={() => setMenuOpen(false)}
           >
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-700 text-xl font-bold">
-              +
-            </div>
             <div className="min-w-0">
               <div className="truncate text-xs font-bold tracking-[0.12em] text-teal-200 sm:text-sm sm:tracking-[0.18em]">
                 MUDr. Barna Miloš, Ph.D.
@@ -74,22 +72,11 @@ export default function SiteChrome({
             aria-controls="main-nav"
             onClick={() => setMenuOpen((open) => !open)}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              className="h-6 w-6"
-              aria-hidden="true"
-            >
-              {menuOpen ? (
-                <path d="M6 6l12 12M18 6L6 18" />
-              ) : (
-                <path d="M4 7h16M4 12h16M4 17h16" />
-              )}
-            </svg>
+            {menuOpen ? (
+              <X aria-hidden="true" className="h-6 w-6" />
+            ) : (
+              <Menu aria-hidden="true" className="h-6 w-6" />
+            )}
           </button>
 
           {/* Desktop nav */}
@@ -160,7 +147,8 @@ export default function SiteChrome({
               rel="noopener noreferrer"
               className="inline-flex min-h-11 items-center font-semibold text-teal-800 underline decoration-teal-300 underline-offset-4 hover:text-teal-950 sm:min-h-0"
             >
-              Barna Medical Praha <span aria-hidden="true">↗</span>
+              Barna Medical Praha
+              <ExternalLink aria-hidden="true" className="ml-1 h-3.5 w-3.5" />
             </a>
           </div>
         </div>

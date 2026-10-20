@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { ArrowRight, FunnelX, Search } from "lucide-react";
 import {
   AGE_GROUP_LABELS,
   type AgeGroup,
@@ -178,8 +179,12 @@ export default function Console({
                   type="button"
                   onClick={clearFilters}
                   disabled={!hasActiveFilters}
-                  className="text-xs font-semibold text-teal-800 underline decoration-teal-200 underline-offset-4 transition-opacity disabled:cursor-not-allowed disabled:opacity-35"
+                  className="text-xs font-semibold text-teal-800 underline decoration-teal-200 underline-offset-4 transition-opacity disabled:cursor-not-allowed disabled:opacity-35 flex items-center gap-1"
                 >
+                  <FunnelX
+                    aria-hidden="true"
+                    className="h-3.5 w-3.5 shrink-0"
+                  />
                   Vymazat filtry
                 </button>
               </div>
@@ -224,9 +229,10 @@ export default function Console({
                 </p>
               </div>
               <div className="relative w-full sm:max-w-xs">
-                <span className="pointer-events-none absolute left-3 top-2.5 text-slate-400">
-                  ⌕
-                </span>
+                <Search
+                  aria-hidden="true"
+                  className="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-slate-400"
+                />
                 <input
                   type="text"
                   value={query}
@@ -250,9 +256,10 @@ export default function Console({
                         <span className="rounded-full bg-teal-50 px-2.5 py-1 text-xs font-bold text-teal-800">
                           {t.bodyPart}
                         </span>
-                        <span className="text-lg text-teal-700 transition-transform group-hover:translate-x-1">
-                          →
-                        </span>
+                        <ArrowRight
+                          aria-hidden="true"
+                          className="h-5 w-5 text-teal-700 transition-transform group-hover:translate-x-1"
+                        />
                       </div>
                       <span className="font-serif-display text-xl leading-tight text-slate-800 group-hover:text-teal-800">
                         {t.title}

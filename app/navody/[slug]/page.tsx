@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { ExternalLink } from "lucide-react";
 import Layout from "@/components/Layout";
 import PatientGuideBody from "@/components/PatientGuideBody";
 import {
@@ -91,7 +92,11 @@ export default async function TopicPage({
                 rel="noopener noreferrer"
                 className="inline-flex min-h-11 items-center rounded-xl border border-rose-400 px-4 py-2.5 text-sm font-semibold text-rose-950 transition-colors hover:bg-white"
               >
-                {followUpLink.label} <span aria-hidden="true">↗</span>
+                {followUpLink.label}
+                <ExternalLink
+                  aria-hidden="true"
+                  className="ml-1 h-4 w-4"
+                />
               </a>
             </div>
           </aside>

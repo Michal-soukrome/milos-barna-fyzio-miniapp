@@ -45,10 +45,7 @@ export default function AboutPage() {
               po něm. Záleží mi na tom, abyste věděli, co vás čeká a kam se
               obrátit, když potřebujete další informace.
             </p>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">
-              Na tomto webu sdílím praktické pokyny, cvičení a články, ke
-              kterým se můžete vrátit, kdykoli je potřebujete.
-            </p>
+
             <Link
               href="/navody"
               className="mt-6 inline-flex min-h-11 items-center rounded-xl bg-teal-700 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-teal-800"
