@@ -1,20 +1,29 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Topic } from "@/lib/content";
+
+type FlowOption = { label: string; answer: string; urgent?: boolean };
 
 type FlowQuestion = {
   prompt: string;
-  options: { label: string; answer: string; urgent?: boolean }[];
+  options: FlowOption[];
+};
+
+type FlowAnswer = {
+  prompt: string;
+  choice: string;
+  answer: string;
 };
 
 export default function PatientConfigurator({ topic }: { topic: Topic }) {
   const questions: FlowQuestion[] = [
     {
-      prompt: "Máte některý z těchto varovných příznaků?",
+      prompt: "Týká se vás některý z těchto varovných příznaků?",
       options: [
         {
-          label: "Ano, chci je zkontrolovat",
+          label: "Ano, některý z těchto příznaků mám",
           answer: topic.warningSigns.join(" "),
           urgent: true,
         },
@@ -34,34 +43,96 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
   ];
 
   const [step, setStep] = useState(0);
-  const [selectedOption, setSelectedOption] = useState<
-    FlowQuestion["options"][number] | null
-  >(null);
-  const [answers, setAnswers] = useState<string[]>([]);
+  const [selectedOption, setSelectedOption] = useState<FlowOption | null>(null);
+  const [answers, setAnswers] = useState<FlowAnswer[]>([]);
+  const [isUrgent, setIsUrgent] = useState(false);
 
   const question = questions[step];
   const isComplete = step >= questions.length;
 
-  function chooseOption(option: FlowQuestion["options"][number]) {
+  function chooseOption(option: FlowOption) {
     setSelectedOption(option);
   }
 
   function continueFlow() {
     if (!selectedOption) return;
-    setAnswers((current) => [...current, selectedOption.answer]);
+    setAnswers((current) => [
+      ...current.slice(0, step),
+      {
+        prompt: question.prompt,
+        choice: selectedOption.label,
+        answer: selectedOption.answer,
+      },
+    ]);
+    if (selectedOption.urgent) {
+      setIsUrgent(true);
+      return;
+    }
     setSelectedOption(null);
     setStep((current) => current + 1);
+  }
+
+  function goBack() {
+    if (step === 0) return;
+    const previousStep = step - 1;
+    const previousAnswer = answers[previousStep];
+    setStep(previousStep);
+    setSelectedOption(
+      previousAnswer
+        ? (questions[previousStep].options.find(
+            (option) => option.label === previousAnswer.choice,
+          ) ?? null)
+        : null,
+    );
   }
 
   function restart() {
     setStep(0);
     setSelectedOption(null);
     setAnswers([]);
+    setIsUrgent(false);
+  }
+
+  if (isUrgent) {
+    return (
+      <section
+        role="alert"
+        className="mt-8 rounded-2xl border border-rose-300 bg-rose-50 p-5 sm:p-6"
+      >
+        <h2 className="font-serif-display text-2xl text-rose-900">
+          Nepokračujte v tomto průvodci
+        </h2>
+        <p className="mt-3 text-sm leading-relaxed text-slate-700">
+          Pokud se vás některý z uvedených příznaků týká, kontaktujte ordinaci.
+          Tento online průvodce nenahrazuje individuální lékařské posouzení.
+        </p>
+        <ul className="mt-4 list-inside list-disc space-y-2 text-sm leading-relaxed text-slate-700">
+          {topic.warningSigns.map((warning, index) => (
+            <li key={`${warning}-${index}`}>{warning}</li>
+          ))}
+        </ul>
+        <div className="mt-5 flex flex-wrap gap-3">
+          <Link
+            href="/contact"
+            className="inline-flex min-h-11 items-center rounded-xl bg-rose-800 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-rose-900"
+          >
+            Kontakty ordinace
+          </Link>
+          <button
+            type="button"
+            onClick={restart}
+            className="min-h-11 rounded-xl border border-rose-400 px-4 py-2.5 text-sm font-semibold text-rose-900 transition-colors hover:bg-white"
+          >
+            Začít znovu
+          </button>
+        </div>
+      </section>
+    );
   }
 
   if (isComplete) {
     return (
-      <div className="mt-8">
+      <section aria-live="polite" className="mt-8">
         <div className="mb-6 flex items-center justify-between">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-teal-700">
@@ -79,10 +150,16 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
         <div className="flex flex-col gap-3">
           {answers.map((answer, index) => (
             <div
-              key={`${answer}-${index}`}
-              className="rounded-xl border border-slate-200 bg-white p-4 text-sm leading-relaxed text-slate-600"
+              key={`${answer.prompt}-${index}`}
+              className="rounded-xl border border-slate-200 bg-white p-4"
             >
-              {answer}
+              <h3 className="font-semibold text-slate-800">{answer.prompt}</h3>
+              <p className="mt-2 text-xs font-bold uppercase tracking-wide text-teal-700">
+                {answer.choice}
+              </p>
+              <p className="mt-1 text-sm leading-relaxed text-slate-600">
+                {answer.answer}
+              </p>
             </div>
           ))}
         </div>
@@ -94,7 +171,7 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
         >
           Zopakovat průchod
         </button>
-      </div>
+      </section>
     );
   }
 
@@ -109,7 +186,10 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
             Projděme si vaše potíže
           </h2>
         </div>
-        <span className="text-sm font-semibold text-slate-500">
+        <span
+          aria-label={`Krok ${step + 1} z ${questions.length}`}
+          className="text-sm font-semibold text-slate-500"
+        >
           {step + 1} / {questions.length}
         </span>
       </div>
@@ -122,7 +202,11 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
       </div>
 
       <div className="rounded-2xl border border-slate-200 bg-teal-50/50 p-5 sm:p-6">
-        <h3 className="font-serif-display text-xl leading-tight text-slate-800">
+        <h3
+          id="guide-question"
+          aria-live="polite"
+          className="font-serif-display text-xl leading-tight text-slate-800"
+        >
           {question.prompt}
         </h3>
         <div className="mt-5 flex flex-col gap-2">
@@ -133,6 +217,7 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
                 key={option.label}
                 type="button"
                 onClick={() => chooseOption(option)}
+                aria-pressed={active}
                 className={`rounded-xl border px-4 py-3 text-left text-sm font-semibold transition-colors ${
                   active
                     ? option.urgent
@@ -164,14 +249,32 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
           </div>
         )}
 
-        <button
-          type="button"
-          onClick={continueFlow}
-          disabled={!selectedOption}
-          className="mt-5 w-full rounded-xl bg-teal-700 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800 disabled:cursor-not-allowed disabled:opacity-40"
-        >
-          {step === questions.length - 1 ? "Zobrazit shrnutí" : "Pokračovat"}
-        </button>
+        <div className="mt-5 flex flex-col-reverse gap-2 sm:flex-row sm:justify-between">
+          {step > 0 ? (
+            <button
+              type="button"
+              onClick={goBack}
+              className="min-h-11 rounded-xl border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-white"
+            >
+              Zpět
+            </button>
+          ) : (
+            <span />
+          )}
+          <button
+            type="button"
+            onClick={continueFlow}
+            disabled={!selectedOption}
+            aria-describedby="guide-question"
+            className="min-h-11 rounded-xl bg-teal-700 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            {selectedOption?.urgent
+              ? "Zobrazit důležité informace"
+              : step === questions.length - 1
+                ? "Zobrazit shrnutí"
+                : "Pokračovat"}
+          </button>
+        </div>
       </div>
     </section>
   );

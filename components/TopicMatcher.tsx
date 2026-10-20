@@ -59,13 +59,13 @@ export default function TopicMatcher() {
           </h2>
         </div>
         <span className="rounded-full border border-teal-300 px-2.5 py-1 text-xs font-bold text-teal-800">
-          AI pomocník
+          Výběr tématu
         </span>
       </div>
       <p className="mt-2 max-w-xl text-sm leading-relaxed text-slate-600">
-        Z vašeho popisu vybereme nejvhodnější téma z materiálů schválených
-        ordinací. AI pouze doporučuje existující stránku a nevytváří zdravotní
-        rady.
+        Nástroj pouze doporučí existující stránku a nevytváří zdravotní rady.
+        Pokud je AI v ordinaci zapnutá, popis se odešle službě OpenAI; jinak
+        proběhne místní vyhledávání. Neuvádějte jméno ani jiné osobní údaje.
       </p>
 
       <form onSubmit={findTopic} className="mt-5">
@@ -83,7 +83,7 @@ export default function TopicMatcher() {
         />
         <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <span className="text-xs text-slate-500">
-            Bez diagnóz a bez nových rad od AI.
+            Zadejte pouze nezbytný popis potíží bez identifikačních údajů.
           </span>
           <button
             type="submit"

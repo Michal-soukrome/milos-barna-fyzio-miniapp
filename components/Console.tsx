@@ -169,6 +169,7 @@ export default function Console() {
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                aria-label="Hledat podle tématu, oblasti nebo příznaku"
                 placeholder="Hledat příznak nebo téma…"
                 className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-sm outline-none transition-shadow focus:border-teal-600 focus:ring-2 focus:ring-teal-100"
               />
@@ -199,10 +200,11 @@ export default function Console() {
                     </span>
                   </Link>
                   <div className="mt-3 flex items-center gap-3">
-                    <Link href={`/t/${t.slug}`} className="min-h-11 w-full">
-                      <button className="min-h-11 w-full rounded-xl bg-slate-700 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-800 focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2">
-                        Více informací
-                      </button>
+                    <Link
+                      href={`/t/${t.slug}`}
+                      className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-slate-700 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-800 focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2"
+                    >
+                      Více informací
                     </Link>
                     <button
                       type="button"
@@ -262,10 +264,18 @@ function matchesFilters(
   if (bodyPart && topic.bodyPart !== bodyPart) return false;
   if (age && !topic.ageGroups.includes(age)) return false;
   if (query.trim()) {
-    const normalizedQuery = query.trim().toLowerCase();
-    const haystack =
-      `${topic.title} ${topic.summary} ${topic.symptoms.join(" ")}`.toLowerCase();
+    const normalizedQuery = normalizeSearch(query);
+    const haystack = normalizeSearch(
+      `${topic.title} ${topic.bodyPart} ${topic.summary} ${topic.symptoms.join(" ")}`,
+    );
     if (!haystack.includes(normalizedQuery)) return false;
   }
   return true;
+}
+
+function normalizeSearch(value: string) {
+  return value
+    .toLocaleLowerCase("cs-CZ")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 }

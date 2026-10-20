@@ -1,71 +1,56 @@
-# OrthoCare Console
+# MUDr. Barna Miloš, Ph.D. — profil a pacientské materiály
 
-A small tool for the clinic: pick a topic, then send the patient the answer
-by QR code (they scan it on the spot) or by email (typed in and sent right
-there).
+This site combines the doctor's public professional profile with the clinic's topic
+library and patient-facing guides.
 
-## How it's organized
+## Main routes
 
-- `lib/content.ts` — **every FAQ topic lives here.** Title, body text,
-  "seek care if..." warnings, tags for the filter. To add a new topic, add
-  a new object to the `topics` array. No other file needs to change.
-- `app/page.tsx` + `components/Console.tsx` — the doctor's screen: search/
-  filter topics, pick one, then choose QR or email.
-- `app/t/[slug]/page.tsx` — the **patient-facing** page. This is what opens
-  when they scan the QR code or click the email link.
-- `app/api/send/route.ts` — sends the email.
+- `/` — clinic topic library, filters, QR codes, and email sharing.
+- `/configurator` — patient topic selection and topic matcher.
+- `/t/<slug>` — focused patient guide opened from a QR code or email.
+- `/about` — professional profile.
+- `/contact` — public clinic contact details.
 
-## Running it locally
+## Local development
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
-Open http://localhost:3000
 
-## Deploying
+Open http://localhost:3000. Run `npm run build` to validate the production
+build and TypeScript.
 
-The easiest path is Vercel (made by the creators of Next.js, free tier is
-enough for this):
+## Environment variables
 
-1. Push this folder to a GitHub repo.
-2. Import it at vercel.com/new.
-3. Add the two environment variables below in the Vercel project settings.
-4. Deploy. You'll get a permanent URL like `orthocare.vercel.app` — that's
-   the URL the QR codes and emails will point to.
+Email sending requires these server-side variables:
 
-## Setting up email sending
-
-Email sending uses Resend (resend.com — has a free tier, simple setup).
-Without these two environment variables, the "email" tab will show a clear
-error instead of failing silently:
-
-```
+```text
 RESEND_API_KEY=your_key_here
 SEND_FROM_EMAIL=clinic@yourdomain.com
+APP_URL=https://your-public-domain.example
 ```
 
-Steps:
-1. Create a free Resend account.
-2. Verify a sending domain (or use their test domain while testing).
-3. Create an API key, add it as RESEND_API_KEY.
-4. Set SEND_FROM_EMAIL to an address on your verified domain.
+Verify the sender domain with Resend and set `APP_URL` to the canonical public
+HTTPS URL. Email links are generated from this value, not from client input.
 
-Add these in Vercel under Project -> Settings -> Environment Variables,
-then redeploy.
+Topic matching works locally by default. If `OPENAI_API_KEY` is configured,
+topic descriptions are sent to OpenAI to suggest an existing topic. Do not
+include names or other identifying details in those descriptions. An optional
+`OPENAI_MODEL` value can select the model.
 
-## Before this goes near real patients
+## Content that must be completed before publication
 
-All patient-facing and UI text is in Czech. The medical content in
-`lib/content.ts` is placeholder text so the app is demoable. Every
-`sections` and `warningSigns` field needs to be replaced with the doctor's
-own reviewed guidance before any patient sees it. It's worth having him
-review the disclaimer wording too (in `components/TopicActions.tsx` and
-`app/t/[slug]/page.tsx`) to make sure it matches how he wants to frame
-"tohle není diagnóza."
+The professional biography, specialties, experience, public contact details,
+and professional links on `/about` and `/contact` are marked as placeholders.
+Replace them only with verified details approved for publication.
 
-## No database, no patient data stored
+All patient guide sections and warning signs in `lib/content.ts` are also
+placeholders. A physician must write and review this guidance before the
+patient-facing pages are used clinically. The visible demo notice is
+intentional until that review is complete.
 
-Patient emails are used once to send a message and are not saved anywhere
-in the app or database — there isn't one. Nothing about a specific patient
-is logged.
+Review the privacy notice, medical disclaimer, and provider data-handling
+terms before enabling AI matching or email for real patients. The app has no
+database, but configured external services process the information sent to
+them.

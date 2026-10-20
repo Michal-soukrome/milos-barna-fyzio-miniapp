@@ -17,6 +17,13 @@ export default async function TopicPage({
 
   return (
     <main className="mx-auto max-w-md px-5 py-8">
+      <div
+        role="status"
+        className="mb-6 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm leading-relaxed text-amber-950"
+      >
+        Ukázkový obsah: pokyny a varovné příznaky nejsou dokončené ani určené
+        pro klinické použití. Před zveřejněním je musí ověřit lékař.
+      </div>
       <div className="mb-1 text-sm text-slate-500">{topic.bodyPart}</div>
       <h1 className="font-serif-display text-3xl leading-tight">
         {topic.title}

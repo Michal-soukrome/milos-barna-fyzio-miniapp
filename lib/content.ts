@@ -23,9 +23,12 @@ export const AGE_GROUP_LABELS: Record<AgeGroup, string> = {
   senior: "Senior",
 };
 
-// POZNÁMKA: Veškerý text níže je pouze placeholder, aby šla aplikace předvést.
-// Před nasazením pro skutečné pacienty je potřeba nahradit "sections" a
-// "warningSigns" opravdovými, lékařem ověřenými informacemi.
+const SECTION_PLACEHOLDER =
+  "Lékařsky ověřený obsah bude doplněn před zveřejněním.";
+const WARNING_PLACEHOLDER =
+  "Lékařsky ověřené varovné příznaky budou doplněny před zveřejněním.";
+
+// Replace every placeholder with content reviewed by the doctor before launch.
 export const topics: Topic[] = [
   {
     slug: "cast-care",
@@ -37,21 +40,18 @@ export const topics: Topic[] = [
     sections: [
       {
         heading: "Udržení sucha",
-        text: "PLACEHOLDER — lékař doplní: jak bezpečně sprchovat/koupat, co dělat, když sádra zvlhne.",
+        text: SECTION_PLACEHOLDER,
       },
       {
         heading: "Svědění",
-        text: "PLACEHOLDER — lékař doplní: proč sádra svědí, co nikdy nestrkat dovnitř.",
+        text: SECTION_PLACEHOLDER,
       },
       {
         heading: "Normální vs. neobvyklý otok",
-        text: "PLACEHOLDER — lékař doplní: jak velký otok prstů je očekávaný.",
+        text: SECTION_PLACEHOLDER,
       },
     ],
-    warningSigns: [
-      "PLACEHOLDER — např. prsty zmodrají, jsou studené nebo necitlivé",
-      "PLACEHOLDER — např. bolest, která navzdory lékům stále narůstá",
-    ],
+    warningSigns: [WARNING_PLACEHOLDER],
   },
   {
     slug: "ankle-sprain-rehab",
@@ -63,17 +63,14 @@ export const topics: Topic[] = [
     sections: [
       {
         heading: "Prvních 48 hodin",
-        text: "PLACEHOLDER — lékař doplní: klid, led, komprese, poloha nohy výše.",
+        text: SECTION_PLACEHOLDER,
       },
       {
         heading: "Návrat na nohy",
-        text: "PLACEHOLDER — lékař doplní: očekávaný časový rámec pro zatěžování nohy.",
+        text: SECTION_PLACEHOLDER,
       },
     ],
-    warningSigns: [
-      "PLACEHOLDER — např. po 3-4 dnech nelze na nohu vůbec došlápnout",
-      "PLACEHOLDER — např. viditelná deformita",
-    ],
+    warningSigns: [WARNING_PLACEHOLDER],
   },
   {
     slug: "knee-swelling-post-op",
@@ -85,13 +82,10 @@ export const topics: Topic[] = [
     sections: [
       {
         heading: "Co je normální",
-        text: "PLACEHOLDER — lékař doplní: očekávaný průběh otoku po operaci.",
+        text: SECTION_PLACEHOLDER,
       },
     ],
-    warningSigns: [
-      "PLACEHOLDER — např. bolest a otok lýtka jen na jedné straně (možná trombóza)",
-      "PLACEHOLDER — např. horečka, šířící se zarudnutí, výtok z rány",
-    ],
+    warningSigns: [WARNING_PLACEHOLDER],
   },
   {
     slug: "crutches-how-to",
@@ -103,16 +97,14 @@ export const topics: Topic[] = [
     sections: [
       {
         heading: "Nastavení berlí",
-        text: "PLACEHOLDER — lékař doplní: správná výška berlí a poloha rukou.",
+        text: SECTION_PLACEHOLDER,
       },
       {
         heading: "Schody",
-        text: "PLACEHOLDER — lékař doplní: technika 'nahoru se zdravou, dolů s postiženou'.",
+        text: SECTION_PLACEHOLDER,
       },
     ],
-    warningSigns: [
-      "PLACEHOLDER — např. necitlivost nebo brnění v rukou či podpaží (tlak berlí)",
-    ],
+    warningSigns: [WARNING_PLACEHOLDER],
   },
   {
     slug: "post-op-wound-care",
@@ -124,13 +116,10 @@ export const topics: Topic[] = [
     sections: [
       {
         heading: "Výměna obvazu",
-        text: "PLACEHOLDER — lékař doplní: jak často a jak udržet sterilitu.",
+        text: SECTION_PLACEHOLDER,
       },
     ],
-    warningSigns: [
-      "PLACEHOLDER — např. narůstající zarudnutí, teplo nebo výtok",
-      "PLACEHOLDER — např. horečka nad 38 °C",
-    ],
+    warningSigns: [WARNING_PLACEHOLDER],
   },
   {
     slug: "wrist-fracture-basics",
@@ -142,12 +131,10 @@ export const topics: Topic[] = [
     sections: [
       {
         heading: "Udržování pohyblivosti prstů",
-        text: "PLACEHOLDER — lékař doplní: proč je vhodný šetrný pohyb prsty.",
+        text: SECTION_PLACEHOLDER,
       },
     ],
-    warningSigns: [
-      "PLACEHOLDER — např. prsty blednou nebo znecitliví",
-    ],
+    warningSigns: [WARNING_PLACEHOLDER],
   },
 ];
 

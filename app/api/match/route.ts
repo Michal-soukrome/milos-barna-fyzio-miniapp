@@ -3,7 +3,7 @@ import { topics } from "@/lib/content";
 
 const MAX_SITUATION_LENGTH = 500;
 
-type MatchResult = { slug: string };
+type MatchResult = { slug: string; source: "ai" | "local" };
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null);
@@ -54,10 +54,10 @@ export async function POST(req: NextRequest) {
       bodyPart: topic.bodyPart,
       summary: topic.summary,
     },
-    reason: apiKey
-      ? "Téma vybrané z materiálů schválených ordinací."
+    reason: result.source === "ai"
+      ? "Téma doporučené podle popisu."
       : "Téma vybrané podle slov ve vašem popisu.",
-    source: apiKey ? "ai" : "local",
+    source: result.source,
   });
 }
 
@@ -98,14 +98,20 @@ async function matchWithAi(
       }),
     });
 
-    if (!response.ok) return null;
+    if (!response.ok) {
+      console.error("Topic matching provider returned an error", response.status);
+      return matchLocally(situation);
+    }
     const payload = await response.json();
     const parsed = JSON.parse(payload.choices?.[0]?.message?.content || "{}");
     const slug = typeof parsed.slug === "string" ? parsed.slug : null;
 
-    if (!slug || !topics.some((topic) => topic.slug === slug)) return null;
-    return { slug };
-  } catch {
+    if (!slug || !topics.some((topic) => topic.slug === slug)) {
+      return matchLocally(situation);
+    }
+    return { slug, source: "ai" };
+  } catch (error) {
+    console.error("Topic matching provider request failed", error);
     return matchLocally(situation);
   }
 }
@@ -128,7 +134,7 @@ function matchLocally(situation: string): MatchResult | null {
   }
 
   if (!best || best.score === 0) return null;
-  return { slug: best.topic.slug };
+  return { slug: best.topic.slug, source: "local" };
 }
 
 function normalize(value: string) {

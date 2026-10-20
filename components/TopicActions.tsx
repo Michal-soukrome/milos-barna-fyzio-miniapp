@@ -99,8 +99,6 @@ function EmailPane({ topic }: { topic: Topic }) {
         body: JSON.stringify({
           email,
           slug: topic.slug,
-          title: topic.title,
-          origin: window.location.origin,
         }),
       });
       const data = await res.json();
