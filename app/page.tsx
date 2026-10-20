@@ -18,7 +18,7 @@ const destinations = [
       "Představení lékaře, jeho odborné zaměření a profesní zkušenosti.",
   },
   {
-    href: "/ordinace",
+    href: "/navody",
     eyebrow: "Knihovna ordinace",
     title: "Pacientské materiály",
     description:

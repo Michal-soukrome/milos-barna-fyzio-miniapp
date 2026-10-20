@@ -6,7 +6,7 @@ library and patient-facing guides.
 ## Main routes
 
 - `/` — universal welcome page with links for patients and other visitors.
-- `/ordinace` — clinic topic library, filters, QR codes, and email sharing.
+- `/navody` — clinic topic library, filters, QR codes, and email sharing.
 - `/pruvodce` — patient topic selection and topic matcher.
 - `/navody/<slug>` — focused patient guide opened from a QR code or email.
 - `/o-lekari` — professional profile.
