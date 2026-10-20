@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 const navigation = [
   { href: "/", label: "Úvod" },
   { href: "/navody", label: "Pokyny" },
-  { href: "/clanky", label: "Články" },
+  { href: "/clanky", label: "Témata" },
   { href: "/o-lekari", label: "O mně" },
   { href: "/kontakt", label: "Kontakt" },
 ];

@@ -6,9 +6,10 @@ import Layout from "@/components/Layout";
 import { ARTICLE_QUERY, ARTICLES_QUERY } from "@/sanity/lib/queries";
 import { sanityClient } from "@/sanity/lib/client";
 import { ArticleSummary, PublishedArticle } from "@/sanity/lib/types";
+import { getArticleBodyPartLabel } from "@/sanity/lib/article-taxonomy";
 
 export const metadata: Metadata = {
-  title: "Článek | Miloš Barna",
+  title: "Zdravotní téma | Miloš Barna",
 };
 
 export const revalidate = 300;
@@ -87,9 +88,19 @@ export default async function ArticlePage({
     <Layout>
       <div className="grid w-full grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <article className="min-w-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
-          <p className="text-sm font-semibold text-teal-700">
-            {new Date(article.publishedAt).toLocaleDateString("cs-CZ")}
-          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            {getArticleBodyPartLabel(article.bodyPart) && (
+              <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-800">
+                {getArticleBodyPartLabel(article.bodyPart)}
+              </span>
+            )}
+            <time
+              dateTime={article.publishedAt}
+              className="text-sm font-semibold text-teal-700"
+            >
+              {new Date(article.publishedAt).toLocaleDateString("cs-CZ")}
+            </time>
+          </div>
           <h1 className="font-serif-display mt-2 text-4xl leading-tight text-slate-800">
             {article.title}
           </h1>
@@ -144,7 +155,7 @@ export default async function ArticlePage({
             </ul>
           ) : (
             <p className="mt-4 text-sm leading-relaxed text-slate-600">
-              Další články se zobrazí po jejich odborné kontrole a zveřejnění.
+              Další témata se zobrazí po jejich odborné kontrole a zveřejnění.
             </p>
           )}
 
@@ -152,7 +163,7 @@ export default async function ArticlePage({
             href="/clanky"
             className="mt-5 inline-flex text-sm font-semibold text-teal-800 underline decoration-teal-300 underline-offset-4 hover:text-teal-950"
           >
-            Všechny články
+            Všechna témata
           </Link>
         </aside>
       </div>
@@ -177,23 +188,29 @@ function getRelatedArticles(
       sharedCategoryCount: (candidate.categories ?? []).filter((category) =>
         currentCategories.has(normalizeCategory(category)),
       ).length,
+      sameBodyPart:
+        Boolean(article.bodyPart) && candidate.bodyPart === article.bodyPart,
     }));
   const matching = candidates
-    .filter((candidate) => candidate.sharedCategoryCount > 0)
+    .filter(
+      (candidate) => candidate.sharedCategoryCount > 0 || candidate.sameBodyPart,
+    )
     .sort(
       (a, b) =>
-        b.sharedCategoryCount - a.sharedCategoryCount || a.index - b.index,
+        b.sharedCategoryCount - a.sharedCategoryCount ||
+        Number(b.sameBodyPart) - Number(a.sameBodyPart) ||
+        a.index - b.index,
     );
 
   if (matching.length > 0) {
     return {
-      title: "Související články",
+      title: "Související témata",
       articles: matching.slice(0, 3).map(({ article: related }) => related),
     };
   }
 
   return {
-    title: "Další články",
+    title: "Další témata",
     articles: candidates
       .slice(0, 3)
       .map(({ article: related }) => related),

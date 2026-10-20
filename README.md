@@ -12,7 +12,8 @@ and articles, including information for before and after procedures.
 - `/navody/<slug>` — focused patient guide opened from a QR code or email.
 - `/o-lekari` — personal introduction and approach to patient care.
 - `/kontakt` — public clinic contact details.
-- `/clanky` and `/clanky/<slug>` — published, medically reviewed CMS articles.
+- `/clanky` — medically reviewed education grouped by body area.
+- `/clanky/<slug>` — an individual doctor-authored, medically reviewed article.
 - `/studio` — Sanity Studio for authoring and reviewing articles.
 
 ## Local development
@@ -45,8 +46,11 @@ and warning signs are managed in Sanity, alongside longer clinic-authored
 articles. Public guide pages show published demo records with a prominent
 warning or medically reviewed records.
 Article pages show only published documents marked as medically reviewed.
-Article categories are used to prioritize related reading; when no categories
-match, the sidebar falls back to the newest other reviewed articles.
+Articles are grouped by their required body area; categories prioritize related
+reading, with same-area articles as an additional relevance signal. Articles
+without a body area remain visible in a fallback group until they are updated.
+The current article body-area options are foot and ankle, knee, wrist and hand,
+and general topics.
 When a patient confirms a warning sign, the guide links to Barna Medical's
 injury/operation rehabilitation information, except wound-care topics, which
 link to the clinic's contact page.

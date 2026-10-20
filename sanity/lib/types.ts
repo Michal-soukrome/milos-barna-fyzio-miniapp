@@ -1,5 +1,6 @@
 import type { PortableTextBlock } from "@portabletext/types";
 import type { SanityImageCrop, SanityImageHotspot } from "@sanity/image-url";
+import type { ArticleBodyPart } from "./article-taxonomy";
 
 export type AgeGroup = "child" | "adult" | "senior";
 
@@ -59,6 +60,7 @@ export type ArticleSummary = {
   slug: string;
   excerpt: string;
   publishedAt: string;
+  bodyPart?: ArticleBodyPart | null;
   categories?: string[];
 };
 

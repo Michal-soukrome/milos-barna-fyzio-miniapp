@@ -3,10 +3,11 @@ import {
   ArticleSlugInput,
   createUniqueArticleSlug,
 } from "./ArticleSlugInput";
+import { ARTICLE_BODY_PARTS } from "../lib/article-taxonomy";
 
 export const article = defineType({
   name: "article",
-  title: "Pacientský článek",
+  title: "Vzdělávací článek",
   type: "document",
   fields: [
     defineField({
@@ -37,6 +38,20 @@ export const article = defineType({
         },
         maxLength: 96,
         aiAssist: { exclude: true },
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "bodyPart",
+      title: "Oblast těla",
+      description:
+        "Hlavní oblast, podle které se článek zařadí v přehledu zdravotních témat.",
+      type: "string",
+      options: {
+        list: ARTICLE_BODY_PARTS.map(({ value, label }) => ({
+          title: label,
+          value,
+        })),
       },
       validation: (rule) => rule.required(),
     }),
@@ -130,13 +145,16 @@ export const article = defineType({
     select: {
       title: "title",
       subtitle: "publishedAt",
+      bodyPart: "bodyPart",
     },
-    prepare({ title, subtitle }) {
+    prepare({ title, subtitle, bodyPart }) {
+      const publishedDate = subtitle
+        ? new Date(subtitle).toLocaleDateString("cs-CZ")
+        : "Datum nezadáno";
+
       return {
         title: title || "Článek bez názvu",
-        subtitle: subtitle
-          ? new Date(subtitle).toLocaleDateString("cs-CZ")
-          : "Datum nezadáno",
+        subtitle: [bodyPart, publishedDate].filter(Boolean).join(" · "),
       };
     },
   },

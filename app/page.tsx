@@ -27,9 +27,9 @@ const destinations = [
   {
     href: "/clanky",
     eyebrow: "Lépe se zorientovat",
-    title: "Články",
+    title: "Zdravotní témata",
     description:
-      "Podrobnější texty o léčbě a tématech, na která se mě pacienti často ptají.",
+      "Srozumitelné informace o častých potížích a možnostech léčby, přehledně podle oblasti těla.",
   },
   {
     href: "/kontakt",
@@ -61,7 +61,7 @@ export default function HomePage() {
               kterým se můžete vrátit, kdykoli je potřebujete.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
                 href="/navody"
                 className="inline-flex min-h-11 items-center rounded-xl bg-white px-6 py-3 text-sm font-bold text-teal-900 transition-colors hover:bg-teal-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
