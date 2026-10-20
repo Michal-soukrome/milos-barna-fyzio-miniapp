@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import Layout from "@/components/Layout";
 
 export const metadata: Metadata = {
   title: "Úvod | MUDr. Barna Miloš, Ph.D.",
@@ -48,7 +49,7 @@ const destinations = [
 
 export default function HomePage() {
   return (
-    <main className="mx-auto min-h-screen w-full max-w-7xl px-5 py-8 sm:px-8 sm:py-12">
+    <Layout>
       <section className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
         <div className="grid md:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)]">
           <div className="flex flex-col justify-center p-6 sm:p-10 lg:p-14">
@@ -153,6 +154,6 @@ export default function HomePage() {
           <span aria-hidden="true" className="ml-2">↗</span>
         </a>
       </section>
-    </main>
+    </Layout>
   );
 }

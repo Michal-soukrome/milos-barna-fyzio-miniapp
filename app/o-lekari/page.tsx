@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import Layout from "@/components/Layout";
 
 export const metadata: Metadata = {
   title: "O lékaři | MUDr. Barna Miloš, Ph.D.",
@@ -24,7 +25,7 @@ const profileSections = [
 
 export default function AboutPage() {
   return (
-    <main className="mx-auto min-h-screen w-full max-w-5xl px-5 py-8 sm:px-8 sm:py-12">
+    <Layout>
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
         <div className="grid gap-8 md:grid-cols-[minmax(0,280px)_1fr] md:items-center">
           <Image
@@ -85,6 +86,6 @@ export default function AboutPage() {
           </section>
         </div>
       </section>
-    </main>
+    </Layout>
   );
 }

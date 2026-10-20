@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import { notFound } from "next/navigation";
+import Layout from "@/components/Layout";
 import { ARTICLE_QUERY, ARTICLES_QUERY } from "@/sanity/lib/queries";
 import { sanityClient } from "@/sanity/lib/client";
 import { ArticleSummary, PublishedArticle } from "@/sanity/lib/types";
@@ -73,8 +74,8 @@ export default async function ArticlePage({
   if (!article) return notFound();
 
   return (
-    <main className="mx-auto min-h-screen w-full max-w-3xl px-5 py-8 sm:px-8 sm:py-12">
-      <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
+    <Layout>
+      <article className="mx-auto w-full max-w-4xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
         <p className="text-sm font-semibold text-teal-700">
           {new Date(article.publishedAt).toLocaleDateString("cs-CZ")}
         </p>
@@ -95,6 +96,6 @@ export default async function ArticlePage({
           vyšetření ani pokyny vašeho lékaře.
         </p>
       </article>
-    </main>
+    </Layout>
   );
 }

@@ -10,6 +10,7 @@ import {
   topics,
 } from "@/lib/content";
 import TopicActions from "@/components/TopicActions";
+import Layout from "@/components/Layout";
 
 const AGE_GROUPS: AgeGroup[] = ["child", "adult", "senior"];
 
@@ -77,23 +78,23 @@ export default function Console() {
 
   if (selected) {
     return (
-      <div className="min-h-screen px-5 py-6 sm:px-8">
+      <Layout>
         <button
           onClick={() => setSelected(null)}
           className="mx-auto mb-5 block max-w-4xl text-sm font-semibold text-teal-700 hover:text-slate-800"
         >
           ← Zpět na přehled materiálů
         </button>
-        <main className="mx-auto max-w-4xl rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-10">
+        <section className="mx-auto w-full max-w-4xl rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-10">
           <TopicActions topic={selected} />
-        </main>
-      </div>
+        </section>
+      </Layout>
     );
   }
 
   return (
-    <div className="min-h-screen">
-      <div className="dashboard-grid mx-auto max-w-7xl gap-8 px-5 py-7 sm:px-8 sm:py-10">
+    <Layout>
+      <div className="dashboard-grid gap-8">
         <aside className="mb-7 sm:mb-0">
           <div className="mb-7">
             <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
@@ -150,7 +151,7 @@ export default function Console() {
           </div>
         </aside>
 
-        <main>
+        <section>
           <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
               <p className="text-sm font-semibold text-teal-700">
@@ -223,9 +224,9 @@ export default function Console() {
               </li>
             )}
           </ul>
-        </main>
+        </section>
       </div>
-    </div>
+    </Layout>
   );
 }
 

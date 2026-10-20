@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getTopicBySlug, topics } from "@/lib/content";
 import PatientConfigurator from "@/components/PatientConfigurator";
+import Layout from "@/components/Layout";
 
 export const metadata = {
   title: "Pacientský průvodce | MUDr. Barna Miloš, Ph.D.",
@@ -20,7 +21,8 @@ export default async function TopicPage({
   if (!topic) return notFound();
 
   return (
-    <main className="mx-auto max-w-md px-5 py-8">
+    <Layout>
+      <div className="mx-auto w-full max-w-xl">
       <div
         role="status"
         className="mb-6 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm leading-relaxed text-amber-950"
@@ -44,6 +46,7 @@ export default async function TopicPage({
         lékařské vyšetření. Pokud se cokoli neshoduje s tím, co vám bylo řečeno
         osobně, řiďte se pokyny svého lékaře a s dotazy se obraťte na ordinaci.
       </p>
-    </main>
+      </div>
+    </Layout>
   );
 }

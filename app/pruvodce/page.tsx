@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { topics } from "@/lib/content";
 import TopicMatcher from "@/components/TopicMatcher";
+import Layout from "@/components/Layout";
 
 export const metadata: Metadata = {
   title: "Průvodce pro pacienty | MUDr. Barna Miloš, Ph.D.",
@@ -10,8 +11,8 @@ export const metadata: Metadata = {
 
 export default function ConfiguratorPage() {
   return (
-    <main className="min-h-screen">
-      <div className="dashboard-grid mx-auto max-w-7xl gap-8 px-5 py-7 sm:px-8 sm:py-10">
+    <Layout>
+      <div className="dashboard-grid gap-8">
         <aside className="mb-7 sm:mb-0">
           <div className="mb-7">
             <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
@@ -90,6 +91,6 @@ export default function ConfiguratorPage() {
           </ul>
         </section>
       </div>
-    </main>
+    </Layout>
   );
 }

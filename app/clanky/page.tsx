@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Layout from "@/components/Layout";
 import { ARTICLES_QUERY } from "@/sanity/lib/queries";
 import { isSanityConfigured, sanityClient } from "@/sanity/lib/client";
 import { ArticleSummary } from "@/sanity/lib/types";
@@ -21,7 +22,7 @@ export default async function ArticlesPage() {
     ));
 
   return (
-    <main className="mx-auto min-h-screen w-full max-w-5xl px-5 py-8 sm:px-8 sm:py-12">
+    <Layout>
       <section>
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
           Pacientské informace
@@ -65,6 +66,6 @@ export default async function ArticlesPage() {
           </p>
         )}
       </section>
-    </main>
+    </Layout>
   );
 }

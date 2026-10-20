@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Layout from "@/components/Layout";
 
 export const metadata: Metadata = {
   title: "Kontakt na ordinaci | MUDr. Barna Miloš, Ph.D.",
@@ -17,7 +18,7 @@ const contactDetails = [
 
 export default function ContactPage() {
   return (
-    <main className="mx-auto min-h-screen w-full max-w-4xl px-5 py-8 sm:px-8 sm:py-12">
+    <Layout>
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
           Spojení s ordinací
@@ -44,6 +45,6 @@ export default function ContactPage() {
           ))}
         </dl>
       </section>
-    </main>
+    </Layout>
   );
 }
