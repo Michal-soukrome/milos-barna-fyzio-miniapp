@@ -1,4 +1,5 @@
 import type { PortableTextBlock } from "@portabletext/types";
+import type { SanityImageCrop, SanityImageHotspot } from "@sanity/image-url";
 
 export type AgeGroup = "child" | "adult" | "senior";
 
@@ -6,6 +7,27 @@ export type PatientGuideSection = {
   heading: string;
   text: string;
 };
+
+export type PatientGuideImage = {
+  _type: "image";
+  _key?: string;
+  asset: {
+    _ref: string;
+    _type: "reference";
+    metadata?: {
+      dimensions?: {
+        width: number;
+        height: number;
+      };
+    };
+  };
+  alt: string;
+  caption?: string;
+  crop?: SanityImageCrop;
+  hotspot?: SanityImageHotspot;
+};
+
+export type PatientGuideBodyBlock = PortableTextBlock | PatientGuideImage;
 
 export type PatientGuideSummary = {
   _id: string;
@@ -18,7 +40,8 @@ export type PatientGuideSummary = {
 
 export type PatientGuide = PatientGuideSummary & {
   ageGroups: AgeGroup[];
-  sections: PatientGuideSection[];
+  sections?: PatientGuideSection[];
+  body?: PatientGuideBodyBlock[];
   warningSigns: string[];
   isDemo: boolean;
   medicalReviewed: boolean;

@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
 
   if (!isSanityConfigured) {
     return NextResponse.json(
-      { error: "Knihovna pacientských průvodců není připojena k CMS." },
+      { error: "Knihovna pokynů pro pacienty není připojena k CMS." },
       { status: 503 },
     );
   }

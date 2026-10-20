@@ -12,7 +12,6 @@ export const PATIENT_GUIDES_QUERY = defineQuery(`*[
   ageGroups,
   symptoms,
   summary,
-  sections[]{heading, text},
   warningSigns,
   isDemo,
   medicalReviewed
@@ -32,6 +31,19 @@ export const PATIENT_GUIDE_QUERY = defineQuery(`*[
   symptoms,
   summary,
   sections[]{heading, text},
+  body[]{
+    ...,
+    _type == "image" => {
+      ...,
+      "asset": {
+        "_ref": asset._ref,
+        "_type": "reference",
+        "metadata": asset->metadata{
+          "dimensions": dimensions{width, height}
+        }
+      }
+    }
+  },
   warningSigns,
   isDemo,
   medicalReviewed

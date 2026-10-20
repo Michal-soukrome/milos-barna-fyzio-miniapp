@@ -20,9 +20,9 @@ export default function TopicActions({ topic }: { topic: PatientGuide }) {
       <div className="mb-2 text-xs font-bold uppercase tracking-[0.14em] text-teal-700">
         {topic.bodyPart}
       </div>
-      <h1 className="font-serif-display text-3xl leading-tight text-slate-800">
+      <h2 className="font-serif-display text-3xl leading-tight text-slate-800">
         {topic.title}
-      </h1>
+      </h2>
       <p className="mt-2 text-sm text-slate-500">{topic.summary}</p>
 
       <div className="mt-7 flex gap-1 rounded-xl bg-slate-100 p-1">
@@ -43,7 +43,7 @@ export default function TopicActions({ topic }: { topic: PatientGuide }) {
       </div>
 
       <div className="mt-8 rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500">
-        Tento materiál poskytuje pouze obecné informace. Nenahrazuje osobní
+        Tyto pokyny poskytují pouze obecné informace. Nenahrazují osobní
         vyšetření. V případě nejistoty se ozvěte nebo přijďte znovu.
       </div>
     </div>

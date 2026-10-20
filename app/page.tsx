@@ -4,43 +4,37 @@ import Link from "next/link";
 import Layout from "@/components/Layout";
 
 export const metadata: Metadata = {
-  title: "Úvod | MUDr. Barna Miloš, Ph.D.",
+  title: "Miloš Barna | Srozumitelně před zákrokem i po něm",
   description:
-    "Profesní profil, informace o ordinaci a pacientské materiály MUDr. Barna Miloš, Ph.D.",
+    "Jsem lékař Miloš Barna. Sdílím srozumitelné informace a praktické pokyny, které vám pomohou před zákrokem i po něm.",
 };
 
 const destinations = [
   {
     href: "/o-lekari",
-    eyebrow: "Profesní profil",
-    title: "O lékaři",
-    description:
-      "Představení lékaře, jeho odborné zaměření a profesní zkušenosti.",
+    eyebrow: "Moje práce",
+    title: "O mně",
+    description: "Proč připravuji tyto informace a jak vám mohou pomoci.",
   },
   {
     href: "/navody",
-    eyebrow: "Návody",
-    title: "Pacientské materiály",
-    description: "Prohlédněte si témata a vyberte si materiál, který hledáte.",
-  },
-  {
-    href: "/pruvodce",
-    eyebrow: "Průvodce",
-    title: "Najít správné téma",
+    eyebrow: "Před zákrokem i po něm",
+    title: "Najít pokyny",
     description:
-      "Popište, co vás zajímá, nebo vyberte téma z připraveného přehledu.",
+      "Vyhledejte návod nebo cvičení podle své situace. Odkaz či QR kód ode mě vás zavede přímo ke konkrétním pokynům.",
   },
   {
     href: "/clanky",
-    eyebrow: "Články",
-    title: "Informace o léčbě",
-    description: "Delší články připravované ordinací a určené pacientům.",
+    eyebrow: "Lépe se zorientovat",
+    title: "Články",
+    description:
+      "Podrobnější texty o léčbě a tématech, na která se mě pacienti často ptají.",
   },
   {
     href: "/kontakt",
     eyebrow: "Kontakt",
-    title: "Kontaktujte ordinaci",
-    description: "Získejte kontaktní informace a možnosti spojení s ordinací.",
+    title: "Spojit se se mnou",
+    description: "Najděte kontaktní údaje a možnosti, jak se na mě obrátit.",
   },
 ];
 
@@ -61,22 +55,23 @@ export default function HomePage() {
             </h1>
 
             <p className="mt-6 max-w-md text-lg leading-relaxed text-teal-50">
-              Profesní informace, přehled ordinace a pacientské materiály na
-              jednom místě.
+              Jsem lékař a pomáhám pacientům zorientovat se před zákrokem i po
+              něm. Tady najdete srozumitelné informace a praktické pokyny, ke
+              kterým se můžete vrátit, kdykoli je potřebujete.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
               <Link
-                href="/kontakt"
+                href="/navody"
                 className="inline-flex min-h-11 items-center rounded-xl bg-white px-6 py-3 text-sm font-bold text-teal-900 transition-colors hover:bg-teal-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
-                Kontakt
+                Najít pokyny
               </Link>
               <Link
                 href="/o-lekari"
                 className="inline-flex min-h-11 items-center rounded-xl border border-teal-300/60 px-6 py-3 text-sm font-bold text-white transition-colors hover:border-white hover:bg-teal-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
-                O lékaři
+                O mně
               </Link>
               <a
                 href="https://www.barnamedical.cz/"
@@ -111,10 +106,10 @@ export default function HomePage() {
       <section className="mt-10">
         <div className="mb-5">
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
-            Vyberte, co hledáte
+            Podle toho, co právě potřebujete
           </p>
           <h2 className="font-serif-display mt-2 text-3xl text-slate-800">
-            Informace pro pacienty i návštěvníky
+            Jak vám mohu pomoci
           </h2>
         </div>
         <ul className="grid gap-4 sm:grid-cols-2">
@@ -147,11 +142,12 @@ export default function HomePage() {
           Barna Medical · Praha
         </p>
         <h2 className="font-serif-display mt-2 text-2xl text-slate-800">
-          Léčba a operační péče
+          Péče v Barna Medical
         </h2>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-slate-700">
-          Pokud se chystáte na léčbu nebo zákrok v Barna Medical, informace o
-          klinice a její péči najdete na jejím hlavním webu.
+          Pokud se připravujete na léčbu nebo zákrok v Barna Medical, aktuální
+          informace o klinice najdete na jejím webu. Praktické pokyny, které
+          vám posílám, otevřete přímo přes odkaz nebo QR kód.
         </p>
         <a
           href="https://www.barnamedical.cz/"
@@ -159,7 +155,7 @@ export default function HomePage() {
           rel="noopener noreferrer"
           className="mt-5 inline-flex min-h-11 items-center rounded-xl bg-teal-800 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-900"
         >
-          Informace na webu Barna Medical
+          Web Barna Medical
           <span aria-hidden="true" className="ml-2">
             ↗
           </span>

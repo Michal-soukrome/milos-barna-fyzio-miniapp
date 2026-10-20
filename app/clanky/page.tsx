@@ -6,8 +6,9 @@ import { isSanityConfigured, sanityClient } from "@/sanity/lib/client";
 import { ArticleSummary } from "@/sanity/lib/types";
 
 export const metadata: Metadata = {
-  title: "Články ordinace | MUDr. Barna Miloš, Ph.D.",
-  description: "Odborně zkontrolované články a příprava na léčbu.",
+  title: "Články | Miloš Barna",
+  description:
+    "Podrobnější informace o léčbě a tématech, na která se pacienti často ptají.",
 };
 
 export const revalidate = 300;
@@ -25,14 +26,14 @@ export default async function ArticlesPage() {
     <Layout>
       <section>
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
-          Pacientské informace
+          Pro lepší orientaci
         </p>
         <h1 className="font-serif-display mt-2 text-4xl leading-tight text-slate-800">
           Články
         </h1>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">
-          Delší články připravuje ordinace a před zveřejněním je lékařsky
-          kontroluje.
+          Delší texty k tématům, která s pacienty řeším. Před zveřejněním
+          procházejí lékařskou kontrolou.
         </p>
 
         {!isSanityConfigured ? (

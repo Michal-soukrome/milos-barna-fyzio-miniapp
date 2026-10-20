@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Layout from "@/components/Layout";
 
 export const metadata: Metadata = {
-  title: "Kontakt na ordinaci | MUDr. Barna Miloš, Ph.D.",
-  description: "Kontaktní informace ordinace MUDr. Barna Miloš, Ph.D.",
+  title: "Kontakt | Miloš Barna",
+  description: "Jak se spojit se mnou nebo s ordinací.",
 };
 
 const contactDetails = [
@@ -11,8 +11,8 @@ const contactDetails = [
   { label: "Telefon", value: "[Doplnit veřejné telefonní číslo.]" },
   { label: "E-mail", value: "[Doplnit veřejnou kontaktní e-mailovou adresu.]" },
   {
-    label: "Profesní profily",
-    value: "[Doplnit ověřené odkazy na profesní profily a webové stránky.]",
+    label: "Další odkazy",
+    value: "[Doplnit ověřené odkazy na moje webové stránky.]",
   },
 ];
 
@@ -21,14 +21,14 @@ export default function ContactPage() {
     <Layout>
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
-          Spojení s ordinací
+          Spojte se se mnou
         </p>
         <h1 className="font-serif-display mt-2 text-4xl leading-tight text-slate-800">
           Kontakt
         </h1>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">
-          Kontaktní údaje budou doplněny po jejich ověření a schválení ke
-          zveřejnění.
+          Potřebujete se na něco zeptat? Kontaktní údaje zveřejním po jejich
+          ověření.
         </p>
 
         <dl className="mt-8 grid gap-3 sm:grid-cols-2">

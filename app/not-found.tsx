@@ -13,7 +13,8 @@ export default function NotFound() {
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base">
           Odkaz může být zastaralý nebo adresa neexistuje. Vraťte se na úvodní
-          stránku, nebo pokračujte do knihovny pacientských materiálů.
+          stránku, nebo najděte pokyny, které vám pomohou před zákrokem i po
+          něm.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link
@@ -26,7 +27,7 @@ export default function NotFound() {
             href="/navody"
             className="inline-flex min-h-11 items-center rounded-xl border border-teal-800 px-5 py-3 text-sm font-bold text-teal-900 transition-colors hover:bg-teal-50"
           >
-            Návody
+            Najít pokyny
           </Link>
         </div>
       </section>

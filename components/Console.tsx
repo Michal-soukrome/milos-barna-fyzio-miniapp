@@ -2,8 +2,13 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { AGE_GROUP_LABELS, type AgeGroup, type PatientGuide } from "@/sanity/lib/types";
+import {
+  AGE_GROUP_LABELS,
+  type AgeGroup,
+  type PatientGuide,
+} from "@/sanity/lib/types";
 import TopicActions from "@/components/TopicActions";
+import TopicMatcher from "@/components/TopicMatcher";
 import Layout from "@/components/Layout";
 
 const AGE_GROUPS: AgeGroup[] = ["child", "adult", "senior"];
@@ -20,10 +25,50 @@ export default function Console({
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<PatientGuide | null>(null);
   const skipInitialUrlSync = useRef(true);
+  const shareDialogRef = useRef<HTMLDialogElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const shareTriggerRef = useRef<HTMLButtonElement>(null);
   const bodyParts = useMemo(
     () => Array.from(new Set(topics.map((topic) => topic.bodyPart))),
     [topics],
   );
+
+  useEffect(() => {
+    const dialog = shareDialogRef.current;
+    if (!dialog) return;
+
+    if (selected && !dialog.open) {
+      dialog.showModal();
+      closeButtonRef.current?.focus();
+    } else if (!selected && dialog.open) {
+      dialog.close();
+    }
+  }, [selected]);
+
+  useEffect(() => {
+    if (!selected) return;
+
+    const { body, documentElement } = document;
+    const previousBodyOverflow = body.style.overflow;
+    const previousBodyPaddingRight = body.style.paddingRight;
+    const previousDocumentOverflow = documentElement.style.overflow;
+    const scrollbarWidth = window.innerWidth - documentElement.clientWidth;
+
+    if (scrollbarWidth > 0) {
+      const bodyPaddingRight =
+        Number.parseFloat(window.getComputedStyle(body).paddingRight) || 0;
+      body.style.paddingRight = `${bodyPaddingRight + scrollbarWidth}px`;
+    }
+
+    body.style.overflow = "hidden";
+    documentElement.style.overflow = "hidden";
+
+    return () => {
+      body.style.overflow = previousBodyOverflow;
+      body.style.paddingRight = previousBodyPaddingRight;
+      documentElement.style.overflow = previousDocumentOverflow;
+    };
+  }, [selected]);
 
   useEffect(() => {
     function readFiltersFromUrl() {
@@ -80,32 +125,19 @@ export default function Console({
     setQuery("");
   }
 
-  if (selected) {
-    return (
-      <Layout>
-        <button
-          onClick={() => setSelected(null)}
-          className="mx-auto mb-5 block max-w-4xl text-sm font-semibold text-teal-700 hover:text-slate-800"
-        >
-          ← Zpět na přehled materiálů
-        </button>
-        <section className="mx-auto w-full max-w-4xl rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-10">
-          <TopicActions topic={selected} />
-        </section>
-      </Layout>
-    );
-  }
-
   if (topics.length === 0) {
     return (
       <Layout>
+        <h1 className="font-serif-display mb-4 text-3xl text-slate-800">
+          Pokyny a cvičení pro pacienty
+        </h1>
         <p
           role="status"
           className="rounded-2xl border border-slate-200 bg-white p-6 text-sm leading-relaxed text-slate-600"
         >
           {isSanityConfigured
-            ? "Zatím nejsou zveřejněné žádné průvodce pro pacienty."
-            : "Knihovna pacientských průvodců zatím není připojena k CMS."}
+            ? "Zatím nejsou zveřejněné žádné pokyny pro pacienty."
+            : "Knihovna pokynů pro pacienty zatím není připojena k CMS."}
         </p>
       </Layout>
     );
@@ -113,21 +145,33 @@ export default function Console({
 
   return (
     <Layout>
+      <header className="mb-8">
+        <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
+          Pokyny pro pacienty
+        </p>
+        <h1 className="font-serif-display text-3xl leading-tight text-slate-800">
+          Pokyny a cvičení pro pacienty
+        </h1>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">
+          Najděte návod podle své situace, nebo procházejte témata. Konkrétní
+          pokyny můžete otevřít také přímo přes odkaz nebo QR kód od lékaře.
+        </p>
+      </header>
+
+      <TopicMatcher />
+
       <div className="dashboard-grid gap-8">
         <aside className="mb-7 sm:mb-0">
           <div className="mb-7">
             <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
-              Knihovna
+              Procházet pokyny
             </p>
-            <h1 className="font-serif-display text-3xl leading-tight text-slate-800">
-              Pomůcky pro pacienty
-            </h1>
             <p className="mt-3 text-sm leading-relaxed text-slate-500">
-              Vyberte téma a sdílejte informace přes QR kód nebo e-mailem.
+              Zúžte výběr podle oblasti těla nebo věkové skupiny.
             </p>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div className="md:sticky md:top-24 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <div className="mb-3 flex items-center justify-between gap-3">
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
                 Filtrovat podle oblasti
@@ -173,9 +217,9 @@ export default function Console({
         <section>
           <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
-              <p className="text-sm font-semibold text-teal-700">
-                Dostupné materiály
-              </p>
+              <h2 className="font-serif-display text-2xl text-slate-800">
+                Všechny návody
+              </h2>
               <p className="mt-1 text-sm text-slate-500">
                 {filtered.length} {filtered.length === 1 ? "téma" : "témat"} k
                 dispozici
@@ -224,11 +268,15 @@ export default function Console({
                       href={`/navody/${t.slug}`}
                       className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-slate-700 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-800 focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2"
                     >
-                      Více informací
+                      Otevřít návod
                     </Link>
                     <button
                       type="button"
-                      onClick={() => setSelected(t)}
+                      aria-haspopup="dialog"
+                      onClick={(event) => {
+                        shareTriggerRef.current = event.currentTarget;
+                        setSelected(t);
+                      }}
                       className="min-h-11 w-full rounded-xl bg-teal-700 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800 focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2"
                     >
                       Sdílet
@@ -245,6 +293,41 @@ export default function Console({
           </ul>
         </section>
       </div>
+
+      <dialog
+        ref={shareDialogRef}
+        aria-label={selected ? `Sdílet pokyny: ${selected.title}` : undefined}
+        onClose={() => {
+          setSelected(null);
+          shareTriggerRef.current?.focus();
+        }}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) {
+            event.currentTarget.close();
+          }
+        }}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") {
+            event.preventDefault();
+            event.currentTarget.close();
+          }
+        }}
+        className="m-auto max-h-[90dvh] w-[calc(100%-2rem)] max-w-xl overflow-y-auto border-0 bg-white p-0 shadow-2xl backdrop:bg-slate-950/60"
+      >
+        <div className="p-5 sm:p-7">
+          <div className="mb-4 flex justify-end">
+            <button
+              ref={closeButtonRef}
+              type="button"
+              onClick={() => shareDialogRef.current?.close()}
+              className="inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-700"
+            >
+              Zavřít
+            </button>
+          </div>
+          {selected && <TopicActions topic={selected} />}
+        </div>
+      </dialog>
     </Layout>
   );
 }

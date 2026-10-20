@@ -4,8 +4,9 @@ import { isSanityConfigured } from "@/sanity/lib/client";
 import { getPatientGuides } from "@/sanity/lib/patient-guides";
 
 export const metadata: Metadata = {
-  title: "Návody | MUDr. Barna Miloš, Ph.D.",
-  description: "Přehled pacientských materiálů ordinace.",
+  title: "Pokyny pro pacienty | MUDr. Barna Miloš, Ph.D.",
+  description:
+    "Najděte doporučené pokyny pro svou situaci nebo procházejte návody a cvičení pro pacienty.",
 };
 
 export const revalidate = 300;

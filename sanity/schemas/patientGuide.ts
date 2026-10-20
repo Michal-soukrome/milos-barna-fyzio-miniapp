@@ -2,7 +2,7 @@ import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const patientGuide = defineType({
   name: "patientGuide",
-  title: "Průvodce pro pacienty",
+  title: "Návod pro pacienty",
   type: "document",
   fields: [
     defineField({
@@ -13,7 +13,7 @@ export const patientGuide = defineType({
     }),
     defineField({
       name: "slug",
-      title: "Adresa průvodce",
+      title: "Adresa návodu",
       type: "slug",
       options: {
         source: "title",
@@ -67,11 +67,60 @@ export const patientGuide = defineType({
       validation: (rule) => rule.required().min(10).max(300),
     }),
     defineField({
-      name: "sections",
-      title: "Části průvodce",
+      name: "body",
+      title: "Obsah návodu",
       type: "array",
+      description:
+        "Pište text, přidávejte nadpisy a vkládejte obrázky. U starších návodů se jejich původní text zobrazí, dokud zde nepřidáte nový obsah.",
+      of: [
+        defineArrayMember({
+          type: "block",
+          styles: [
+            { title: "Odstavec", value: "normal" },
+            { title: "Nadpis 2", value: "h2" },
+            { title: "Nadpis 3", value: "h3" },
+            { title: "Citace", value: "blockquote" },
+          ],
+          lists: [
+            { title: "Odrážky", value: "bullet" },
+            { title: "Číslovaný seznam", value: "number" },
+          ],
+        }),
+        defineArrayMember({
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alternativní text",
+              description: "Stručně popište, co je na obrázku.",
+              type: "string",
+              validation: (rule) => rule.required().max(200),
+            }),
+            defineField({
+              name: "caption",
+              title: "Popisek",
+              type: "string",
+              validation: (rule) => rule.max(200),
+            }),
+          ],
+        }),
+      ],
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          if (Array.isArray(value) && value.length > 0) return true;
+          return Array.isArray(context.document?.sections) &&
+            context.document.sections.length > 0
+            ? true
+            : "Přidejte text nebo obrázek do obsahu návodu.";
+        }),
+    }),
+    defineField({
+      name: "sections",
+      title: "Starší textové části",
+      type: "array",
+      hidden: true,
       of: [defineArrayMember({ type: "guideSection" })],
-      validation: (rule) => rule.required().min(1),
     }),
     defineField({
       name: "warningSigns",
@@ -86,7 +135,7 @@ export const patientGuide = defineType({
       name: "isDemo",
       title: "Veřejná ukázka — neověřeno pro klinické použití",
       description:
-        "Ponechte zapnuté, dokud lékař nezkontroluje celý obsah. Veřejná stránka pak zobrazí výrazné upozornění.",
+        "Ponechte zapnuté, dokud lékař nezkontroluje celý text, obrázky i varovné příznaky. Veřejná stránka pak zobrazí výrazné upozornění.",
       type: "boolean",
       initialValue: true,
       options: { aiAssist: { exclude: true } },
@@ -113,7 +162,7 @@ export const patientGuide = defineType({
       name: "medicalReviewed",
       title: "Lékařsky zkontrolováno",
       description:
-        "Potvrďte až po kontrole všech údajů, částí průvodce i varovných příznaků.",
+        "Potvrďte až po kontrole všech údajů, textu, obrázků i varovných příznaků.",
       type: "boolean",
       initialValue: false,
       options: { aiAssist: { exclude: true } },
@@ -175,7 +224,7 @@ export const patientGuide = defineType({
     },
     prepare({ title, bodyPart, isDemo, medicalReviewed }) {
       return {
-        title: title || "Průvodce bez názvu",
+      title: title || "Návod bez názvu",
         subtitle: [
           bodyPart,
           isDemo ? "ukázka" : medicalReviewed ? "zkontrolováno" : "čeká na kontrolu",

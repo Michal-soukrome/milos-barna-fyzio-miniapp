@@ -1,15 +1,16 @@
-# MUDr. Barna Miloš, Ph.D. — profil a pacientské materiály
+# Miloš Barna — informace a pokyny pro pacienty
 
-This site combines the doctor's public professional profile with the clinic's topic
-library and patient-facing guides.
+This site introduces Miloš Barna and provides practical patient instructions
+and articles, including information for before and after procedures.
 
 ## Main routes
 
 - `/` — universal welcome page with links for patients and other visitors.
-- `/navody` — clinic topic library, filters, QR codes, and email sharing.
-- `/pruvodce` — patient topic selection and topic matcher.
+- `/navody` — patient instructions and exercises, with topic matching, filters,
+  QR codes, and email sharing.
+- `/pruvodce` — permanent redirect to `/navody` for existing links.
 - `/navody/<slug>` — focused patient guide opened from a QR code or email.
-- `/o-lekari` — professional profile.
+- `/o-lekari` — personal introduction and approach to patient care.
 - `/kontakt` — public clinic contact details.
 - `/clanky` and `/clanky/<slug>` — published, medically reviewed CMS articles.
 - `/studio` — Sanity Studio for authoring and reviewing articles.
@@ -39,9 +40,10 @@ HTTPS URL. Email links are generated from this value, not from client input.
 
 ## Sanity CMS
 
-Patient guides, their search metadata, sections, and warning signs are managed
-in Sanity, alongside longer clinic-authored articles. Public guide pages show
-published demo records with a prominent warning or medically reviewed records.
+Patient instructions, their search metadata, rich-text content, inline images,
+and warning signs are managed in Sanity, alongside longer clinic-authored
+articles. Public guide pages show published demo records with a prominent
+warning or medically reviewed records.
 Article pages show only published documents marked as medically reviewed.
 Article categories are used to prioritize related reading; when no categories
 match, the sidebar falls back to the newest other reviewed articles.

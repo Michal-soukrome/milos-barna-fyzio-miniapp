@@ -3,9 +3,9 @@ import SiteChrome from "@/components/SiteChrome";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "MUDr. Barna Miloš, Ph.D. | Profil a pacientské materiály",
+  title: "Miloš Barna | Srozumitelně před zákrokem i po něm",
   description:
-    "Profesní profil MUDr. Barna Miloš, Ph.D. a informační materiály pro pacienty.",
+    "Jsem lékař Miloš Barna. Sdílím srozumitelné informace a praktické pokyny, které vám pomohou před zákrokem i po něm.",
 };
 
 export default function RootLayout({

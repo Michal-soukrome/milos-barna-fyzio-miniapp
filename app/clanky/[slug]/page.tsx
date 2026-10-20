@@ -8,7 +8,7 @@ import { sanityClient } from "@/sanity/lib/client";
 import { ArticleSummary, PublishedArticle } from "@/sanity/lib/types";
 
 export const metadata: Metadata = {
-  title: "Článek ordinace | MUDr. Barna Miloš, Ph.D.",
+  title: "Článek | Miloš Barna",
 };
 
 export const revalidate = 300;
@@ -103,7 +103,7 @@ export default async function ArticlePage({
             />
           </div>
           <p className="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm leading-relaxed text-slate-600">
-            Tento článek poskytuje obecné informace a nenahrazuje osobní
+            Tyto informace nenahrazují osobní
             lékařské vyšetření ani pokyny vašeho lékaře.
           </p>
         </article>
