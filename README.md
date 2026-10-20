@@ -5,11 +5,14 @@ library and patient-facing guides.
 
 ## Main routes
 
-- `/` — clinic topic library, filters, QR codes, and email sharing.
-- `/configurator` — patient topic selection and topic matcher.
-- `/t/<slug>` — focused patient guide opened from a QR code or email.
-- `/about` — professional profile.
-- `/contact` — public clinic contact details.
+- `/` — universal welcome page with links for patients and other visitors.
+- `/ordinace` — clinic topic library, filters, QR codes, and email sharing.
+- `/pruvodce` — patient topic selection and topic matcher.
+- `/navody/<slug>` — focused patient guide opened from a QR code or email.
+- `/o-lekari` — professional profile.
+- `/kontakt` — public clinic contact details.
+- `/clanky` and `/clanky/<slug>` — published, medically reviewed CMS articles.
+- `/studio` — Sanity Studio for authoring and reviewing articles.
 
 ## Local development
 
@@ -34,6 +37,38 @@ APP_URL=https://your-public-domain.example
 Verify the sender domain with Resend and set `APP_URL` to the canonical public
 HTTPS URL. Email links are generated from this value, not from client input.
 
+## Sanity CMS
+
+General patient topics remain in `lib/content.ts`. Use Sanity for longer
+articles authored by the clinic, such as preparation for knee replacement.
+The public article pages query only published documents marked as medically
+reviewed.
+
+1. Create a Sanity project and dataset, then copy the project ID and dataset
+   name from the Sanity project settings.
+2. Copy `.env.example` to `.env.local` and set
+   `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET`.
+3. Add the local site origin (`http://localhost:3000`) to the project's CORS
+   origins. Add the production domain in the same way before using the Studio
+   there; enable credentialed requests for origins where Studio authentication
+   is used.
+4. Start the app and open `/studio`. Sign in with a Sanity project account.
+5. In Vercel, set the two `NEXT_PUBLIC_SANITY_*` variables for each deployment
+   environment that should use the CMS, then redeploy. Add preview origins to
+   Sanity CORS only if preview deployments need Studio access.
+
+`SANITY_API_READ_TOKEN` is optional and server-only. Do not use a write token
+for public article rendering or expose any Sanity token through a
+`NEXT_PUBLIC_` variable. Public pages use the published perspective and do not
+render drafts.
+
+Sanity AI Assist is available only on supported Sanity plans and must be
+enabled for the project by a project member. It can help draft article text,
+but it cannot set the medical review fields. A clinician must review the
+complete article, enter their name and review date, mark it medically reviewed,
+and publish it manually. Never enter patient-identifying information into
+editorial AI tools.
+
 Topic matching works locally by default. If `OPENAI_API_KEY` is configured,
 topic descriptions are sent to OpenAI to suggest an existing topic. Do not
 include names or other identifying details in those descriptions. An optional
@@ -42,7 +77,7 @@ include names or other identifying details in those descriptions. An optional
 ## Content that must be completed before publication
 
 The professional biography, specialties, experience, public contact details,
-and professional links on `/about` and `/contact` are marked as placeholders.
+and professional links on `/o-lekari` and `/kontakt` are marked as placeholders.
 Replace them only with verified details approved for publication.
 
 All patient guide sections and warning signs in `lib/content.ts` are also

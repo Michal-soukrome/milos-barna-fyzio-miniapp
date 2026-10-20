@@ -2,6 +2,10 @@ import { notFound } from "next/navigation";
 import { getTopicBySlug, topics } from "@/lib/content";
 import PatientConfigurator from "@/components/PatientConfigurator";
 
+export const metadata = {
+  title: "Pacientský průvodce | MUDr. Barna Miloš, Ph.D.",
+};
+
 export function generateStaticParams() {
   return topics.map((t) => ({ slug: t.slug }));
 }

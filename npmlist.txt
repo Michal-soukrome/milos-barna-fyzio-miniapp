@@ -1,0 +1,22 @@
+npm list
+PS C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp> npm list
+milos-barna@0.1.0 C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
+├── @emnapi/runtime@1.11.3 extraneous
+├── @img/sharp-wasm32@0.35.5 extraneous
+├── @portabletext/react@8.0.1
+├── @portabletext/types@4.0.2
+├── @sanity/assist@6.2.5
+├── @tailwindcss/postcss@4.3.3
+├── @types/node@20.19.43
+├── @types/react-dom@19.2.7
+├── @types/react@19.2.18
+├── next-sanity@13.3.4
+├── next@16.4.2
+├── qrcode.react@4.2.0
+├── react-dom@19.2.8
+├── react@19.2.8
+├── resend@6.26.0
+├── sanity@6.20.0
+├── tailwindcss@4.3.3
+└── typescript@5.9.3
+

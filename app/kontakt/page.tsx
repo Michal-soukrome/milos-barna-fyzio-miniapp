@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Kontakt | MUDr. Barna Miloš, Ph.D.",
+  title: "Kontakt na ordinaci | MUDr. Barna Miloš, Ph.D.",
   description: "Kontaktní informace ordinace MUDr. Barna Miloš, Ph.D.",
 };
 

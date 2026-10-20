@@ -115,7 +115,7 @@ export default function TopicMatcher() {
           <p className="mt-1 text-sm text-slate-600">{result.topic.summary}</p>
           <p className="mt-3 text-xs text-slate-500">{result.reason}</p>
           <Link
-            href={`/t/${result.topic.slug}`}
+            href={`/navody/${result.topic.slug}`}
             className="mt-4 inline-flex min-h-11 items-center rounded-xl bg-slate-800 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800"
           >
             Otevřít průvodce

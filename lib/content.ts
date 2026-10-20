@@ -7,7 +7,7 @@
 export type AgeGroup = "child" | "adult" | "senior";
 
 export type Topic = {
-  slug: string; // použito v URL: /t/<slug>
+  slug: string; // použito v URL: /navody/<slug>
   title: string; // zobrazeno pacientovi
   bodyPart: string; // např. "Koleno", "Kotník", "Zápěstí / ruka", "Páteř", "Obecné"
   ageGroups: AgeGroup[]; // pro koho platí

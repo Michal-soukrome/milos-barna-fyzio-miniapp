@@ -12,8 +12,8 @@ export default function TopicActions({ topic }: { topic: Topic }) {
 
   const url =
     typeof window !== "undefined"
-      ? `${window.location.origin}/t/${topic.slug}`
-      : `/t/${topic.slug}`;
+      ? `${window.location.origin}/navody/${topic.slug}`
+      : `/navody/${topic.slug}`;
 
   return (
     <div>

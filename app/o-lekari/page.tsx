@@ -47,7 +47,7 @@ export default function AboutPage() {
               informace.]
             </p>
             <Link
-              href="/configurator"
+              href="/pruvodce"
               className="mt-6 inline-flex min-h-11 items-center rounded-xl bg-teal-700 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-teal-800"
             >
               Pacientské materiály
@@ -77,7 +77,7 @@ export default function AboutPage() {
               [Doplnit veřejné kontaktní údaje a odkazy na profesní profily.]
             </p>
             <Link
-              href="/contact"
+              href="/kontakt"
               className="mt-4 inline-flex min-h-11 items-center rounded-xl bg-teal-700 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-teal-800"
             >
               Kontaktní údaje

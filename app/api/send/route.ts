@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
     ) {
       throw new Error("APP_URL must be an HTTP(S) URL without credentials.");
     }
-    link = new URL(`/t/${topic.slug}`, configuredUrl.origin).toString();
+    link = new URL(`/navody/${topic.slug}`, configuredUrl.origin).toString();
   } catch {
     console.error("Email sending is disabled because APP_URL is invalid.");
     return NextResponse.json(

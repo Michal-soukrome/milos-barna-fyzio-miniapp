@@ -113,7 +113,7 @@ export default function PatientConfigurator({ topic }: { topic: Topic }) {
         </ul>
         <div className="mt-5 flex flex-wrap gap-3">
           <Link
-            href="/contact"
+            href="/kontakt"
             className="inline-flex min-h-11 items-center rounded-xl bg-rose-800 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-rose-900"
           >
             Kontakty ordinace

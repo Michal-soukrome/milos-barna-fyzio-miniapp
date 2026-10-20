@@ -1,6 +1,12 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { topics } from "@/lib/content";
 import TopicMatcher from "@/components/TopicMatcher";
+
+export const metadata: Metadata = {
+  title: "Průvodce pro pacienty | MUDr. Barna Miloš, Ph.D.",
+  description: "Vyhledejte pacientský materiál podle tématu.",
+};
 
 export default function ConfiguratorPage() {
   return (
@@ -25,13 +31,13 @@ export default function ConfiguratorPage() {
             </p>
             <nav aria-label="Možnosti ordinace" className="flex flex-col gap-2">
               <Link
-                href="/"
+                href="/ordinace"
                 className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors hover:bg-teal-50 hover:text-teal-800"
               >
                 Knihovna materiálů
               </Link>
               <Link
-                href="/contact"
+                href="/kontakt"
                 className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors hover:bg-teal-50 hover:text-teal-800"
               >
                 Kontaktovat ordinaci
@@ -61,7 +67,7 @@ export default function ConfiguratorPage() {
             {topics.map((topic) => (
               <li key={topic.slug}>
                 <Link
-                  href={`/t/${topic.slug}`}
+                  href={`/navody/${topic.slug}`}
                   className="group flex min-h-36 flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-teal-600 hover:shadow-md"
                 >
                   <div className="mb-4 flex items-center justify-between">

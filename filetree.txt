@@ -1,18 +1,33 @@
-C:\Users\Jirak\Github\milos-barna-fyzio-miniapp
-├── .env.local
+C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
+├── .env.example
 ├── AGENTS.md
 ├── app/
 │   ├── api/
+│   │   ├── match/
 │   │   └── send/
+│   ├── articles/
+│   │   ├── page.tsx
+│   │   └── [slug]/
+│   │       └── page.tsx
+│   ├── configurator/
+│   │   └── page.tsx
+│   ├── contact/
+│   │   └── page.tsx
 │   ├── globals.css
 │   ├── page.tsx
+│   ├── studio/
+│   │   └── [[...tool]]/
+│   │       └── page.tsx
 │   └── t/
 │       └── [slug]/
 │           └── page.tsx
 ├── CLAUDE.md
 ├── components/
 │   ├── Console.tsx
-│   └── TopicActions.tsx
+│   ├── PatientConfigurator.tsx
+│   ├── SiteChrome.tsx
+│   ├── TopicActions.tsx
+│   └── TopicMatcher.tsx
 ├── filetree.txt
 ├── lib/
 │   └── content.ts
@@ -24,10 +39,22 @@ C:\Users\Jirak\Github\milos-barna-fyzio-miniapp
 ├── public/
 │   ├── file.svg
 │   ├── globe.svg
+│   ├── milos/
+│   │   └── milos_barna_ml.jpeg
 │   ├── next.svg
 │   ├── vercel.svg
 │   └── window.svg
 ├── README.md
+├── sanity/
+│   ├── lib/
+│   │   ├── client.ts
+│   │   ├── queries.ts
+│   │   └── types.ts
+│   └── schemas/
+│       ├── article.ts
+│       └── index.ts
+├── sanity.cli.ts
+├── sanity.config.ts
 ├── scripts/
 │   └── generate-tree.js
 ├── TopicActions.tsx
