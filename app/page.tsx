@@ -125,7 +125,7 @@ export default function HomePage() {
             <li key={destination.href}>
               <Link
                 href={destination.href}
-                className="group block h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-teal-600 hover:shadow-md"
+                className="group block h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-teal-600 hover:shadow-md group"
               >
                 <p className="text-xs font-bold uppercase tracking-[0.14em] text-teal-700">
                   {destination.eyebrow}
@@ -136,7 +136,7 @@ export default function HomePage() {
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   {destination.description}
                 </p>
-                <span className="mt-4 inline-block text-sm font-bold text-teal-800">
+                <span className="mt-4 inline-block text-sm font-bold text-teal-800 group-hover:underline">
                   Otevřít →
                 </span>
               </Link>
