@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 const navigation = [
   { href: "/", label: "Úvod" },
-  { href: "/navody", label: "Knihovna ordinace" },
+  { href: "/navody", label: "Návody" },
   { href: "/pruvodce", label: "Průvodce pro pacienty" },
   { href: "/clanky", label: "Články" },
   { href: "/o-lekari", label: "O lékaři" },

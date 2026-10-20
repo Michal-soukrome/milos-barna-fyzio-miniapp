@@ -1,4 +1,8 @@
 import { defineField, defineType } from "sanity";
+import {
+  ArticleSlugInput,
+  createUniqueArticleSlug,
+} from "./ArticleSlugInput";
 
 export const article = defineType({
   name: "article",
@@ -15,8 +19,22 @@ export const article = defineType({
       name: "slug",
       title: "Adresa článku",
       type: "slug",
+      components: { input: ArticleSlugInput },
       options: {
         source: "title",
+        slugify: (input, _schemaType, context) => {
+          const documentId =
+            !Array.isArray(context.parent) &&
+            typeof context.parent._id === "string"
+              ? context.parent._id
+              : undefined;
+
+          return createUniqueArticleSlug(
+            input,
+            context.getClient({ apiVersion: "2026-10-20" }),
+            documentId,
+          );
+        },
         maxLength: 96,
         aiAssist: { exclude: true },
       },

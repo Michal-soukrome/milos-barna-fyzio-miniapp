@@ -26,7 +26,7 @@ export default function NotFound() {
             href="/navody"
             className="inline-flex min-h-11 items-center rounded-xl border border-teal-800 px-5 py-3 text-sm font-bold text-teal-900 transition-colors hover:bg-teal-50"
           >
-            Knihovna ordinace
+            Návody
           </Link>
         </div>
       </section>
