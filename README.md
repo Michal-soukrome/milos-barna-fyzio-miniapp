@@ -43,6 +43,8 @@ Patient guides, their search metadata, sections, and warning signs are managed
 in Sanity, alongside longer clinic-authored articles. Public guide pages show
 published demo records with a prominent warning or medically reviewed records.
 Article pages show only published documents marked as medically reviewed.
+Article categories are used to prioritize related reading; when no categories
+match, the sidebar falls back to the newest other reviewed articles.
 
 1. Create a Sanity project and dataset, then copy the project ID and dataset
    name from the Sanity project settings.

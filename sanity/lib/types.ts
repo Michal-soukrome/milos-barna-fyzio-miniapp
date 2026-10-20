@@ -36,6 +36,7 @@ export type ArticleSummary = {
   slug: string;
   excerpt: string;
   publishedAt: string;
+  categories?: string[];
 };
 
 export type PublishedArticle = ArticleSummary & {

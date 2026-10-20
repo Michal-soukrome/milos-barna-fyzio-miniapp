@@ -30,6 +30,15 @@ export const article = defineType({
       validation: (rule) => rule.required().min(20).max(300),
     }),
     defineField({
+      name: "categories",
+      title: "Kategorie",
+      description:
+        "Používejte stejné kategorie u článků, které spolu tematicky souvisejí.",
+      type: "array",
+      of: [{ type: "string" }],
+      validation: (rule) => rule.unique().max(10),
+    }),
+    defineField({
       name: "body",
       title: "Obsah článku",
       type: "array",

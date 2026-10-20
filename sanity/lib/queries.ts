@@ -59,7 +59,8 @@ export const ARTICLES_QUERY = defineQuery(`*[
   title,
   "slug": slug.current,
   excerpt,
-  publishedAt
+  publishedAt,
+  categories
 }`);
 
 export const ARTICLE_QUERY = defineQuery(`*[
@@ -72,5 +73,6 @@ export const ARTICLE_QUERY = defineQuery(`*[
   "slug": slug.current,
   excerpt,
   publishedAt,
+  categories,
   body
 }`);
