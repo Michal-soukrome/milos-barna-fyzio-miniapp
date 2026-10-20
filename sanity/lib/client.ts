@@ -14,6 +14,6 @@ export const sanityClient =
         apiVersion: "2026-10-20",
         perspective: "published",
         token: readToken,
-        useCdn: !readToken,
+        useCdn: false,
       })
     : null;

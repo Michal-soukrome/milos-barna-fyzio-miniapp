@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
 import Console from "@/components/Console";
+import { isSanityConfigured } from "@/sanity/lib/client";
+import {
+  getPatientGuides,
+} from "@/sanity/lib/patient-guides";
 
 export const metadata: Metadata = {
   title: "Knihovna ordinace | MUDr. Barna Miloš, Ph.D.",
   description: "Přehled pacientských materiálů ordinace.",
 };
 
-export default function ClinicLibraryPage() {
-  return <Console />;
+export const revalidate = 300;
+
+export default async function ClinicLibraryPage() {
+  const topics = await getPatientGuides();
+  return <Console topics={topics} isSanityConfigured={isSanityConfigured} />;
 }

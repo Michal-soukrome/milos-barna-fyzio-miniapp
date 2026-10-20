@@ -39,10 +39,10 @@ HTTPS URL. Email links are generated from this value, not from client input.
 
 ## Sanity CMS
 
-General patient topics remain in `lib/content.ts`. Use Sanity for longer
-articles authored by the clinic, such as preparation for knee replacement.
-The public article pages query only published documents marked as medically
-reviewed.
+Patient guides, their search metadata, sections, and warning signs are managed
+in Sanity, alongside longer clinic-authored articles. Public guide pages show
+published demo records with a prominent warning or medically reviewed records.
+Article pages show only published documents marked as medically reviewed.
 
 1. Create a Sanity project and dataset, then copy the project ID and dataset
    name from the Sanity project settings.
@@ -63,11 +63,13 @@ for public article rendering or expose any Sanity token through a
 render drafts.
 
 Sanity AI Assist is available only on supported Sanity plans and must be
-enabled for the project by a project member. It can help draft article text,
-but it cannot set the medical review fields. A clinician must review the
-complete article, enter their name and review date, mark it medically reviewed,
-and publish it manually. Never enter patient-identifying information into
-editorial AI tools.
+enabled for the project by a project member. It can help draft content, but it
+cannot change the demo or medical review fields. Demo guides remain visibly
+marked as unreviewed. To publish a guide for clinical use, a clinician must
+review all metadata, sections, and warning signs, enter their name and review
+date, mark it medically reviewed, disable demo mode, and publish it manually.
+Articles also require clinician review before publication. Never enter
+patient-identifying information into editorial AI tools.
 
 Topic matching works locally by default. If `OPENAI_API_KEY` is configured,
 topic descriptions are sent to OpenAI to suggest an existing topic. Do not
@@ -80,10 +82,10 @@ The professional biography, specialties, experience, public contact details,
 and professional links on `/o-lekari` and `/kontakt` are marked as placeholders.
 Replace them only with verified details approved for publication.
 
-All patient guide sections and warning signs in `lib/content.ts` are also
-placeholders. A physician must write and review this guidance before the
-patient-facing pages are used clinically. The visible demo notice is
-intentional until that review is complete.
+The migrated patient guide sections and warning signs are placeholders. A
+physician must write and review this guidance before the patient-facing pages
+are used clinically. The visible demo notice is intentional until that review
+is complete.
 
 Review the privacy notice, medical disclaimer, and provider data-handling
 terms before enabling AI matching or email for real patients. The app has no

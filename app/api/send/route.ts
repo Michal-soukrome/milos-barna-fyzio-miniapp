@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getTopicBySlug } from "@/lib/content";
+import { isSanityConfigured } from "@/sanity/lib/client";
+import { getPatientGuideBySlug } from "@/sanity/lib/patient-guides";
 
 // Very small email format check — good enough to catch typos, not meant to be
 // a full RFC validator.
@@ -27,7 +28,31 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const topic = typeof slug === "string" ? getTopicBySlug(slug) : undefined;
+  if (typeof slug !== "string" || !slug.trim()) {
+    return NextResponse.json({ error: "Neznámé téma." }, { status: 400 });
+  }
+
+  if (!isSanityConfigured) {
+    return NextResponse.json(
+      { error: "Knihovna pacientských průvodců není připojena k CMS." },
+      { status: 503 },
+    );
+  }
+
+  let topic;
+  try {
+    topic = await getPatientGuideBySlug(slug);
+  } catch (error) {
+    console.error(
+      "Patient guide lookup failed.",
+      error instanceof Error ? error.name : "Unknown error",
+    );
+    return NextResponse.json(
+      { error: "Informace o tématu se nepodařilo načíst." },
+      { status: 503 },
+    );
+  }
+
   if (!topic) {
     return NextResponse.json({ error: "Neznámé téma." }, { status: 400 });
   }

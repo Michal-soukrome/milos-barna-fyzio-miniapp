@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { topics } from "@/lib/content";
+import { isSanityConfigured } from "@/sanity/lib/client";
+import { getPatientGuideSummaries } from "@/sanity/lib/patient-guides";
+import type { PatientGuideSummary } from "@/sanity/lib/types";
 
 const MAX_SITUATION_LENGTH = 500;
 
@@ -24,10 +26,38 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  if (!isSanityConfigured) {
+    return NextResponse.json(
+      { error: "Knihovna pacientských průvodců není připojena k CMS." },
+      { status: 503 },
+    );
+  }
+
+  let topics: PatientGuideSummary[];
+  try {
+    topics = await getPatientGuideSummaries();
+  } catch (error) {
+    console.error(
+      "Patient guide query failed.",
+      error instanceof Error ? error.name : "Unknown error",
+    );
+    return NextResponse.json(
+      { error: "Seznam pacientských témat se nepodařilo načíst." },
+      { status: 503 },
+    );
+  }
+
+  if (topics.length === 0) {
+    return NextResponse.json(
+      { error: "Zatím nejsou zveřejněná žádná pacientská témata." },
+      { status: 503 },
+    );
+  }
+
   const apiKey = process.env.OPENAI_API_KEY;
   const result = apiKey
-    ? await matchWithAi(situation, apiKey)
-    : matchLocally(situation);
+    ? await matchWithAi(situation, apiKey, topics)
+    : matchLocally(situation, topics);
 
   if (!result) {
     return NextResponse.json(
@@ -64,6 +94,7 @@ export async function POST(req: NextRequest) {
 async function matchWithAi(
   situation: string,
   apiKey: string,
+  topics: PatientGuideSummary[],
 ): Promise<MatchResult | null> {
   const topicCatalog = topics.map((topic) => ({
     slug: topic.slug,
@@ -100,27 +131,30 @@ async function matchWithAi(
 
     if (!response.ok) {
       console.error("Topic matching provider returned an error", response.status);
-      return matchLocally(situation);
+      return matchLocally(situation, topics);
     }
     const payload = await response.json();
     const parsed = JSON.parse(payload.choices?.[0]?.message?.content || "{}");
     const slug = typeof parsed.slug === "string" ? parsed.slug : null;
 
     if (!slug || !topics.some((topic) => topic.slug === slug)) {
-      return matchLocally(situation);
+      return matchLocally(situation, topics);
     }
     return { slug, source: "ai" };
   } catch (error) {
     console.error("Topic matching provider request failed", error);
-    return matchLocally(situation);
+    return matchLocally(situation, topics);
   }
 }
 
-function matchLocally(situation: string): MatchResult | null {
+function matchLocally(
+  situation: string,
+  topics: PatientGuideSummary[],
+): MatchResult | null {
   const words = normalize(situation)
     .split(/\s+/)
     .filter((word) => word.length > 2);
-  let best: { topic: (typeof topics)[number]; score: number } | null = null;
+  let best: { topic: PatientGuideSummary; score: number } | null = null;
 
   for (const topic of topics) {
     const searchable = normalize(

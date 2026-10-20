@@ -2,24 +2,28 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import {
-  AGE_GROUP_LABELS,
-  AgeGroup,
-  BODY_PARTS,
-  Topic,
-  topics,
-} from "@/lib/content";
+import { AGE_GROUP_LABELS, type AgeGroup, type PatientGuide } from "@/sanity/lib/types";
 import TopicActions from "@/components/TopicActions";
 import Layout from "@/components/Layout";
 
 const AGE_GROUPS: AgeGroup[] = ["child", "adult", "senior"];
 
-export default function Console() {
+export default function Console({
+  topics,
+  isSanityConfigured,
+}: {
+  topics: PatientGuide[];
+  isSanityConfigured: boolean;
+}) {
   const [bodyPart, setBodyPart] = useState<string | null>(null);
   const [age, setAge] = useState<AgeGroup | null>(null);
   const [query, setQuery] = useState("");
-  const [selected, setSelected] = useState<Topic | null>(null);
+  const [selected, setSelected] = useState<PatientGuide | null>(null);
   const skipInitialUrlSync = useRef(true);
+  const bodyParts = useMemo(
+    () => Array.from(new Set(topics.map((topic) => topic.bodyPart))),
+    [topics],
+  );
 
   useEffect(() => {
     function readFiltersFromUrl() {
@@ -27,7 +31,7 @@ export default function Console() {
       const urlBodyPart = params.get("bodyPart");
       const urlAge = params.get("age");
 
-      setBodyPart(BODY_PARTS.includes(urlBodyPart ?? "") ? urlBodyPart : null);
+      setBodyPart(bodyParts.includes(urlBodyPart ?? "") ? urlBodyPart : null);
       setAge(
         AGE_GROUPS.includes(urlAge as AgeGroup) ? (urlAge as AgeGroup) : null,
       );
@@ -37,7 +41,7 @@ export default function Console() {
     readFiltersFromUrl();
     window.addEventListener("popstate", readFiltersFromUrl);
     return () => window.removeEventListener("popstate", readFiltersFromUrl);
-  }, []);
+  }, [bodyParts]);
 
   useEffect(() => {
     if (skipInitialUrlSync.current) {
@@ -92,6 +96,21 @@ export default function Console() {
     );
   }
 
+  if (topics.length === 0) {
+    return (
+      <Layout>
+        <p
+          role="status"
+          className="rounded-2xl border border-slate-200 bg-white p-6 text-sm leading-relaxed text-slate-600"
+        >
+          {isSanityConfigured
+            ? "Zatím nejsou zveřejněné žádné průvodce pro pacienty."
+            : "Knihovna pacientských průvodců zatím není připojena k CMS."}
+        </p>
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
       <div className="dashboard-grid gap-8">
@@ -104,7 +123,7 @@ export default function Console() {
               Pomůcky pro pacienty
             </h1>
             <p className="mt-3 text-sm leading-relaxed text-slate-500">
-              Vyberte téma a sdílejte ověřené pokyny přes QR kód nebo e-mailem.
+              Vyberte téma a sdílejte informace přes QR kód nebo e-mailem.
             </p>
           </div>
 
@@ -123,7 +142,7 @@ export default function Console() {
               </button>
             </div>
             <div className="flex flex-wrap gap-2 sm:flex-col sm:items-start">
-              {BODY_PARTS.map((part) => (
+              {bodyParts.map((part) => (
                 <FilterChip
                   key={part}
                   label={part}
@@ -257,7 +276,7 @@ function FilterChip({
 }
 
 function matchesFilters(
-  topic: Topic,
+  topic: PatientGuide,
   bodyPart: string | null,
   age: AgeGroup | null,
   query: string,

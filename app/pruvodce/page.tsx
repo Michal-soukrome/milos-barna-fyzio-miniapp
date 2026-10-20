@@ -1,15 +1,22 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { topics } from "@/lib/content";
 import TopicMatcher from "@/components/TopicMatcher";
 import Layout from "@/components/Layout";
+import { isSanityConfigured } from "@/sanity/lib/client";
+import {
+  getPatientGuides,
+} from "@/sanity/lib/patient-guides";
 
 export const metadata: Metadata = {
   title: "Průvodce pro pacienty | MUDr. Barna Miloš, Ph.D.",
   description: "Vyhledejte pacientský materiál podle tématu.",
 };
 
-export default function ConfiguratorPage() {
+export const revalidate = 300;
+
+export default async function ConfiguratorPage() {
+  const topics = await getPatientGuides();
+
   return (
     <Layout>
       <div className="dashboard-grid gap-8">
@@ -59,36 +66,49 @@ export default function ConfiguratorPage() {
             pouze předem připravené informace ordinace.
           </p>
 
-          <TopicMatcher />
+          {topics.length === 0 ? (
+            <p
+              role="status"
+              className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 text-sm leading-relaxed text-slate-600"
+            >
+              {isSanityConfigured
+                ? "Zatím nejsou zveřejněné žádné průvodce pro pacienty."
+                : "Pacientské průvodce zatím nejsou připojené k CMS."}
+            </p>
+          ) : (
+            <>
+              <TopicMatcher />
 
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
-            Nebo vyberte ručně
-          </p>
-          <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-            {topics.map((topic) => (
-              <li key={topic.slug}>
-                <Link
-                  href={`/navody/${topic.slug}`}
-                  className="group flex min-h-36 flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-teal-600 hover:shadow-md"
-                >
-                  <div className="mb-4 flex items-center justify-between">
-                    <span className="rounded-full bg-teal-50 px-2.5 py-1 text-xs font-bold text-teal-800">
-                      {topic.bodyPart}
-                    </span>
-                    <span className="text-lg text-teal-700 transition-transform group-hover:translate-x-1">
-                      →
-                    </span>
-                  </div>
-                  <span className="font-serif-display text-xl leading-tight text-slate-800">
-                    {topic.title}
-                  </span>
-                  <span className="mt-2 text-sm leading-relaxed text-slate-500">
-                    {topic.summary}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
+                Nebo vyberte ručně
+              </p>
+              <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+                {topics.map((topic) => (
+                  <li key={topic._id}>
+                    <Link
+                      href={`/navody/${topic.slug}`}
+                      className="group flex min-h-36 flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-teal-600 hover:shadow-md"
+                    >
+                      <div className="mb-4 flex items-center justify-between">
+                        <span className="rounded-full bg-teal-50 px-2.5 py-1 text-xs font-bold text-teal-800">
+                          {topic.bodyPart}
+                        </span>
+                        <span className="text-lg text-teal-700 transition-transform group-hover:translate-x-1">
+                          →
+                        </span>
+                      </div>
+                      <span className="font-serif-display text-xl leading-tight text-slate-800">
+                        {topic.title}
+                      </span>
+                      <span className="mt-2 text-sm leading-relaxed text-slate-500">
+                        {topic.summary}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </section>
       </div>
     </Layout>

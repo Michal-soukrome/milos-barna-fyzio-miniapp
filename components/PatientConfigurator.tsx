@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Topic } from "@/lib/content";
+import type { PatientGuide } from "@/sanity/lib/types";
 
 type FlowOption = { label: string; answer: string; urgent?: boolean };
 
@@ -17,7 +17,11 @@ type FlowAnswer = {
   answer: string;
 };
 
-export default function PatientConfigurator({ topic }: { topic: Topic }) {
+export default function PatientConfigurator({
+  topic,
+}: {
+  topic: PatientGuide;
+}) {
   const questions: FlowQuestion[] = [
     {
       prompt: "Týká se vás některý z těchto varovných příznaků?",

@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
-import { Topic } from "@/lib/content";
+import type { PatientGuide } from "@/sanity/lib/types";
 
 type Tab = "qr" | "email";
 type SendState = "idle" | "sending" | "sent" | "error";
 
-export default function TopicActions({ topic }: { topic: Topic }) {
+export default function TopicActions({ topic }: { topic: PatientGuide }) {
   const [tab, setTab] = useState<Tab>("qr");
 
   const url =
@@ -83,7 +83,7 @@ function QrPane({ url, title }: { url: string; title: string }) {
   );
 }
 
-function EmailPane({ topic }: { topic: Topic }) {
+function EmailPane({ topic }: { topic: PatientGuide }) {
   const [email, setEmail] = useState("");
   const [state, setState] = useState<SendState>("idle");
   const [errorMsg, setErrorMsg] = useState("");
