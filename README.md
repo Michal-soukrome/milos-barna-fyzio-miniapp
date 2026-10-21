@@ -17,8 +17,7 @@ generate personalized treatment or rehabilitation plans.
    for. The matcher recommends an existing guide; it does not create medical
    advice.
 3. **Read the guide** at `/navody/[slug]`. A guide may show warning signs,
-   links to contact the clinic, related guides, and a clear demo notice until a
-   doctor has reviewed it.
+   links to contact the clinic, and related guides.
 4. **Share a guide** using its QR code or by email. The QR code opens the guide
    directly. Email delivery uses Resend and links to the configured public
    site URL.
@@ -26,11 +25,9 @@ generate personalized treatment or rehabilitation plans.
    conditions, injury types, examinations, and treatment options. Diagnosis
    pages become public only after medical review in Sanity.
 
-The guide matcher only suggests a guide from Sanity's published guide list. If
-`OPENAI_API_KEY` is configured, the description is sent to OpenAI to select an
-existing guide; otherwise, local keyword matching is used. Do not enter names
-or other patient-identifying details. The app does not save these descriptions
-to its own database.
+The guide matcher runs entirely in the browser and uses local keyword matching
+against the published guide list. The description is not sent to the app server
+or an AI provider. The app does not save these descriptions.
 
 ## Routes
 
@@ -46,7 +43,6 @@ to its own database.
 | `/o-lekari` | Doctor profile and background |
 | `/kontakt` | Clinic contact details |
 | `/studio` | Sanity Studio for editorial content |
-| `/api/match` | Matches a patient description to an existing guide |
 | `/api/send` | Sends a guide link using Resend |
 
 Legacy routes such as `/pruvodce`, `/configurator`, `/articles`, and `/t/[slug]`
@@ -58,19 +54,17 @@ Editorial content is stored in Sanity and read from the **published**
 perspective. Drafts are not rendered on public pages.
 
 - **Patient guides** include body area, age groups, symptoms/search terms,
-  summary, guide content, and warning signs. Demo guides are visibly marked
-  unreviewed. For a guide to be presented as clinically reviewed, the doctor
-  must review it, record their name and review date, disable demo mode, and
-  publish it.
+  summary, guide content, and warning signs. Only published guides with
+  `reviewed: true` appear publicly; `reviewed` is set only after the doctor
+  approves the content.
 - **Diagnoses** are intended as durable reference pages rather than a
   chronological stream of new articles. Use headings and rich text for
   applicable topics such as what a diagnosis means, injury types, examination,
-  treatment, surgery, and recovery. The schema requires medical review details;
-  only medically reviewed published diagnoses appear on the site. There is no
-  clinical content about a diagnosis until a clinician creates and reviews it
-  in Sanity.
+  treatment, surgery, and recovery. Only published diagnoses with
+  `reviewed: true` appear on the site. Some diagnosis entries still need their
+  detailed clinical content completed.
 - **Educational articles** remain available at `/clanky`. They are published
-  only after medical review.
+  only when `reviewed: true`.
 
 Sanity AI Assist may help draft editorial text where enabled, but it must not be
 used with patient-identifying information. Clinical claims and instructions
@@ -108,14 +102,11 @@ intend to use:
 | `RESEND_API_KEY` | Sending guide emails | Keep server-side |
 | `SEND_FROM_EMAIL` | Sending guide emails | Verified sender address in Resend |
 | `APP_URL` | Links in guide emails | Canonical public HTTP(S) URL |
-| `OPENAI_API_KEY` | AI-assisted guide matching | Optional; without it, matching is local |
-| `OPENAI_MODEL` | Selecting the matching model | Optional; defaults to `gpt-4o-mini` |
 
 Never put secrets in `NEXT_PUBLIC_*` variables or commit them to the repository.
-If OpenAI matching is enabled, user-entered descriptions are sent to OpenAI. If
-email is enabled, the entered email address and selected guide are sent to
-Resend. Review provider privacy terms and the site's privacy notice before
-using these services with real patients.
+When email is enabled, the recipient address and selected guide link are sent
+to Resend for delivery. The email content does not include the guide title or
+the user's symptom description.
 
 ## Deployment
 
@@ -125,10 +116,15 @@ variables in the deployment project and redeploy when build-time Sanity
 variables change. Add production and preview origins to Sanity CORS only when
 the Studio needs to be used from those origins.
 
+Before enabling email on Vercel, create a Firewall rate-limit rule with ID
+`patient-guide-email` to match the check in `/api/send`. Configure it per
+client IP (for example, 5 requests per minute). The route rejects requests
+with `429` when limited and fails closed with `503` if the rule is missing or
+the Firewall check fails. Local development skips the Vercel Firewall check.
+
 ## Content that needs approval
 
-The biography, professional history, and contact details contain placeholders
-that must be replaced with verified, approved information before launch.
-Patient-guide demo content and warning signs also need a clinician's review.
-Review medical disclaimers, privacy notices, and external-provider data
-handling before the site is used with patients.
+The biography, professional history, contact details, and detailed diagnosis
+content must be completed and verified before launch. Review medical
+disclaimers, privacy notices, and external-provider data handling before the
+site is used with patients.

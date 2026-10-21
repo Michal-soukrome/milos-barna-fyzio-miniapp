@@ -84,10 +84,11 @@ function EmailPane({ topic }: { topic: PatientGuide }) {
   const [state, setState] = useState<SendState>("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
-  async function handleSend(e: React.FormEvent) {
+  async function handleSend(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setState("sending");
     setErrorMsg("");
+    const formData = new FormData(e.currentTarget);
     try {
       const res = await fetch("/api/send", {
         method: "POST",
@@ -95,6 +96,7 @@ function EmailPane({ topic }: { topic: PatientGuide }) {
         body: JSON.stringify({
           email,
           slug: topic.slug,
+          website: String(formData.get("website") ?? ""),
         }),
       });
       const data = await res.json();
@@ -147,6 +149,23 @@ function EmailPane({ topic }: { topic: PatientGuide }) {
         placeholder="pacient@example.com"
         className="w-full rounded-md border border-slate-200 px-3 py-2.5 text-sm outline-none focus-visible:border-teal-600"
       />
+      <div
+        aria-hidden="true"
+        className="absolute -left-[10000px] h-px w-px overflow-hidden"
+      >
+        <label htmlFor="website">Webová stránka</label>
+        <input
+          id="website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+      <p className="mt-3 text-xs leading-relaxed text-slate-500">
+        E-mailovou adresu a odkaz předáme službě Resend pouze pro doručení
+        zprávy. Do e-mailu neposíláme popis příznaků.
+      </p>
       <button
         type="submit"
         disabled={state === "sending"}

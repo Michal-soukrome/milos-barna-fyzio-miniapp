@@ -151,13 +151,14 @@ export default function Console({
           Rady a tipy pro pacienty
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-slate-600">
-          Najděte návod podle své situace, nebo procházejte články. Konkrétní
+          Najděte návod podle své situace, nebo procházejte všechny zveřejněné
+          návody. Konkrétní
           pokyny můžete otevřít také přímo přes odkaz nebo QR kód od lékaře.
         </p>
       </header>
 
       <div className="space-y-6">
-        <TopicMatcher />
+        <TopicMatcher topics={topics} />
 
         <div className="dashboard-grid gap-8">
           <aside className="mb-7 sm:mb-0">

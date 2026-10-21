@@ -2,49 +2,32 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import type { PatientGuideSummary } from "@/sanity/lib/types";
+import { findMatchingPatientGuide } from "@/sanity/lib/patient-guide-text";
 
-type MatchResponse = {
-  topic: {
-    slug: string;
-    title: string;
-    bodyPart: string;
-    summary: string;
-  };
-  reason: string;
-  source: "ai" | "local";
-};
-
-export default function TopicMatcher() {
+export default function TopicMatcher({
+  topics,
+}: {
+  topics: PatientGuideSummary[];
+}) {
   const [situation, setSituation] = useState("");
-  const [result, setResult] = useState<MatchResponse | null>(null);
+  const [result, setResult] = useState<PatientGuideSummary | null>(null);
   const [error, setError] = useState("");
-  const [isMatching, setIsMatching] = useState(false);
 
-  async function findTopic(event: React.FormEvent<HTMLFormElement>) {
+  function findTopic(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setIsMatching(true);
     setError("");
-    setResult(null);
+    const match = findMatchingPatientGuide(situation, topics);
 
-    try {
-      const response = await fetch("/api/match", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ situation }),
-      });
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(data.error || "Téma se nepodařilo najít.");
-        return;
-      }
-
-      setResult(data);
-    } catch {
-      setError("Nepodařilo se spojit se serverem. Zkuste to prosím znovu.");
-    } finally {
-      setIsMatching(false);
+    if (!match) {
+      setResult(null);
+      setError(
+        "Nenašli jsme vhodné téma. Zkuste popis upřesnit nebo vyberte téma ručně.",
+      );
+      return;
     }
+
+    setResult(match);
   }
 
   return (
@@ -57,10 +40,11 @@ export default function TopicMatcher() {
         </div>
       </div>
       <p className="mt-2 text-sm leading-relaxed text-slate-600">
-        Popište téma nebo situaci a najdeme související návod. Například pokyny
-        po operaci nebo cvičení po úrazu. Nástroj pouze doporučí existující
-        materiál a nevytváří zdravotní rady. Neuvádějte jméno ani jiné osobní
-        údaje.
+        Popište téma nebo situaci a najdeme související návod. Text se zpracuje
+        pouze ve vašem prohlížeči a neodesílá se na server ani do externí AI
+        služby. Nástroj pouze doporučí existující materiál a nevytváří
+        zdravotní rady. Neuvádějte jméno ani jiné údaje, které by vás mohly
+        identifikovat.
       </p>
 
       <form onSubmit={findTopic} className="mt-5">
@@ -79,10 +63,10 @@ export default function TopicMatcher() {
         <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <button
             type="submit"
-            disabled={isMatching || !situation.trim()}
+            disabled={!situation.trim()}
             className="min-h-11 rounded-xl bg-teal-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            {isMatching ? "Hledám…" : "Vyhledat"}
+            Vyhledat
           </button>
         </div>
       </form>
@@ -102,12 +86,14 @@ export default function TopicMatcher() {
             Doporučený návod
           </p>
           <h3 className="font-serif-display mt-1 text-xl text-slate-800">
-            {result.topic.title}
+            {result.title}
           </h3>
-          <p className="mt-1 text-sm text-slate-600">{result.topic.summary}</p>
-          <p className="mt-3 text-xs text-slate-500">{result.reason}</p>
+          <p className="mt-1 text-sm text-slate-600">{result.summary}</p>
+          <p className="mt-3 text-xs text-slate-500">
+            Vybráno podle slov ve vašem popisu.
+          </p>
           <Link
-            href={`/navody/${result.topic.slug}`}
+            href={`/navody/${result.slug}`}
             className="mt-4 inline-flex min-h-11 items-center rounded-xl bg-slate-800 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800"
           >
             Otevřít návod

@@ -7,8 +7,8 @@ import GuideShareButton from "@/components/GuideShareButton";
 import {
   getPatientGuideBySlug,
   getPatientGuideSummaries,
-  normalizePatientGuideText,
 } from "@/sanity/lib/patient-guides";
+import { normalizePatientGuideText } from "@/sanity/lib/patient-guide-text";
 import type { PatientGuideSummary } from "@/sanity/lib/types";
 
 export const metadata = {

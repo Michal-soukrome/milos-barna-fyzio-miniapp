@@ -10,15 +10,9 @@ import type {
   PatientGuide,
   PatientGuideSummary,
 } from "./types";
+export { normalizePatientGuideText } from "./patient-guide-text";
 
 export const patientGuideRevalidateSeconds = 300;
-
-export function normalizePatientGuideText(value: string) {
-  return value
-    .toLocaleLowerCase("cs-CZ")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
-}
 
 export async function getPatientGuides(): Promise<PatientGuide[]> {
   if (!sanityClient) return [];
