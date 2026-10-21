@@ -5,16 +5,12 @@ export default function NotFound() {
   return (
     <Layout>
       <section className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white px-6 py-12 text-center shadow-sm sm:px-12 sm:py-16">
-        <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
-          Chyba 404
-        </p>
+      
         <h1 className="font-serif-display mt-3 text-3xl leading-tight text-slate-800 sm:text-4xl">
           Tuto stránku se nepodařilo najít
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base">
-          Odkaz může být zastaralý nebo adresa neexistuje. Vraťte se na úvodní
-          stránku, nebo najděte pokyny, které vám pomohou před zákrokem i po
-          něm.
+          Omlouvám se, ale odkaz je buď zastaralý nebo adresa neexistuje.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link

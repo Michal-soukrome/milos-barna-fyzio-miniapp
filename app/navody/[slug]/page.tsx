@@ -51,7 +51,7 @@ export default async function TopicPage({
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <article
           aria-labelledby="guide-title"
-          className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-10"
+          className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-10 h-fit"
         >
           {topic.isDemo && (
             <div

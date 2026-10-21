@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, FunnelX, Search, Share } from "lucide-react";
+import { ArrowRight, FunnelX, Search, Share, X } from "lucide-react";
 import {
   AGE_GROUP_LABELS,
   type AgeGroup,
@@ -321,9 +321,10 @@ export default function Console({
               ref={closeButtonRef}
               type="button"
               onClick={() => shareDialogRef.current?.close()}
-              className="absolute top-2 right-2 inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-700"
+              className="absolute top-0 right-0 inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-700"
             >
-              Zavřít
+                            <X className="h-4 w-4" />
+
             </button>
           </div>
           {selected && <TopicActions topic={selected} />}

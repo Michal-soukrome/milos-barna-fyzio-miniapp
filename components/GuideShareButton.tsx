@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Share } from "lucide-react";
+import { Share, X } from "lucide-react";
 import TopicActions from "@/components/TopicActions";
 import type { PatientGuide } from "@/sanity/lib/types";
 
@@ -92,9 +92,9 @@ export default function GuideShareButton({
               ref={closeButtonRef}
               type="button"
               onClick={() => dialogRef.current?.close()}
-              className="absolute right-2 top-2 inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-700"
+              className="absolute right-0 top-0 inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-700"
             >
-              Zavřít
+              <X className="h-4 w-4" />
             </button>
             <TopicActions topic={topic} />
           </div>

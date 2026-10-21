@@ -17,9 +17,7 @@ export default function TopicActions({ topic }: { topic: PatientGuide }) {
 
   return (
     <div>
-      <div className="!hidden mb-2 text-xs font-bold uppercase tracking-[0.14em] text-teal-700">
-        {topic.bodyPart}
-      </div>
+      
       <h2 className="font-serif-display text-3xl leading-tight text-slate-800">
         {topic.title}
       </h2>
