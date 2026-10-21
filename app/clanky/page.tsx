@@ -76,7 +76,7 @@ export default async function ArticlesPage() {
                             "cs-CZ",
                           )}
                         </p>
-                        <h3 className="font-serif-display mt-2 text-2xl leading-tight text-slate-800 group-hover:text-teal-800">
+                        <h3 className="font-serif-display mt-2 text-2xl leading-tight text-slate-800 group-hover:text-teal-800 group-hover:underline">
                           {article.title}
                         </h3>
                         <p className="mt-3 text-sm leading-relaxed text-slate-600">

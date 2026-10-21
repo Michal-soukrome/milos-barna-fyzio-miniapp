@@ -79,12 +79,7 @@ export default function AboutPage() {
               obrátit, když potřebujete další informace.
             </p>
 
-            <Link
-              href="/navody"
-              className="mt-6 inline-flex min-h-11 items-center rounded-xl bg-teal-700 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-teal-800"
-            >
-              Rady a tipy
-            </Link>
+    
           </div>
         </div>
 

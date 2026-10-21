@@ -164,13 +164,8 @@ export default function Console({
        
 
             <div className="md:sticky md:top-24 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-              <div className="mb-3 flex items-center justify-between gap-3">
-                <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
-                  Filtrovat podle oblasti
-                </p>
-              
-              </div>
-              <div>
+
+<div>
                 <button
                   type="button"
                   onClick={clearFilters}
@@ -183,6 +178,12 @@ export default function Console({
                   />
                   Vymazat filtry
                 </button>
+              </div>
+
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
+                  Filtrovat podle oblasti
+                </p>
               </div>
               <div className="flex flex-wrap gap-2 items-start">
                 {bodyParts.map((part) => (
@@ -267,7 +268,7 @@ export default function Console({
                         href={`/navody/${t.slug}`}
                         className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-slate-700 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-800 focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2"
                       >
-                        Zobrazit
+                        Přečíst
                       </Link>
                       <button
                         type="button"

@@ -82,7 +82,7 @@ export default function TopicMatcher() {
             disabled={isMatching || !situation.trim()}
             className="min-h-11 rounded-xl bg-teal-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            {isMatching ? "Hledám návod…" : "Najít odpovídající návod"}
+            {isMatching ? "Hledám…" : "Vyhledat"}
           </button>
         </div>
       </form>
