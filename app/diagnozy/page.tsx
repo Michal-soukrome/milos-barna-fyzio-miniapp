@@ -5,7 +5,7 @@ import DiagnosisBrowser, {
 } from "@/components/DiagnosisBrowser";
 import { getDiagnoses } from "@/sanity/lib/diagnoses";
 import { isSanityConfigured } from "@/sanity/lib/client";
-import { ARTICLE_BODY_PARTS } from "@/sanity/lib/article-taxonomy";
+import { DIAGNOSIS_CATEGORIES } from "@/sanity/lib/diagnosis-categories";
 import type { DiagnosisSummary } from "@/sanity/lib/types";
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export const revalidate = 300;
 
 export default async function DiagnosesPage() {
   const diagnoses = await getDiagnoses();
-  const groups = groupDiagnosesByBodyPart(diagnoses);
+  const groups = groupDiagnosesByCategory(diagnoses);
 
   return (
     <Layout>
@@ -59,14 +59,14 @@ export default async function DiagnosesPage() {
 }
 
 // Only the fields the client needs are serialized into the page payload.
-function groupDiagnosesByBodyPart(
+function groupDiagnosesByCategory(
   diagnoses: DiagnosisSummary[],
 ): BrowserGroup[] {
-  return ARTICLE_BODY_PARTS.map(({ value, label }) => ({
+  return DIAGNOSIS_CATEGORIES.map(({ value, label }) => ({
     key: value,
     label,
     diagnoses: diagnoses
-      .filter((diagnosis) => diagnosis.bodyPart === value)
+      .filter((diagnosis) => diagnosis.category === value)
       .map(({ _id, slug, title, summary }) => ({
         _id,
         slug,

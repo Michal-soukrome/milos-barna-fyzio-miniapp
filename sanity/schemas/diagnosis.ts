@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { ARTICLE_BODY_PARTS } from "../lib/article-taxonomy";
+import { DIAGNOSIS_CATEGORIES } from "../lib/diagnosis-categories";
 import { ReviewedInput } from "./ReviewedInput";
 
 export const diagnosis = defineType({
@@ -12,6 +13,19 @@ export const diagnosis = defineType({
       title: "Název diagnózy",
       type: "string",
       validation: (rule) => rule.required().min(3).max(120),
+    }),
+    defineField({
+      name: "category",
+      title: "Kategorie",
+      description:
+        "Kategorie pro seskupení diagnóz v přehledu. U starších diagnóz se použije oblast těla.",
+      type: "string",
+      options: {
+        list: DIAGNOSIS_CATEGORIES.map(({ value, label }) => ({
+          title: label,
+          value,
+        })),
+      },
     }),
     defineField({
       name: "slug",

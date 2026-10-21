@@ -133,20 +133,20 @@ export default function DiagnosisBrowser({
           {/* Aside: on mobile it sits above the content, on lg it moves to the right */}
           <aside
             className="order-first lg:order-2 lg:sticky lg:top-20"
-            aria-label="Navigace podle části těla"
+            aria-label="Navigace podle kategorie diagnóz"
           >
             <nav
-              id="body-part-navigation"
-              className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
+              id="diagnosis-category-navigation"
+              className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:max-h-[calc(100dvh-6rem)] lg:overflow-y-auto"
             >
               <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
-                Podle části těla
+                Podle kategorie
               </p>
               <ul className="flex flex-wrap gap-2 lg:flex-col lg:gap-1">
                 {filteredGroups.map((group) => (
                   <li key={group.key}>
                     <a
-                      href={`#body-part-${group.key}`}
+                      href={`#diagnosis-category-${group.key}`}
                       className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-semibold text-teal-800 transition-colors hover:border-teal-600 hover:bg-teal-50 lg:border-transparent lg:bg-transparent lg:py-2"
                     >
                       <span>
@@ -167,12 +167,12 @@ export default function DiagnosisBrowser({
             {filteredGroups.map((group) => (
               <section
                 key={group.key}
-                id={`body-part-${group.key}`}
+                id={`diagnosis-category-${group.key}`}
                 className="scroll-mt-24"
-                aria-labelledby={`body-part-${group.key}-heading`}
+                aria-labelledby={`diagnosis-category-${group.key}-heading`}
               >
                 <h2
-                  id={`body-part-${group.key}-heading`}
+                  id={`diagnosis-category-${group.key}-heading`}
                   className="font-serif-display mb-5 border-b border-slate-200 pb-2 text-2xl text-slate-800"
                 >
                   {group.label}

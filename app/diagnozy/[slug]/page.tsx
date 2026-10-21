@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Layout from "@/components/Layout";
 import MedicalBody from "@/components/MedicalBody";
 import { getDiagnosisBySlug, getDiagnoses } from "@/sanity/lib/diagnoses";
-import { getArticleBodyPartLabel } from "@/sanity/lib/article-taxonomy";
+import { getDiagnosisCategoryLabel } from "@/sanity/lib/diagnosis-categories";
 import { sanityClient } from "@/sanity/lib/client";
 import type { DiagnosisSummary } from "@/sanity/lib/types";
 
@@ -30,7 +30,7 @@ export default async function DiagnosisPage({
   const diagnosis = await getDiagnosisBySlug(slug);
   if (!diagnosis) return notFound();
 
-  const bodyPartLabel = getArticleBodyPartLabel(diagnosis.bodyPart);
+  const categoryLabel = getDiagnosisCategoryLabel(diagnosis.category);
 
   return (
     <Layout>
@@ -39,9 +39,9 @@ export default async function DiagnosisPage({
           aria-labelledby="diagnosis-title"
           className="h-fit min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-10"
         >
-          {bodyPartLabel && (
+          {categoryLabel && (
             <p className="text-sm font-semibold text-teal-700">
-              {bodyPartLabel}
+              {categoryLabel}
             </p>
           )}
           <h1
@@ -80,10 +80,8 @@ export default async function DiagnosisPage({
               id="related-diagnoses-title"
               className="font-serif-display mt-2 text-2xl text-slate-800"
             >
-              Další diagnózy z oblasti{" "}
-              <span className="lowercase italic">
-              '{bodyPartLabel}'
-              </span>
+              Další diagnózy z kategorie{" "}
+              <span className="lowercase italic">'{categoryLabel}'</span>
             </h2>
             <ul className="mt-5 divide-y divide-slate-200">
               {diagnosis.relatedDiagnoses.map((relatedDiagnosis) => (
@@ -92,7 +90,6 @@ export default async function DiagnosisPage({
                     href={`/diagnozy/${relatedDiagnosis.slug}`}
                     className="group block"
                   >
-             
                     <span className="font-serif-display mt-1 block text-lg leading-snug text-slate-800 group-hover:text-teal-800 group-hover:underline">
                       {relatedDiagnosis.title}
                     </span>

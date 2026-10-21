@@ -83,11 +83,12 @@ export const DIAGNOSES_QUERY = defineQuery(`*[
   _type == "diagnosis" &&
   reviewed == true &&
   defined(slug.current)
-] | order(bodyPart asc, title asc) {
+] | order(coalesce(category, bodyPart) asc, title asc) {
   _id,
   title,
   "slug": slug.current,
   bodyPart,
+  "category": coalesce(category, bodyPart),
   summary
 }`);
 
@@ -101,19 +102,21 @@ export const DIAGNOSIS_QUERY = defineQuery(`*[
   title,
   "slug": slug.current,
   bodyPart,
+  "category": coalesce(category, bodyPart),
   summary,
   body,
   "relatedDiagnoses": *[
     _type == "diagnosis" &&
     reviewed == true &&
     defined(slug.current) &&
-    bodyPart == ^.bodyPart &&
+    coalesce(category, bodyPart) == coalesce(^.category, ^.bodyPart) &&
     slug.current != ^.slug.current
   ] | order(title asc)[0...3] {
     _id,
     title,
     "slug": slug.current,
     bodyPart,
+    "category": coalesce(category, bodyPart),
     summary
   }
 }`);

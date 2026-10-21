@@ -98,6 +98,7 @@ export type DiagnosisSummary = {
   title: string;
   slug: string;
   bodyPart: ArticleBodyPart;
+  category: string;
   summary?: string | null;
 };
 
