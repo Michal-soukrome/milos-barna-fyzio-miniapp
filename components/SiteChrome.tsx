@@ -157,7 +157,6 @@ export default function SiteChrome({
                 Srozumitelně před zákrokem i po něm
               </span>
             </Link>
-         
           </div>
 
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -167,7 +166,7 @@ export default function SiteChrome({
               </h2>
               <ul className="mt-3 flex flex-col gap-2">
                 {navigation.map(({ href, label }) => (
-                  <li key={href} >
+                  <li key={href}>
                     <Link
                       href={href}
                       aria-current={isActiveLink(href) ? "page" : undefined}
@@ -217,7 +216,6 @@ export default function SiteChrome({
                       >
                         {tip.title}
                       </Link>
-                    
                     </li>
                   ))}
                 </ul>

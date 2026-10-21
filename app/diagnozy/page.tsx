@@ -31,10 +31,18 @@ export default async function DiagnosesPage() {
           Diagnózy a možnosti léčby
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-slate-600">
-         Základem úspěšné léčby onemocnění a deformit nohy je správné stanovení diagnózy. Nejčastějším důvodem návštěvy ortopedické ambulance je bolest, jejíž charakter a lokalizace mohou napovědět, o jaký problém se jedná. Dalším častým důvodem je změna tvaru nohy (deformita) a obava z jejího dalšího zhoršování.
-<br />
-
-Na této stránce najdete přehled nejčastějších diagnóz a obtíží, se kterými pacienti vyhledávají lékařskou péči. Jednotlivé stavy se mohou vzájemně kombinovat a postižení může současně zasahovat více oblastí nohy. Ke stanovení přesné diagnózy je proto nezbytné klinické vyšetření lékařem, které může být podle potřeby doplněno zobrazovacími metodami, například rentgenovým vyšetřením.
+          Základem úspěšné léčby onemocnění a deformit nohy je správné stanovení
+          diagnózy. Nejčastějším důvodem návštěvy ortopedické ambulance je
+          bolest, jejíž charakter a lokalizace mohou napovědět, o jaký problém
+          se jedná. Dalším častým důvodem je změna tvaru nohy (deformita) a
+          obava z jejího dalšího zhoršování.
+          <br />
+          Na této stránce najdete přehled nejčastějších diagnóz a obtíží, se
+          kterými pacienti vyhledávají lékařskou péči. Jednotlivé stavy se mohou
+          vzájemně kombinovat a postižení může současně zasahovat více oblastí
+          nohy. Ke stanovení přesné diagnózy je proto nezbytné klinické
+          vyšetření lékařem, které může být podle potřeby doplněno zobrazovacími
+          metodami, například rentgenovým vyšetřením.
         </p>
 
         {!isSanityConfigured ? (
@@ -42,53 +50,76 @@ Na této stránce najdete přehled nejčastějších diagnóz a obtíží, se kt
             Knihovna diagnóz zatím není připojena k redakčnímu systému.
           </p>
         ) : groups.length > 0 ? (
-          <div className="mt-10 space-y-10">
-
-<div className="sticky top-17 w-full shadow bg-white flex flex-wrap" id="body-part-navigation">
-  <ul>
-    {groups.map((group) => (
-      <li key={group.key} className="w-fit px-4 py-2 ">
-        <a href={`#body-part-${group.key}`} className="text-sm font-semibold text-teal-800 hover:underline">
-          {group.label}
-        </a>
-      </li>
-    ))}
-  </ul>
-</div>
-
-            {groups.map((group) => (
-              <section
-                key={group.key}
-                className="scroll-mt-20"
-                aria-labelledby={`body-part-${group.key}`}
+          <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-start">
+            {/* Aside: on mobile it sits above the content, on lg it moves to the right */}
+            <aside
+              className="order-first lg:order-2 lg:sticky lg:top-20"
+              aria-label="Navigace podle části těla"
+            >
+              <nav
+                id="body-part-navigation"
+                className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
               >
-                <h2
-                  id={`body-part-${group.key}`}
-                  className="font-serif-display mb-4 text-2xl text-slate-800"
-                >
-                  {group.label}
-                </h2>
-                <ul className="grid gap-4 md:grid-cols-2">
-                  {group.diagnoses.map((diagnosis) => (
-                    <li key={diagnosis._id}>
-                      <Link
-                        href={`/diagnozy/${diagnosis.slug}`}
-                        className="group block h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-teal-600 hover:shadow-md"
+                <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  Podle části těla
+                </p>
+                <ul className="flex flex-wrap gap-2 lg:flex-col lg:gap-1">
+                  {groups.map((group) => (
+                    <li key={group.key}>
+                      <a
+                        href={`#body-part-${group.key}`}
+                        className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-semibold text-teal-800 transition-colors hover:border-teal-600 hover:bg-teal-50 lg:border-transparent lg:bg-transparent lg:py-2"
                       >
-                        <h3 className="font-serif-display text-2xl leading-tight text-slate-800 group-hover:text-teal-800 group-hover:underline">
-                          {diagnosis.title}
-                        </h3>
-                        {diagnosis.summary && (
-                          <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                            {diagnosis.summary}
-                          </p>
-                        )}
-                      </Link>
+                        <span>
+                          {group.label}{" "}
+                          <span className="text-teal-600 italic font-light">
+                            ({group.diagnoses.length})
+                          </span>
+                        </span>
+                      </a>
                     </li>
                   ))}
                 </ul>
-              </section>
-            ))}
+              </nav>
+            </aside>
+
+            {/* Main content */}
+            <div className="space-y-12 lg:order-1">
+              {groups.map((group) => (
+                <section
+                  key={group.key}
+                  id={`body-part-${group.key}`}
+                  className="scroll-mt-24"
+                  aria-labelledby={`body-part-${group.key}-heading`}
+                >
+                  <h2
+                    id={`body-part-${group.key}-heading`}
+                    className="font-serif-display mb-5 border-b border-slate-200 pb-2 text-2xl text-slate-800"
+                  >
+                    {group.label}
+                  </h2>
+                  <ul className="grid gap-4 md:grid-cols-2">
+                    {group.diagnoses.map((diagnosis) => (
+                      <li key={diagnosis._id}>
+                        <Link
+                          href={`/diagnozy/${diagnosis.slug}`}
+                          className="group block h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-teal-600 hover:shadow-md"
+                        >
+                          <h3 className="font-serif-display text-2xl leading-tight text-slate-800 group-hover:text-teal-800 group-hover:underline">
+                            {diagnosis.title}
+                          </h3>
+                          {diagnosis.summary && (
+                            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                              {diagnosis.summary}
+                            </p>
+                          )}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
+            </div>
           </div>
         ) : (
           <p className="mt-8 rounded-2xl border border-slate-200 bg-white p-5 text-sm leading-relaxed text-slate-600">
