@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import Layout from "@/components/Layout";
 import { Timeline, type TimelineItem } from "@/components/Timeline";
 
@@ -78,8 +77,6 @@ export default function AboutPage() {
               po něm. Záleží mi na tom, abyste věděli, co vás čeká a kam se
               obrátit, když potřebujete další informace.
             </p>
-
-    
           </div>
         </div>
 
@@ -97,7 +94,6 @@ export default function AboutPage() {
               </p>
             </section>
           ))}
-        
         </div>
 
         <div className="mt-12 border-t border-slate-200 pt-10">

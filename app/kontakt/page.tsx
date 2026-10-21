@@ -7,12 +7,12 @@ export const metadata: Metadata = {
 };
 
 const contactDetails = [
-  { label: "Adresa ordinace", value: "[Doplnit adresu ordinace.]" },
-  { label: "Telefon", value: "[Doplnit veřejné telefonní číslo.]" },
-  { label: "E-mail", value: "[Doplnit veřejnou kontaktní e-mailovou adresu.]" },
+  { label: "Adresa ordinace", value: "[Doplnit]" },
+  { label: "Telefon", value: "[Doplnit]" },
+  { label: "E-mail", value: "[Doplnit]" },
   {
     label: "Další odkazy",
-    value: "[Doplnit ověřené odkazy na moje webové stránky.]",
+    value: "[Doplnit]",
   },
 ];
 
@@ -24,8 +24,7 @@ export default function ContactPage() {
           Kontakt
         </h1>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">
-          Potřebujete se na něco zeptat? Kontaktní údaje zveřejním po jejich
-          ověření.
+          Potřebujete se na něco zeptat?
         </p>
 
         <dl className="mt-8 grid gap-3 sm:grid-cols-2">
