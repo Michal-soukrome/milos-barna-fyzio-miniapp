@@ -16,7 +16,7 @@ const careSections = [
   },
   {
     title: "Po zákroku",
-    text: "Pokyny a cvičení můžete mít po ruce i doma. Pokud se informace na webu liší od toho, co jsme probrali osobně, řiďte se naším domluveným postupem.",
+    text: "Rady a tipy můžete mít po ruce i doma. Pokud se informace na webu liší od toho, co jsme probrali osobně, řiďte se naším domluveným postupem.",
   },
 ];
 
@@ -26,7 +26,7 @@ export default function AboutPage() {
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
         <div className="grid gap-8 md:grid-cols-[minmax(0,280px)_1fr] md:items-center">
           <Image
-            src="/milos/milos_barna_ml.jpeg"
+            src="/milosek/milosek_barna_ml.jpeg"
             alt="Miloš Barna"
             width={426}
             height={640}

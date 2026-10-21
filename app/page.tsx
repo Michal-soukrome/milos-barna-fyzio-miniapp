@@ -81,7 +81,7 @@ export default function HomePage() {
           <div className="px-6 pt-10 sm:px-10 md:px-0 md:pr-10 md:pt-12 lg:pr-14">
             <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-t-[999px] bg-teal-800 ring-1 ring-inset ring-teal-300/30">
               <Image
-                src="/milos/milos_barna_ml.jpeg"
+                src="/milosek/milosek_barna_ml.jpeg"
                 alt="Portrét MUDr. Barna Miloš, Ph.D."
                 fill
                 priority
@@ -105,7 +105,7 @@ export default function HomePage() {
               <li key={destination.href}>
                 <Link
                   href={destination.href}
-                  className="group block h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-teal-600 hover:shadow-md group"
+                  className="group block h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all  hover:border-teal-600 hover:shadow-md group"
                 >
                   <p className="!hidden text-xs font-bold uppercase tracking-[0.14em] text-teal-700">
                     {destination.eyebrow}

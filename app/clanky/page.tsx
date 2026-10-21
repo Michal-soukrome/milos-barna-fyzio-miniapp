@@ -35,10 +35,10 @@ export default async function ArticlesPage() {
   return (
     <Layout>
       <section>
-        <h1 className="font-serif-display mt-2 text-4xl leading-tight text-slate-800">
+        <h1 className="font-serif-display text-3xl leading-tight text-slate-800">
           Zdravotní témata
         </h1>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">
+        <p className="mt-3 text-sm leading-relaxed text-slate-600">
           Srozumitelné informace o častých potížích a možnostech léčby,
           přehledně podle oblasti těla. Každý zveřejněný článek prošel lékařskou
           kontrolou.
@@ -71,7 +71,7 @@ export default async function ArticlesPage() {
                     <li key={article._id}>
                       <Link
                         href={`/clanky/${article.slug}`}
-                        className="group block h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-teal-600 hover:shadow-md"
+                        className="group block h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all  hover:border-teal-600 hover:shadow-md"
                       >
                         <p className="text-xs font-semibold text-teal-700">
                           {new Date(article.publishedAt).toLocaleDateString(

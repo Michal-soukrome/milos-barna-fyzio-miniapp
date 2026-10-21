@@ -130,7 +130,7 @@ export default function Console({
     return (
       <Layout>
         <h1 className="font-serif-display mb-4 text-3xl text-slate-800">
-          Pokyny a cvičení pro pacienty
+          Rady a tipy pro pacienty
         </h1>
         <p
           role="status"
@@ -148,7 +148,7 @@ export default function Console({
     <Layout>
       <header className="mb-8">
         <h1 className="font-serif-display text-3xl leading-tight text-slate-800">
-          Pokyny a cvičení pro pacienty
+          Rady a tipy pro pacienty
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-slate-600">
           Najděte návod podle své situace, nebo procházejte témata. Konkrétní
@@ -161,14 +161,7 @@ export default function Console({
 
         <div className="dashboard-grid gap-8">
           <aside className="mb-7 sm:mb-0">
-            <div className="mb-7">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
-                Procházet pokyny
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-slate-500">
-                Zúžte výběr podle oblasti těla nebo věkové skupiny.
-              </p>
-            </div>
+       
 
             <div className="md:sticky md:top-24 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
               <div className="mb-3 flex items-center justify-between gap-3">
@@ -247,7 +240,7 @@ export default function Console({
             <ul className="grid gap-3 sm:grid-cols-2">
               {filtered.map((t) => (
                 <li key={t.slug} className="topic-card">
-                  <div className="flex min-h-52 w-full flex-col rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:border-teal-600 hover:shadow-md sm:p-5">
+                  <div className="flex min-h-52 w-full flex-col rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-all group hover:border-teal-600 hover:shadow-md sm:p-5">
                     <Link
                       href={`/navody/${t.slug}`}
                       className="group flex flex-1 flex-col rounded-xl p-1 text-left focus-visible:ring-2 focus-visible:ring-teal-600"
@@ -261,7 +254,7 @@ export default function Console({
                           className="h-5 w-5 text-teal-700 transition-transform group-hover:translate-x-1"
                         />
                       </div>
-                      <span className="font-serif-display text-xl leading-tight text-slate-800 group-hover:text-teal-800">
+                      <span className="font-serif-display text-xl leading-tight text-slate-800 group-hover:text-teal-800 group-hover:underline">
                         {t.title}
                       </span>
                       <span className="mt-2 text-sm leading-relaxed text-slate-500">
