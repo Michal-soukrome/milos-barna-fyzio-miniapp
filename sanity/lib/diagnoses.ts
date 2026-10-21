@@ -1,4 +1,5 @@
 import { sanityClient } from "./client";
+import { getSanityContentCacheTags } from "./cache-tags";
 import {
   DIAGNOSES_QUERY,
   DIAGNOSIS_QUERY,
@@ -18,7 +19,12 @@ export async function getDiagnoses(): Promise<DiagnosisSummary[]> {
   return sanityClient.fetch<DiagnosisSummary[]>(
     DIAGNOSES_QUERY,
     {},
-    { next: { revalidate: diagnosisRevalidateSeconds } },
+    {
+      next: {
+        revalidate: diagnosisRevalidateSeconds,
+        tags: getSanityContentCacheTags("diagnosis"),
+      },
+    },
   );
 }
 
@@ -30,7 +36,12 @@ export async function getDiagnosisBySlug(
   return sanityClient.fetch<PublishedDiagnosis | null>(
     DIAGNOSIS_QUERY,
     { slug },
-    { next: { revalidate: diagnosisRevalidateSeconds } },
+    {
+      next: {
+        revalidate: diagnosisRevalidateSeconds,
+        tags: getSanityContentCacheTags("diagnosis", slug),
+      },
+    },
   );
 }
 
@@ -40,6 +51,11 @@ export async function getLatestDiagnoses(): Promise<LatestDiagnosisSummary[]> {
   return sanityClient.fetch<LatestDiagnosisSummary[]>(
     LATEST_DIAGNOSES_QUERY,
     {},
-    { next: { revalidate: diagnosisRevalidateSeconds } },
+    {
+      next: {
+        revalidate: diagnosisRevalidateSeconds,
+        tags: getSanityContentCacheTags("diagnosis"),
+      },
+    },
   );
 }

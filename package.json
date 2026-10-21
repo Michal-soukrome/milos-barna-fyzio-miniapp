@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build && npm run tree",
     "start": "next start",
-    "tree": "node scripts/generate-tree.js"
+    "tree": "node scripts/generate-tree.js",
+    "test": "node --experimental-strip-types --test tests/patient-guide-matcher.test.ts"
   },
   "dependencies": {
     "@portabletext/react": "^8.0.1",

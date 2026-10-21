@@ -1,5 +1,7 @@
 import { defineField, defineType } from "sanity";
 import { ARTICLE_BODY_PARTS } from "../lib/article-taxonomy";
+import { getReviewedContentIssues } from "../lib/reviewed-content";
+import { ReviewedInput } from "./ReviewedInput";
 
 export const diagnosis = defineType({
   name: "diagnosis",
@@ -70,11 +72,17 @@ export const diagnosis = defineType({
       name: "reviewed",
       title: "Lékařsky zkontrolováno",
       description:
-        "Po kontrole celého obsahu MUDr. Milošem Barnou zapněte pro zveřejnění diagnózy na webu.",
+        "Po kontrole celého obsahu MUDr. Milošem Barnou zapněte pro zveřejnění diagnózy na webu. Úprava obsahu příznak automaticky vypne.",
       type: "boolean",
       initialValue: false,
       options: { aiAssist: { exclude: true } },
-      validation: (rule) => rule.required(),
+      components: { input: ReviewedInput },
+      validation: (rule) =>
+        rule.required().custom((value, context) => {
+          if (value !== true) return true;
+          const issues = getReviewedContentIssues("diagnosis", context.document);
+          return issues.length > 0 ? issues.join(" ") : true;
+        }),
     }),
   ],
   preview: {

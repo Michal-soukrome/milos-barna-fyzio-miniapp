@@ -3,11 +3,11 @@ import Layout from "@/components/Layout";
 
 export const metadata: Metadata = {
   title: "Kontakt | Miloš Barna",
-  description: "Jak se spojit se mnou nebo s ordinací.",
+  description: "Jak se se mnou spojit.",
 };
 
 const contactDetails = [
-  { label: "Adresa ordinace", value: "[Doplnit]" },
+  { label: "Adresa", value: "[Doplnit]" },
   { label: "Telefon", value: "[Doplnit]" },
   { label: "E-mail", value: "[Doplnit]" },
   {

@@ -1,4 +1,5 @@
 import { sanityClient } from "./client";
+import { getSanityContentCacheTags } from "./cache-tags";
 import {
   PATIENT_GUIDES_QUERY,
   PATIENT_GUIDE_QUERY,
@@ -20,7 +21,12 @@ export async function getPatientGuides(): Promise<PatientGuide[]> {
   return sanityClient.fetch<PatientGuide[]>(
     PATIENT_GUIDES_QUERY,
     {},
-    { next: { revalidate: patientGuideRevalidateSeconds } },
+    {
+      next: {
+        revalidate: patientGuideRevalidateSeconds,
+        tags: getSanityContentCacheTags("patientGuide"),
+      },
+    },
   );
 }
 
@@ -32,7 +38,12 @@ export async function getPatientGuideBySlug(
   return sanityClient.fetch<PatientGuide | null>(
     PATIENT_GUIDE_QUERY,
     { slug },
-    { next: { revalidate: patientGuideRevalidateSeconds } },
+    {
+      next: {
+        revalidate: patientGuideRevalidateSeconds,
+        tags: getSanityContentCacheTags("patientGuide", slug),
+      },
+    },
   );
 }
 
@@ -44,7 +55,12 @@ export async function getPatientGuideSummaries(): Promise<
   return sanityClient.fetch<PatientGuideSummary[]>(
     PATIENT_GUIDE_SUMMARIES_QUERY,
     {},
-    { next: { revalidate: patientGuideRevalidateSeconds } },
+    {
+      next: {
+        revalidate: patientGuideRevalidateSeconds,
+        tags: getSanityContentCacheTags("patientGuide"),
+      },
+    },
   );
 }
 
@@ -56,6 +72,11 @@ export async function getLatestPatientGuideSummaries(): Promise<
   return sanityClient.fetch<LatestPatientGuideSummary[]>(
     LATEST_PATIENT_GUIDES_QUERY,
     {},
-    { next: { revalidate: patientGuideRevalidateSeconds } },
+    {
+      next: {
+        revalidate: patientGuideRevalidateSeconds,
+        tags: getSanityContentCacheTags("patientGuide"),
+      },
+    },
   );
 }

@@ -5,6 +5,7 @@ import { ARTICLES_QUERY } from "@/sanity/lib/queries";
 import { isSanityConfigured, sanityClient } from "@/sanity/lib/client";
 import { ArticleSummary } from "@/sanity/lib/types";
 import { ARTICLE_BODY_PARTS } from "@/sanity/lib/article-taxonomy";
+import { getSanityContentCacheTags } from "@/sanity/lib/cache-tags";
 
 export const metadata: Metadata = {
   title: "Články | Miloš Barna",
@@ -26,7 +27,7 @@ export default async function ArticlesPage() {
     (await sanityClient.fetch<ArticleSummary[]>(
       ARTICLES_QUERY,
       {},
-      { next: { revalidate } },
+      { next: { revalidate, tags: getSanityContentCacheTags("article") } },
     ));
   const articleGroups = Array.isArray(articles)
     ? groupArticlesByBodyPart(articles)

@@ -63,16 +63,15 @@ export default async function TopicPage({
           <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
             {topic.summary}
           </p>
-        
 
           {topic.warningSigns.length > 0 && (
             <aside className="mt-8 rounded-xl border border-rose-300 bg-rose-50 p-5 text-rose-950">
               <h2 className="font-serif-display text-xl">
-                Kdy kontaktovat ordinaci
+                Kdy kontaktovat lékaře?
               </h2>
               <p className="mt-2 text-sm leading-relaxed">
                 Pokud se vás týká některý z těchto varovných příznaků,
-                kontaktujte ordinaci a nespoléhejte se pouze na tyto obecné
+                kontaktujte svého lékaře a nespoléhejte se pouze na tyto obecné
                 pokyny.
               </p>
               <ul className="mt-3 list-inside list-disc space-y-2 text-sm leading-relaxed">
@@ -81,12 +80,6 @@ export default async function TopicPage({
                 ))}
               </ul>
               <div className="mt-4 flex flex-wrap gap-3">
-                <Link
-                  href="/kontakt"
-                  className="inline-flex min-h-11 items-center rounded-xl bg-rose-800 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-rose-900"
-                >
-                  Kontaktovat ordinaci
-                </Link>
                 <a
                   href={followUpLink.href}
                   target="_blank"
@@ -94,10 +87,7 @@ export default async function TopicPage({
                   className="inline-flex min-h-11 items-center rounded-xl border border-rose-400 px-4 py-2.5 text-sm font-semibold text-rose-950 transition-colors hover:bg-white"
                 >
                   {followUpLink.label}
-                  <ExternalLink
-                    aria-hidden="true"
-                    className="ml-1 h-4 w-4"
-                  />
+                  <ExternalLink aria-hidden="true" className="ml-1 h-4 w-4" />
                 </a>
               </div>
             </aside>
@@ -108,10 +98,9 @@ export default async function TopicPage({
           <p className="mt-6 text-xs text-slate-500">
             Tato stránka poskytuje pouze obecné informace a nenahrazuje osobní
             lékařské vyšetření. Pokud se cokoli neshoduje s tím, co vám bylo
-            řečeno osobně, řiďte se pokyny svého lékaře a s dotazy se obraťte na
-            ordinaci.
+            řečeno osobně a řiďte se pokyny svého lékaře.
           </p>
-            <div className="mt-5">
+          <div className="mt-5">
             <GuideShareButton topic={topic} />
           </div>
         </article>
@@ -121,14 +110,13 @@ export default async function TopicPage({
             aria-labelledby="related-guides-title"
             className="h-fit rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 md:sticky md:top-24"
           >
-          
             <h2
               id="related-guides-title"
               className="font-serif-display mt-2 text-2xl text-slate-800"
             >
               Související
             </h2>
-          
+
             <ul className="mt-5 divide-y divide-slate-200">
               {relatedGuides.map((relatedGuide) => (
                 <li key={relatedGuide._id} className="py-4 first:pt-0">
@@ -151,15 +139,14 @@ export default async function TopicPage({
                 </li>
               ))}
             </ul>
-              <Link
-                        href="/navody"
-                        className="mt-5 inline-flex text-sm font-semibold text-teal-800 underline decoration-teal-300 underline-offset-4 hover:text-teal-950"
-                      >
-                        Všechny rady a tipy
-                      </Link>
+            <Link
+              href="/navody"
+              className="mt-5 inline-flex text-sm font-semibold text-teal-800 underline decoration-teal-300 underline-offset-4 hover:text-teal-950"
+            >
+              Všechny rady a tipy
+            </Link>
           </aside>
         )}
-
       </div>
     </Layout>
   );
@@ -191,8 +178,7 @@ function getRelatedGuides(
         normalizePatientGuideText(topic.bodyPart),
     }))
     .filter(
-      (candidate) =>
-        candidate.sharedSymptomCount > 0 || candidate.sameBodyPart,
+      (candidate) => candidate.sharedSymptomCount > 0 || candidate.sameBodyPart,
     )
     .sort(
       (a, b) =>

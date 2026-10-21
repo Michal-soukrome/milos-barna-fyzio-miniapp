@@ -4,14 +4,27 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import {
   AGE_GROUP_LABELS,
+  GUIDE_CONTEXT_LABELS,
+  GUIDE_CONTEXTS,
   type AgeGroup,
+  type GuideContext,
   type PatientGuideSummary,
 } from "@/sanity/lib/types";
+import {
+  matchPatientGuides,
+  PATIENT_NAVIGATOR_NO_MATCH,
+} from "@/sanity/lib/patient-guide-matcher";
 
 const ageGroups: AgeGroup[] = ["child", "adult", "senior"];
-const stepLabels = ["Věková skupina", "Oblast", "Příznaky", "Výsledek"];
+const stepLabels = [
+  "Věková skupina",
+  "Oblast",
+  "Příznaky",
+  "Situace",
+  "Výsledek",
+];
 
-type Step = "age" | "bodyPart" | "symptoms" | "results";
+type Step = "age" | "bodyPart" | "symptoms" | "context" | "results";
 
 export default function PatientNavigator({
   topics,
@@ -22,22 +35,20 @@ export default function PatientNavigator({
   const [ageGroup, setAgeGroup] = useState<AgeGroup | null>(null);
   const [bodyPart, setBodyPart] = useState<string | null>(null);
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
+  const [symptomsUnknown, setSymptomsUnknown] = useState(false);
+  const [selectedContexts, setSelectedContexts] = useState<GuideContext[]>([]);
+  const [contextUnknown, setContextUnknown] = useState(false);
 
-  const ageGuides = useMemo(
-    () =>
-      topics.filter((topic) => ageGroup && topic.ageGroups.includes(ageGroup)),
-    [ageGroup, topics],
-  );
   const bodyParts = useMemo(
     () =>
-      Array.from(new Set(ageGuides.map((topic) => topic.bodyPart))).sort(
-        (a, b) => a.localeCompare(b, "cs"),
+      Array.from(new Set(topics.map((topic) => topic.bodyPart))).sort((a, b) =>
+        a.localeCompare(b, "cs"),
       ),
-    [ageGuides],
+    [topics],
   );
   const areaGuides = useMemo(
-    () => ageGuides.filter((topic) => topic.bodyPart === bodyPart),
-    [ageGuides, bodyPart],
+    () => topics.filter((topic) => topic.bodyPart === bodyPart),
+    [bodyPart, topics],
   );
   const symptoms = useMemo(
     () =>
@@ -46,40 +57,58 @@ export default function PatientNavigator({
       ),
     [areaGuides],
   );
-  const matchingGuides = useMemo(
+  const matchResult = useMemo(
     () =>
-      areaGuides
-        .map((topic) => ({
-          topic,
-          matchCount: topic.symptoms.filter((symptom) =>
-            selectedSymptoms.includes(symptom),
-          ).length,
-        }))
-        .filter(
-          ({ matchCount }) => selectedSymptoms.length === 0 || matchCount > 0,
-        )
-        .sort((a, b) => b.matchCount - a.matchCount)
-        .map(({ topic }) => topic),
-    [areaGuides, selectedSymptoms],
+      matchPatientGuides(topics, {
+        ageGroup,
+        bodyPart,
+        symptoms: symptomsUnknown ? null : selectedSymptoms,
+        contexts: contextUnknown ? null : selectedContexts,
+      }),
+    [
+      ageGroup,
+      bodyPart,
+      contextUnknown,
+      selectedContexts,
+      selectedSymptoms,
+      symptomsUnknown,
+      topics,
+    ],
   );
 
-  function chooseAgeGroup(value: AgeGroup) {
+  function chooseAgeGroup(value: AgeGroup | null) {
     setAgeGroup(value);
     setBodyPart(null);
     setSelectedSymptoms([]);
+    setSymptomsUnknown(false);
+    setSelectedContexts([]);
+    setContextUnknown(false);
     setStep("bodyPart");
   }
 
-  function chooseBodyPart(value: string) {
+  function chooseBodyPart(value: string | null) {
     setBodyPart(value);
     setSelectedSymptoms([]);
+    setSymptomsUnknown(false);
+    setSelectedContexts([]);
+    setContextUnknown(false);
     setStep("symptoms");
   }
 
   function toggleSymptom(value: string) {
+    setSymptomsUnknown(false);
     setSelectedSymptoms((current) =>
       current.includes(value)
         ? current.filter((symptom) => symptom !== value)
+        : [...current, value],
+    );
+  }
+
+  function toggleContext(value: GuideContext) {
+    setContextUnknown(false);
+    setSelectedContexts((current) =>
+      current.includes(value)
+        ? current.filter((context) => context !== value)
         : [...current, value],
     );
   }
@@ -88,10 +117,19 @@ export default function PatientNavigator({
     setAgeGroup(null);
     setBodyPart(null);
     setSelectedSymptoms([]);
+    setSymptomsUnknown(false);
+    setSelectedContexts([]);
+    setContextUnknown(false);
     setStep("age");
   }
 
-  const currentStep = ["age", "bodyPart", "symptoms", "results"].indexOf(step);
+  const currentStep = [
+    "age",
+    "bodyPart",
+    "symptoms",
+    "context",
+    "results",
+  ].indexOf(step);
 
   return (
     <section className="space-y-6">
@@ -139,13 +177,7 @@ export default function PatientNavigator({
               href="/navody"
               className="font-semibold text-teal-800 underline underline-offset-4"
             >
-              Procházet návody
-            </Link>
-            <Link
-              href="/kontakt"
-              className="font-semibold text-teal-800 underline underline-offset-4"
-            >
-              Kontaktovat ordinaci
+              Procházet rady a tipy
             </Link>
           </div>
         </div>
@@ -195,6 +227,13 @@ export default function PatientNavigator({
                     </button>
                   ))}
                 </div>
+                <button
+                  type="button"
+                  onClick={() => chooseAgeGroup(null)}
+                  className="mt-3 min-h-12 rounded-xl border border-slate-300 px-4 py-3 text-left text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
+                >
+                  Nevím
+                </button>
               </fieldset>
             )}
 
@@ -215,6 +254,13 @@ export default function PatientNavigator({
                     </button>
                   ))}
                 </div>
+                <button
+                  type="button"
+                  onClick={() => chooseBodyPart(null)}
+                  className="mt-3 min-h-12 rounded-xl border border-slate-300 px-4 py-3 text-left text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
+                >
+                  Nevím
+                </button>
                 {bodyParts.length === 0 && (
                   <div className="mt-4 rounded-xl bg-slate-50 p-4 text-sm leading-relaxed text-slate-600">
                     Pro tuto věkovou skupinu zatím nejsou zveřejněné návody.
@@ -223,14 +269,7 @@ export default function PatientNavigator({
                       href="/navody"
                       className="font-semibold text-teal-800 underline underline-offset-4"
                     >
-                      procházet všechny návody
-                    </Link>{" "}
-                    nebo{" "}
-                    <Link
-                      href="/kontakt"
-                      className="font-semibold text-teal-800 underline underline-offset-4"
-                    >
-                      kontaktovat ordinaci
+                      procházet rady a tipy
                     </Link>
                     .
                   </div>
@@ -280,20 +319,96 @@ export default function PatientNavigator({
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                   <button
                     type="button"
-                    onClick={() => setStep("results")}
-                    className="min-h-12 rounded-xl bg-teal-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800"
+                    onClick={() => {
+                      setSymptomsUnknown(false);
+                      setStep("context");
+                    }}
+                    disabled={selectedSymptoms.length === 0}
+                    className="min-h-12 rounded-xl bg-teal-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800 disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    Zobrazit návody
+                    Pokračovat
                   </button>
-                  {symptoms.length > 0 && selectedSymptoms.length === 0 && (
-                    <button
-                      type="button"
-                      onClick={() => setStep("results")}
-                      className="min-h-12 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
-                    >
-                      Nevím nebo zde svůj příznak nevidím
-                    </button>
-                  )}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedSymptoms([]);
+                      setSymptomsUnknown(true);
+                      setStep("context");
+                    }}
+                    className="min-h-12 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+                  >
+                    Nevím nebo zde svůj příznak nevidím
+                  </button>
+                </div>
+              </fieldset>
+            )}
+
+            {step === "context" && (
+              <fieldset>
+                <legend className="font-serif-display text-2xl text-slate-800">
+                  Souvisí obtíže s některou z těchto situací?
+                </legend>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                  Návody po operaci, zlomenině nebo při sádře zobrazíme jen po
+                  výběru odpovídající situace. Můžete zvolit více možností.
+                </p>
+                <div className="mt-5 grid gap-2 sm:grid-cols-2">
+                  {GUIDE_CONTEXTS.map((context) => {
+                    const checked = selectedContexts.includes(context);
+                    return (
+                      <label
+                        key={context}
+                        className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 text-sm transition-colors ${
+                          checked
+                            ? "border-teal-700 bg-teal-50 text-teal-950"
+                            : "border-slate-200 text-slate-700 hover:border-teal-700"
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={() => toggleContext(context)}
+                          className="h-4 w-4 accent-teal-700"
+                        />
+                        {GUIDE_CONTEXT_LABELS[context]}
+                      </label>
+                    );
+                  })}
+                </div>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setContextUnknown(false);
+                      setStep("results");
+                    }}
+                    disabled={selectedContexts.length === 0}
+                    className="min-h-12 rounded-xl bg-teal-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    Zobrazit odpovídající návody
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedContexts([]);
+                      setContextUnknown(false);
+                      setStep("results");
+                    }}
+                    className="min-h-12 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+                  >
+                    Žádná z uvedených situací
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedContexts([]);
+                      setContextUnknown(true);
+                      setStep("results");
+                    }}
+                    className="min-h-12 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+                  >
+                    Nevím
+                  </button>
                 </div>
               </fieldset>
             )}
@@ -301,7 +416,7 @@ export default function PatientNavigator({
             {step === "results" && (
               <section aria-labelledby="navigator-results-title">
                 <p className="text-sm font-semibold text-teal-700">
-                  {ageGroup && AGE_GROUP_LABELS[ageGroup]}
+                  {ageGroup ? AGE_GROUP_LABELS[ageGroup] : "Věk není znám"}
                   {bodyPart ? ` · ${bodyPart}` : ""}
                 </p>
                 <h2
@@ -316,9 +431,9 @@ export default function PatientNavigator({
                   zhoršují, obraťte se na zdravotníka.
                 </p>
 
-                {matchingGuides.length > 0 ? (
+                {matchResult.status === "match" ? (
                   <ul className="mt-5 divide-y divide-slate-200">
-                    {matchingGuides.map((topic) => (
+                    {matchResult.guides.map((topic) => (
                       <li key={topic._id} className="py-4 first:pt-0">
                         <Link
                           href={`/navody/${topic.slug}`}
@@ -333,26 +448,30 @@ export default function PatientNavigator({
                           <span className="mt-2 block text-sm leading-relaxed text-slate-600">
                             {topic.summary}
                           </span>
+                          <span className="mt-2 block text-xs font-semibold text-slate-600">
+                            {topic.contexts
+                              .map((context) => GUIDE_CONTEXT_LABELS[context])
+                              .join(" · ")}
+                          </span>
                         </Link>
                       </li>
                     ))}
                   </ul>
                 ) : (
                   <div className="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm leading-relaxed text-slate-700">
-                    Nenašli jsme zveřejněný návod odpovídající všem vybraným
-                    údajům. To nevylučuje žádné onemocnění.{" "}
+                    {PATIENT_NAVIGATOR_NO_MATCH.copy}{" "}
                     <Link
-                      href="/kontakt"
+                      href={PATIENT_NAVIGATOR_NO_MATCH.contactHref}
                       className="font-semibold text-teal-800 underline underline-offset-4"
                     >
                       Obraťte se na ordinaci
                     </Link>{" "}
                     nebo si{" "}
                     <Link
-                      href="/navody"
+                      href={PATIENT_NAVIGATOR_NO_MATCH.libraryHref}
                       className="font-semibold text-teal-800 underline underline-offset-4"
                     >
-                      prohlédněte všechny návody
+                      prohlédněte rady a tipy
                     </Link>
                     .
                   </div>
@@ -379,9 +498,11 @@ export default function PatientNavigator({
             {step !== "age" && step !== "results" && (
               <button
                 type="button"
-                onClick={() =>
-                  setStep(step === "symptoms" ? "bodyPart" : "age")
-                }
+                onClick={() => {
+                  if (step === "context") setStep("symptoms");
+                  else if (step === "symptoms") setStep("bodyPart");
+                  else setStep("age");
+                }}
                 className="mt-6 min-h-11 rounded-xl border border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
               >
                 Zpět

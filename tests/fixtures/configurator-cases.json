@@ -1,0 +1,380 @@
+{
+  "approvedBy": "MUDr. Miloš Barna",
+  "approvedOn": "2026-10-21",
+  "guideSnapshotDate": "2026-10-21",
+  "guides": [
+    {
+      "_id": "patientGuide-crutches-how-to",
+      "title": "Bezpečné používání berlí",
+      "slug": "bezpecne-pouzivani-berli",
+      "bodyPart": "Obecné",
+      "ageGroups": ["child", "adult", "senior"],
+      "contexts": ["using-crutches"],
+      "symptoms": ["berle", "rovnováha", "schody"],
+      "summary": "Správná výška, technika chůze, schody, jak se vyhnout pádu",
+      "reviewed": true
+    },
+    {
+      "_id": "patientGuide-knee-swelling-post-op",
+      "title": "Otok po operaci kolena",
+      "slug": "otok-po-operaci-kolena",
+      "bodyPart": "Koleno",
+      "ageGroups": ["adult", "senior"],
+      "contexts": ["after-surgery"],
+      "symptoms": ["otok", "teplo", "po operaci"],
+      "summary": "Co je po operaci kolena normální vs. příznaky infekce/trombózy",
+      "reviewed": true
+    },
+    {
+      "_id": "patientGuide-wrist-fracture-basics",
+      "title": "Po zlomenině zápěstí",
+      "slug": "po-zlomenine-zapesti",
+      "bodyPart": "Zápěstí / ruka",
+      "ageGroups": ["child", "adult", "senior"],
+      "contexts": ["after-fracture"],
+      "symptoms": ["zlomenina", "dlaha", "otok"],
+      "summary": "Péče o dlahu, pohyb prstů, očekávaná doba hojení",
+      "reviewed": true
+    },
+    {
+      "_id": "patientGuide-post-op-wound-care",
+      "title": "Péče o operační ránu",
+      "slug": "pece-o-operacni-ranu",
+      "bodyPart": "Obecné",
+      "ageGroups": ["adult", "senior"],
+      "contexts": ["after-surgery"],
+      "symptoms": ["rána", "obvaz", "po operaci"],
+      "summary": "Převazy, sprchování, příznaky infekce",
+      "reviewed": true
+    },
+    {
+      "_id": "patientGuide-cast-care",
+      "title": "Péče o sádru",
+      "slug": "pece-o-sadru",
+      "bodyPart": "Obecné",
+      "ageGroups": ["child", "adult", "senior"],
+      "contexts": ["in-cast"],
+      "symptoms": ["sádra", "otok", "svědění"],
+      "summary": "Jak udržet sádru suchou a čistou, co znamená svědění a otok",
+      "reviewed": true
+    },
+    {
+      "_id": "patientGuide-ankle-sprain-rehab",
+      "title": "Zotavení po podvrtnutí kotníku",
+      "slug": "zotaveni-po-podvrtnuti-kotniku",
+      "bodyPart": "Kotník",
+      "ageGroups": ["adult", "senior"],
+      "contexts": ["after-sprain"],
+      "symptoms": ["otok", "modřina", "bolest při chůzi"],
+      "summary": "Postup RICE, kdy začít zatěžovat nohu, návrat ke sportu",
+      "reviewed": true
+    }
+  ],
+  "cases": [
+    {
+      "id": "crutches-positive",
+      "rule": "positive-control",
+      "inputs": {
+        "ageGroup": "adult",
+        "bodyPart": "Obecné",
+        "symptoms": ["berle", "schody"],
+        "contexts": ["using-crutches"]
+      },
+      "expectedStatus": "match",
+      "expectedGuideSlugs": ["bezpecne-pouzivani-berli"],
+      "mustNotAppear": [],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "knee-surgery-positive",
+      "rule": "positive-control",
+      "inputs": {
+        "ageGroup": "adult",
+        "bodyPart": "Koleno",
+        "symptoms": ["otok", "po operaci"],
+        "contexts": ["after-surgery"]
+      },
+      "expectedStatus": "match",
+      "expectedGuideSlugs": ["otok-po-operaci-kolena"],
+      "mustNotAppear": [],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "wrist-fracture-positive",
+      "rule": "positive-control",
+      "inputs": {
+        "ageGroup": "child",
+        "bodyPart": "Zápěstí / ruka",
+        "symptoms": ["zlomenina", "dlaha"],
+        "contexts": ["after-fracture"]
+      },
+      "expectedStatus": "match",
+      "expectedGuideSlugs": ["po-zlomenine-zapesti"],
+      "mustNotAppear": [],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "wound-care-positive",
+      "rule": "positive-control",
+      "inputs": {
+        "ageGroup": "adult",
+        "bodyPart": "Obecné",
+        "symptoms": ["rána", "obvaz"],
+        "contexts": ["after-surgery"]
+      },
+      "expectedStatus": "match",
+      "expectedGuideSlugs": ["pece-o-operacni-ranu"],
+      "mustNotAppear": [],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "cast-care-positive",
+      "rule": "positive-control",
+      "inputs": {
+        "ageGroup": "child",
+        "bodyPart": "Obecné",
+        "symptoms": ["sádra", "svědění"],
+        "contexts": ["in-cast"]
+      },
+      "expectedStatus": "match",
+      "expectedGuideSlugs": ["pece-o-sadru"],
+      "mustNotAppear": [],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "ankle-sprain-positive",
+      "rule": "positive-control",
+      "inputs": {
+        "ageGroup": "adult",
+        "bodyPart": "Kotník",
+        "symptoms": ["modřina", "bolest při chůzi"],
+        "contexts": ["after-sprain"]
+      },
+      "expectedStatus": "match",
+      "expectedGuideSlugs": ["zotaveni-po-podvrtnuti-kotniku"],
+      "mustNotAppear": [],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "crutches-without-crutches-context",
+      "rule": "context-gate",
+      "inputs": {
+        "ageGroup": "adult",
+        "bodyPart": "Obecné",
+        "symptoms": ["schody"],
+        "contexts": []
+      },
+      "expectedStatus": "no-match",
+      "expectedGuideSlugs": [],
+      "mustNotAppear": ["bezpecne-pouzivani-berli"],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "knee-swelling-without-surgery",
+      "rule": "context-gate",
+      "inputs": {
+        "ageGroup": "adult",
+        "bodyPart": "Koleno",
+        "symptoms": ["otok"],
+        "contexts": []
+      },
+      "expectedStatus": "no-match",
+      "expectedGuideSlugs": [],
+      "mustNotAppear": ["otok-po-operaci-kolena"],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "child-knee-age-filter",
+      "rule": "age-filter",
+      "inputs": {
+        "ageGroup": "child",
+        "bodyPart": "Koleno",
+        "symptoms": ["otok", "po operaci"],
+        "contexts": ["after-surgery"]
+      },
+      "expectedStatus": "no-match",
+      "expectedGuideSlugs": [],
+      "mustNotAppear": ["otok-po-operaci-kolena"],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "wrist-fracture-unconfirmed",
+      "rule": "context-gate",
+      "inputs": {
+        "ageGroup": "child",
+        "bodyPart": "Zápěstí / ruka",
+        "symptoms": ["zlomenina", "otok"],
+        "contexts": []
+      },
+      "expectedStatus": "no-match",
+      "expectedGuideSlugs": [],
+      "mustNotAppear": ["po-zlomenine-zapesti"],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "wound-care-general-is-not-wildcard",
+      "rule": "exact-area",
+      "inputs": {
+        "ageGroup": "adult",
+        "bodyPart": "Koleno",
+        "symptoms": ["rána", "obvaz"],
+        "contexts": ["after-surgery"]
+      },
+      "expectedStatus": "no-match",
+      "expectedGuideSlugs": [],
+      "mustNotAppear": ["pece-o-operacni-ranu"],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "cast-care-without-cast",
+      "rule": "context-gate",
+      "inputs": {
+        "ageGroup": "adult",
+        "bodyPart": "Obecné",
+        "symptoms": ["otok"],
+        "contexts": []
+      },
+      "expectedStatus": "no-match",
+      "expectedGuideSlugs": [],
+      "mustNotAppear": ["pece-o-sadru"],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "ankle-sprain-unknown-context",
+      "rule": "not-sure-gate",
+      "inputs": {
+        "ageGroup": "adult",
+        "bodyPart": "Kotník",
+        "symptoms": ["modřina", "bolest při chůzi"],
+        "contexts": null
+      },
+      "expectedStatus": "no-match",
+      "expectedGuideSlugs": [],
+      "mustNotAppear": ["zotaveni-po-podvrtnuti-kotniku"],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "not-sure-age",
+      "rule": "not-sure-gate",
+      "inputs": {
+        "ageGroup": null,
+        "bodyPart": "Koleno",
+        "symptoms": ["otok", "po operaci"],
+        "contexts": ["after-surgery"]
+      },
+      "expectedStatus": "no-match",
+      "expectedGuideSlugs": [],
+      "mustNotAppear": ["otok-po-operaci-kolena"],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "not-sure-area",
+      "rule": "not-sure-gate",
+      "inputs": {
+        "ageGroup": "child",
+        "bodyPart": null,
+        "symptoms": ["zlomenina", "dlaha"],
+        "contexts": ["after-fracture"]
+      },
+      "expectedStatus": "no-match",
+      "expectedGuideSlugs": [],
+      "mustNotAppear": ["po-zlomenine-zapesti"],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "not-sure-symptoms",
+      "rule": "not-sure-gate",
+      "inputs": {
+        "ageGroup": "child",
+        "bodyPart": "Zápěstí / ruka",
+        "symptoms": null,
+        "contexts": ["after-fracture"]
+      },
+      "expectedStatus": "no-match",
+      "expectedGuideSlugs": [],
+      "mustNotAppear": ["po-zlomenine-zapesti"],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "not-sure-context",
+      "rule": "not-sure-gate",
+      "inputs": {
+        "ageGroup": "adult",
+        "bodyPart": "Koleno",
+        "symptoms": ["otok", "po operaci"],
+        "contexts": null
+      },
+      "expectedStatus": "no-match",
+      "expectedGuideSlugs": [],
+      "mustNotAppear": ["otok-po-operaci-kolena"],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21",
+      "uiExpectations": {
+        "contactHref": "/kontakt",
+        "libraryHref": "/navody",
+        "emergencyNumbers": ["155", "112"]
+      }
+    },
+    {
+      "id": "multiple-tags-require-intersection",
+      "rule": "tag-intersection",
+      "inputs": {
+        "ageGroup": "adult",
+        "bodyPart": "Koleno",
+        "symptoms": ["otok", "po operaci", "berle"],
+        "contexts": ["after-surgery"]
+      },
+      "expectedStatus": "no-match",
+      "expectedGuideSlugs": [],
+      "mustNotAppear": ["otok-po-operaci-kolena"],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "known-contexts-use-union",
+      "rule": "context-union",
+      "inputs": {
+        "ageGroup": "adult",
+        "bodyPart": "Obecné",
+        "symptoms": ["rána", "obvaz"],
+        "contexts": ["after-surgery", "in-cast"]
+      },
+      "expectedStatus": "match",
+      "expectedGuideSlugs": ["pece-o-operacni-ranu"],
+      "mustNotAppear": [],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    },
+    {
+      "id": "known-context-with-unknown-blocks",
+      "rule": "not-sure-gate",
+      "inputs": {
+        "ageGroup": "adult",
+        "bodyPart": "Obecné",
+        "symptoms": ["rána", "obvaz"],
+        "contexts": null
+      },
+      "expectedStatus": "no-match",
+      "expectedGuideSlugs": [],
+      "mustNotAppear": ["pece-o-operacni-ranu"],
+      "approvedBy": "MUDr. Miloš Barna",
+      "approvedOn": "2026-10-21"
+    }
+  ]
+}

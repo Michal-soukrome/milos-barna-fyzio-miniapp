@@ -147,17 +147,17 @@ export async function POST(req: NextRequest) {
     const { error } = await resend.emails.send({
       from: fromAddress,
       to: email.trim(),
-      subject: "Informace pro pacienty od ordinace",
+      subject: "Informace pro pacienty",
       html: `
         <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto;">
-          <p style="color: #555;">Ordinace vám posílá odkaz na obecné informace pro pacienty.</p>
+          <p style="color: #555;">MUDr. Miloš Barna, Ph.D. Vám posílá odkaz na obecné informace pro pacienty.</p>
           <p>
             <a href="${escapeHtml(link)}" style="display:inline-block; background:#3f6659; color:#fff; padding:10px 16px; border-radius:6px; text-decoration:none;">
               Otevřít informace
             </a>
           </p>
           <p style="color: #888; font-size: 13px;">
-            Toto jsou pouze obecné informace, nejde o diagnózu. Pokud si nejste jistí, kontaktujte ordinaci.
+            Toto jsou pouze obecné informace, nejde o diagnózu. Pokud si nejste jistí, kontaktujte svého lékaře.
           </p>
         </div>
       `,
@@ -176,7 +176,10 @@ export async function POST(req: NextRequest) {
       "Email provider request failed.",
       error instanceof Error ? error.name : "Unknown error",
     );
-    return NextResponse.json({ error: "Neočekávaná chyba při odesílání e-mailu." }, { status: 500 });
+    return NextResponse.json(
+      { error: "Neočekávaná chyba při odesílání e-mailu." },
+      { status: 500 },
+    );
   }
 }
 

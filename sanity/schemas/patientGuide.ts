@@ -1,4 +1,7 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { GUIDE_CONTEXTS, GUIDE_CONTEXT_LABELS } from "../lib/types";
+import { getReviewedContentIssues } from "../lib/reviewed-content";
+import { ReviewedInput } from "./ReviewedInput";
 
 export const patientGuide = defineType({
   name: "patientGuide",
@@ -51,6 +54,21 @@ export const patientGuide = defineType({
       validation: (rule) => rule.required().min(1),
     }),
     defineField({
+      name: "contexts",
+      title: "Situace",
+      description:
+        "Určuje, pro jakou potvrzenou situaci návod platí; nezaměňujte ji s příznaky.",
+      type: "array",
+      of: [defineArrayMember({ type: "string" })],
+      options: {
+        list: GUIDE_CONTEXTS.map((value) => ({
+          title: GUIDE_CONTEXT_LABELS[value],
+          value,
+        })),
+      },
+      validation: (rule) => rule.required().min(1).unique(),
+    }),
+    defineField({
       name: "symptoms",
       title: "Vyhledávací výrazy",
       description:
@@ -64,7 +82,7 @@ export const patientGuide = defineType({
       title: "Krátký popis",
       type: "text",
       rows: 3,
-      validation: (rule) => rule.required().min(10).max(300),
+      validation: (rule) => rule.required().min(20).max(300),
     }),
     defineField({
       name: "body",
@@ -134,11 +152,20 @@ export const patientGuide = defineType({
       name: "reviewed",
       title: "Lékařsky zkontrolováno",
       description:
-        "Po kontrole všech údajů, textu, obrázků a varovných příznaků MUDr. Milošem Barnou zapněte pro zveřejnění návodu.",
+        "Po kontrole všech údajů, textu, obrázků a varovných příznaků MUDr. Milošem Barnou zapněte pro zveřejnění. Úprava obsahu příznak automaticky vypne.",
       type: "boolean",
       initialValue: false,
       options: { aiAssist: { exclude: true } },
-      validation: (rule) => rule.required(),
+      components: { input: ReviewedInput },
+      validation: (rule) =>
+        rule.required().custom((value, context) => {
+          if (value !== true) return true;
+          const issues = getReviewedContentIssues(
+            "patientGuide",
+            context.document,
+          );
+          return issues.length > 0 ? issues.join(" ") : true;
+        }),
     }),
   ],
   preview: {

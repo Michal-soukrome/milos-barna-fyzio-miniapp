@@ -4,6 +4,8 @@ import {
   createUniqueArticleSlug,
 } from "./ArticleSlugInput";
 import { ARTICLE_BODY_PARTS } from "../lib/article-taxonomy";
+import { getReviewedContentIssues } from "../lib/reviewed-content";
+import { ReviewedInput } from "./ReviewedInput";
 
 export const article = defineType({
   name: "article",
@@ -104,11 +106,17 @@ export const article = defineType({
       name: "reviewed",
       title: "Lékařsky zkontrolováno",
       description:
-        "Po kontrole celého článku MUDr. Milošem Barnou zapněte pro zveřejnění článku na webu.",
+        "Po kontrole celého článku MUDr. Milošem Barnou zapněte pro zveřejnění článku na webu. Úprava obsahu příznak automaticky vypne.",
       type: "boolean",
       initialValue: false,
       options: { aiAssist: { exclude: true } },
-      validation: (rule) => rule.required(),
+      components: { input: ReviewedInput },
+      validation: (rule) =>
+        rule.required().custom((value, context) => {
+          if (value !== true) return true;
+          const issues = getReviewedContentIssues("article", context.document);
+          return issues.length > 0 ? issues.join(" ") : true;
+        }),
     }),
   ],
   preview: {

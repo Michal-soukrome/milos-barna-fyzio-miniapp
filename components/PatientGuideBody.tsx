@@ -1,17 +1,12 @@
 import { createImageUrlBuilder } from "@sanity/image-url";
-import {
-  PortableText,
-  type PortableTextComponents,
-} from "@portabletext/react";
+import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import { sanityClient } from "@/sanity/lib/client";
 import type {
   PatientGuideBodyBlock,
   PatientGuideSection,
 } from "@/sanity/lib/types";
 
-const imageBuilder = sanityClient
-  ? createImageUrlBuilder(sanityClient)
-  : null;
+const imageBuilder = sanityClient ? createImageUrlBuilder(sanityClient) : null;
 
 const portableTextComponents: PortableTextComponents<PatientGuideBodyBlock> = {
   block: {
@@ -24,9 +19,7 @@ const portableTextComponents: PortableTextComponents<PatientGuideBodyBlock> = {
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="mb-2 mt-6 text-lg font-bold text-slate-800">
-        {children}
-      </h3>
+      <h3 className="mb-2 mt-6 text-lg font-bold text-slate-800">{children}</h3>
     ),
     blockquote: ({ children }) => (
       <blockquote className="my-5 border-l-4 border-teal-600 pl-4 italic text-slate-600">
@@ -65,11 +58,7 @@ const portableTextComponents: PortableTextComponents<PatientGuideBodyBlock> = {
 
       const width = Math.min(dimensions.width, 1600);
       const height = Math.round((dimensions.height / dimensions.width) * width);
-      const src = imageBuilder
-        .image(value)
-        .width(width)
-        .auto("format")
-        .url();
+      const src = imageBuilder.image(value).width(width).auto("format").url();
 
       return (
         <figure className="my-8">
@@ -130,7 +119,7 @@ export default function PatientGuideBody({
 
   return (
     <p role="alert" className="mt-8 text-sm text-rose-800">
-      Obsah návodu zatím není k dispozici. Kontaktujte ordinaci.
+      Obsah návodu zatím není k dispozici.
     </p>
   );
 }

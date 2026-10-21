@@ -7,6 +7,7 @@ import { ARTICLE_QUERY, ARTICLES_QUERY } from "@/sanity/lib/queries";
 import { sanityClient } from "@/sanity/lib/client";
 import { ArticleSummary, PublishedArticle } from "@/sanity/lib/types";
 import { getArticleBodyPartLabel } from "@/sanity/lib/article-taxonomy";
+import { getSanityContentCacheTags } from "@/sanity/lib/cache-tags";
 
 export const metadata: Metadata = {
   title: "Zdravotní téma | Miloš Barna",
@@ -20,7 +21,7 @@ export async function generateStaticParams() {
   const articles = await sanityClient.fetch<ArticleSummary[]>(
     ARTICLES_QUERY,
     {},
-    { next: { revalidate } },
+    { next: { revalidate, tags: getSanityContentCacheTags("article") } },
   );
   return articles.map((article) => ({ slug: article.slug }));
 }
@@ -37,12 +38,17 @@ export default async function ArticlePage({
     sanityClient.fetch<PublishedArticle | null>(
       ARTICLE_QUERY,
       { slug },
-      { next: { revalidate } },
+      {
+        next: {
+          revalidate,
+          tags: getSanityContentCacheTags("article", slug),
+        },
+      },
     ),
     sanityClient.fetch<ArticleSummary[]>(
       ARTICLES_QUERY,
       {},
-      { next: { revalidate } },
+      { next: { revalidate, tags: getSanityContentCacheTags("article") } },
     ),
   ]);
   if (!article) return notFound();

@@ -4,6 +4,26 @@ import type { ArticleBodyPart } from "./article-taxonomy";
 
 export type AgeGroup = "child" | "adult" | "senior";
 
+export const GUIDE_CONTEXTS = [
+  "general",
+  "after-surgery",
+  "after-fracture",
+  "in-cast",
+  "using-crutches",
+  "after-sprain",
+] as const;
+
+export type GuideContext = (typeof GUIDE_CONTEXTS)[number];
+
+export const GUIDE_CONTEXT_LABELS: Record<GuideContext, string> = {
+  general: "Obecné obtíže",
+  "after-surgery": "Po operaci",
+  "after-fracture": "Po potvrzené zlomenině",
+  "in-cast": "Při nošení sádry",
+  "using-crutches": "Při používání berlí",
+  "after-sprain": "Po potvrzeném podvrtnutí",
+};
+
 export type PatientGuideSection = {
   heading: string;
   text: string;
@@ -36,6 +56,7 @@ export type PatientGuideSummary = {
   slug: string;
   bodyPart: string;
   ageGroups: AgeGroup[];
+  contexts: GuideContext[];
   symptoms: string[];
   summary: string;
   reviewed: boolean;
