@@ -34,75 +34,86 @@ export default async function DiagnosisPage({
 
   return (
     <Layout>
-      <article
-        aria-labelledby="diagnosis-title"
-        className="mx-auto w-full max-w-4xl rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-10"
-      >
-        {bodyPartLabel && (
-          <p className="text-sm font-semibold text-teal-700">{bodyPartLabel}</p>
-        )}
-        <h1
-          id="diagnosis-title"
-          className="font-serif-display mt-2 text-4xl leading-tight text-slate-800"
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <article
+          aria-labelledby="diagnosis-title"
+          className="h-fit min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-10"
         >
-          {diagnosis.title}
-        </h1>
-        {diagnosis.summary ? (
-          <p className="mt-4 border-b border-slate-200 pb-6 text-lg leading-relaxed text-slate-600">
-            {diagnosis.summary}
-          </p>
-        ) : (
-          <p className="mt-4 border-b border-slate-200 pb-6 text-sm leading-relaxed text-slate-500">
-            Podrobnější informace k této diagnóze budou doplněny.
-          </p>
-        )}
-        <p className="mt-4 text-xs text-slate-500">
-          Odborně zkontroloval MUDr. Miloš Barna.
-        </p>
-        <div className="mt-8">
-          <MedicalBody body={diagnosis.body} />
-        </div>
-        <p className="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm leading-relaxed text-slate-600">
-          Tyto informace mají obecný charakter a nenahrazují osobní lékařské
-          vyšetření ani doporučení vašeho lékaře. Konkrétní léčbu vždy
-          konzultujte s odborníkem.
-        </p>
-      </article>
-      {diagnosis.relatedDiagnoses.length > 0 && (
-        <section
-          aria-labelledby="related-diagnoses-title"
-          className="mx-auto mt-8 w-full max-w-4xl"
-        >
-          <h2
-            id="related-diagnoses-title"
-            className="font-serif-display text-2xl text-slate-800"
+          {bodyPartLabel && (
+            <p className="text-sm font-semibold text-teal-700">
+              {bodyPartLabel}
+            </p>
+          )}
+          <h1
+            id="diagnosis-title"
+            className="font-serif-display mt-2 text-4xl leading-tight text-slate-800"
           >
-            Další diagnózy ze stejné oblasti
-          </h2>
-          <ul className="mt-4 grid gap-4 sm:grid-cols-2">
-            {diagnosis.relatedDiagnoses.map((relatedDiagnosis) => (
-              <li key={relatedDiagnosis._id}>
-                <Link
-                  href={`/diagnozy/${relatedDiagnosis.slug}`}
-                  className="group block h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-teal-600 hover:shadow-md"
-                >
-                  <span className="text-sm font-semibold text-teal-700">
-                    {getArticleBodyPartLabel(relatedDiagnosis.bodyPart)}
-                  </span>
-                  <span className="font-serif-display mt-1 block text-xl leading-tight text-slate-800 group-hover:text-teal-800 group-hover:underline">
-                    {relatedDiagnosis.title}
-                  </span>
-                  {relatedDiagnosis.summary && (
-                    <span className="mt-3 block text-sm leading-relaxed text-slate-600">
-                      {relatedDiagnosis.summary}
+            {diagnosis.title}
+          </h1>
+          {diagnosis.summary ? (
+            <p className="mt-4 border-b border-slate-200 pb-6 text-lg leading-relaxed text-slate-600">
+              {diagnosis.summary}
+            </p>
+          ) : (
+            <p className="mt-4 border-b border-slate-200 pb-6 text-sm leading-relaxed text-slate-500">
+              Podrobnější informace k této diagnóze budou doplněny.
+            </p>
+          )}
+          <p className="mt-4 text-xs text-slate-500">
+            Odborně zkontroloval MUDr. Miloš Barna.
+          </p>
+          <div className="mt-8">
+            <MedicalBody body={diagnosis.body} />
+          </div>
+          <p className="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm leading-relaxed text-slate-600">
+            Tyto informace mají obecný charakter a nenahrazují osobní lékařské
+            vyšetření ani doporučení vašeho lékaře. Konkrétní léčbu vždy
+            konzultujte s odborníkem.
+          </p>
+        </article>
+        {diagnosis.relatedDiagnoses.length > 0 && (
+          <aside
+            aria-labelledby="related-diagnoses-title"
+            className="h-fit rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 md:sticky md:top-24"
+          >
+            <h2
+              id="related-diagnoses-title"
+              className="font-serif-display mt-2 text-2xl text-slate-800"
+            >
+              Další diagnózy z oblasti{" "}
+              <span className="lowercase italic">
+              '{bodyPartLabel}'
+              </span>
+            </h2>
+            <ul className="mt-5 divide-y divide-slate-200">
+              {diagnosis.relatedDiagnoses.map((relatedDiagnosis) => (
+                <li key={relatedDiagnosis._id} className="py-4 first:pt-0">
+                  <Link
+                    href={`/diagnozy/${relatedDiagnosis.slug}`}
+                    className="group block"
+                  >
+             
+                    <span className="font-serif-display mt-1 block text-lg leading-snug text-slate-800 group-hover:text-teal-800 group-hover:underline">
+                      {relatedDiagnosis.title}
                     </span>
-                  )}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+                    {relatedDiagnosis.summary && (
+                      <span className="mt-2 block text-sm leading-relaxed text-slate-600">
+                        {relatedDiagnosis.summary}
+                      </span>
+                    )}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="/diagnozy"
+              className="mt-5 inline-flex text-sm font-semibold text-teal-800 underline decoration-teal-300 underline-offset-4 hover:text-teal-950"
+            >
+              Všechny diagnózy
+            </Link>
+          </aside>
+        )}
+      </div>
     </Layout>
   );
 }
