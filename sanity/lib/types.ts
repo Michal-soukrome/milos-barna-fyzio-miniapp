@@ -35,17 +35,17 @@ export type PatientGuideSummary = {
   title: string;
   slug: string;
   bodyPart: string;
+  ageGroups: AgeGroup[];
   symptoms: string[];
   summary: string;
+  isDemo: boolean;
+  medicalReviewed: boolean;
 };
 
 export type PatientGuide = PatientGuideSummary & {
-  ageGroups: AgeGroup[];
   sections?: PatientGuideSection[];
   body?: PatientGuideBodyBlock[];
   warningSigns: string[];
-  isDemo: boolean;
-  medicalReviewed: boolean;
 };
 
 export const AGE_GROUP_LABELS: Record<AgeGroup, string> = {
@@ -63,6 +63,16 @@ export type ArticleSummary = {
   bodyPart?: ArticleBodyPart | null;
   categories?: string[];
 };
+
+export type LatestArticleSummary = Pick<
+  ArticleSummary,
+  "_id" | "title" | "slug"
+>;
+
+export type LatestPatientGuideSummary = Pick<
+  PatientGuideSummary,
+  "_id" | "title" | "slug" | "isDemo"
+>;
 
 export type PublishedArticle = ArticleSummary & {
   body: PortableTextBlock[];

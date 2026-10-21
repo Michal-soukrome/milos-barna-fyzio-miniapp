@@ -7,7 +7,7 @@ import { ArticleSummary } from "@/sanity/lib/types";
 import { ARTICLE_BODY_PARTS } from "@/sanity/lib/article-taxonomy";
 
 export const metadata: Metadata = {
-  title: "Zdravotní témata | Miloš Barna",
+  title: "Články | Miloš Barna",
   description:
     "Srozumitelné informace o častých potížích a možnostech léčby, přehledně podle oblasti těla.",
 };
@@ -36,7 +36,7 @@ export default async function ArticlesPage() {
     <Layout>
       <section>
         <h1 className="font-serif-display text-3xl leading-tight text-slate-800">
-          Zdravotní témata
+          Články
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-slate-600">
           Srozumitelné informace o častých potížích a možnostech léčby,
@@ -46,7 +46,7 @@ export default async function ArticlesPage() {
 
         {!isSanityConfigured ? (
           <p className="mt-8 rounded-2xl border border-amber-300 bg-amber-50 p-5 text-sm leading-relaxed text-amber-950">
-            Témata budou dostupná po připojení Sanity CMS.
+            články budou dostupná po připojení Sanity CMS.
           </p>
         ) : articleGroups.length ? (
           <div className="mt-10 space-y-10">
@@ -60,11 +60,9 @@ export default async function ArticlesPage() {
                     id={`body-part-${group.key}`}
                     className="font-serif-display text-2xl text-slate-800"
                   >
-                    {group.label}
+                    {group.label}{" "}<span className="text-teal-600 italic font-light">({(group.articles.length)})</span>
                   </h2>
-                  <p className="shrink-0 text-sm text-slate-500">
-                    {formatArticleCount(group.articles.length)}
-                  </p>
+                  
                 </div>
                 <ul className="grid gap-4 md:grid-cols-2">
                   {group.articles.map((article) => (
@@ -93,7 +91,7 @@ export default async function ArticlesPage() {
           </div>
         ) : (
           <p className="mt-8 rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-600">
-            Zatím zde nejsou zveřejněná žádná témata.
+            Zatím zde nejsou zveřejněná žádná články.
           </p>
         )}
       </section>
@@ -116,7 +114,7 @@ function groupArticlesByBodyPart(articles: ArticleSummary[]) {
   if (unassignedArticles.length > 0) {
     groups.push({
       key: "other",
-      label: "Další témata",
+      label: "Další články",
       articles: unassignedArticles,
     });
   }

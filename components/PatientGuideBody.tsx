@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { createImageUrlBuilder } from "@sanity/image-url";
 import {
   PortableText,
@@ -74,13 +73,13 @@ const portableTextComponents: PortableTextComponents<PatientGuideBodyBlock> = {
 
       return (
         <figure className="my-8">
-          <Image
+          <img
             src={src}
             alt={value.alt}
             width={width}
             height={height}
-            sizes="(max-width: 768px) 100vw, 768px"
-            unoptimized
+            loading="lazy"
+            decoding="async"
             className="h-auto w-full rounded-xl"
           />
           {value.caption && (

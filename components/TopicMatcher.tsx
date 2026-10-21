@@ -59,7 +59,7 @@ export default function TopicMatcher() {
       <p className="mt-2 text-sm leading-relaxed text-slate-600">
         Popište téma nebo situaci a najdeme související návod. Například pokyny
         po operaci nebo cvičení po úrazu. Nástroj pouze doporučí existující
-        materiál a nevytváří zdravotní rady.Neuvádějte jméno ani jiné osobní
+        materiál a nevytváří zdravotní rady. Neuvádějte jméno ani jiné osobní
         údaje.
       </p>
 

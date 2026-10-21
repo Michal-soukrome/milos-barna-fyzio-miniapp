@@ -123,9 +123,7 @@ export default async function ArticlePage({
           aria-label={relatedArticles.title}
           className="h-fit rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
         >
-          <p className="text-xs font-bold uppercase tracking-[0.14em] text-teal-700">
-            Pro další čtení
-          </p>
+       
           <h2 className="font-serif-display mt-2 text-2xl text-slate-800">
             {relatedArticles.title}
           </h2>
@@ -155,7 +153,7 @@ export default async function ArticlePage({
             </ul>
           ) : (
             <p className="mt-4 text-sm leading-relaxed text-slate-600">
-              Další témata se zobrazí po jejich odborné kontrole a zveřejnění.
+              Žádné související články.
             </p>
           )}
 
@@ -163,7 +161,7 @@ export default async function ArticlePage({
             href="/clanky"
             className="mt-5 inline-flex text-sm font-semibold text-teal-800 underline decoration-teal-300 underline-offset-4 hover:text-teal-950"
           >
-            Všechna témata
+            Všechny články
           </Link>
         </aside>
       </div>
@@ -204,13 +202,13 @@ function getRelatedArticles(
 
   if (matching.length > 0) {
     return {
-      title: "Související témata",
+      title: "Související články",
       articles: matching.slice(0, 3).map(({ article: related }) => related),
     };
   }
 
   return {
-    title: "Další témata",
+    title: "Související",
     articles: candidates
       .slice(0, 3)
       .map(({ article: related }) => related),

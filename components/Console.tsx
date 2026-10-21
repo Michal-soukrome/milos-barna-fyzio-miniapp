@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, FunnelX, Search } from "lucide-react";
+import { ArrowRight, FunnelX, Search, Share } from "lucide-react";
 import {
   AGE_GROUP_LABELS,
   type AgeGroup,
@@ -151,7 +151,7 @@ export default function Console({
           Rady a tipy pro pacienty
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-slate-600">
-          Najděte návod podle své situace, nebo procházejte témata. Konkrétní
+          Najděte návod podle své situace, nebo procházejte články. Konkrétní
           pokyny můžete otevřít také přímo přes odkaz nebo QR kód od lékaře.
         </p>
       </header>
@@ -168,11 +168,14 @@ export default function Console({
                 <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
                   Filtrovat podle oblasti
                 </p>
+              
+              </div>
+              <div>
                 <button
                   type="button"
                   onClick={clearFilters}
                   disabled={!hasActiveFilters}
-                  className="text-xs font-semibold text-teal-800 underline decoration-teal-200 underline-offset-4 transition-opacity disabled:cursor-not-allowed disabled:opacity-35 flex items-center gap-1"
+                  className="mt-2 mb-4 text-xs font-semibold text-teal-800 underline decoration-teal-200 underline-offset-4 transition-opacity disabled:cursor-not-allowed disabled:opacity-35 flex items-center gap-1"
                 >
                   <FunnelX
                     aria-hidden="true"
@@ -181,7 +184,7 @@ export default function Console({
                   Vymazat filtry
                 </button>
               </div>
-              <div className="flex flex-wrap gap-2 sm:flex-col sm:items-start">
+              <div className="flex flex-wrap gap-2 items-start">
                 {bodyParts.map((part) => (
                   <FilterChip
                     key={part}
@@ -196,7 +199,7 @@ export default function Console({
               <p className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
                 Věková skupina
               </p>
-              <div className="flex flex-wrap gap-2 sm:flex-col sm:items-start">
+              <div className="flex flex-wrap gap-2 items-start">
                 {AGE_GROUPS.map((g) => (
                   <FilterChip
                     key={g}
@@ -206,20 +209,18 @@ export default function Console({
                     onClick={() => setAge(age === g ? null : g)}
                   />
                 ))}
-              </div>
+              </div>    
             </div>
+          
           </aside>
 
           <section>
             <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
               <div>
                 <h2 className="font-serif-display text-2xl text-slate-800">
-                  Všechny návody
+                  Všechny rady{" "}<span className="text-teal-600 italic font-light">({filtered.length})</span>
                 </h2>
-                <p className="mt-1 text-sm text-slate-500">
-                  {filtered.length} {filtered.length === 1 ? "téma" : "témat"} k
-                  dispozici
-                </p>
+                
               </div>
               <div className="relative w-full sm:max-w-xs">
                 <Search
@@ -266,7 +267,7 @@ export default function Console({
                         href={`/navody/${t.slug}`}
                         className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-slate-700 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-800 focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2"
                       >
-                        Otevřít návod
+                        Zobrazit
                       </Link>
                       <button
                         type="button"
@@ -275,8 +276,9 @@ export default function Console({
                           shareTriggerRef.current = event.currentTarget;
                           setSelected(t);
                         }}
-                        className="min-h-11 w-full rounded-xl bg-teal-700 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800 focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2"
+                        className="flex-1 min-h-11 w-full rounded-xl bg-teal-700 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800 focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2 flex items-center gap-1 justify-center"
                       >
+                        <Share className="h-4 w-4" />
                         Sdílet
                       </button>
                     </div>

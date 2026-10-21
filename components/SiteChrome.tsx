@@ -4,6 +4,10 @@ import Link from "next/link";
 import { ExternalLink, Menu, Plus, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import type {
+  LatestArticleSummary,
+  LatestPatientGuideSummary,
+} from "@/sanity/lib/types";
 
 const navigation = [
   { href: "/", label: "Úvod" },
@@ -15,8 +19,12 @@ const navigation = [
 
 export default function SiteChrome({
   children,
+  latestArticles,
+  latestTips,
 }: {
   children: React.ReactNode;
+  latestArticles: LatestArticleSummary[];
+  latestTips: LatestPatientGuideSummary[];
 }) {
   const pathname = usePathname();
   const isStudio = pathname === "/studio" || pathname.startsWith("/studio/");
@@ -137,20 +145,94 @@ export default function SiteChrome({
 
       <div className="flex-1">{children}</div>
 
-      <footer className="border-t border-slate-200 bg-white">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-6 text-xs leading-relaxed text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-          <span>MUDr. Barna Miloš, Ph.D. - oficiální webové stránky</span>
-          <div className="flex flex-col gap-2 sm:items-end">
-            <a
-              href="https://www.barnamedical.cz/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center font-semibold text-teal-800 underline decoration-teal-300 underline-offset-4 hover:text-teal-950 sm:min-h-0"
-            >
-              Barna Medical Praha
-              <ExternalLink aria-hidden="true" className="ml-1 h-3.5 w-3.5" />
-            </a>
+      <footer className="border-t border-slate-700 bg-slate-800 text-slate-100">
+        <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-10 sm:px-8 sm:py-12 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+          <div>
+            <Link href="/" className="inline-flex flex-col">
+              <span className="text-sm font-bold tracking-[0.16em] text-teal-200">
+                MUDr. Barna Miloš, Ph.D.
+              </span>
+              <span className="mt-1 text-sm text-slate-300">
+                Srozumitelně před zákrokem i po něm
+              </span>
+            </Link>
+         
           </div>
+
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <nav aria-label="Navigace v zápatí">
+              <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-teal-200">
+                Rychlé odkazy
+              </h2>
+              <ul className="mt-3 flex flex-col gap-2">
+                {navigation.map(({ href, label }) => (
+                  <li key={href} >
+                    <Link
+                      href={href}
+                      aria-current={isActiveLink(href) ? "page" : undefined}
+                      className="text-sm text-slate-300 transition-colors hover:underline"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <div>
+              <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-teal-200">
+                Nejnovější články
+              </h2>
+              {latestArticles.length > 0 ? (
+                <ul className="mt-3 flex flex-col gap-2">
+                  {latestArticles.map((article) => (
+                    <li key={article._id}>
+                      <Link
+                        href={`/clanky/${article.slug}`}
+                        className="text-sm text-slate-300 transition-colors hover:text-teal-200 hover:underline"
+                      >
+                        {article.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-3 text-sm text-slate-400">
+                  Zatím nejsou zveřejněné žádné články.
+                </p>
+              )}
+            </div>
+            <div>
+              <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-teal-200">
+                Nejnovější rady a tipy
+              </h2>
+              {latestTips.length > 0 ? (
+                <ul className="mt-3 flex flex-col gap-2">
+                  {latestTips.map((tip) => (
+                    <li key={tip._id}>
+                      <Link
+                        href={`/navody/${tip.slug}`}
+                        className="text-sm text-slate-300 transition-colors hover:text-teal-200 hover:underline"
+                      >
+                        {tip.title}
+                      </Link>
+                    
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-3 text-sm text-slate-400">
+                  Zatím nejsou zveřejněné žádné pokyny.
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-slate-700">
+          <p className="mx-auto w-full max-w-7xl px-4 py-4 text-xs text-slate-400 sm:px-8">
+            MUDr. Barna Miloš, Ph.D. · Oficiální webové stránky
+          </p>
         </div>
       </footer>
     </div>

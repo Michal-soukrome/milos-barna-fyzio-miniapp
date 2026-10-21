@@ -58,8 +58,11 @@ export const PATIENT_GUIDE_SUMMARIES_QUERY = defineQuery(`*[
   title,
   "slug": slug.current,
   bodyPart,
+  ageGroups,
   symptoms,
-  summary
+  summary,
+  isDemo,
+  medicalReviewed
 }`);
 
 export const ARTICLES_QUERY = defineQuery(`*[
@@ -74,6 +77,27 @@ export const ARTICLES_QUERY = defineQuery(`*[
   publishedAt,
   bodyPart,
   categories
+}`);
+
+export const LATEST_ARTICLES_QUERY = defineQuery(`*[
+  _type == "article" &&
+  medicalReviewed == true &&
+  defined(slug.current)
+] | order(publishedAt desc)[0...3] {
+  _id,
+  title,
+  "slug": slug.current
+}`);
+
+export const LATEST_PATIENT_GUIDES_QUERY = defineQuery(`*[
+  _type == "patientGuide" &&
+  defined(slug.current) &&
+  (isDemo == true || medicalReviewed == true)
+] | order(_createdAt desc)[0...3] {
+  _id,
+  title,
+  "slug": slug.current,
+  isDemo
 }`);
 
 export const ARTICLE_QUERY = defineQuery(`*[

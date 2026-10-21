@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isSanityConfigured } from "@/sanity/lib/client";
-import { getPatientGuideSummaries } from "@/sanity/lib/patient-guides";
+import {
+  getPatientGuideSummaries,
+  normalizePatientGuideText,
+} from "@/sanity/lib/patient-guides";
 import type { PatientGuideSummary } from "@/sanity/lib/types";
 
 const MAX_SITUATION_LENGTH = 500;
@@ -49,7 +52,7 @@ export async function POST(req: NextRequest) {
 
   if (topics.length === 0) {
     return NextResponse.json(
-      { error: "Zatím nejsou zveřejněná žádná pacientská témata." },
+      { error: "Zatím nejsou zveřejněná žádná pacientská články." },
       { status: 503 },
     );
   }
@@ -151,13 +154,13 @@ function matchLocally(
   situation: string,
   topics: PatientGuideSummary[],
 ): MatchResult | null {
-  const words = normalize(situation)
+  const words = normalizePatientGuideText(situation)
     .split(/\s+/)
     .filter((word) => word.length > 2);
   let best: { topic: PatientGuideSummary; score: number } | null = null;
 
   for (const topic of topics) {
-    const searchable = normalize(
+    const searchable = normalizePatientGuideText(
       `${topic.title} ${topic.bodyPart} ${topic.summary} ${topic.symptoms.join(" ")}`,
     );
     const score = words.reduce(
@@ -169,12 +172,4 @@ function matchLocally(
 
   if (!best || best.score === 0) return null;
   return { slug: best.topic.slug, source: "local" };
-}
-
-function normalize(value: string) {
-  return value
-    .toLocaleLowerCase("cs-CZ")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/ů/g, "u");
 }

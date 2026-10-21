@@ -20,14 +20,14 @@ const destinations = [
   {
     href: "/navody",
     eyebrow: "Před zákrokem i po něm",
-    title: "Najít pokyny",
+    title: "Rady a tipy",
     description:
       "Vyhledejte návod nebo cvičení podle své situace. Odkaz či QR kód ode mě vás zavede přímo ke konkrétním pokynům.",
   },
   {
     href: "/clanky",
     eyebrow: "Lépe se zorientovat",
-    title: "Zdravotní témata",
+    title: "Články",
     description:
       "Srozumitelné informace o častých potížích a možnostech léčby, přehledně podle oblasti těla.",
   },
@@ -57,7 +57,7 @@ export default function HomePage() {
 
             <p className="mt-6 max-w-md text-lg leading-relaxed text-teal-50">
               Jsem lékař a pomáhám pacientům zorientovat se před zákrokem i po
-              něm. Tady najdete srozumitelné informace a praktické pokyny, ke
+              něm. Zde najdete srozumitelné informace a praktické pokyny, ke
               kterým se můžete vrátit, kdykoli je potřebujete.
             </p>
 
@@ -66,7 +66,7 @@ export default function HomePage() {
                 href="/navody"
                 className="inline-flex min-h-11 items-center rounded-xl bg-white px-6 py-3 text-sm font-bold text-teal-900 transition-colors hover:bg-teal-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
-                Najít pokyny
+                Rady a tipy
               </Link>
               <Link
                 href="/o-lekari"
@@ -81,7 +81,7 @@ export default function HomePage() {
           <div className="px-6 pt-10 sm:px-10 md:px-0 md:pr-10 md:pt-12 lg:pr-14">
             <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-t-[999px] bg-teal-800 ring-1 ring-inset ring-teal-300/30">
               <Image
-                src="/milosek/milosek_barna_ml.jpeg"
+                src="/milos/milos_barna_ml.jpeg"
                 alt="Portrét MUDr. Barna Miloš, Ph.D."
                 fill
                 priority
@@ -127,7 +127,7 @@ export default function HomePage() {
         </section>
 
         <section className="rounded-2xl border border-teal-200 bg-teal-50 p-6 sm:p-8">
-          <h2 className="font-serif-display mt-2 text-2xl text-slate-800">
+          <h2 className="font-serif-display text-2xl text-slate-800">
             Péče v Barna Medical
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-slate-700">
@@ -141,7 +141,7 @@ export default function HomePage() {
             rel="noopener noreferrer"
             className="mt-5 inline-flex min-h-11 items-center rounded-xl bg-teal-800 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-900"
           >
-            Web Barna Medical
+            Přejít na web Barna Medical
             <ExternalLink aria-hidden="true" className="ml-2 h-4 w-4" />
           </a>
         </section>

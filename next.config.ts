@@ -1,15 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "cdn.sanity.io",
-        pathname: "/images/**",
-      },
-    ],
-  },
+  allowedDevOrigins: ["192.168.31.83"],
   async redirects() {
     return [
       { source: "/configurator", destination: "/navody", permanent: true },
