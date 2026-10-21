@@ -82,8 +82,8 @@ export default async function ArticlePage({
             <MedicalBody body={article.body} />
           </div>
           <p className="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm leading-relaxed text-slate-600">
-            Tyto informace nenahrazují osobní
-            lékařské vyšetření ani pokyny vašeho lékaře.
+            Tyto informace nenahrazují osobní lékařské vyšetření ani pokyny
+            vašeho lékaře.
           </p>
         </article>
 
@@ -91,7 +91,6 @@ export default async function ArticlePage({
           aria-label={relatedArticles.title}
           className="h-fit rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
         >
-       
           <h2 className="font-serif-display mt-2 text-2xl text-slate-800">
             {relatedArticles.title}
           </h2>
@@ -142,9 +141,7 @@ function getRelatedArticles(
   articles: ArticleSummary[],
 ): { title: string; articles: ArticleSummary[] } {
   const currentCategories = new Set(
-    (article.categories ?? []).map((category) =>
-      normalizeCategory(category),
-    ),
+    (article.categories ?? []).map((category) => normalizeCategory(category)),
   );
   const candidates = articles
     .filter((candidate) => candidate.slug !== article.slug)
@@ -159,7 +156,8 @@ function getRelatedArticles(
     }));
   const matching = candidates
     .filter(
-      (candidate) => candidate.sharedCategoryCount > 0 || candidate.sameBodyPart,
+      (candidate) =>
+        candidate.sharedCategoryCount > 0 || candidate.sameBodyPart,
     )
     .sort(
       (a, b) =>
@@ -177,9 +175,7 @@ function getRelatedArticles(
 
   return {
     title: "Související",
-    articles: candidates
-      .slice(0, 3)
-      .map(({ article: related }) => related),
+    articles: candidates.slice(0, 3).map(({ article: related }) => related),
   };
 }
 

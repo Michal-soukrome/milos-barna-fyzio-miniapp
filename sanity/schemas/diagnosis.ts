@@ -1,6 +1,5 @@
 import { defineField, defineType } from "sanity";
 import { ARTICLE_BODY_PARTS } from "../lib/article-taxonomy";
-import { getReviewedContentIssues } from "../lib/reviewed-content";
 import { ReviewedInput } from "./ReviewedInput";
 
 export const diagnosis = defineType({
@@ -43,7 +42,7 @@ export const diagnosis = defineType({
       description: "Stručně vysvětlete, čeho se diagnóza týká.",
       type: "text",
       rows: 3,
-      validation: (rule) => rule.required().min(20).max(300),
+      validation: (rule) => rule.max(300),
     }),
     defineField({
       name: "body",
@@ -66,23 +65,17 @@ export const diagnosis = defineType({
           ],
         },
       ],
-      validation: (rule) => rule.required().min(1),
     }),
     defineField({
       name: "reviewed",
       title: "Lékařsky zkontrolováno",
       description:
-        "Po kontrole celého obsahu MUDr. Milošem Barnou zapněte pro zveřejnění diagnózy na webu. Úprava obsahu příznak automaticky vypne.",
+        "Po odborné kontrole zapněte pro zveřejnění diagnózy na webu. Každá následná úprava obsahu příznak automaticky vypne.",
       type: "boolean",
       initialValue: false,
       options: { aiAssist: { exclude: true } },
       components: { input: ReviewedInput },
-      validation: (rule) =>
-        rule.required().custom((value, context) => {
-          if (value !== true) return true;
-          const issues = getReviewedContentIssues("diagnosis", context.document);
-          return issues.length > 0 ? issues.join(" ") : true;
-        }),
+      validation: (rule) => rule.required(),
     }),
   ],
   preview: {
@@ -94,10 +87,7 @@ export const diagnosis = defineType({
     prepare({ title, bodyPart, reviewed }) {
       return {
         title: title || "Diagnóza bez názvu",
-        subtitle: [
-          bodyPart,
-          reviewed ? "zveřejněno" : "čeká na kontrolu",
-        ]
+        subtitle: [bodyPart, reviewed ? "zveřejněno" : "čeká na kontrolu"]
           .filter(Boolean)
           .join(" · "),
       };

@@ -1,10 +1,6 @@
 import { defineField, defineType } from "sanity";
-import {
-  ArticleSlugInput,
-  createUniqueArticleSlug,
-} from "./ArticleSlugInput";
+import { ArticleSlugInput, createUniqueArticleSlug } from "./ArticleSlugInput";
 import { ARTICLE_BODY_PARTS } from "../lib/article-taxonomy";
-import { getReviewedContentIssues } from "../lib/reviewed-content";
 import { ReviewedInput } from "./ReviewedInput";
 
 export const article = defineType({
@@ -62,7 +58,7 @@ export const article = defineType({
       title: "Krátký úvod",
       type: "text",
       rows: 3,
-      validation: (rule) => rule.required().min(20).max(300),
+      validation: (rule) => rule.max(300),
     }),
     defineField({
       name: "categories",
@@ -92,7 +88,6 @@ export const article = defineType({
           ],
         },
       ],
-      validation: (rule) => rule.required().min(1),
     }),
     defineField({
       name: "publishedAt",
@@ -106,17 +101,12 @@ export const article = defineType({
       name: "reviewed",
       title: "Lékařsky zkontrolováno",
       description:
-        "Po kontrole celého článku MUDr. Milošem Barnou zapněte pro zveřejnění článku na webu. Úprava obsahu příznak automaticky vypne.",
+        "Po odborné kontrole zapněte pro zveřejnění článku na webu. Každá následná úprava obsahu příznak automaticky vypne.",
       type: "boolean",
       initialValue: false,
       options: { aiAssist: { exclude: true } },
       components: { input: ReviewedInput },
-      validation: (rule) =>
-        rule.required().custom((value, context) => {
-          if (value !== true) return true;
-          const issues = getReviewedContentIssues("article", context.document);
-          return issues.length > 0 ? issues.join(" ") : true;
-        }),
+      validation: (rule) => rule.required(),
     }),
   ],
   preview: {

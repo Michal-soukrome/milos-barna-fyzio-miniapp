@@ -63,7 +63,8 @@ export default function PatientNavigator({
         ageGroup,
         bodyPart,
         symptoms: symptomsUnknown ? null : selectedSymptoms,
-        contexts: contextUnknown ? null : selectedContexts,
+        contexts: selectedContexts,
+        contextUnknown,
       }),
     [
       ageGroup,
@@ -105,7 +106,6 @@ export default function PatientNavigator({
   }
 
   function toggleContext(value: GuideContext) {
-    setContextUnknown(false);
     setSelectedContexts((current) =>
       current.includes(value)
         ? current.filter((context) => context !== value)
@@ -398,17 +398,17 @@ export default function PatientNavigator({
                   >
                     Žádná z uvedených situací
                   </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSelectedContexts([]);
-                      setContextUnknown(true);
-                      setStep("results");
-                    }}
-                    className="min-h-12 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
-                  >
+                  <label className="flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+                    <input
+                      type="checkbox"
+                      checked={contextUnknown}
+                      onChange={(event) =>
+                        setContextUnknown(event.currentTarget.checked)
+                      }
+                      className="h-4 w-4 accent-teal-700"
+                    />
                     Nevím
-                  </button>
+                  </label>
                 </div>
               </fieldset>
             )}

@@ -4,16 +4,10 @@ export const SANITY_CACHE_TAGS = {
   articles: "sanity:articles",
 } as const;
 
-export type SanityPublicContentType =
-  | "article"
-  | "diagnosis"
-  | "patientGuide";
+export type SanityPublicContentType = "article" | "diagnosis" | "patientGuide";
 
 export function isSanityContentSlug(value: string): boolean {
-  return (
-    value.length <= 96 &&
-    /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value)
-  );
+  return value.length <= 96 && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
 }
 
 export function getSanityContentCacheTags(
@@ -54,7 +48,6 @@ function getDocumentCacheTag(
   type: SanityPublicContentType,
   slug: string,
 ): string {
-  const documentType =
-    type === "patientGuide" ? "patient-guide" : type;
+  const documentType = type === "patientGuide" ? "patient-guide" : type;
   return `sanity:${documentType}:${slug}`;
 }

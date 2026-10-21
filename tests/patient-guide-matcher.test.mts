@@ -6,6 +6,12 @@ import {
   PATIENT_NAVIGATOR_NO_MATCH,
   type PatientGuideAnswers,
 } from "../sanity/lib/patient-guide-matcher.ts";
+import {
+  getSanityContentCacheTags,
+  getSanityRevalidationTags,
+  isSanityContentSlug,
+} from "../sanity/lib/cache-tags.ts";
+import { getReviewedContentSignature } from "../sanity/lib/reviewed-content.ts";
 import type { PatientGuideSummary } from "../sanity/lib/types.ts";
 
 type FixtureCase = {
@@ -38,7 +44,7 @@ const fixture = JSON.parse(
   ),
 ) as Fixture;
 
-test("approved fixture cases match their expected guide slugs", () => {
+test("clinician-approved fixture cases match their expected guide slugs", () => {
   for (const testCase of fixture.cases) {
     assert.equal(
       testCase.approvedBy,
@@ -55,9 +61,7 @@ test("approved fixture cases match their expected guide slugs", () => {
     assert.equal(result.status, testCase.expectedStatus, testCase.id);
 
     const resultSlugs =
-      result.status === "match"
-        ? result.guides.map((guide) => guide.slug)
-        : [];
+      result.status === "match" ? result.guides.map((guide) => guide.slug) : [];
     assert.deepEqual(resultSlugs, testCase.expectedGuideSlugs, testCase.id);
     for (const excludedSlug of testCase.mustNotAppear) {
       assert.equal(resultSlugs.includes(excludedSlug), false, testCase.id);
@@ -85,9 +89,7 @@ test("each guide has a positive control and a must-not-appear control", () => {
 });
 
 test("no-match guidance keeps clinic, guide-library, and emergency routes", () => {
-  const noMatchCase = fixture.cases.find(
-    (testCase) => testCase.uiExpectations,
-  );
+  const noMatchCase = fixture.cases.find((testCase) => testCase.uiExpectations);
   assert.ok(noMatchCase?.uiExpectations);
   assert.equal(noMatchCase.expectedStatus, "no-match");
   assert.equal(
@@ -102,4 +104,50 @@ test("no-match guidance keeps clinic, guide-library, and emergency routes", () =
     noMatchCase.uiExpectations.emergencyNumbers,
     PATIENT_NAVIGATOR_NO_MATCH.emergencyNumbers,
   );
+  assert.ok(PATIENT_NAVIGATOR_NO_MATCH.copy.includes("nevylučuje"));
+});
+
+test("review reset signatures ignore the flag but track content edits", () => {
+  const baseline = getReviewedContentSignature({
+    _id: "guide-1",
+    _updatedAt: "2026-10-21T10:00:00Z",
+    reviewed: true,
+    title: "Původní název",
+    body: [],
+  });
+  assert.equal(
+    baseline,
+    getReviewedContentSignature({
+      _id: "guide-1",
+      _updatedAt: "2026-10-21T10:05:00Z",
+      reviewed: false,
+      title: "Původní název",
+      body: [],
+    }),
+  );
+  assert.notEqual(
+    baseline,
+    getReviewedContentSignature({
+      _id: "guide-1",
+      _updatedAt: "2026-10-21T10:05:00Z",
+      reviewed: true,
+      title: "Upravený název",
+      body: [],
+    }),
+  );
+});
+
+test("Sanity cache tags cover collections and old/new document slugs", () => {
+  assert.deepEqual(getSanityContentCacheTags("patientGuide"), [
+    "sanity:patient-guides",
+  ]);
+  assert.deepEqual(getSanityContentCacheTags("patientGuide", "pece-o-sadru"), [
+    "sanity:patient-guides",
+    "sanity:patient-guide:pece-o-sadru",
+  ]);
+  assert.deepEqual(
+    getSanityRevalidationTags("article", ["old-slug", "new-slug"]),
+    ["sanity:articles", "sanity:article:old-slug", "sanity:article:new-slug"],
+  );
+  assert.equal(isSanityContentSlug("../invalid"), false);
 });

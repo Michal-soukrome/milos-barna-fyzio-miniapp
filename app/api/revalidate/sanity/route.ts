@@ -12,7 +12,9 @@ export const runtime = "nodejs";
 export async function POST(request: NextRequest) {
   const secret = process.env.SANITY_REVALIDATE_SECRET;
   if (!secret?.trim()) {
-    console.error("Sanity revalidation is disabled: webhook secret is missing.");
+    console.error(
+      "Sanity revalidation is disabled: webhook secret is missing.",
+    );
     return NextResponse.json(
       { error: "Revalidation is not configured." },
       { status: 500 },
@@ -63,9 +65,7 @@ export async function POST(request: NextRequest) {
   return NextResponse.json({ revalidated: true, tags });
 }
 
-function getWebhookSlugs(
-  payload: Record<string, unknown>,
-): string[] | null {
+function getWebhookSlugs(payload: Record<string, unknown>): string[] | null {
   const values = [payload.beforeSlug, payload.afterSlug];
   const slugs: string[] = [];
 
@@ -78,9 +78,7 @@ function getWebhookSlugs(
   return Array.from(new Set(slugs));
 }
 
-function isPublicContentType(
-  value: unknown,
-): value is SanityPublicContentType {
+function isPublicContentType(value: unknown): value is SanityPublicContentType {
   return (
     value === "patientGuide" || value === "diagnosis" || value === "article"
   );

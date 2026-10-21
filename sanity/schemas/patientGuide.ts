@@ -1,6 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { GUIDE_CONTEXTS, GUIDE_CONTEXT_LABELS } from "../lib/types";
-import { getReviewedContentIssues } from "../lib/reviewed-content";
 import { ReviewedInput } from "./ReviewedInput";
 
 export const patientGuide = defineType({
@@ -72,7 +71,7 @@ export const patientGuide = defineType({
       name: "symptoms",
       title: "Vyhledávací výrazy",
       description:
-        "Krátká slova a fráze pro vyhledávání a doporučení tématu.",
+        "Krátké výrazy pro příznaky nebo potíže. Situace, například po operaci, nastavte samostatně v poli Situace.",
       type: "array",
       of: [defineArrayMember({ type: "string" })],
       validation: (rule) => rule.required().min(1),
@@ -82,7 +81,7 @@ export const patientGuide = defineType({
       title: "Krátký popis",
       type: "text",
       rows: 3,
-      validation: (rule) => rule.required().min(20).max(300),
+      validation: (rule) => rule.max(300),
     }),
     defineField({
       name: "body",
@@ -124,14 +123,6 @@ export const patientGuide = defineType({
           ],
         }),
       ],
-      validation: (rule) =>
-        rule.custom((value, context) => {
-          if (Array.isArray(value) && value.length > 0) return true;
-          return Array.isArray(context.document?.sections) &&
-            context.document.sections.length > 0
-            ? true
-            : "Přidejte text nebo obrázek do obsahu návodu.";
-        }),
     }),
     defineField({
       name: "sections",
@@ -146,26 +137,17 @@ export const patientGuide = defineType({
       description: "Doplňte podle obsahu návodu a po odborném ověření.",
       type: "array",
       of: [defineArrayMember({ type: "string" })],
-      validation: (rule) => rule.required().min(1),
     }),
     defineField({
       name: "reviewed",
       title: "Lékařsky zkontrolováno",
       description:
-        "Po kontrole všech údajů, textu, obrázků a varovných příznaků MUDr. Milošem Barnou zapněte pro zveřejnění. Úprava obsahu příznak automaticky vypne.",
+        "Po odborné kontrole zapněte pro zveřejnění. Každá následná úprava obsahu příznak automaticky vypne.",
       type: "boolean",
       initialValue: false,
       options: { aiAssist: { exclude: true } },
       components: { input: ReviewedInput },
-      validation: (rule) =>
-        rule.required().custom((value, context) => {
-          if (value !== true) return true;
-          const issues = getReviewedContentIssues(
-            "patientGuide",
-            context.document,
-          );
-          return issues.length > 0 ? issues.join(" ") : true;
-        }),
+      validation: (rule) => rule.required(),
     }),
   ],
   preview: {
@@ -177,10 +159,7 @@ export const patientGuide = defineType({
     prepare({ title, bodyPart, reviewed }) {
       return {
         title: title || "Návod bez názvu",
-        subtitle: [
-          bodyPart,
-          reviewed ? "zveřejněno" : "čeká na kontrolu",
-        ]
+        subtitle: [bodyPart, reviewed ? "zveřejněno" : "čeká na kontrolu"]
           .filter(Boolean)
           .join(" · "),
       };

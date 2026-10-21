@@ -1,12 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import {
-  PatchEvent,
-  set,
-  useFormValue,
-  type BooleanInputProps,
-} from "sanity";
+import { PatchEvent, set, useFormValue, type BooleanInputProps } from "sanity";
 import { getReviewedContentSignature } from "../lib/reviewed-content";
 
 export function ReviewedInput(props: BooleanInputProps) {

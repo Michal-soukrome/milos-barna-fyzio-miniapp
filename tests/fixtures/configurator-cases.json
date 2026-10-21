@@ -21,7 +21,7 @@
       "bodyPart": "Koleno",
       "ageGroups": ["adult", "senior"],
       "contexts": ["after-surgery"],
-      "symptoms": ["otok", "teplo", "po operaci"],
+      "symptoms": ["otok", "teplo"],
       "summary": "Co je po operaci kolena normální vs. příznaky infekce/trombózy",
       "reviewed": true
     },
@@ -43,7 +43,7 @@
       "bodyPart": "Obecné",
       "ageGroups": ["adult", "senior"],
       "contexts": ["after-surgery"],
-      "symptoms": ["rána", "obvaz", "po operaci"],
+      "symptoms": ["rána", "obvaz"],
       "summary": "Převazy, sprchování, příznaky infekce",
       "reviewed": true
     },
@@ -92,7 +92,7 @@
       "inputs": {
         "ageGroup": "adult",
         "bodyPart": "Koleno",
-        "symptoms": ["otok", "po operaci"],
+        "symptoms": ["otok", "teplo"],
         "contexts": ["after-surgery"]
       },
       "expectedStatus": "match",
@@ -197,7 +197,7 @@
       "inputs": {
         "ageGroup": "child",
         "bodyPart": "Koleno",
-        "symptoms": ["otok", "po operaci"],
+        "symptoms": ["otok", "teplo"],
         "contexts": ["after-surgery"]
       },
       "expectedStatus": "no-match",
@@ -317,8 +317,9 @@
       "inputs": {
         "ageGroup": "adult",
         "bodyPart": "Koleno",
-        "symptoms": ["otok", "po operaci"],
-        "contexts": null
+        "symptoms": ["otok", "teplo"],
+        "contexts": ["after-surgery"],
+        "contextUnknown": true
       },
       "expectedStatus": "no-match",
       "expectedGuideSlugs": [],
@@ -337,7 +338,7 @@
       "inputs": {
         "ageGroup": "adult",
         "bodyPart": "Koleno",
-        "symptoms": ["otok", "po operaci", "berle"],
+        "symptoms": ["otok", "teplo", "berle"],
         "contexts": ["after-surgery"]
       },
       "expectedStatus": "no-match",
@@ -368,7 +369,8 @@
         "ageGroup": "adult",
         "bodyPart": "Obecné",
         "symptoms": ["rána", "obvaz"],
-        "contexts": null
+        "contexts": ["after-surgery"],
+        "contextUnknown": true
       },
       "expectedStatus": "no-match",
       "expectedGuideSlugs": [],

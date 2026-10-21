@@ -5,15 +5,14 @@ export type PatientGuideAnswers = {
   bodyPart: string | null;
   symptoms: string[] | null;
   contexts: GuideContext[] | null;
+  contextUnknown?: boolean;
 };
 
 export type PatientGuideMatchResult =
-  | { status: "match"; guides: PatientGuideSummary[] }
-  | { status: "no-match" };
+  { status: "match"; guides: PatientGuideSummary[] } | { status: "no-match" };
 
 export const PATIENT_NAVIGATOR_NO_MATCH = {
-  copy:
-    "Nenašli jsme zveřejněný návod odpovídající všem vybraným údajům. To nevylučuje žádné onemocnění.",
+  copy: "Nenašli jsme zveřejněný návod odpovídající všem vybraným údajům. To nevylučuje žádné onemocnění.",
   contactHref: "/kontakt",
   libraryHref: "/navody",
   emergencyNumbers: ["155", "112"],
@@ -29,6 +28,7 @@ export function matchPatientGuides(
     bodyPart === null ||
     symptoms === null ||
     contexts === null ||
+    answers.contextUnknown === true ||
     symptoms.length === 0 ||
     contexts.length === 0
   ) {
