@@ -4,7 +4,7 @@ import PatientNavigator from "@/components/PatientNavigator";
 import { getPatientGuideSummaries } from "@/sanity/lib/patient-guides";
 
 export const metadata: Metadata = {
-  title: "Průvodce potížemi | MUDr. Barna Miloš, Ph.D.",
+  title: "Průvodce obtížemi | MUDr. Barna Miloš, Ph.D.",
   description:
     "Najděte zveřejněné pacientské návody podle věkové skupiny, oblasti a příznaků.",
 };

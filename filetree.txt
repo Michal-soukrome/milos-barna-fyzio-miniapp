@@ -1,6 +1,10 @@
 C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 ├── .env.example
 ├── .env.local
+├── .prettierrc.json
+├── .vscode/
+│   ├── extensions.json
+│   └── settings.json
 ├── AGENTS.md
 ├── app/
 │   ├── api/
@@ -19,6 +23,8 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 │   │   └── [slug]/
 │   │       └── page.tsx
 │   ├── globals.css
+│   ├── konfigurator/
+│   │   └── page.tsx
 │   ├── kontakt/
 │   │   └── page.tsx
 │   ├── navody/
@@ -42,6 +48,7 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 │   ├── GuideShareButton.tsx
 │   ├── MedicalBody.tsx
 │   ├── PatientGuideBody.tsx
+│   ├── PatientNavigator.tsx
 │   ├── SiteChrome.tsx
 │   ├── Timeline.tsx
 │   ├── TopicActions.tsx
@@ -49,6 +56,7 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 ├── content/
 │   └── drafts/
 │       └── hallux-valgus.md
+├── FEEDBACKFILE.md
 ├── filetree.txt
 ├── lib/
 ├── next-env.d.ts
@@ -71,6 +79,7 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 │   │   ├── article-taxonomy.ts
 │   │   ├── client.ts
 │   │   ├── diagnoses.ts
+│   │   ├── patient-guide-text.ts
 │   │   ├── patient-guides.ts
 │   │   ├── queries.ts
 │   │   └── types.ts

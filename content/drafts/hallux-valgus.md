@@ -10,7 +10,7 @@ Vbočený palec může postupně měnit způsob, jakým se zatěžuje přední �
 
 Hallux valgus je postupná změna postavení palce, který se vychyluje směrem k ostatním prstům. Současně se může měnit postavení první nártní kosti a kloubu u kořene palce. Nejde tedy jen o hrbolek na vnitřní straně chodidla: změna může ovlivnit zatížení přednoží při stoji a chůzi.
 
-U někoho způsobuje hlavně tlak obuvi a otlaky, u jiného se přidává bolest nebo obtížnější chůze. Rozsah potíží se mezi lidmi liší.
+U někoho způsobuje hlavně tlak obuvi a otlaky, u jiného se přidává bolest nebo obtížnější chůze. Rozsah obtíží se mezi lidmi liší.
 
 ## Proč se palec vychyluje
 
@@ -18,7 +18,7 @@ Na vzniku se často podílí více vlivů. Roli může hrát stavba nohy a vroze
 
 ## Jak se problém vyšetřuje
 
-Lékař se ptá na bolest a její vliv na běžné činnosti, prohlédne nohu a zhodnotí pohyblivost palce i zatížení přednoží. Podle situace doplní rentgenový snímek ve stoji; ten pomáhá posoudit postavení kostí a případné změny kloubu. Konkrétní vyšetření se vždy řídí vašimi potížemi.
+Lékař se ptá na bolest a její vliv na běžné činnosti, prohlédne nohu a zhodnotí pohyblivost palce i zatížení přednoží. Podle situace doplní rentgenový snímek ve stoji; ten pomáhá posoudit postavení kostí a případné změny kloubu. Konkrétní vyšetření se vždy řídí vašimi obtížemi.
 
 ## Jaké jsou možnosti úlevy
 
@@ -30,7 +30,7 @@ Pokud bolest přetrvává a omezuje běžný život i přes konzervativní postu
 
 Režim zatěžování, obuv i návrat k běžným aktivitám se liší podle zvoleného výkonu a průběhu hojení. Řiďte se proto plánem svého operatéra a fyzioterapeuta; obecný článek nemůže nahradit individuální pooperační pokyny.
 
-Pokud vás palec bolí, obtíže se zhoršují nebo vám deformita ztěžuje chůzi či výběr obuvi, objednejte se na vyšetření. O možnostech léčby má smysl rozhodovat podle vašich potíží a nálezu, ne pouze podle vzhledu nohy.
+Pokud vás palec bolí, obtíže se zhoršují nebo vám deformita ztěžuje chůzi či výběr obuvi, objednejte se na vyšetření. O možnostech léčby má smysl rozhodovat podle vašich obtíží a nálezu, ne pouze podle vzhledu nohy.
 
 ---
 

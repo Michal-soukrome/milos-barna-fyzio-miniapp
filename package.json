@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && npm run tree",
     "start": "next start",
     "tree": "node scripts/generate-tree.js"
   },

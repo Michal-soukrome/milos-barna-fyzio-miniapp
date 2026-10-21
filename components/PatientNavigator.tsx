@@ -24,7 +24,8 @@ export default function PatientNavigator({
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
 
   const ageGuides = useMemo(
-    () => topics.filter((topic) => ageGroup && topic.ageGroups.includes(ageGroup)),
+    () =>
+      topics.filter((topic) => ageGroup && topic.ageGroups.includes(ageGroup)),
     [ageGroup, topics],
   );
   const bodyParts = useMemo(
@@ -55,8 +56,7 @@ export default function PatientNavigator({
           ).length,
         }))
         .filter(
-          ({ matchCount }) =>
-            selectedSymptoms.length === 0 || matchCount > 0,
+          ({ matchCount }) => selectedSymptoms.length === 0 || matchCount > 0,
         )
         .sort((a, b) => b.matchCount - a.matchCount)
         .map(({ topic }) => topic),
@@ -97,9 +97,9 @@ export default function PatientNavigator({
     <section className="space-y-6">
       <header>
         <h1 className="font-serif-display text-3xl leading-tight text-slate-800">
-          Průvodce potížemi
+          Průvodce obtížemi
         </h1>
-        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-600">
+        <p className="mt-3 text-sm leading-relaxed text-slate-600">
           Odpovězte na několik krátkých otázek a najděte zveřejněné návody
           odpovídající vašemu výběru. Průvodce neurčuje diagnózu ani naléhavost
           stavu a nenahrazuje vyšetření lékařem.
@@ -177,7 +177,7 @@ export default function PatientNavigator({
             {step === "age" && (
               <fieldset>
                 <legend className="font-serif-display text-2xl text-slate-800">
-                  Koho se potíže týkají?
+                  Koho se obtíže týkají?
                 </legend>
                 <p className="mt-2 text-sm text-slate-600">
                   Vyberte věkovou skupinu. Přesný věk ani jiné osobní údaje
@@ -201,7 +201,7 @@ export default function PatientNavigator({
             {step === "bodyPart" && (
               <fieldset>
                 <legend className="font-serif-display text-2xl text-slate-800">
-                  Které oblasti se potíže týkají?
+                  Které oblasti se obtíže týkají?
                 </legend>
                 <div className="mt-5 grid gap-3 sm:grid-cols-2">
                   {bodyParts.map((part) => (
@@ -312,7 +312,7 @@ export default function PatientNavigator({
                 </h2>
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   Jde o obecné informační materiály, nikoli o diagnózu nebo
-                  individuální doporučení. Pokud potíže přetrvávají nebo se
+                  individuální doporučení. Pokud obtíže přetrvávají nebo se
                   zhoršují, obraťte se na zdravotníka.
                 </p>
 

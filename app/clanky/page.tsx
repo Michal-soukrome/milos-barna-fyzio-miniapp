@@ -9,7 +9,7 @@ import { ARTICLE_BODY_PARTS } from "@/sanity/lib/article-taxonomy";
 export const metadata: Metadata = {
   title: "Články | Miloš Barna",
   description:
-    "Srozumitelné informace o častých potížích a možnostech léčby, přehledně podle oblasti těla.",
+    "Srozumitelné informace o častých obtížích a možnostech léčby, přehledně podle oblasti těla.",
 };
 
 export const revalidate = 300;
@@ -39,7 +39,7 @@ export default async function ArticlesPage() {
           Články
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-slate-600">
-          Srozumitelné informace o častých potížích a možnostech léčby,
+          Srozumitelné informace o častých obtížích a možnostech léčby,
           přehledně podle oblasti těla. Každý zveřejněný článek prošel lékařskou
           kontrolou.
         </p>
@@ -60,9 +60,11 @@ export default async function ArticlesPage() {
                     id={`body-part-${group.key}`}
                     className="font-serif-display text-2xl text-slate-800"
                   >
-                    {group.label}{" "}<span className="text-teal-600 italic font-light">({(group.articles.length)})</span>
+                    {group.label}{" "}
+                    <span className="text-teal-600 italic font-light">
+                      ({group.articles.length})
+                    </span>
                   </h2>
-                  
                 </div>
                 <ul className="grid gap-4 md:grid-cols-2">
                   {group.articles.map((article) => (
