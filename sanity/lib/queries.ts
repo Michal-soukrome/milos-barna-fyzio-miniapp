@@ -3,7 +3,7 @@ import { defineQuery } from "next-sanity";
 export const PATIENT_GUIDES_QUERY = defineQuery(`*[
   _type == "patientGuide" &&
   defined(slug.current) &&
-  (isDemo == true || medicalReviewed == true)
+  reviewed == true
 ] | order(title asc) {
   _id,
   title,
@@ -13,15 +13,14 @@ export const PATIENT_GUIDES_QUERY = defineQuery(`*[
   symptoms,
   summary,
   warningSigns,
-  isDemo,
-  medicalReviewed
+  reviewed
 }`);
 
 export const PATIENT_GUIDE_QUERY = defineQuery(`*[
   _type == "patientGuide" &&
   defined(slug.current) &&
   slug.current == $slug &&
-  (isDemo == true || medicalReviewed == true)
+  reviewed == true
 ][0] {
   _id,
   title,
@@ -45,14 +44,13 @@ export const PATIENT_GUIDE_QUERY = defineQuery(`*[
     }
   },
   warningSigns,
-  isDemo,
-  medicalReviewed
+  reviewed
 }`);
 
 export const PATIENT_GUIDE_SUMMARIES_QUERY = defineQuery(`*[
   _type == "patientGuide" &&
   defined(slug.current) &&
-  (isDemo == true || medicalReviewed == true)
+  reviewed == true
 ] | order(title asc) {
   _id,
   title,
@@ -61,13 +59,12 @@ export const PATIENT_GUIDE_SUMMARIES_QUERY = defineQuery(`*[
   ageGroups,
   symptoms,
   summary,
-  isDemo,
-  medicalReviewed
+  reviewed
 }`);
 
 export const ARTICLES_QUERY = defineQuery(`*[
   _type == "article" &&
-  medicalReviewed == true &&
+  reviewed == true &&
   defined(slug.current)
 ] | order(publishedAt desc) {
   _id,
@@ -79,11 +76,50 @@ export const ARTICLES_QUERY = defineQuery(`*[
   categories
 }`);
 
-export const LATEST_ARTICLES_QUERY = defineQuery(`*[
-  _type == "article" &&
-  medicalReviewed == true &&
+export const DIAGNOSES_QUERY = defineQuery(`*[
+  _type == "diagnosis" &&
+  reviewed == true &&
   defined(slug.current)
-] | order(publishedAt desc)[0...3] {
+] | order(bodyPart asc, title asc) {
+  _id,
+  title,
+  "slug": slug.current,
+  bodyPart,
+  summary
+}`);
+
+export const DIAGNOSIS_QUERY = defineQuery(`*[
+  _type == "diagnosis" &&
+  reviewed == true &&
+  defined(slug.current) &&
+  slug.current == $slug
+][0] {
+  _id,
+  title,
+  "slug": slug.current,
+  bodyPart,
+  summary,
+  body,
+  "relatedDiagnoses": *[
+    _type == "diagnosis" &&
+    reviewed == true &&
+    defined(slug.current) &&
+    bodyPart == ^.bodyPart &&
+    slug.current != ^.slug.current
+  ] | order(title asc)[0...3] {
+    _id,
+    title,
+    "slug": slug.current,
+    bodyPart,
+    summary
+  }
+}`);
+
+export const LATEST_DIAGNOSES_QUERY = defineQuery(`*[
+  _type == "diagnosis" &&
+  reviewed == true &&
+  defined(slug.current)
+] | order(_createdAt desc)[0...3] {
   _id,
   title,
   "slug": slug.current
@@ -92,17 +128,16 @@ export const LATEST_ARTICLES_QUERY = defineQuery(`*[
 export const LATEST_PATIENT_GUIDES_QUERY = defineQuery(`*[
   _type == "patientGuide" &&
   defined(slug.current) &&
-  (isDemo == true || medicalReviewed == true)
+  reviewed == true
 ] | order(_createdAt desc)[0...3] {
   _id,
   title,
-  "slug": slug.current,
-  isDemo
+  "slug": slug.current
 }`);
 
 export const ARTICLE_QUERY = defineQuery(`*[
   _type == "article" &&
-  medicalReviewed == true &&
+  reviewed == true &&
   slug.current == $slug
 ][0] {
   _id,

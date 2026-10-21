@@ -53,14 +53,6 @@ export default async function TopicPage({
           aria-labelledby="guide-title"
           className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-10 h-fit"
         >
-          {topic.isDemo && (
-            <div
-              role="status"
-              className="mb-6 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm leading-relaxed text-amber-950"
-            >
-              Demo obsah, pouze pro ilustraci.
-            </div>
-          )}
           <div className="mb-1 text-sm text-slate-500">{topic.bodyPart}</div>
           <h1
             id="guide-title"
@@ -73,7 +65,7 @@ export default async function TopicPage({
           </p>
         
 
-          {!topic.isDemo && topic.warningSigns.length > 0 && (
+          {topic.warningSigns.length > 0 && (
             <aside className="mt-8 rounded-xl border border-rose-300 bg-rose-50 p-5 text-rose-950">
               <h2 className="font-serif-display text-xl">
                 Kdy kontaktovat ordinaci
@@ -145,14 +137,9 @@ export default async function TopicPage({
                     className="group block"
                   >
                     <span className="flex flex-wrap items-center gap-2">
-                      <span className="text-xs font-semibold text-teal-700 ">
+                      <span className="text-xs font-semibold text-teal-700">
                         {relatedGuide.bodyPart}
                       </span>
-                      {relatedGuide.isDemo && (
-                        <span className="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-900">
-                          Demo
-                        </span>
-                      )}
                     </span>
                     <span className="font-serif-display mt-1 block text-lg leading-snug text-slate-800 group-hover:text-teal-800 group-hover:underline">
                       {relatedGuide.title}

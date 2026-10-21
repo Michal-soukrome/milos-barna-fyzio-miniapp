@@ -5,25 +5,25 @@ import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import type {
-  LatestArticleSummary,
+  LatestDiagnosisSummary,
   LatestPatientGuideSummary,
 } from "@/sanity/lib/types";
 
 const navigation = [
   { href: "/", label: "Úvod" },
   { href: "/navody", label: "Rady a tipy" },
-  { href: "/clanky", label: "Články" },
+  { href: "/diagnozy", label: "Diagnózy" },
   { href: "/o-lekari", label: "O mně" },
   { href: "/kontakt", label: "Kontakt" },
 ];
 
 export default function SiteChrome({
   children,
-  latestArticles,
+  latestDiagnoses,
   latestTips,
 }: {
   children: React.ReactNode;
-  latestArticles: LatestArticleSummary[];
+  latestDiagnoses: LatestDiagnosisSummary[];
   latestTips: LatestPatientGuideSummary[];
 }) {
   const pathname = usePathname();
@@ -181,24 +181,24 @@ export default function SiteChrome({
 
             <div>
               <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-teal-200">
-                Nejnovější články
+                Diagnózy
               </h2>
-              {latestArticles.length > 0 ? (
+              {latestDiagnoses.length > 0 ? (
                 <ul className="mt-3 flex flex-col gap-2">
-                  {latestArticles.map((article) => (
-                    <li key={article._id}>
+                  {latestDiagnoses.map((diagnosis) => (
+                    <li key={diagnosis._id}>
                       <Link
-                        href={`/clanky/${article.slug}`}
+                        href={`/diagnozy/${diagnosis.slug}`}
                         className="text-sm text-slate-300 transition-colors hover:text-teal-200 hover:underline"
                       >
-                        {article.title}
+                        {diagnosis.title}
                       </Link>
                     </li>
                   ))}
                 </ul>
               ) : (
                 <p className="mt-3 text-sm text-slate-400">
-                  Zatím nejsou zveřejněné žádné články.
+                  Odborně zkontrolované diagnózy se zde zobrazí po zveřejnění.
                 </p>
               )}
             </div>

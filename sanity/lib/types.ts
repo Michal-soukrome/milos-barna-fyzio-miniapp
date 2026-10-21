@@ -38,8 +38,7 @@ export type PatientGuideSummary = {
   ageGroups: AgeGroup[];
   symptoms: string[];
   summary: string;
-  isDemo: boolean;
-  medicalReviewed: boolean;
+  reviewed: boolean;
 };
 
 export type PatientGuide = PatientGuideSummary & {
@@ -64,16 +63,29 @@ export type ArticleSummary = {
   categories?: string[];
 };
 
-export type LatestArticleSummary = Pick<
-  ArticleSummary,
-  "_id" | "title" | "slug"
->;
-
 export type LatestPatientGuideSummary = Pick<
   PatientGuideSummary,
-  "_id" | "title" | "slug" | "isDemo"
+  "_id" | "title" | "slug"
 >;
 
 export type PublishedArticle = ArticleSummary & {
   body: PortableTextBlock[];
+};
+
+export type DiagnosisSummary = {
+  _id: string;
+  title: string;
+  slug: string;
+  bodyPart: ArticleBodyPart;
+  summary?: string | null;
+};
+
+export type LatestDiagnosisSummary = Pick<
+  DiagnosisSummary,
+  "_id" | "title" | "slug"
+>;
+
+export type PublishedDiagnosis = DiagnosisSummary & {
+  body?: PortableTextBlock[] | null;
+  relatedDiagnoses: DiagnosisSummary[];
 };

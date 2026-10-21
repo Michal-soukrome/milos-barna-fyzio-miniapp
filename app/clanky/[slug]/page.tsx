@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Layout from "@/components/Layout";
+import MedicalBody from "@/components/MedicalBody";
 import { ARTICLE_QUERY, ARTICLES_QUERY } from "@/sanity/lib/queries";
 import { sanityClient } from "@/sanity/lib/client";
 import { ArticleSummary, PublishedArticle } from "@/sanity/lib/types";
@@ -13,41 +13,6 @@ export const metadata: Metadata = {
 };
 
 export const revalidate = 300;
-
-const portableTextComponents: PortableTextComponents = {
-  block: {
-    normal: ({ children }) => (
-      <p className="mb-4 leading-8 text-slate-700">{children}</p>
-    ),
-    h2: ({ children }) => (
-      <h2 className="font-serif-display mb-3 mt-8 text-2xl text-slate-800">
-        {children}
-      </h2>
-    ),
-    h3: ({ children }) => (
-      <h3 className="mb-2 mt-6 text-lg font-bold text-slate-800">
-        {children}
-      </h3>
-    ),
-    blockquote: ({ children }) => (
-      <blockquote className="my-5 border-l-4 border-teal-600 pl-4 italic text-slate-600">
-        {children}
-      </blockquote>
-    ),
-  },
-  list: {
-    bullet: ({ children }) => (
-      <ul className="mb-4 list-disc space-y-2 pl-6 text-slate-700">
-        {children}
-      </ul>
-    ),
-    number: ({ children }) => (
-      <ol className="mb-4 list-decimal space-y-2 pl-6 text-slate-700">
-        {children}
-      </ol>
-    ),
-  },
-};
 
 export async function generateStaticParams() {
   if (!sanityClient) return [];
@@ -108,10 +73,7 @@ export default async function ArticlePage({
             {article.excerpt}
           </p>
           <div className="mt-8">
-            <PortableText
-              value={article.body}
-              components={portableTextComponents}
-            />
+            <MedicalBody body={article.body} />
           </div>
           <p className="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm leading-relaxed text-slate-600">
             Tyto informace nenahrazují osobní

@@ -25,11 +25,11 @@ const destinations = [
       "Vyhledejte návod nebo cvičení podle své situace. Odkaz či QR kód ode mě vás zavede přímo ke konkrétním pokynům.",
   },
   {
-    href: "/clanky",
+    href: "/diagnozy",
     eyebrow: "Lépe se zorientovat",
-    title: "Články",
+    title: "Diagnózy",
     description:
-      "Srozumitelné informace o častých potížích a možnostech léčby, přehledně podle oblasti těla.",
+      "Co diagnóza znamená, jaké má podoby a jaké možnosti léčby či operace se zvažují.",
   },
   {
     href: "/kontakt",

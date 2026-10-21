@@ -125,109 +125,34 @@ export const patientGuide = defineType({
     defineField({
       name: "warningSigns",
       title: "Varovné příznaky",
-      description:
-        "Doplňte až po odborném ověření. U ukázkového obsahu zůstává text výslovně označen jako neověřený.",
+      description: "Doplňte podle obsahu návodu a po odborném ověření.",
       type: "array",
       of: [defineArrayMember({ type: "string" })],
       validation: (rule) => rule.required().min(1),
     }),
     defineField({
-      name: "isDemo",
-      title: "Veřejná ukázka — neověřeno pro klinické použití",
-      description:
-        "Ponechte zapnuté, dokud lékař nezkontroluje celý text, obrázky i varovné příznaky. Veřejná stránka pak zobrazí výrazné upozornění.",
-      type: "boolean",
-      initialValue: true,
-      options: { aiAssist: { exclude: true } },
-      validation: (rule) =>
-        rule.custom((value, context) => {
-          if (value === true) return true;
-
-          const document = context.document;
-          if (document?.medicalReviewed !== true) {
-            return "Před vypnutím ukázkového režimu musí lékař potvrdit odbornou kontrolu.";
-          }
-          if (
-            typeof document.reviewedBy !== "string" ||
-            !document.reviewedBy.trim() ||
-            typeof document.reviewedAt !== "string" ||
-            !document.reviewedAt
-          ) {
-            return "Vyplňte jméno lékaře a datum odborné kontroly.";
-          }
-          return true;
-        }),
-    }),
-    defineField({
-      name: "medicalReviewed",
+      name: "reviewed",
       title: "Lékařsky zkontrolováno",
       description:
-        "Potvrďte až po kontrole všech údajů, textu, obrázků i varovných příznaků.",
+        "Po kontrole všech údajů, textu, obrázků a varovných příznaků MUDr. Milošem Barnou zapněte pro zveřejnění návodu.",
       type: "boolean",
       initialValue: false,
       options: { aiAssist: { exclude: true } },
-      validation: (rule) =>
-        rule.custom((value, context) => {
-          const document = context.document;
-          if (value !== true) {
-            return document?.isDemo === true
-              ? true
-              : "Neukládejte obsah jako klinicky použitelný bez lékařské kontroly.";
-          }
-          if (document?.isDemo !== false) {
-            return "Před potvrzením kontroly vypněte ukázkový režim.";
-          }
-          if (
-            typeof document.reviewedBy !== "string" ||
-            !document.reviewedBy.trim() ||
-            typeof document.reviewedAt !== "string" ||
-            !document.reviewedAt
-          ) {
-            return "Vyplňte jméno lékaře a datum odborné kontroly.";
-          }
-          return true;
-        }),
-    }),
-    defineField({
-      name: "reviewedBy",
-      title: "Kontrolu provedl",
-      type: "string",
-      options: { aiAssist: { exclude: true } },
-      validation: (rule) =>
-        rule.custom((value, context) => {
-          if (context.document?.medicalReviewed !== true) return true;
-          return typeof value === "string" && value.trim()
-            ? true
-            : "Vyplňte jméno lékaře, který obsah zkontroloval.";
-        }),
-    }),
-    defineField({
-      name: "reviewedAt",
-      title: "Datum odborné kontroly",
-      type: "date",
-      options: { aiAssist: { exclude: true } },
-      validation: (rule) =>
-        rule.custom((value, context) => {
-          if (context.document?.medicalReviewed !== true) return true;
-          return typeof value === "string" && value
-            ? true
-            : "Vyplňte datum odborné kontroly.";
-        }),
+      validation: (rule) => rule.required(),
     }),
   ],
   preview: {
     select: {
       title: "title",
       bodyPart: "bodyPart",
-      isDemo: "isDemo",
-      medicalReviewed: "medicalReviewed",
+      reviewed: "reviewed",
     },
-    prepare({ title, bodyPart, isDemo, medicalReviewed }) {
+    prepare({ title, bodyPart, reviewed }) {
       return {
-      title: title || "Návod bez názvu",
+        title: title || "Návod bez názvu",
         subtitle: [
           bodyPart,
-          isDemo ? "ukázka" : medicalReviewed ? "zkontrolováno" : "čeká na kontrolu",
+          reviewed ? "zveřejněno" : "čeká na kontrolu",
         ]
           .filter(Boolean)
           .join(" · "),

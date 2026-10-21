@@ -101,44 +101,14 @@ export const article = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "medicalReviewed",
+      name: "reviewed",
       title: "Lékařsky zkontrolováno",
       description:
-        "Potvrďte až po osobní kontrole celého článku. Bez potvrzení se článek na webu nezobrazí a nelze jej publikovat.",
+        "Po kontrole celého článku MUDr. Milošem Barnou zapněte pro zveřejnění článku na webu.",
       type: "boolean",
       initialValue: false,
       options: { aiAssist: { exclude: true } },
-      validation: (rule) =>
-        rule.custom((value, context) => {
-          if (value !== true) {
-            return "Před publikováním musí lékař potvrdit odbornou kontrolu.";
-          }
-
-          const document = context.document;
-          if (
-            typeof document?.reviewedBy !== "string" ||
-            !document.reviewedBy.trim() ||
-            typeof document.reviewedAt !== "string" ||
-            !document.reviewedAt
-          ) {
-            return "Vyplňte jméno lékaře a datum odborné kontroly.";
-          }
-
-          return true;
-        }),
-    }),
-    defineField({
-      name: "reviewedBy",
-      title: "Kontrolu provedl",
-      type: "string",
-      description: "Jméno lékaře, který článek odborně zkontroloval.",
-      options: { aiAssist: { exclude: true } },
-    }),
-    defineField({
-      name: "reviewedAt",
-      title: "Datum odborné kontroly",
-      type: "date",
-      options: { aiAssist: { exclude: true } },
+      validation: (rule) => rule.required(),
     }),
   ],
   preview: {

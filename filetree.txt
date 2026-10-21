@@ -1,38 +1,59 @@
 C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 ├── .env.example
+├── .env.local
 ├── AGENTS.md
 ├── app/
 │   ├── api/
 │   │   ├── match/
 │   │   └── send/
 │   ├── articles/
+│   │   └── [slug]/
+│   ├── clanky/
 │   │   ├── page.tsx
 │   │   └── [slug]/
 │   │       └── page.tsx
 │   ├── configurator/
-│   │   └── page.tsx
 │   ├── contact/
-│   │   └── page.tsx
+│   ├── diagnozy/
+│   │   ├── page.tsx
+│   │   └── [slug]/
+│   │       └── page.tsx
 │   ├── globals.css
+│   ├── kontakt/
+│   │   └── page.tsx
+│   ├── navody/
+│   │   ├── page.tsx
+│   │   └── [slug]/
+│   │       └── page.tsx
+│   ├── not-found.tsx
+│   ├── o-lekari/
+│   │   └── page.tsx
+│   ├── ordinace/
+│   │   └── page.tsx
 │   ├── page.tsx
 │   ├── studio/
 │   │   └── [[...tool]]/
 │   │       └── page.tsx
 │   └── t/
 │       └── [slug]/
-│           └── page.tsx
 ├── CLAUDE.md
 ├── components/
 │   ├── Console.tsx
-│   ├── PatientConfigurator.tsx
+│   ├── GuideShareButton.tsx
+│   ├── MedicalBody.tsx
+│   ├── PatientGuideBody.tsx
 │   ├── SiteChrome.tsx
+│   ├── Timeline.tsx
 │   ├── TopicActions.tsx
 │   └── TopicMatcher.tsx
+├── content/
+│   └── drafts/
+│       └── hallux-valgus.md
 ├── filetree.txt
 ├── lib/
-│   └── content.ts
 ├── next-env.d.ts
 ├── next.config.ts
+├── npmlist.txt
 ├── package-lock.json
 ├── package.json
 ├── postcss.config.mjs
@@ -47,15 +68,21 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 ├── README.md
 ├── sanity/
 │   ├── lib/
+│   │   ├── article-taxonomy.ts
 │   │   ├── client.ts
+│   │   ├── diagnoses.ts
+│   │   ├── patient-guides.ts
 │   │   ├── queries.ts
 │   │   └── types.ts
 │   └── schemas/
 │       ├── article.ts
-│       └── index.ts
+│       ├── ArticleSlugInput.tsx
+│       ├── diagnosis.ts
+│       ├── guideSection.ts
+│       ├── index.ts
+│       └── patientGuide.ts
 ├── sanity.cli.ts
 ├── sanity.config.ts
 ├── scripts/
 │   └── generate-tree.js
-├── TopicActions.tsx
 └── tsconfig.json

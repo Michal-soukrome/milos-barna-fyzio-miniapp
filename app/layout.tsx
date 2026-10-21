@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import SiteChrome from "@/components/SiteChrome";
-import { getLatestArticles } from "@/sanity/lib/articles";
+import { getLatestDiagnoses } from "@/sanity/lib/diagnoses";
 import { getLatestPatientGuideSummaries } from "@/sanity/lib/patient-guides";
 import "./globals.css";
 
@@ -15,15 +15,15 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [latestArticles, latestTips] = await Promise.all([
-    getLatestArticles(),
+  const [latestDiagnoses, latestTips] = await Promise.all([
+    getLatestDiagnoses(),
     getLatestPatientGuideSummaries(),
   ]);
 
   return (
     <html lang="cs">
       <body className="flex min-h-screen flex-col antialiased">
-        <SiteChrome latestArticles={latestArticles} latestTips={latestTips}>
+        <SiteChrome latestDiagnoses={latestDiagnoses} latestTips={latestTips}>
           {children}
         </SiteChrome>
       </body>

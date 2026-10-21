@@ -6,10 +6,12 @@ milos-barna@0.1.0 C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-minia
 ├── @portabletext/react@8.0.1
 ├── @portabletext/types@4.0.2
 ├── @sanity/assist@6.2.5
+├── @sanity/image-url@2.1.1
 ├── @tailwindcss/postcss@4.3.3
 ├── @types/node@20.19.43
 ├── @types/react-dom@19.2.7
 ├── @types/react@19.2.18
+├── lucide-react@1.60.0
 ├── next-sanity@13.3.4
 ├── next@16.4.2
 ├── qrcode.react@4.2.0
