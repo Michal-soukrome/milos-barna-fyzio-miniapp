@@ -50,8 +50,8 @@ const portableTextComponents: PortableTextComponents<PatientGuideBodyBlock> = {
       ) {
         return (
           <p role="alert" className="my-4 text-sm text-rose-800">
-            Obrázek návodu nelze zobrazit. Zkontrolujte jeho soubor a
-            alternativní text v redakčním systému.
+            Obrázek rady nelze zobrazit. Zkontrolujte jeho soubor a alternativní
+            text v redakčním systému.
           </p>
         );
       }
@@ -119,7 +119,7 @@ export default function PatientGuideBody({
 
   return (
     <p role="alert" className="mt-8 text-sm text-rose-800">
-      Obsah návodu zatím není k dispozici.
+      Obsah rady zatím není k dispozici.
     </p>
   );
 }

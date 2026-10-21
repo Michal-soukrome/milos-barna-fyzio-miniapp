@@ -22,7 +22,7 @@ const destinations = [
     eyebrow: "Před zákrokem i po něm",
     title: "Rady a tipy",
     description:
-      "Vyhledejte návod nebo cvičení podle své situace. Odkaz či QR kód ode mě vás zavede přímo ke konkrétním pokynům.",
+      "Vyhledejte radu nebo cvičení podle své situace. Odkaz či QR kód ode mě vás zavede přímo ke konkrétním pokynům.",
   },
   {
     href: "/diagnozy",

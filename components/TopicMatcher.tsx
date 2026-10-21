@@ -40,11 +40,10 @@ export default function TopicMatcher({
         </div>
       </div>
       <p className="mt-2 text-sm leading-relaxed text-slate-600">
-        Popište téma nebo situaci a najdeme související návod. Text se zpracuje
+        Popište téma nebo situaci a najdeme související radu. Text se zpracuje
         pouze ve vašem prohlížeči a neodesílá se na server ani do externí AI
-        služby. Nástroj pouze doporučí existující materiál a nevytváří
-        zdravotní rady. Neuvádějte jméno ani jiné údaje, které by vás mohly
-        identifikovat.
+        služby. Nástroj pouze doporučí existující materiál a nevytváří zdravotní
+        rady. Neuvádějte jméno ani jiné údaje, které by vás mohly identifikovat.
       </p>
 
       <form onSubmit={findTopic} className="mt-5">
@@ -83,7 +82,7 @@ export default function TopicMatcher({
       {result && (
         <div className="mt-5 rounded-xl border border-teal-200 bg-white p-4">
           <p className="text-xs font-bold uppercase tracking-[0.14em] text-teal-700">
-            Doporučený návod
+            Doporučená rada
           </p>
           <h3 className="font-serif-display mt-1 text-xl text-slate-800">
             {result.title}
@@ -96,7 +95,7 @@ export default function TopicMatcher({
             href={`/navody/${result.slug}`}
             className="mt-4 inline-flex min-h-11 items-center rounded-xl bg-slate-800 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800"
           >
-            Otevřít návod
+            Otevřít radu
           </Link>
         </div>
       )}

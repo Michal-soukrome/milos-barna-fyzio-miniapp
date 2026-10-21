@@ -4,7 +4,7 @@ import { ReviewedInput } from "./ReviewedInput";
 
 export const patientGuide = defineType({
   name: "patientGuide",
-  title: "Návod pro pacienty",
+  title: "Rady a tipy pro pacienty",
   type: "document",
   fields: [
     defineField({
@@ -15,7 +15,7 @@ export const patientGuide = defineType({
     }),
     defineField({
       name: "slug",
-      title: "Adresa návodu",
+      title: "Adresa rady",
       type: "slug",
       options: {
         source: "title",
@@ -56,7 +56,7 @@ export const patientGuide = defineType({
       name: "contexts",
       title: "Situace",
       description:
-        "Určuje, pro jakou potvrzenou situaci návod platí; nezaměňujte ji s příznaky.",
+        "Určuje, pro jakou potvrzenou situaci rada platí; nezaměňujte ji s příznaky.",
       type: "array",
       of: [defineArrayMember({ type: "string" })],
       options: {
@@ -85,10 +85,10 @@ export const patientGuide = defineType({
     }),
     defineField({
       name: "body",
-      title: "Obsah návodu",
+      title: "Obsah rady",
       type: "array",
       description:
-        "Pište text, přidávejte nadpisy a vkládejte obrázky. U starších návodů se jejich původní text zobrazí, dokud zde nepřidáte nový obsah.",
+        "Pište text, přidávejte nadpisy a vkládejte obrázky. U starších rad se jejich původní text zobrazí, dokud zde nepřidáte nový obsah.",
       of: [
         defineArrayMember({
           type: "block",
@@ -134,7 +134,7 @@ export const patientGuide = defineType({
     defineField({
       name: "warningSigns",
       title: "Varovné příznaky",
-      description: "Doplňte podle obsahu návodu a po odborném ověření.",
+      description: "Doplňte podle obsahu rady a po odborném ověření.",
       type: "array",
       of: [defineArrayMember({ type: "string" })],
     }),
@@ -142,7 +142,7 @@ export const patientGuide = defineType({
       name: "reviewed",
       title: "Lékařsky zkontrolováno",
       description:
-        "Po odborné kontrole zapněte pro zveřejnění. Každá následná úprava obsahu příznak automaticky vypne.",
+        "Po odborné kontrole zapněte pro zveřejnění. Každá následná úprava obsahu rady automaticky vypne.",
       type: "boolean",
       initialValue: false,
       options: { aiAssist: { exclude: true } },
@@ -158,7 +158,7 @@ export const patientGuide = defineType({
     },
     prepare({ title, bodyPart, reviewed }) {
       return {
-        title: title || "Návod bez názvu",
+        title: title || "Rada bez názvu",
         subtitle: [bodyPart, reviewed ? "zveřejněno" : "čeká na kontrolu"]
           .filter(Boolean)
           .join(" · "),

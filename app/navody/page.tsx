@@ -6,7 +6,7 @@ import { getPatientGuides } from "@/sanity/lib/patient-guides";
 export const metadata: Metadata = {
   title: "Pokyny pro pacienty | MUDr. Barna Miloš, Ph.D.",
   description:
-    "Najděte doporučené pokyny pro svou situaci nebo procházejte návody a cvičení pro pacienty.",
+    "Najděte doporučené pokyny pro svou situaci nebo procházejte rady a tipy a cvičení pro pacienty.",
 };
 
 export const revalidate = 300;

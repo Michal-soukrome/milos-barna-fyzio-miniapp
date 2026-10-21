@@ -12,7 +12,7 @@ export type PatientGuideMatchResult =
   { status: "match"; guides: PatientGuideSummary[] } | { status: "no-match" };
 
 export const PATIENT_NAVIGATOR_NO_MATCH = {
-  copy: "Nenašli jsme zveřejněný návod odpovídající všem vybraným údajům. To nevylučuje žádné onemocnění.",
+  copy: "Nenašli jsme zveřejněnou radu ani tip odpovídající všem vybraným údajům. To nevylučuje žádné onemocnění.",
   contactHref: "/kontakt",
   libraryHref: "/navody",
   emergencyNumbers: ["155", "112"],

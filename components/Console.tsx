@@ -151,9 +151,9 @@ export default function Console({
           Rady a tipy pro pacienty
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-slate-600">
-          Najděte návod podle své situace, nebo procházejte všechny zveřejněné
-          návody. Konkrétní
-          pokyny můžete otevřít také přímo přes odkaz nebo QR kód od lékaře.
+          Najděte radu podle své situace, nebo procházejte všechny zveřejněné
+          rady a tipy. Konkrétní pokyny můžete otevřít také přímo přes odkaz
+          nebo QR kód od lékaře.
         </p>
       </header>
 
@@ -162,11 +162,8 @@ export default function Console({
 
         <div className="dashboard-grid gap-8">
           <aside className="mb-7 sm:mb-0">
-       
-
             <div className="md:sticky md:top-24 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-
-<div>
+              <div>
                 <button
                   type="button"
                   onClick={clearFilters}
@@ -211,18 +208,19 @@ export default function Console({
                     onClick={() => setAge(age === g ? null : g)}
                   />
                 ))}
-              </div>    
+              </div>
             </div>
-          
           </aside>
 
           <section>
             <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
               <div>
                 <h2 className="font-serif-display text-2xl text-slate-800">
-                  Všechny rady{" "}<span className="text-teal-600 italic font-light">({filtered.length})</span>
+                  Všechny rady{" "}
+                  <span className="text-teal-600 italic font-light">
+                    ({filtered.length})
+                  </span>
                 </h2>
-                
               </div>
               <div className="relative w-full sm:max-w-xs">
                 <Search
@@ -325,8 +323,7 @@ export default function Console({
               onClick={() => shareDialogRef.current?.close()}
               className="absolute top-0 right-0 inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-700"
             >
-                            <X className="h-4 w-4" />
-
+              <X className="h-4 w-4" />
             </button>
           </div>
           {selected && <TopicActions topic={selected} />}

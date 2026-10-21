@@ -6,7 +6,7 @@ import { getPatientGuideSummaries } from "@/sanity/lib/patient-guides";
 export const metadata: Metadata = {
   title: "Průvodce obtížemi | MUDr. Barna Miloš, Ph.D.",
   description:
-    "Najděte zveřejněné pacientské návody podle věkové skupiny, oblasti a příznaků.",
+    "Najděte zveřejněné pacientské rady a tipy podle věkové skupiny, oblasti a příznaků.",
 };
 
 export const revalidate = 300;

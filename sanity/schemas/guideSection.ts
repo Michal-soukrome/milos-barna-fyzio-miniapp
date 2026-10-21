@@ -2,7 +2,7 @@ import { defineField, defineType } from "sanity";
 
 export const guideSection = defineType({
   name: "guideSection",
-  title: "Část návodu",
+  title: "Část rady",
   type: "object",
   fields: [
     defineField({

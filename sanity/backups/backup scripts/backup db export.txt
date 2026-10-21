@@ -1,0 +1,1 @@
+npx sanity datasets export production "$HOME\Downloads\sanity-backup-before-import.tar.gz"
