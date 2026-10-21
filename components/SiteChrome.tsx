@@ -12,6 +12,7 @@ import type {
 const navigation = [
   { href: "/", label: "Úvod" },
   { href: "/navody", label: "Rady a tipy" },
+  { href: "/konfigurator", label: "Konfigurátor" },
   { href: "/diagnozy", label: "Diagnózy" },
   { href: "/o-lekari", label: "O mně" },
   { href: "/kontakt", label: "Kontakt" },
@@ -55,7 +56,7 @@ export default function SiteChrome({
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-40 bg-slate-800 text-white shadow-sm">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-8 md:py-4">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-8 lg:py-4">
           <Link
             href="/"
             className="flex min-w-0 items-center gap-3"
@@ -74,7 +75,7 @@ export default function SiteChrome({
           {/* Mobile menu button */}
           <button
             type="button"
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-slate-100 transition-colors hover:bg-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-300 md:hidden"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-slate-100 transition-colors hover:bg-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-300 lg:hidden"
             aria-label={menuOpen ? "Zavřít menu" : "Otevřít menu"}
             aria-expanded={menuOpen}
             aria-controls="main-nav"
@@ -90,7 +91,7 @@ export default function SiteChrome({
           {/* Desktop nav */}
           <nav
             aria-label="Hlavní navigace"
-            className="hidden items-center gap-2 text-sm md:flex"
+            className="hidden items-center gap-2 text-sm lg:flex"
           >
             {navigation.map(({ href, label }) => {
               const isActive = isActiveLink(href);
@@ -116,7 +117,7 @@ export default function SiteChrome({
         <nav
           id="main-nav"
           aria-label="Hlavní navigace"
-          className={`border-t border-slate-700 md:hidden ${
+          className={`border-t border-slate-700 lg:hidden ${
             menuOpen ? "block" : "hidden"
           }`}
         >
@@ -146,7 +147,7 @@ export default function SiteChrome({
       <div className="flex-1">{children}</div>
 
       <footer className="border-t border-slate-700 bg-slate-800 text-slate-100">
-        <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-10 sm:px-8 sm:py-12 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+        <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-10 sm:px-8 sm:py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
           <div>
             <Link href="/" className="inline-flex flex-col">
               <span className="text-sm font-bold tracking-[0.16em] text-teal-200">

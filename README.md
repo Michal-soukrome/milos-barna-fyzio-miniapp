@@ -16,14 +16,17 @@ generate personalized treatment or rehabilitation plans.
    age group, search by topic or symptom, or describe what they are looking
    for. The matcher recommends an existing guide; it does not create medical
    advice.
-3. **Read the guide** at `/navody/[slug]`. A guide may show warning signs,
-   links to contact the clinic, and related guides.
-4. **Share a guide** using its QR code or by email. The QR code opens the guide
-   directly. Email delivery uses Resend and links to the configured public
-   site URL.
-5. **Browse diagnoses** at `/diagnozy` for evergreen explanations of
-   conditions, injury types, examinations, and treatment options. Diagnosis
-   pages become public only after medical review in Sanity.
+3. **Use the symptom guide** at `/konfigurator` to filter reviewed guides by
+    age group, body area, and their existing symptom tags. It does not diagnose
+    or assess urgency; emergency contact numbers remain visible throughout.
+4. **Read the guide** at `/navody/[slug]`. A guide may show warning signs,
+    links to contact the clinic, and related guides.
+5. **Share a guide** using its QR code or by email. The QR code opens the guide
+    directly. Email delivery uses Resend and links to the configured public
+    site URL.
+6. **Browse diagnoses** at `/diagnozy` for evergreen explanations of
+    conditions, injury types, examinations, and treatment options. Diagnosis
+    pages become public only after medical review in Sanity.
 
 The guide matcher runs entirely in the browser and uses local keyword matching
 against the published guide list. The description is not sent to the app server
@@ -36,6 +39,7 @@ or an AI provider. The app does not save these descriptions.
 | `/` | Homepage and primary navigation |
 | `/navody` | Search, filters, and guide matcher |
 | `/navody/[slug]` | Patient guide with warnings and sharing options |
+| `/konfigurator` | Step-by-step guide finder; not a diagnostic or urgency tool |
 | `/diagnozy` | Medically reviewed diagnoses, grouped by body area |
 | `/diagnozy/[slug]` | Evergreen diagnosis information |
 | `/clanky` | Existing educational article index |
@@ -46,7 +50,7 @@ or an AI provider. The app does not save these descriptions.
 | `/api/send` | Sends a guide link using Resend |
 
 Legacy routes such as `/pruvodce`, `/configurator`, `/articles`, and `/t/[slug]`
-are retained as redirects.
+are retained as redirects; `/configurator` redirects to `/konfigurator`.
 
 ## Editorial workflow
 

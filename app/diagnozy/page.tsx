@@ -43,9 +43,23 @@ Na této stránce najdete přehled nejčastějších diagnóz a obtíží, se kt
           </p>
         ) : groups.length > 0 ? (
           <div className="mt-10 space-y-10">
+
+<div className="sticky top-17 w-full shadow bg-white flex flex-wrap" id="body-part-navigation">
+  <ul>
+    {groups.map((group) => (
+      <li key={group.key} className="w-fit px-4 py-2 ">
+        <a href={`#body-part-${group.key}`} className="text-sm font-semibold text-teal-800 hover:underline">
+          {group.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
             {groups.map((group) => (
               <section
                 key={group.key}
+                className="scroll-mt-20"
                 aria-labelledby={`body-part-${group.key}`}
               >
                 <h2

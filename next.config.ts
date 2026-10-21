@@ -4,7 +4,11 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["192.168.31.83"],
   async redirects() {
     return [
-      { source: "/configurator", destination: "/navody", permanent: true },
+      {
+        source: "/configurator",
+        destination: "/konfigurator",
+        permanent: true,
+      },
       { source: "/pruvodce", destination: "/navody", permanent: true },
       { source: "/about", destination: "/o-lekari", permanent: true },
       {
