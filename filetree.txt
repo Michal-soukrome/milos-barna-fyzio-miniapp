@@ -9,6 +9,8 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 ├── app/
 │   ├── api/
 │   │   ├── match/
+│   │   ├── revalidate/
+│   │   │   └── sanity/
 │   │   └── send/
 │   ├── articles/
 │   │   └── [slug]/
@@ -45,6 +47,7 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 ├── CLAUDE.md
 ├── components/
 │   ├── Console.tsx
+│   ├── DiagnosisBrowser.tsx
 │   ├── GuideShareButton.tsx
 │   ├── MedicalBody.tsx
 │   ├── PatientGuideBody.tsx
@@ -77,11 +80,14 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 ├── sanity/
 │   ├── lib/
 │   │   ├── article-taxonomy.ts
+│   │   ├── cache-tags.ts
 │   │   ├── client.ts
 │   │   ├── diagnoses.ts
+│   │   ├── patient-guide-matcher.ts
 │   │   ├── patient-guide-text.ts
 │   │   ├── patient-guides.ts
 │   │   ├── queries.ts
+│   │   ├── reviewed-content.ts
 │   │   └── types.ts
 │   └── schemas/
 │       ├── article.ts
@@ -89,9 +95,14 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 │       ├── diagnosis.ts
 │       ├── guideSection.ts
 │       ├── index.ts
-│       └── patientGuide.ts
+│       ├── patientGuide.ts
+│       └── ReviewedInput.tsx
 ├── sanity.cli.ts
 ├── sanity.config.ts
 ├── scripts/
 │   └── generate-tree.js
+├── tests/
+│   ├── fixtures/
+│   │   └── configurator-cases.json
+│   └── patient-guide-matcher.test.mts
 └── tsconfig.json
