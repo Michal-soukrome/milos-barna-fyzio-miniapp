@@ -72,6 +72,7 @@ export default function Layout({
 
   const isActiveLink = (href: string) =>
     pathname === href || (href !== "/" && pathname.startsWith(`${href}/`));
+  const isDiagnosisIndex = pathname === "/diagnozy";
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -188,7 +189,11 @@ export default function Layout({
             </Link>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div
+            className={`grid gap-8 sm:grid-cols-2 ${
+              isDiagnosisIndex ? "lg:grid-cols-2" : "lg:grid-cols-3"
+            }`}
+          >
             <nav aria-label="Navigace v zápatí">
               <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-teal-200">
                 Rychlé odkazy
@@ -208,37 +213,39 @@ export default function Layout({
               </ul>
             </nav>
 
-            <div>
-              <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-teal-200">
-                Diagnózy
-              </h2>
-              {latestDiagnoses.length > 0 ? (
-                <ul className="mt-3 flex flex-col gap-2">
-                  {latestDiagnoses.map((diagnosis) => (
-                    <li key={diagnosis._id}>
+            {!isDiagnosisIndex && (
+              <div>
+                <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-teal-200">
+                  Diagnózy
+                </h2>
+                {latestDiagnoses.length > 0 ? (
+                  <ul className="mt-3 flex flex-col gap-2">
+                    {latestDiagnoses.map((diagnosis) => (
+                      <li key={diagnosis._id}>
+                        <Link
+                          href={`/diagnozy/${diagnosis.slug}`}
+                          className="text-sm text-slate-300 transition-colors hover:text-teal-200 hover:underline"
+                        >
+                          {diagnosis.title}
+                        </Link>
+                      </li>
+                    ))}
+                    <li>
                       <Link
-                        href={`/diagnozy/${diagnosis.slug}`}
-                        className="text-sm text-slate-300 transition-colors hover:text-teal-200 hover:underline"
+                        href="/diagnozy"
+                        className="text-sm text-slate-300 underline transition-colors hover:text-teal-200"
                       >
-                        {diagnosis.title}
+                        Zobrazit vše
                       </Link>
                     </li>
-                  ))}
-                  <li>
-                    <Link
-                      href="/diagnozy"
-                      className="text-sm text-slate-300 underline transition-colors hover:text-teal-200"
-                    >
-                      Zobrazit vše
-                    </Link>
-                  </li>
-                </ul>
-              ) : (
-                <p className="mt-3 text-sm text-slate-400">
-                  Odborně zkontrolované diagnózy se zde zobrazí po zveřejnění.
-                </p>
-              )}
-            </div>
+                  </ul>
+                ) : (
+                  <p className="mt-3 text-sm text-slate-400">
+                    Odborně zkontrolované diagnózy se zde zobrazí po zveřejnění.
+                  </p>
+                )}
+              </div>
+            )}
             <div>
               <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-teal-200">
                 Nejnovější rady a tipy

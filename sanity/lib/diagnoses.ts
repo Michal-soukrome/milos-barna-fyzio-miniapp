@@ -13,10 +13,28 @@ import type {
 
 export const diagnosisRevalidateSeconds = 300;
 
+type DeduplicableDiagnosis = {
+  slug: string;
+  summary?: string | null;
+};
+
+function deduplicateBySlug<T extends DeduplicableDiagnosis>(
+  diagnoses: readonly T[],
+): T[] {
+  const unique = new Map<string, T>();
+  for (const diagnosis of diagnoses) {
+    const current = unique.get(diagnosis.slug);
+    if (!current || (!current.summary && diagnosis.summary)) {
+      unique.set(diagnosis.slug, diagnosis);
+    }
+  }
+  return Array.from(unique.values());
+}
+
 export async function getDiagnoses(): Promise<DiagnosisSummary[]> {
   if (!sanityClient) return [];
 
-  return sanityClient.fetch<DiagnosisSummary[]>(
+  const diagnoses = await sanityClient.fetch<DiagnosisSummary[]>(
     DIAGNOSES_QUERY,
     {},
     {
@@ -26,6 +44,7 @@ export async function getDiagnoses(): Promise<DiagnosisSummary[]> {
       },
     },
   );
+  return deduplicateBySlug(diagnoses);
 }
 
 export async function getDiagnosisBySlug(
@@ -33,7 +52,7 @@ export async function getDiagnosisBySlug(
 ): Promise<PublishedDiagnosis | null> {
   if (!sanityClient) return null;
 
-  return sanityClient.fetch<PublishedDiagnosis | null>(
+  const diagnosis = await sanityClient.fetch<PublishedDiagnosis | null>(
     DIAGNOSIS_QUERY,
     { slug },
     {
@@ -43,12 +62,18 @@ export async function getDiagnosisBySlug(
       },
     },
   );
+  if (!diagnosis) return null;
+
+  return {
+    ...diagnosis,
+    relatedDiagnoses: deduplicateBySlug(diagnosis.relatedDiagnoses).slice(0, 3),
+  };
 }
 
 export async function getLatestDiagnoses(): Promise<LatestDiagnosisSummary[]> {
   if (!sanityClient) return [];
 
-  return sanityClient.fetch<LatestDiagnosisSummary[]>(
+  const diagnoses = await sanityClient.fetch<LatestDiagnosisSummary[]>(
     LATEST_DIAGNOSES_QUERY,
     {},
     {
@@ -58,4 +83,5 @@ export async function getLatestDiagnoses(): Promise<LatestDiagnosisSummary[]> {
       },
     },
   );
+  return deduplicateBySlug(diagnoses);
 }

@@ -83,7 +83,7 @@ export const DIAGNOSES_QUERY = defineQuery(`*[
   _type == "diagnosis" &&
   reviewed == true &&
   defined(slug.current)
-] | order(coalesce(category, bodyPart) asc, title asc) {
+] | order(coalesce(category, bodyPart) asc, title asc, defined(summary) desc, _id asc) {
   _id,
   title,
   "slug": slug.current,
@@ -97,7 +97,7 @@ export const DIAGNOSIS_QUERY = defineQuery(`*[
   reviewed == true &&
   defined(slug.current) &&
   slug.current == $slug
-][0] {
+] | order(defined(category) desc, defined(summary) desc, _id asc)[0] {
   _id,
   title,
   "slug": slug.current,
@@ -111,7 +111,7 @@ export const DIAGNOSIS_QUERY = defineQuery(`*[
     defined(slug.current) &&
     coalesce(category, bodyPart) == coalesce(^.category, ^.bodyPart) &&
     slug.current != ^.slug.current
-  ] | order(title asc)[0...3] {
+  ] | order(title asc, defined(category) desc, defined(summary) desc, _id asc) {
     _id,
     title,
     "slug": slug.current,
