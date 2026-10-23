@@ -51,12 +51,14 @@ export default async function PatientGuidePage({
     <PageContainer>
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <article
-          aria-labelledby="guide-title"
+          aria-labelledby={`poradna-detail-${slug}`}
           className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-10 h-fit"
         >
-          <div className="mb-1 text-sm text-slate-500">{topic.bodyPart}</div>
+          <span className="mb-1 text-xs font-semibold text-teal-700">
+            {topic.bodyPart}
+          </span>
           <h1
-            id="guide-title"
+            id={`poradna-detail-${slug}`}
             className="font-serif-display text-3xl leading-tight"
           >
             {topic.title}

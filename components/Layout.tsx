@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import PrivacyConsent from "@/components/PrivacyConsent";
 import type {
   LatestDiagnosisSummary,
   LatestPatientGuideSummary,
@@ -282,15 +283,20 @@ export default function Layout({
         </div>
 
         <div className="border-t border-slate-700">
-          <p className="mx-auto w-full max-w-7xl px-4 py-4 text-xs text-slate-400 sm:px-8
-          flex items-center justify-between">
+          <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-4 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between sm:px-8">
             <span>
-            MUDr. Barna Miloš, Ph.D. · Oficiální webové stránky
+              MUDr. Barna Miloš, Ph.D. · Oficiální webové stránky
             </span>
-            <Link to>
-            Ochrana osobních údajů
-            </Link>
-          </p>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+              <Link
+                href="/ochrana-osobnich-udaju"
+                className="underline decoration-slate-500 underline-offset-4 hover:text-white"
+              >
+                Ochrana osobních údajů
+              </Link>
+              <PrivacyConsent />
+            </div>
+          </div>
         </div>
       </footer>
     </div>

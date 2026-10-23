@@ -46,6 +46,7 @@ or an AI provider. The app does not save these descriptions.
 | `/clanky/[slug]`   | Individual educational article                              |
 | `/o-mne`           | Doctor profile and background                               |
 | `/kontakt`         | Clinic contact details                                      |
+| `/ochrana-osobnich-udaju` | Privacy notice and analytics consent settings        |
 | `/studio`          | Sanity Studio for editorial content                         |
 | `/api/send`        | Sends a guide link using Resend                             |
 
@@ -107,11 +108,17 @@ intend to use:
 | `RESEND_API_KEY`                | Sending guide emails         | Keep server-side                                |
 | `SEND_FROM_EMAIL`               | Sending guide emails         | Verified sender address in Resend               |
 | `APP_URL`                       | Links in guide emails        | Canonical public HTTP(S) URL                    |
+| `NEXT_PUBLIC_GTM_ID`            | Google Tag Manager           | Optional; its script loads only after analytics consent |
 
 Never put secrets in `NEXT_PUBLIC_*` variables or commit them to the repository.
 When email is enabled, the recipient address and selected guide link are sent
 to Resend for delivery. The email content does not include the guide title or
 the user's symptom description.
+
+Google Tag Manager is loaded only after the visitor accepts analytics in the
+cookie settings. Configure the production container ID as `NEXT_PUBLIC_GTM_ID`,
+and ensure every analytics tag in the container respects the consent state.
+The visitor can change or withdraw the choice from the footer.
 
 ## Deployment
 
