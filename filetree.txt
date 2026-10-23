@@ -46,6 +46,7 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 │       └── [slug]/
 ├── CLAUDE.md
 ├── components/
+│   ├── AsidePanel.tsx
 │   ├── Console.tsx
 │   ├── DiagnosisBrowser.tsx
 │   ├── GuideShareButton.tsx
@@ -57,6 +58,7 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 │   ├── TopicActions.tsx
 │   └── TopicMatcher.tsx
 ├── content/
+│   ├── diagnoses-import.ndjson
 │   └── drafts/
 │       └── hallux-valgus.md
 ├── FEEDBACKFILE.md
@@ -68,6 +70,7 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 ├── package-lock.json
 ├── package.json
 ├── postcss.config.mjs
+├── PRUVODCE-SPRAVOU-OBSAHU.md
 ├── public/
 │   ├── file.svg
 │   ├── globe.svg
@@ -76,13 +79,19 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 │   ├── next.svg
 │   ├── vercel.svg
 │   └── window.svg
+├── Přehled diagnóz – pohybový aparát.txt
 ├── README.md
 ├── sanity/
+│   ├── backups/
+│   │   ├── backup scripts/
+│   │   │   └── backup db export.txt
+│   │   └── sanity-backup-before-import.tar.gz
 │   ├── lib/
 │   │   ├── article-taxonomy.ts
 │   │   ├── cache-tags.ts
 │   │   ├── client.ts
 │   │   ├── diagnoses.ts
+│   │   ├── diagnosis-categories.ts
 │   │   ├── patient-guide-matcher.ts
 │   │   ├── patient-guide-text.ts
 │   │   ├── patient-guides.ts

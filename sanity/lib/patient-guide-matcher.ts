@@ -8,6 +8,13 @@ export type PatientGuideAnswers = {
   contextUnknown?: boolean;
 };
 
+export type PartialPatientGuideAnswers = {
+  ageGroup?: AgeGroup | null;
+  bodyPart?: string | null;
+  symptoms?: string[];
+  contexts?: GuideContext[];
+};
+
 export type PatientGuideMatchResult =
   { status: "match"; guides: PatientGuideSummary[] } | { status: "no-match" };
 
@@ -17,6 +24,31 @@ export const PATIENT_NAVIGATOR_NO_MATCH = {
   libraryHref: "/navody",
   emergencyNumbers: ["155", "112"],
 } as const;
+
+/**
+ * How many guides can still be reached. Unset, null or empty answers
+ * are treated as "not decided yet", not as "unknown". Uses the same
+ * rules as matchPatientGuides for everything that is set.
+ */
+export function countReachableGuides(
+  guides: readonly PatientGuideSummary[],
+  {
+    ageGroup,
+    bodyPart,
+    symptoms = [],
+    contexts = [],
+  }: PartialPatientGuideAnswers,
+): number {
+  return guides.filter(
+    (guide) =>
+      guide.reviewed === true &&
+      (!ageGroup || guide.ageGroups.includes(ageGroup)) &&
+      (!bodyPart || guide.bodyPart === bodyPart) &&
+      symptoms.every((symptom) => guide.symptoms.includes(symptom)) &&
+      (contexts.length === 0 ||
+        contexts.some((context) => guide.contexts.includes(context))),
+  ).length;
+}
 
 export function matchPatientGuides(
   guides: readonly PatientGuideSummary[],

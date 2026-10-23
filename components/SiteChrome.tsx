@@ -195,6 +195,12 @@ export default function SiteChrome({
                       </Link>
                     </li>
                   ))}
+                  <Link
+                    href="/diagnozy"
+                    className="underline text-sm text-slate-300 transition-colors hover:text-teal-200 hover:underline"
+                  >
+                    Zobrazit vše
+                  </Link>
                 </ul>
               ) : (
                 <p className="mt-3 text-sm text-slate-400">
@@ -218,6 +224,12 @@ export default function SiteChrome({
                       </Link>
                     </li>
                   ))}
+                  <Link
+                    href="/navody"
+                    className="underline text-sm text-slate-300 transition-colors hover:text-teal-200 hover:underline"
+                  >
+                    Zobrazit vše
+                  </Link>
                 </ul>
               ) : (
                 <p className="mt-3 text-sm text-slate-400">

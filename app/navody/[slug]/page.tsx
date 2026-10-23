@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
+import AsidePanel from "@/components/AsidePanel";
 import Layout from "@/components/Layout";
 import PatientGuideBody from "@/components/PatientGuideBody";
 import GuideShareButton from "@/components/GuideShareButton";
@@ -106,10 +107,7 @@ export default async function TopicPage({
         </article>
 
         {relatedGuides.length > 0 && (
-          <aside
-            aria-labelledby="related-guides-title"
-            className="h-fit rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 md:sticky md:top-24"
-          >
+          <AsidePanel aria-labelledby="related-guides-title">
             <h2
               id="related-guides-title"
               className="font-serif-display mt-2 text-2xl text-slate-800"
@@ -145,7 +143,7 @@ export default async function TopicPage({
             >
               Všechny rady a tipy
             </Link>
-          </aside>
+          </AsidePanel>
         )}
       </div>
     </Layout>

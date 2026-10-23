@@ -57,6 +57,8 @@ are retained as redirects; `/configurator` redirects to `/konfigurator`.
 Editorial content is stored in Sanity and read from the **published**
 perspective. Drafts are not rendered on public pages.
 
+- For step-by-step instructions for editors, see the
+  [Czech content-management handbook](./PRUVODCE-SPRAVOU-OBSAHU.md).
 - **Patient guides** include body area, age groups, symptoms/search terms,
   summary, guide content, and warning signs. Only published guides with
   `reviewed: true` appear publicly; `reviewed` is set only after the doctor

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { test } from "node:test";
 import {
+  countReachableGuides,
   matchPatientGuides,
   PATIENT_NAVIGATOR_NO_MATCH,
   type PatientGuideAnswers,
@@ -43,6 +44,30 @@ const fixture = JSON.parse(
     "utf8",
   ),
 ) as Fixture;
+
+test("countReachableGuides agrees with matchPatientGuides on complete answers", () => {
+  for (const { inputs } of fixture.cases) {
+    if (
+      !inputs.ageGroup ||
+      !inputs.bodyPart ||
+      !inputs.symptoms?.length ||
+      !inputs.contexts?.length ||
+      inputs.contextUnknown
+    ) {
+      continue;
+    }
+    const matched = matchPatientGuides(fixture.guides, inputs);
+    assert.equal(
+      countReachableGuides(fixture.guides, {
+        ageGroup: inputs.ageGroup,
+        bodyPart: inputs.bodyPart,
+        symptoms: inputs.symptoms,
+        contexts: inputs.contexts,
+      }),
+      matched.status === "match" ? matched.guides.length : 0,
+    );
+  }
+});
 
 test("clinician-approved fixture cases match their expected guide slugs", () => {
   for (const testCase of fixture.cases) {

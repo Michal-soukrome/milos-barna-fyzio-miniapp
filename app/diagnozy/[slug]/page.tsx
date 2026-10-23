@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import AsidePanel from "@/components/AsidePanel";
 import Layout from "@/components/Layout";
 import MedicalBody from "@/components/MedicalBody";
 import { getDiagnosisBySlug, getDiagnoses } from "@/sanity/lib/diagnoses";
@@ -72,10 +73,7 @@ export default async function DiagnosisPage({
           </p>
         </article>
         {diagnosis.relatedDiagnoses.length > 0 && (
-          <aside
-            aria-labelledby="related-diagnoses-title"
-            className="h-fit rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 md:sticky md:top-24"
-          >
+          <AsidePanel aria-labelledby="related-diagnoses-title">
             <h2
               id="related-diagnoses-title"
               className="font-serif-display mt-2 text-2xl text-slate-800"
@@ -108,7 +106,7 @@ export default async function DiagnosisPage({
             >
               Všechny diagnózy
             </Link>
-          </aside>
+          </AsidePanel>
         )}
       </div>
     </Layout>

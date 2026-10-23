@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useId, useMemo, useState } from "react";
+import AsidePanel from "./AsidePanel";
 
 export type BrowserDiagnosis = {
   _id: string;
@@ -131,13 +132,13 @@ export default function DiagnosisBrowser({
       ) : (
         <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-start">
           {/* Aside: on mobile it sits above the content, on lg it moves to the right */}
-          <aside
-            className="order-first lg:order-2 lg:sticky lg:top-20"
+          <AsidePanel
+            className="order-first lg:order-2"
             aria-label="Navigace podle kategorie diagnóz"
           >
             <nav
               id="diagnosis-category-navigation"
-              className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:max-h-[calc(100dvh-6rem)] lg:overflow-y-auto"
+              className="lg:max-h-[calc(100dvh-6rem)] lg:overflow-y-auto"
             >
               <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Podle kategorie
@@ -160,7 +161,7 @@ export default function DiagnosisBrowser({
                 ))}
               </ul>
             </nav>
-          </aside>
+          </AsidePanel>
 
           {/* Main content */}
           <div className="space-y-12 lg:order-1">
@@ -177,21 +178,29 @@ export default function DiagnosisBrowser({
                 >
                   {group.label}
                 </h2>
-                <ul className="grid gap-4 md:grid-cols-2">
+                <ul className="divide-y divide-slate-200 border-y border-slate-200">
                   {group.diagnoses.map((diagnosis) => (
                     <li key={diagnosis._id}>
                       <Link
                         href={`/diagnozy/${diagnosis.slug}`}
-                        className="group block h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-teal-600 hover:shadow-md"
+                        className="group flex items-center justify-between gap-4 px-2 py-3 transition-colors hover:bg-teal-50/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600/40"
                       >
-                        <h3 className="font-serif-display text-2xl leading-tight text-slate-800 group-hover:text-teal-800 group-hover:underline">
-                          {diagnosis.title}
-                        </h3>
-                        {diagnosis.summary && (
-                          <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                            {diagnosis.summary}
-                          </p>
-                        )}
+                        <span className="min-w-0">
+                          <span className="block text-lg font-semibold text-teal-800 group-hover:underline">
+                            {diagnosis.title}
+                          </span>
+                          {diagnosis.summary && (
+                            <span className="mt-0.5 line-clamp-2 block text-sm leading-relaxed text-slate-600">
+                              {diagnosis.summary}
+                            </span>
+                          )}
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className="shrink-0 text-teal-600 transition-transform group-hover:translate-x-0.5"
+                        >
+                          →
+                        </span>
                       </Link>
                     </li>
                   ))}

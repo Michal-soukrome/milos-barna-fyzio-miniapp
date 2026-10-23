@@ -7,3 +7,11 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+## Sanity CMS documentation
+
+Whenever you change Sanity CMS rules or behavior—including schemas, content
+types, fields, validation, or review and publishing workflows—update
+`PRUVODCE-SPRAVOU-OBSAHU.md` in the same change so the client handbook matches
+the actual Studio. Check the handbook against the changed CMS behavior before
+finishing.

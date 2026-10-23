@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import AsidePanel from "@/components/AsidePanel";
 import Layout from "@/components/Layout";
 import MedicalBody from "@/components/MedicalBody";
 import { ARTICLE_QUERY, ARTICLES_QUERY } from "@/sanity/lib/queries";
@@ -87,9 +88,8 @@ export default async function ArticlePage({
           </p>
         </article>
 
-        <aside
+        <AsidePanel
           aria-label={relatedArticles.title}
-          className="h-fit rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
         >
           <h2 className="font-serif-display mt-2 text-2xl text-slate-800">
             {relatedArticles.title}
@@ -130,7 +130,7 @@ export default async function ArticlePage({
           >
             Všechny články
           </Link>
-        </aside>
+        </AsidePanel>
       </div>
     </Layout>
   );
