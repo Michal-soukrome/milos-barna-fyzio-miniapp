@@ -11,10 +11,10 @@ import type {
 
 const navigation = [
   { href: "/", label: "Úvod" },
-  { href: "/navody", label: "Rady a tipy" },
+  { href: "/poradna", label: "Poradna" },
   { href: "/pruvodce", label: "Průvodce" },
   { href: "/diagnozy", label: "Diagnózy" },
-  { href: "/o-lekari", label: "O mně" },
+  { href: "/o-mne", label: "O mně" },
   { href: "/kontakt", label: "Kontakt" },
 ];
 
@@ -30,6 +30,11 @@ export default function Layout({
   const pathname = usePathname();
   const isStudio = pathname === "/studio" || pathname.startsWith("/studio/");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [clientPathname, setClientPathname] = useState("");
+
+  useEffect(() => {
+    setClientPathname(pathname);
+  }, [pathname]);
 
   // Close the menu after navigating
   useEffect(() => {
@@ -71,7 +76,8 @@ export default function Layout({
   }
 
   const isActiveLink = (href: string) =>
-    pathname === href || (href !== "/" && pathname.startsWith(`${href}/`));
+    clientPathname === href ||
+    (href !== "/" && clientPathname.startsWith(`${href}/`));
   const isDiagnosisIndex = pathname === "/diagnozy";
 
   return (
@@ -189,11 +195,7 @@ export default function Layout({
             </Link>
           </div>
 
-          <div
-            className={`grid gap-8 sm:grid-cols-2 ${
-              isDiagnosisIndex ? "lg:grid-cols-2" : "lg:grid-cols-3"
-            }`}
-          >
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <nav aria-label="Navigace v zápatí">
               <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-teal-200">
                 Rychlé odkazy
@@ -213,39 +215,38 @@ export default function Layout({
               </ul>
             </nav>
 
-            {!isDiagnosisIndex && (
-              <div>
-                <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-teal-200">
-                  Diagnózy
-                </h2>
-                {latestDiagnoses.length > 0 ? (
-                  <ul className="mt-3 flex flex-col gap-2">
-                    {latestDiagnoses.map((diagnosis) => (
-                      <li key={diagnosis._id}>
-                        <Link
-                          href={`/diagnozy/${diagnosis.slug}`}
-                          className="text-sm text-slate-300 transition-colors hover:text-teal-200 hover:underline"
-                        >
-                          {diagnosis.title}
-                        </Link>
-                      </li>
-                    ))}
-                    <li>
+            <div>
+              <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-teal-200">
+                Diagnózy
+              </h2>
+              {latestDiagnoses.length > 0 ? (
+                <ul className="mt-3 flex flex-col gap-2">
+                  {latestDiagnoses.map((diagnosis) => (
+                    <li key={diagnosis._id}>
                       <Link
-                        href="/diagnozy"
-                        className="text-sm text-slate-300 underline transition-colors hover:text-teal-200"
+                        href={`/diagnozy/${diagnosis.slug}`}
+                        className="text-sm text-slate-300 transition-colors hover:text-teal-200 hover:underline"
                       >
-                        Zobrazit vše
+                        {diagnosis.title}
                       </Link>
                     </li>
-                  </ul>
-                ) : (
-                  <p className="mt-3 text-sm text-slate-400">
-                    Odborně zkontrolované diagnózy se zde zobrazí po zveřejnění.
-                  </p>
-                )}
-              </div>
-            )}
+                  ))}
+                  <li>
+                    <Link
+                      href="/diagnozy"
+                      className="text-sm text-slate-300 underline transition-colors hover:text-teal-200"
+                    >
+                      Zobrazit vše
+                    </Link>
+                  </li>
+                </ul>
+              ) : (
+                <p className="mt-3 text-sm text-slate-400">
+                  Odborně zkontrolované diagnózy se zde zobrazí po zveřejnění.
+                </p>
+              )}
+            </div>
+
             <div>
               <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-teal-200">
                 Nejnovější rady a tipy
@@ -255,7 +256,7 @@ export default function Layout({
                   {latestTips.map((tip) => (
                     <li key={tip._id}>
                       <Link
-                        href={`/navody/${tip.slug}`}
+                        href={`/poradna/${tip.slug}`}
                         className="text-sm text-slate-300 transition-colors hover:text-teal-200 hover:underline"
                       >
                         {tip.title}
@@ -264,7 +265,7 @@ export default function Layout({
                   ))}
                   <li>
                     <Link
-                      href="/navody"
+                      href="/poradna"
                       className="text-sm text-slate-300 underline transition-colors hover:text-teal-200"
                     >
                       Zobrazit vše
@@ -281,8 +282,14 @@ export default function Layout({
         </div>
 
         <div className="border-t border-slate-700">
-          <p className="mx-auto w-full max-w-7xl px-4 py-4 text-xs text-slate-400 sm:px-8">
+          <p className="mx-auto w-full max-w-7xl px-4 py-4 text-xs text-slate-400 sm:px-8
+          flex items-center justify-between">
+            <span>
             MUDr. Barna Miloš, Ph.D. · Oficiální webové stránky
+            </span>
+            <Link to>
+            Ochrana osobních údajů
+            </Link>
           </p>
         </div>
       </footer>

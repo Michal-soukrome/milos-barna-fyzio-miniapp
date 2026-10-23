@@ -12,12 +12,11 @@ export default function TopicActions({ topic }: { topic: PatientGuide }) {
 
   const url =
     typeof window !== "undefined"
-      ? `${window.location.origin}/navody/${topic.slug}`
-      : `/navody/${topic.slug}`;
+      ? `${window.location.origin}/poradna/${topic.slug}`
+      : `/poradna/${topic.slug}`;
 
   return (
     <div>
-      
       <h2 className="font-serif-display text-3xl leading-tight text-slate-800">
         {topic.title}
       </h2>

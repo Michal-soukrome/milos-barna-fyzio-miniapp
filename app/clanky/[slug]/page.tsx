@@ -76,9 +76,11 @@ export default async function ArticlePage({
           <h1 className="font-serif-display mt-2 text-4xl leading-tight text-slate-800">
             {article.title}
           </h1>
+          {/* 
           <p className="mt-4 border-b border-slate-200 pb-6 text-lg leading-relaxed text-slate-600">
             {article.excerpt}
           </p>
+          */}
           <div className="mt-8">
             <MedicalBody body={article.body} />
           </div>
@@ -88,9 +90,7 @@ export default async function ArticlePage({
           </p>
         </article>
 
-        <AsidePanel
-          aria-label={relatedArticles.title}
-        >
+        <AsidePanel aria-label={relatedArticles.title}>
           <h2 className="font-serif-display mt-2 text-2xl text-slate-800">
             {relatedArticles.title}
           </h2>
@@ -111,7 +111,7 @@ export default async function ArticlePage({
                     <span className="font-serif-display mt-1 block text-lg leading-snug text-slate-800 group-hover:text-teal-800">
                       {relatedArticle.title}
                     </span>
-                    <span className="mt-2 block text-sm leading-relaxed text-slate-600">
+                    <span className="mt-2 block min-w-0 truncate text-sm leading-relaxed text-slate-600">
                       {relatedArticle.excerpt}
                     </span>
                   </Link>

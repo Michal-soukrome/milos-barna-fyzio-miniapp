@@ -8,7 +8,7 @@ Obsah se upravuje v administraci Sanity, která se na webu jmenuje **Studio**.
 V administraci můžete spravovat tyto tři druhy obsahu:
 
 - **Rady a tipy pro pacienty** – zobrazují se v části webu **Rady a tipy**
-  (`/navody`).
+  (`/poradna`).
 - **Diagnózy** – zobrazují se v části **Diagnózy** (`/diagnozy`).
 - **Vzdělávací články** – zobrazují se v části **Články** (`/clanky`).
 

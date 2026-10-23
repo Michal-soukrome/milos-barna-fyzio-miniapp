@@ -23,7 +23,7 @@ export async function generateStaticParams() {
   return topics.map((topic) => ({ slug: topic.slug }));
 }
 
-export default async function TopicPage({
+export default async function PatientGuidePage({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -39,11 +39,11 @@ export default async function TopicPage({
   const followUpLink =
     topic.slug === "post-op-wound-care"
       ? {
-          href: "https://www.barnamedical.cz/kontakt",
+          href: "https://www.barnamedical.cz/kontakt/?utm_source=mudrbarna.cz&utm_medium=referral&utm_campaign=poradna",
           label: "Kontaktovat Barna Medical",
         }
       : {
-          href: "https://www.barnamedical.cz/sluzby/lecba/rehabilitace-po-urazech-a-operaci",
+          href: "https://www.barnamedical.cz/sluzby/lecba/rehabilitace-po-urazech-a-operaci?utm_source=mudrbarna.cz&utm_medium=referral&utm_campaign=poradna",
           label: "Rehabilitace po úrazech a operaci",
         };
 
@@ -119,7 +119,7 @@ export default async function TopicPage({
               {relatedGuides.map((relatedGuide) => (
                 <li key={relatedGuide._id} className="py-4 first:pt-0">
                   <Link
-                    href={`/navody/${relatedGuide.slug}`}
+                    href={`/poradna/${relatedGuide.slug}`}
                     className="group block"
                   >
                     <span className="flex flex-wrap items-center gap-2">
@@ -130,7 +130,8 @@ export default async function TopicPage({
                     <span className="font-serif-display mt-1 block text-lg leading-snug text-slate-800 group-hover:text-teal-800 group-hover:underline">
                       {relatedGuide.title}
                     </span>
-                    <span className="mt-2 block text-sm leading-relaxed text-slate-600">
+
+                    <span className="mt-2 block min-w-0 truncate text-sm leading-relaxed text-slate-600">
                       {relatedGuide.summary}
                     </span>
                   </Link>
@@ -138,7 +139,7 @@ export default async function TopicPage({
               ))}
             </ul>
             <Link
-              href="/navody"
+              href="/poradna"
               className="mt-5 inline-flex text-sm font-semibold text-teal-800 underline decoration-teal-300 underline-offset-4 hover:text-teal-950"
             >
               Všechny rady a tipy

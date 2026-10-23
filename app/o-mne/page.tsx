@@ -55,7 +55,7 @@ const timeline: TimelineItem[] = [
   },
 ];
 
-export default function AboutPage() {
+export default function AboutMePage() {
   return (
     <PageContainer>
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">

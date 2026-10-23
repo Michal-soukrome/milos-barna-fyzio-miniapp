@@ -328,7 +328,7 @@
       "approvedOn": "2026-10-21",
       "uiExpectations": {
         "contactHref": "/kontakt",
-        "libraryHref": "/navody",
+        "libraryHref": "/poradna",
         "emergencyNumbers": ["155", "112"]
       }
     },

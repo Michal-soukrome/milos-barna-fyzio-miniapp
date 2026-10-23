@@ -5,7 +5,6 @@ export default function NotFound() {
   return (
     <PageContainer>
       <section className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white px-6 py-12 text-center shadow-sm sm:px-12 sm:py-16">
-      
         <h1 className="font-serif-display mt-3 text-3xl leading-tight text-slate-800 sm:text-4xl">
           Tuto stránku se nepodařilo najít
         </h1>
@@ -20,7 +19,7 @@ export default function NotFound() {
             Zpět na úvod
           </Link>
           <Link
-            href="/navody"
+            href="/poradna"
             className="inline-flex min-h-11 items-center rounded-xl border border-teal-800 px-5 py-3 text-sm font-bold text-teal-900 transition-colors hover:bg-teal-50"
           >
             Rady a tipy

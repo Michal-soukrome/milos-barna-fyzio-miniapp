@@ -36,7 +36,7 @@ const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2";
 const primaryBtn = `min-h-12 rounded-xl bg-teal-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800 disabled:cursor-not-allowed disabled:opacity-50 ${focusRing}`;
 const secondaryBtn = `min-h-12 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-45 ${focusRing}`;
-const linkBtn = `text-sm font-semibold text-teal-800 underline decoration-teal-300 underline-offset-4 hover:text-teal-950 ${focusRing} rounded`;
+const linkBtn = `min-h-12 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2 ${focusRing}`;
 const actionBar =
   "sticky bottom-0 z-10 -mx-5 mt-6 border-t border-slate-200 bg-white/95 px-5 py-3 backdrop-blur sm:static sm:mx-0 sm:border-0 sm:bg-transparent sm:p-0 sm:backdrop-blur-none";
 
@@ -47,12 +47,12 @@ const normalize = (value: string) =>
   value.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
 
 function guideCountLabel(count: number) {
-  if (count === 1) return "1 rada";
-  if (count >= 2 && count <= 4) return `${count} rady a tipy`;
-  return `${count} rad a tipů`;
+  if (count === 1) return "1";
+  if (count >= 2 && count <= 4) return `${count}`;
+  return `${count}`;
 }
 
-// Short label for options: "žádná rada" instead of "0 rad a tipů".
+// Short label for options: "žádná rada" instead of "0".
 function optionCountLabel(count: number) {
   return count === 0 ? "žádná rada" : guideCountLabel(count);
 }
@@ -114,9 +114,7 @@ function ChoiceRadio({
         {children}
       </span>
       {hint && (
-        <span className="shrink-0 text-xs font-normal text-slate-500">
-          {hint}
-        </span>
+        <span className="text-teal-600 italic font-light">({hint})</span>
       )}
     </label>
   );
@@ -464,7 +462,7 @@ export default function PatientNavigator({
           </p>
           <div className="mt-4">
             <Link
-              href="/navody"
+              href="/poradna"
               className="font-semibold text-teal-800 underline underline-offset-4"
             >
               Procházet rady a tipy
@@ -593,10 +591,7 @@ export default function PatientNavigator({
                 >
                   Koho se obtíže týkají?
                 </legend>
-                <p className="mt-2 text-sm text-slate-600">
-                  Stačí věková skupina. Přesný věk ani jiné osobní údaje
-                  nepotřebujeme.
-                </p>
+
                 <div className="mt-5 grid gap-3 sm:grid-cols-3">
                   {ageGroups.map((group) => {
                     const n = countFor({
@@ -687,7 +682,7 @@ export default function PatientNavigator({
                     Pro tuto věkovou skupinu zatím nejsou zveřejněné rady a
                     tipy. Změňte věkovou skupinu nebo{" "}
                     <Link
-                      href="/navody"
+                      href="/poradna"
                       className="font-semibold text-teal-800 underline underline-offset-4"
                     >
                       procházejte rady a tipy
@@ -852,7 +847,7 @@ export default function PatientNavigator({
                     Některou předchozí otázku jste přeskočili, proto průvodce
                     nemůže najít přesnou shodu. Odpovědi můžete změnit nahoře
                     nebo{" "}
-                    <Link href="/navody" className={linkBtn}>
+                    <Link href="/poradna" className={linkBtn}>
                       procházet všechny rady a tipy
                     </Link>
                     .
@@ -911,8 +906,8 @@ export default function PatientNavigator({
                   </button>
                   {!canMatch && (
                     <Link
-                      href="/navody"
-                      className={`${linkBtn} mt-3 inline-block`}
+                      href="/poradna"
+                      className={`${linkBtn} inline-block ml-3`}
                     >
                       Procházet všechny rady a tipy
                     </Link>
@@ -949,7 +944,7 @@ export default function PatientNavigator({
                       return (
                         <li key={topic._id}>
                           <Link
-                            href={`/navody/${topic.slug}`}
+                            href={`/poradna/${topic.slug}`}
                             className={`group flex items-center border-x border-slate-200 justify-between gap-4 p-3 transition-colors hover:bg-teal-50/60 ${focusRing}`}
                           >
                             <span className="min-w-0">
@@ -1001,7 +996,7 @@ export default function PatientNavigator({
                       href={PATIENT_NAVIGATOR_NO_MATCH.contactHref}
                       className="font-semibold text-teal-800 underline underline-offset-4"
                     >
-                      Obraťte se na ordinaci
+                      Napište mi
                     </Link>{" "}
                     nebo si{" "}
                     <Link
@@ -1010,18 +1005,17 @@ export default function PatientNavigator({
                     >
                       prohlédněte rady a tipy
                     </Link>
-                    . Můžete také upravit svůj výběr výše.
+                    . Případně také můžete formulář{" "}
+                    <button
+                      type="button"
+                      onClick={startOver}
+                      className="inline-block font-semibold text-teal-800 underline underline-offset-4"
+                    >
+                      začít znovu
+                    </button>
+                    .
                   </div>
                 )}
-
-                <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
-                  <Link href="/navody" className={linkBtn}>
-                    Procházet knihovnu rad a tipů
-                  </Link>
-                  <button type="button" onClick={startOver} className={linkBtn}>
-                    Začít znovu
-                  </button>
-                </div>
               </section>
             )}
 

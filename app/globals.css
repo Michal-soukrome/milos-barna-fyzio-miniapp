@@ -14,6 +14,10 @@ body {
   font-family: var(--font-sans);
 }
 
+button {
+  @apply cursor-pointer;
+}
+
 .font-serif-display {
   font-family: var(--font-serif);
 }

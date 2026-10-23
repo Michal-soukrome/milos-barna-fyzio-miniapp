@@ -12,14 +12,14 @@ generate personalized treatment or rehabilitation plans.
 
 1. **Start at the homepage** and choose patient instructions, diagnoses, the
    doctor's profile, or contact information.
-2. **Find a patient guide** at `/navody`. Patients can filter by body area or
+2. **Find a patient guide** at `/poradna`. Patients can filter by body area or
    age group, search by topic or symptom, or describe what they are looking
    for. The matcher recommends an existing guide; it does not create medical
    advice.
 3. **Use the symptom guide** at `/pruvodce` to filter reviewed guides by
    age group, body area, and their existing symptom tags. It does not diagnose
    or assess urgency; emergency contact numbers remain visible throughout.
-4. **Read the guide** at `/navody/[slug]`. A guide may show warning signs,
+4. **Read the guide** at `/poradna/[slug]`. A guide may show warning signs,
    links to contact the clinic, and related guides.
 5. **Share a guide** using its QR code or by email. The QR code opens the guide
    directly. Email delivery uses Resend and links to the configured public
@@ -37,21 +37,19 @@ or an AI provider. The app does not save these descriptions.
 | Route              | Purpose                                                     |
 | ------------------ | ----------------------------------------------------------- |
 | `/`                | Homepage and primary navigation                             |
-| `/navody`          | Search, filters, and guide matcher                          |
-| `/navody/[slug]`   | Patient guide with warnings and sharing options             |
+| `/poradna`         | Search, filters, and guide matcher                          |
+| `/poradna/[slug]`  | Patient guide with warnings and sharing options             |
 | `/pruvodce`        | Step-by-step guide finder; not a diagnostic or urgency tool |
 | `/diagnozy`        | Medically reviewed diagnoses, grouped by body area          |
 | `/diagnozy/[slug]` | Evergreen diagnosis information                             |
 | `/clanky`          | Existing educational article index                          |
 | `/clanky/[slug]`   | Individual educational article                              |
-| `/o-lekari`        | Doctor profile and background                               |
+| `/o-mne`           | Doctor profile and background                               |
 | `/kontakt`         | Clinic contact details                                      |
 | `/studio`          | Sanity Studio for editorial content                         |
 | `/api/send`        | Sends a guide link using Resend                             |
 
-Legacy routes such as `/konfigurator`, `/configurator`, `/articles`, and
-`/t/[slug]` are retained as redirects to their current Czech-language routes.
-Both `/konfigurator` and `/configurator` redirect to `/pruvodce`.
+Routes are defined by the `app/` directory. Legacy paths are not redirected.
 
 ## Editorial workflow
 

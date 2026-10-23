@@ -92,7 +92,7 @@ export default function TopicMatcher({
             Vybráno podle slov ve vašem popisu.
           </p>
           <Link
-            href={`/navody/${result.slug}`}
+            href={`/poradna/${result.slug}`}
             className="mt-4 inline-flex min-h-11 items-center rounded-xl bg-slate-800 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800"
           >
             Otevřít radu

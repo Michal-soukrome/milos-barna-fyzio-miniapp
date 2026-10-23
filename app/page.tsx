@@ -12,17 +12,16 @@ export const metadata: Metadata = {
 
 const destinations = [
   {
-    href: "/o-lekari",
+    href: "/o-mne",
     eyebrow: "Moje práce",
     title: "O mně",
     description: "Proč připravuji tyto informace a jak vám mohou pomoci.",
   },
   {
-    href: "/navody",
+    href: "/poradna",
     eyebrow: "Před zákrokem i po něm",
     title: "Rady a tipy",
-    description:
-      "Vyhledejte radu nebo cvičení podle své situace. Odkaz či QR kód ode mě vás zavede přímo ke konkrétním pokynům.",
+    description: "Vyhledejte radu nebo cvičení podle své situace.",
   },
   {
     href: "/diagnozy",
@@ -63,13 +62,13 @@ export default function HomePage() {
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
-                href="/navody"
+                href="/poradna"
                 className="inline-flex min-h-11 items-center rounded-xl bg-white px-6 py-3 text-sm font-bold text-teal-900 transition-colors hover:bg-teal-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 Rady a tipy
               </Link>
               <Link
-                href="/o-lekari"
+                href="/o-mne"
                 className="inline-flex min-h-11 items-center rounded-xl border border-teal-300/60 px-6 py-3 text-sm font-bold text-white transition-colors hover:border-white hover:bg-teal-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 O mně
@@ -132,11 +131,10 @@ export default function HomePage() {
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-slate-700">
             Pokud se připravujete na léčbu nebo zákrok v Barna Medical, aktuální
-            informace o klinice najdete na jejím webu. Praktické pokyny, které
-            vám posílám, otevřete přímo přes odkaz nebo QR kód.
+            informace o klinice najdete na jejím webu.
           </p>
           <a
-            href="https://www.barnamedical.cz/"
+            href="https://www.barnamedical.cz/?utm_source=mudrbarna.cz&utm_medium=referral&utm_campaign=homepage"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-5 inline-flex min-h-11 items-center rounded-xl bg-teal-800 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-900"

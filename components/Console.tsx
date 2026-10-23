@@ -153,7 +153,7 @@ export default function Console({
         <p className="mt-3 text-sm leading-relaxed text-slate-600">
           Najděte radu podle své situace, nebo procházejte všechny zveřejněné
           rady a tipy. Konkrétní pokyny můžete otevřít také přímo přes odkaz
-          nebo QR kód od lékaře.
+          nebo QR kód.
         </p>
       </header>
 
@@ -243,7 +243,7 @@ export default function Console({
                 <li key={t.slug} className="topic-card">
                   <div className="flex min-h-52 w-full flex-col rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-all group hover:border-teal-600 hover:shadow-md sm:p-5">
                     <Link
-                      href={`/navody/${t.slug}`}
+                      href={`/poradna/${t.slug}`}
                       className="group flex flex-1 flex-col rounded-xl p-1 text-left focus-visible:ring-2 focus-visible:ring-teal-600"
                     >
                       <div className="mb-5 flex items-center justify-between">
@@ -264,7 +264,7 @@ export default function Console({
                     </Link>
                     <div className="mt-3 flex items-center gap-3">
                       <Link
-                        href={`/navody/${t.slug}`}
+                        href={`/poradna/${t.slug}`}
                         className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-slate-700 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-800 focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2"
                       >
                         Přečíst

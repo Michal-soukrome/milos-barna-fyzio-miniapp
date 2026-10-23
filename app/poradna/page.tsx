@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export const revalidate = 300;
 
-export default async function ClinicLibraryPage() {
+export default async function PatientGuideIndexPage() {
   const topics = await getPatientGuides();
   return <Console topics={topics} isSanityConfigured={isSanityConfigured} />;
 }

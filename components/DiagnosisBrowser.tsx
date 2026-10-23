@@ -137,7 +137,7 @@ export default function DiagnosisBrowser({
             aria-label="Navigace podle kategorie diagnóz"
           >
             <nav
-              id="diagnosis-category-navigation"
+              id="kategorie-navigation"
               className="lg:max-h-[calc(100dvh-6rem)] lg:overflow-y-auto"
             >
               <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
@@ -147,7 +147,7 @@ export default function DiagnosisBrowser({
                 {filteredGroups.map((group) => (
                   <li key={group.key}>
                     <a
-                      href={`#diagnosis-category-${group.key}`}
+                      href={`#kategorie-${group.key}`}
                       className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-semibold text-teal-800 transition-colors hover:border-teal-600 hover:bg-teal-50 lg:border-transparent lg:bg-transparent lg:py-2"
                     >
                       <span>
@@ -168,15 +168,20 @@ export default function DiagnosisBrowser({
             {filteredGroups.map((group) => (
               <section
                 key={group.key}
-                id={`diagnosis-category-${group.key}`}
+                id={`kategorie-${group.key}`}
                 className="scroll-mt-24"
-                aria-labelledby={`diagnosis-category-${group.key}-heading`}
+                aria-labelledby={`kategorie-${group.key}-heading`}
               >
                 <h2
-                  id={`diagnosis-category-${group.key}-heading`}
+                  id={`kategorie-${group.key}-heading`}
                   className="font-serif-display mb-5 border-b border-slate-200 pb-2 text-2xl text-slate-800"
                 >
-                  {group.label}
+                  {group.label}{" "}
+                  <span>
+                    <span className="text-teal-600 italic font-light">
+                      ({group.diagnoses.length})
+                    </span>
+                  </span>
                 </h2>
                 <ul className="divide-y divide-slate-200 border-b border-slate-200">
                   {group.diagnoses.map((diagnosis) => (

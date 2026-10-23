@@ -33,7 +33,7 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 │   │   └── [slug]/
 │   │       └── page.tsx
 │   ├── not-found.tsx
-│   ├── o-lekari/
+│   ├── o-mne/
 │   │   └── page.tsx
 │   ├── ordinace/
 │   │   └── page.tsx

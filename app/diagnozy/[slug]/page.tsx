@@ -91,8 +91,9 @@ export default async function DiagnosisPage({
                     <span className="font-serif-display mt-1 block text-lg leading-snug text-slate-800 group-hover:text-teal-800 group-hover:underline">
                       {relatedDiagnosis.title}
                     </span>
+
                     {relatedDiagnosis.summary && (
-                      <span className="mt-2 block text-sm leading-relaxed text-slate-600">
+                      <span className="mt-2 block min-w-0 truncate text-sm leading-relaxed text-slate-600">
                         {relatedDiagnosis.summary}
                       </span>
                     )}

@@ -21,7 +21,7 @@ export type PatientGuideMatchResult =
 export const PATIENT_NAVIGATOR_NO_MATCH = {
   copy: "Nenašli jsme zveřejněnou radu ani tip odpovídající všem vybraným údajům. To nevylučuje žádné onemocnění.",
   contactHref: "/kontakt",
-  libraryHref: "/navody",
+  libraryHref: "/poradna",
   emergencyNumbers: ["155", "112"],
 } as const;
 
