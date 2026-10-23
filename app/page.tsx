@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
-import Layout from "@/components/Layout";
+import PageContainer from "@/components/PageContainer";
 
 export const metadata: Metadata = {
   title: "Miloš Barna | Srozumitelně před zákrokem i po něm",
@@ -41,7 +41,7 @@ const destinations = [
 
 export default function HomePage() {
   return (
-    <Layout>
+    <PageContainer>
       <section className="overflow-hidden rounded-3xl bg-teal-900 text-white">
         <div className="grid items-end md:grid-cols-[minmax(0,1.25fr)_minmax(300px,0.75fr)]">
           <div className="px-6 pt-10 sm:px-10 sm:pt-14 md:self-center md:py-16 lg:px-14 lg:py-20">
@@ -146,6 +146,6 @@ export default function HomePage() {
           </a>
         </section>
       </div>
-    </Layout>
+    </PageContainer>
   );
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Layout from "@/components/Layout";
+import PageContainer from "@/components/PageContainer";
 import PatientNavigator from "@/components/PatientNavigator";
 import { getPatientGuideSummaries } from "@/sanity/lib/patient-guides";
 
@@ -15,8 +15,8 @@ export default async function PatientGuideFinderPage() {
   const topics = await getPatientGuideSummaries();
 
   return (
-    <Layout>
+    <PageContainer>
       <PatientNavigator topics={topics} />
-    </Layout>
+    </PageContainer>
   );
 }

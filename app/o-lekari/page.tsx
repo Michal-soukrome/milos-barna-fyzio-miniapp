@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Layout from "@/components/Layout";
+import PageContainer from "@/components/PageContainer";
 import { Timeline, type TimelineItem } from "@/components/Timeline";
 
 export const metadata: Metadata = {
@@ -57,7 +57,7 @@ const timeline: TimelineItem[] = [
 
 export default function AboutPage() {
   return (
-    <Layout>
+    <PageContainer>
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
         <div className="grid gap-8 md:grid-cols-[minmax(0,280px)_1fr] md:items-center">
           <Image
@@ -103,6 +103,6 @@ export default function AboutPage() {
           <Timeline items={timeline} />
         </div>
       </section>
-    </Layout>
+    </PageContainer>
   );
 }

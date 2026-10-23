@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import AsidePanel from "@/components/AsidePanel";
-import Layout from "@/components/Layout";
+import PageContainer from "@/components/PageContainer";
 import PatientGuideBody from "@/components/PatientGuideBody";
 import GuideShareButton from "@/components/GuideShareButton";
 import {
@@ -48,7 +48,7 @@ export default async function TopicPage({
         };
 
   return (
-    <Layout>
+    <PageContainer>
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <article
           aria-labelledby="guide-title"
@@ -146,7 +146,7 @@ export default async function TopicPage({
           </AsidePanel>
         )}
       </div>
-    </Layout>
+    </PageContainer>
   );
 }
 

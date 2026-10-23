@@ -10,7 +10,7 @@ import {
 } from "@/sanity/lib/types";
 import TopicActions from "@/components/TopicActions";
 import TopicMatcher from "@/components/TopicMatcher";
-import Layout from "@/components/Layout";
+import PageContainer from "@/components/PageContainer";
 
 const AGE_GROUPS: AgeGroup[] = ["child", "adult", "senior"];
 
@@ -128,7 +128,7 @@ export default function Console({
 
   if (topics.length === 0) {
     return (
-      <Layout>
+      <PageContainer>
         <h1 className="font-serif-display mb-4 text-3xl text-slate-800">
           Rady a tipy pro pacienty
         </h1>
@@ -140,12 +140,12 @@ export default function Console({
             ? "Zatím nejsou zveřejněné žádné pokyny pro pacienty."
             : "Knihovna pokynů pro pacienty zatím není připojena k CMS."}
         </p>
-      </Layout>
+      </PageContainer>
     );
   }
 
   return (
-    <Layout>
+    <PageContainer>
       <header className="mb-8">
         <h1 className="font-serif-display text-3xl leading-tight text-slate-800">
           Rady a tipy pro pacienty
@@ -329,7 +329,7 @@ export default function Console({
           {selected && <TopicActions topic={selected} />}
         </div>
       </dialog>
-    </Layout>
+    </PageContainer>
   );
 }
 

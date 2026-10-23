@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Layout from "@/components/Layout";
+import PageContainer from "@/components/PageContainer";
 import DiagnosisBrowser, {
   type BrowserGroup,
 } from "@/components/DiagnosisBrowser";
@@ -21,7 +21,7 @@ export default async function DiagnosesPage() {
   const groups = groupDiagnosesByCategory(diagnoses);
 
   return (
-    <Layout>
+    <PageContainer>
       <section>
         <h1 className="font-serif-display text-3xl leading-tight text-slate-800">
           Diagnózy a možnosti léčby
@@ -54,7 +54,7 @@ export default async function DiagnosesPage() {
           </p>
         )}
       </section>
-    </Layout>
+    </PageContainer>
   );
 }
 

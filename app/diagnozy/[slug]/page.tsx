@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import AsidePanel from "@/components/AsidePanel";
-import Layout from "@/components/Layout";
+import PageContainer from "@/components/PageContainer";
 import MedicalBody from "@/components/MedicalBody";
 import { getDiagnosisBySlug, getDiagnoses } from "@/sanity/lib/diagnoses";
 import { getDiagnosisCategoryLabel } from "@/sanity/lib/diagnosis-categories";
@@ -34,7 +34,7 @@ export default async function DiagnosisPage({
   const categoryLabel = getDiagnosisCategoryLabel(diagnosis.category);
 
   return (
-    <Layout>
+    <PageContainer>
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <article
           aria-labelledby="diagnosis-title"
@@ -109,6 +109,6 @@ export default async function DiagnosisPage({
           </AsidePanel>
         )}
       </div>
-    </Layout>
+    </PageContainer>
   );
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Layout from "@/components/Layout";
+import PageContainer from "@/components/PageContainer";
 
 export const metadata: Metadata = {
   title: "Kontakt | Miloš Barna",
@@ -18,7 +18,7 @@ const contactDetails = [
 
 export default function ContactPage() {
   return (
-    <Layout>
+    <PageContainer>
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
         <h1 className="font-serif-display mt-2 text-4xl leading-tight text-slate-800">
           Kontakt
@@ -41,6 +41,6 @@ export default function ContactPage() {
           ))}
         </dl>
       </section>
-    </Layout>
+    </PageContainer>
   );
 }

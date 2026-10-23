@@ -1,9 +1,9 @@
 import Link from "next/link";
-import Layout from "@/components/Layout";
+import PageContainer from "@/components/PageContainer";
 
 export default function NotFound() {
   return (
-    <Layout>
+    <PageContainer>
       <section className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white px-6 py-12 text-center shadow-sm sm:px-12 sm:py-16">
       
         <h1 className="font-serif-display mt-3 text-3xl leading-tight text-slate-800 sm:text-4xl">
@@ -27,6 +27,6 @@ export default function NotFound() {
           </Link>
         </div>
       </section>
-    </Layout>
+    </PageContainer>
   );
 }

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import AsidePanel from "@/components/AsidePanel";
-import Layout from "@/components/Layout";
+import PageContainer from "@/components/PageContainer";
 import MedicalBody from "@/components/MedicalBody";
 import { ARTICLE_QUERY, ARTICLES_QUERY } from "@/sanity/lib/queries";
 import { sanityClient } from "@/sanity/lib/client";
@@ -57,7 +57,7 @@ export default async function ArticlePage({
   const relatedArticles = getRelatedArticles(article, articles);
 
   return (
-    <Layout>
+    <PageContainer>
       <div className="grid w-full grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <article className="min-w-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
           <div className="flex flex-wrap items-center gap-2">
@@ -132,7 +132,7 @@ export default async function ArticlePage({
           </Link>
         </AsidePanel>
       </div>
-    </Layout>
+    </PageContainer>
   );
 }
 

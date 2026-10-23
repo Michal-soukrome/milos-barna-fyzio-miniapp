@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Layout from "@/components/Layout";
+import PageContainer from "@/components/PageContainer";
 import { ARTICLES_QUERY } from "@/sanity/lib/queries";
 import { isSanityConfigured, sanityClient } from "@/sanity/lib/client";
 import { ArticleSummary } from "@/sanity/lib/types";
@@ -34,7 +34,7 @@ export default async function ArticlesPage() {
     : [];
 
   return (
-    <Layout>
+    <PageContainer>
       <section>
         <h1 className="font-serif-display text-3xl leading-tight text-slate-800">
           Články
@@ -98,7 +98,7 @@ export default async function ArticlesPage() {
           </p>
         )}
       </section>
-    </Layout>
+    </PageContainer>
   );
 }
 
