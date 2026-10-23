@@ -52,9 +52,9 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 │   ├── DiagnosisBrowser.tsx
 │   ├── GuideShareButton.tsx
 │   ├── MedicalBody.tsx
+│   ├── PageContainer.tsx
 │   ├── PatientGuideBody.tsx
 │   ├── PatientNavigator.tsx
-│   ├── SiteChrome.tsx
 │   ├── Timeline.tsx
 │   ├── TopicActions.tsx
 │   └── TopicMatcher.tsx
