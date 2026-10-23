@@ -178,7 +178,7 @@ export default function DiagnosisBrowser({
                 >
                   {group.label}
                 </h2>
-                <ul className="divide-y divide-slate-200 border-y border-slate-200">
+                <ul className="divide-y divide-slate-200 border-b border-slate-200">
                   {group.diagnoses.map((diagnosis) => (
                     <li key={diagnosis._id}>
                       <Link
