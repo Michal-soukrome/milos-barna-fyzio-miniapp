@@ -16,17 +16,17 @@ generate personalized treatment or rehabilitation plans.
    age group, search by topic or symptom, or describe what they are looking
    for. The matcher recommends an existing guide; it does not create medical
    advice.
-3. **Use the symptom guide** at `/konfigurator` to filter reviewed guides by
-    age group, body area, and their existing symptom tags. It does not diagnose
-    or assess urgency; emergency contact numbers remain visible throughout.
+3. **Use the symptom guide** at `/pruvodce` to filter reviewed guides by
+   age group, body area, and their existing symptom tags. It does not diagnose
+   or assess urgency; emergency contact numbers remain visible throughout.
 4. **Read the guide** at `/navody/[slug]`. A guide may show warning signs,
-    links to contact the clinic, and related guides.
+   links to contact the clinic, and related guides.
 5. **Share a guide** using its QR code or by email. The QR code opens the guide
-    directly. Email delivery uses Resend and links to the configured public
-    site URL.
+   directly. Email delivery uses Resend and links to the configured public
+   site URL.
 6. **Browse diagnoses** at `/diagnozy` for evergreen explanations of
-    conditions, injury types, examinations, and treatment options. Diagnosis
-    pages become public only after medical review in Sanity.
+   conditions, injury types, examinations, and treatment options. Diagnosis
+   pages become public only after medical review in Sanity.
 
 The guide matcher runs entirely in the browser and uses local keyword matching
 against the published guide list. The description is not sent to the app server
@@ -34,23 +34,24 @@ or an AI provider. The app does not save these descriptions.
 
 ## Routes
 
-| Route | Purpose |
-| --- | --- |
-| `/` | Homepage and primary navigation |
-| `/navody` | Search, filters, and guide matcher |
-| `/navody/[slug]` | Patient guide with warnings and sharing options |
-| `/konfigurator` | Step-by-step guide finder; not a diagnostic or urgency tool |
-| `/diagnozy` | Medically reviewed diagnoses, grouped by body area |
-| `/diagnozy/[slug]` | Evergreen diagnosis information |
-| `/clanky` | Existing educational article index |
-| `/clanky/[slug]` | Individual educational article |
-| `/o-lekari` | Doctor profile and background |
-| `/kontakt` | Clinic contact details |
-| `/studio` | Sanity Studio for editorial content |
-| `/api/send` | Sends a guide link using Resend |
+| Route              | Purpose                                                     |
+| ------------------ | ----------------------------------------------------------- |
+| `/`                | Homepage and primary navigation                             |
+| `/navody`          | Search, filters, and guide matcher                          |
+| `/navody/[slug]`   | Patient guide with warnings and sharing options             |
+| `/pruvodce`        | Step-by-step guide finder; not a diagnostic or urgency tool |
+| `/diagnozy`        | Medically reviewed diagnoses, grouped by body area          |
+| `/diagnozy/[slug]` | Evergreen diagnosis information                             |
+| `/clanky`          | Existing educational article index                          |
+| `/clanky/[slug]`   | Individual educational article                              |
+| `/o-lekari`        | Doctor profile and background                               |
+| `/kontakt`         | Clinic contact details                                      |
+| `/studio`          | Sanity Studio for editorial content                         |
+| `/api/send`        | Sends a guide link using Resend                             |
 
-Legacy routes such as `/pruvodce`, `/configurator`, `/articles`, and `/t/[slug]`
-are retained as redirects; `/configurator` redirects to `/konfigurator`.
+Legacy routes such as `/konfigurator`, `/configurator`, `/articles`, and
+`/t/[slug]` are retained as redirects to their current Czech-language routes.
+Both `/konfigurator` and `/configurator` redirect to `/pruvodce`.
 
 ## Editorial workflow
 
@@ -100,14 +101,14 @@ npm start
 Copy `.env.example` to `.env.local` and configure only the integrations you
 intend to use:
 
-| Variable | Required for | Notes |
-| --- | --- | --- |
-| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity content and Studio | Public project identifier; needed at build time |
-| `NEXT_PUBLIC_SANITY_DATASET` | Sanity content and Studio | Dataset name, commonly `production` |
-| `SANITY_API_READ_TOKEN` | Private Sanity dataset reads | Optional, server-only, read-only token |
-| `RESEND_API_KEY` | Sending guide emails | Keep server-side |
-| `SEND_FROM_EMAIL` | Sending guide emails | Verified sender address in Resend |
-| `APP_URL` | Links in guide emails | Canonical public HTTP(S) URL |
+| Variable                        | Required for                 | Notes                                           |
+| ------------------------------- | ---------------------------- | ----------------------------------------------- |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity content and Studio    | Public project identifier; needed at build time |
+| `NEXT_PUBLIC_SANITY_DATASET`    | Sanity content and Studio    | Dataset name, commonly `production`             |
+| `SANITY_API_READ_TOKEN`         | Private Sanity dataset reads | Optional, server-only, read-only token          |
+| `RESEND_API_KEY`                | Sending guide emails         | Keep server-side                                |
+| `SEND_FROM_EMAIL`               | Sending guide emails         | Verified sender address in Resend               |
+| `APP_URL`                       | Links in guide emails        | Canonical public HTTP(S) URL                    |
 
 Never put secrets in `NEXT_PUBLIC_*` variables or commit them to the repository.
 When email is enabled, the recipient address and selected guide link are sent

@@ -13,7 +13,7 @@ configurator safeguards.
   displays a Resend disclosure. Requests have a 2 KB body limit and a honeypot.
   Vercel Firewall rate-limit enforcement is implemented and fails closed if its
   rule is missing or unavailable.
-- **Context-aware configurator:** `/konfigurator` asks age, body area, symptoms
+- **Context-aware configurator:** `/pruvodce` asks age, body area, symptoms
   or problems, and situation separately. It requires exact age-group and
   body-area matches (`Obecné` is not a wildcard), every selected symptom tag,
   and an explicitly selected matching context. An unknown required answer or

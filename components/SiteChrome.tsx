@@ -12,7 +12,7 @@ import type {
 const navigation = [
   { href: "/", label: "Úvod" },
   { href: "/navody", label: "Rady a tipy" },
-  { href: "/konfigurator", label: "Průvodce" },
+  { href: "/pruvodce", label: "Průvodce" },
   { href: "/diagnozy", label: "Diagnózy" },
   { href: "/o-lekari", label: "O mně" },
   { href: "/kontakt", label: "Kontakt" },

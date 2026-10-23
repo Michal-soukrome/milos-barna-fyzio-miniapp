@@ -26,7 +26,6 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 │   │       └── page.tsx
 │   ├── globals.css
 │   ├── konfigurator/
-│   │   └── page.tsx
 │   ├── kontakt/
 │   │   └── page.tsx
 │   ├── navody/
@@ -39,6 +38,8 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 │   ├── ordinace/
 │   │   └── page.tsx
 │   ├── page.tsx
+│   ├── pruvodce/
+│   │   └── page.tsx
 │   ├── studio/
 │   │   └── [[...tool]]/
 │   │       └── page.tsx

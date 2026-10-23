@@ -6,10 +6,14 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/configurator",
-        destination: "/konfigurator",
+        destination: "/pruvodce",
         permanent: true,
       },
-      { source: "/pruvodce", destination: "/navody", permanent: true },
+      {
+        source: "/konfigurator",
+        destination: "/pruvodce",
+        permanent: true,
+      },
       { source: "/about", destination: "/o-lekari", permanent: true },
       {
         source: "/contact",

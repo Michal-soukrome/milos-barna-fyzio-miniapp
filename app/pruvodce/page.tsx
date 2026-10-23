@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export const revalidate = 300;
 
-export default async function PatientNavigatorPage() {
+export default async function PatientGuideFinderPage() {
   const topics = await getPatientGuideSummaries();
 
   return (
