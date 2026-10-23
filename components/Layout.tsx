@@ -92,8 +92,8 @@ export default function Layout({
         />
       )}
 
-      <header className="sticky top-0 z-40 bg-slate-800 text-white shadow-sm">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-8 lg:py-4">
+      <header className="safe-area-top sticky top-0 z-40 bg-slate-800 text-white shadow-sm">
+        <div className="safe-area-inline mx-auto flex w-full max-w-7xl items-center justify-between gap-3 py-3 lg:py-4">
           <Link
             href="/"
             className="flex min-w-0 items-center gap-3"
@@ -154,11 +154,11 @@ export default function Layout({
         <nav
           id="main-nav"
           aria-label="Hlavní navigace"
-          className={`absolute inset-x-0 top-full max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-slate-700 bg-slate-800 shadow-xl lg:hidden ${
+          className={`mobile-navigation-panel absolute inset-x-0 top-full overflow-y-auto border-t border-slate-700 bg-slate-800 shadow-xl lg:hidden ${
             menuOpen ? "block" : "hidden"
           }`}
         >
-          <ul className="mx-auto flex w-full max-w-7xl flex-col gap-1 px-4 py-3 sm:px-8">
+          <ul className="safe-area-inline mx-auto flex w-full max-w-7xl flex-col gap-1 py-3">
             {navigation.map(({ href, label }) => {
               const isActive = isActiveLink(href);
               return (
@@ -184,7 +184,7 @@ export default function Layout({
       <div className="flex-1">{children}</div>
 
       <footer className="border-t border-slate-700 bg-slate-800 text-slate-100">
-        <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-10 sm:px-8 sm:py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+        <div className="safe-area-inline mx-auto grid w-full max-w-7xl gap-10 py-10 sm:py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
           <div>
             <Link href="/" className="inline-flex flex-col">
               <span className="text-sm font-bold tracking-[0.16em] text-teal-200">
@@ -283,7 +283,7 @@ export default function Layout({
         </div>
 
         <div className="border-t border-slate-700">
-          <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-4 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+          <div className="safe-area-inline mx-auto flex w-full max-w-7xl flex-col gap-3 py-4 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
             <span>
               MUDr. Barna Miloš, Ph.D. · Oficiální webové stránky
             </span>

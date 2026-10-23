@@ -3,6 +3,10 @@
 :root {
   --font-serif: Georgia, "Times New Roman", serif;
   --font-sans: "Trebuchet MS", "Segoe UI", sans-serif;
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --safe-area-inset-right: env(safe-area-inset-right, 0px);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-inset-left: env(safe-area-inset-left, 0px);
 }
 
 html {
@@ -12,6 +16,31 @@ html {
 body {
   @apply bg-slate-50 text-slate-800;
   font-family: var(--font-sans);
+}
+
+.safe-area-inline {
+  padding-inline:
+    max(1.25rem, var(--safe-area-inset-left))
+    max(1.25rem, var(--safe-area-inset-right));
+}
+
+.safe-area-top {
+  padding-top: var(--safe-area-inset-top);
+}
+
+.mobile-navigation-panel {
+  max-height: calc(
+    100dvh - 4rem - var(--safe-area-inset-top) - var(--safe-area-inset-bottom)
+  );
+  padding-bottom: calc(0.75rem + var(--safe-area-inset-bottom));
+}
+
+.privacy-consent-panel {
+  inset-inline-start: max(1rem, var(--safe-area-inset-left));
+  inset-inline-end: max(1rem, var(--safe-area-inset-right));
+  bottom: max(1rem, var(--safe-area-inset-bottom));
+  width: auto;
+  border-radius: 1rem;
 }
 
 button {
@@ -73,5 +102,19 @@ button {
 @media (max-width: 760px) {
   .dashboard-grid {
     display: block;
+  }
+}
+
+@media (max-width: 639px) {
+  .patient-navigator-action-bar {
+    padding-bottom: calc(0.75rem + var(--safe-area-inset-bottom));
+  }
+}
+
+@media (min-width: 640px) {
+  .safe-area-inline {
+    padding-inline:
+      max(2rem, var(--safe-area-inset-left))
+      max(2rem, var(--safe-area-inset-right));
   }
 }

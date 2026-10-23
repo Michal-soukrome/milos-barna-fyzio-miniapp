@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Layout from "@/components/Layout";
 import { getLatestDiagnoses } from "@/sanity/lib/diagnoses";
 import { getLatestPatientGuideSummaries } from "@/sanity/lib/patient-guides";
@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   title: "Miloš Barna | Srozumitelně před zákrokem i po něm",
   description:
     "Jsem lékař Miloš Barna. Sdílím srozumitelné informace a praktické pokyny, které vám pomohou před zákrokem i po něm.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default async function RootLayout({
