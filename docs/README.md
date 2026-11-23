@@ -35,10 +35,13 @@ the server first searches all reviewed patient guides, diagnoses, and articles
 and uses only a matching item's approved content. If none fits, the model may
 provide brief general health education, without diagnosing or recommending
 treatment, medication, or exercise. General AI wording is not clinic content
-or clinician-reviewed; unsafe or personal symptom questions receive no AI
-answer. This is not a web search. If the route or AI service is unavailable,
-the browser falls back to local keyword matching for guide search. The app does
-not save questions in its own database. Do not enter identifying information.
+or clinician-reviewed. General education is declined for current symptoms,
+injuries, diagnosis, or treatment questions. A clinic-grounded answer may
+explain a matching reviewed source, but does not diagnose. Red-flag patterns
+show an urgent notice. This is not a web search. If guide search is unavailable,
+the browser falls back to local keyword matching; AI-answer requests show an
+error instead. The app does not save questions in its own database. Do not
+enter identifying information.
 
 ## Routes
 
@@ -57,7 +60,7 @@ not save questions in its own database. Do not enter identifying information.
 | `/ochrana-osobnich-udaju` | Privacy notice and analytics consent settings        |
 | `/studio`          | Sanity Studio for editorial content                         |
 | `/api/send`        | Sends a guide link using Resend                             |
-| `/api/match`       | Matches reviewed guides; optionally generates general information |
+| `/api/match`       | Ranks reviewed guides; can explain matching guides, diagnoses, or articles, or provide limited general health education |
 
 Routes are defined by the `app/` directory. Legacy paths are not redirected.
 
@@ -68,6 +71,8 @@ perspective. Drafts are not rendered on public pages.
 
 - For step-by-step instructions for editors, see the
   [Czech content-management handbook](./PRUVODCE-SPRAVOU-OBSAHU.md).
+- For a copy-paste project brief to give an AI assistant, see the
+  [AI context brief for the clinic owner](./KONTEXT-PRO-AI.md).
 - **Patient guides** include body area, age groups, symptoms/search terms,
   summary, guide content, and warning signs. Only published guides with
   `reviewed: true` appear publicly; `reviewed` is set only after the doctor
@@ -104,6 +109,12 @@ npm run build
 npm start
 ```
 
+Run the automated tests with:
+
+```bash
+npm test
+```
+
 ## Environment variables
 
 Copy `.env.example` to `.env.local` and configure only the integrations you
@@ -118,9 +129,9 @@ intend to use:
 | `SEND_FROM_EMAIL`               | Sending guide emails         | Verified sender address in Resend               |
 | `APP_URL`                       | Links in guide emails        | Canonical public HTTP(S) URL                    |
 | `NEXT_PUBLIC_GTM_ID`            | Google Tag Manager           | Optional; its script loads only after analytics consent |
-| `CLOUDFLARE_ACCOUNT_ID`         | AI guide matching            | Optional; server-only                           |
-| `CLOUDFLARE_API_TOKEN`          | AI guide matching            | Optional Workers AI token; keep server-side     |
-| `CLOUDFLARE_LLM_MODEL`          | AI guide matching            | Optional; defaults to `@cf/zai-org/glm-4.7-flash` |
+| `CLOUDFLARE_ACCOUNT_ID`         | AI search and answers        | Optional; server-only                           |
+| `CLOUDFLARE_API_TOKEN`          | AI search and answers        | Optional Workers AI token; keep server-side     |
+| `CLOUDFLARE_LLM_MODEL`          | AI search and answers        | Optional; defaults to `@cf/zai-org/glm-4.7-flash` |
 
 Never put secrets in `NEXT_PUBLIC_*` variables or commit them to the repository.
 When email is enabled, the recipient address and selected guide link are sent
@@ -139,17 +150,20 @@ The visitor can change or withdraw the choice from the footer.
 ## Deployment
 
 The app uses standard Next.js `build` and `start` scripts and can run as a
-Node.js web service. Vercel is the current target; configure the environment
-variables in the deployment project and redeploy when build-time Sanity
-variables change. Add production and preview origins to Sanity CORS only when
-the Studio needs to be used from those origins.
+Node.js web service. Vercel is the documented deployment target; verify the
+actual production host and settings in the deployment project. Configure the
+environment variables there and redeploy when build-time Sanity variables
+change. Add production and preview origins to Sanity CORS only when the Studio
+needs to be used from those origins.
 
-Before enabling email or AI guide matching on Vercel, create per-client-IP
+Before enabling email or AI search on Vercel, create per-client-IP
 Firewall rate-limit rules with IDs `patient-guide-email` and
 `patient-guide-match` to match the API checks. `/api/match` fails closed with
 `503` if its rule is missing or the Firewall check fails; local development
 skips the Vercel Firewall check. Cloudflare's daily Workers AI allowance is
-shared across models on the account; model failures fall back to local matching.
+shared across model usage; see [Cloudflare's current pricing and limits](https://developers.cloudflare.com/workers-ai/platform/pricing/).
+Regular guide-search failures fall back to local keyword matching in the
+browser. AI-answer failures return an error instead of falling back locally.
 
 ## Content that needs approval
 

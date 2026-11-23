@@ -1,1 +1,8 @@
-npx sanity datasets export production "$HOME\Downloads\sanity-backup-before-import.tar.gz"
+potom co tohle vyexportuju tak jediny spravny data vylezou v tom .ndjson souboru
+-> tenhle soubor rucne prejmenuju na .json
+-> pak ten soubor otevru ve vscode, ohranicim data v [hranatych zavorkach] a kazdou jednu diagnozu pres find&replace ukoncim "," carkou na konci cimz je oddelim
+-> takhle upraveny data v nejakym formatu predpokladam pujdou nejak zpatky nalejt
+
+--
+
+npx sanity datasets export production "$HOME\Downloads\sanity-backup-before-import.tar.gz" --overwrite

@@ -211,16 +211,25 @@ test("embedding output is validated and guides are ranked by cosine similarity",
 test("clinic-content embeddings are batched within Workers AI's item limit", async () => {
   const fetchBefore = globalThis.fetch;
   const batchSizes: number[] = [];
+  let activeRequests = 0;
+  let maxActiveRequests = 0;
   globalThis.fetch = async (_input, init) => {
     const request = JSON.parse(String(init?.body)) as { text: string[] };
     batchSizes.push(request.text.length);
-    return new Response(
-      JSON.stringify({
-        success: true,
-        result: { data: request.text.map(() => [1, 0]) },
-      }),
-      { headers: { "content-type": "application/json" } },
-    );
+    activeRequests += 1;
+    maxActiveRequests = Math.max(maxActiveRequests, activeRequests);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 10));
+      return new Response(
+        JSON.stringify({
+          success: true,
+          result: { data: request.text.map(() => [1, 0]) },
+        }),
+        { headers: { "content-type": "application/json" } },
+      );
+    } finally {
+      activeRequests -= 1;
+    }
   };
 
   try {
@@ -232,6 +241,7 @@ test("clinic-content embeddings are batched within Workers AI's item limit", asy
       ),
     );
     assert.deepEqual(batchSizes, [100, 2]);
+    assert.equal(maxActiveRequests, 2);
   } finally {
     globalThis.fetch = fetchBefore;
   }

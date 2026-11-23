@@ -284,9 +284,7 @@ export default function Layout({
 
         <div className="border-t border-slate-700">
           <div className="safe-area-inline mx-auto flex w-full max-w-7xl flex-col gap-3 py-4 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
-            <span>
-              MUDr. Barna Miloš, Ph.D. · Oficiální webové stránky
-            </span>
+            <span>MUDr. Barna Miloš, Ph.D. · Oficiální webové stránky</span>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
               <Link
                 href="/ochrana-osobnich-udaju"

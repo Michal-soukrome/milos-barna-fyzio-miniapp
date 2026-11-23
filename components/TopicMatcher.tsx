@@ -17,11 +17,7 @@ type AnswerContentReference = {
   title: string;
   slug: string;
 };
-type SearchSource =
-  | MatchSource
-  | "local"
-  | "clinic-answer"
-  | "general-answer";
+type SearchSource = MatchSource | "local" | "clinic-answer" | "general-answer";
 type MatchResponse = {
   urgent?: boolean;
   source: MatchSource;
@@ -157,14 +153,10 @@ export default function TopicMatcher({
         return;
       }
       setAiAnswer(data.answer);
-      setAnswerContent(
-        data.source === "clinic-answer" ? data.content : null,
-      );
+      setAnswerContent(data.source === "clinic-answer" ? data.content : null);
       setSource(data.source);
     } catch {
-      setAnswerError(
-        "Vysvětlení se nepodařilo načíst. Zkuste to později.",
-      );
+      setAnswerError("Vysvětlení se nepodařilo načíst. Zkuste to později.");
     } finally {
       setAnswerLoading(false);
     }
@@ -183,9 +175,8 @@ export default function TopicMatcher({
         Popište téma nebo situaci a zvolte, zda hledat v našich radách, nebo
         požádat AI o vysvětlení. AI nejprve prohledá zveřejněné pacientské rady,
         diagnózy a články; pokud nenajde vhodný text, může nabídnout obecné
-        zdravotní informace.
-        Vyhledávání používá Cloudflare Workers AI, pokud je služba
-        nakonfigurovaná; text se odešle na server webu a může být předán
+        zdravotní informace. Vyhledávání používá Cloudflare Workers AI, pokud je
+        služba nakonfigurovaná; text se odešle na server webu a může být předán
         Cloudflare. Nezadávejte jméno ani jiné údaje, podle kterých vás lze
         určit.
       </p>
@@ -252,9 +243,7 @@ export default function TopicMatcher({
                 <path d="m19 14 1.2 2.8L23 18l-2.8 1.2L19 22l-1.2-2.8L15 18l2.8-1.2L19 14Z" />
               </svg>
             </span>
-            {answerLoading
-              ? "Připravuji vysvětlení…"
-              : "Požádat AI o vysvětlení"}
+            {answerLoading ? "Pracuji..." : "Požádat AI o vysvětlení"}
           </button>
         </div>
       </form>
@@ -344,8 +333,35 @@ export default function TopicMatcher({
               </p>
             </div>
 
-            <span className="ml-auto rounded-full border border-blue-200 bg-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-blue-700">
-              {answerContent ? "Obsah kliniky" : "Obecné AI"}
+            <span className="ml-auto rounded-full border border-blue-200 bg-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-blue-700 flex items-center gap-1">
+              {answerContent ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  className="h-4 w-4"
+                  aria-hidden="true"
+                >
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  className="h-4 w-4"
+                  aria-hidden="true"
+                >
+                  <path d="m12 3 1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2L12 3Z" />
+                  <path d="m19 14 1.2 2.8L23 18l-2.8 1.2L19 22l-1.2-2.8L15 18l2.8-1.2L19 14Z" />
+                </svg>
+              )}
+              {answerContent ? "Ověřená rada" : "Vygenerováno AI"}
             </span>
           </div>
 

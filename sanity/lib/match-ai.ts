@@ -13,6 +13,7 @@ export const MAX_RESULTS = 3;
 // PLACEHOLDER: calibrate with clinician-reviewed Czech free-text examples.
 export const MIN_SIMILARITY = 0.4;
 const MAX_EMBEDDING_BATCH_SIZE = 100;
+const MAX_CONCURRENT_EMBED_BATCHES = 2;
 const MAX_CACHED_VECTORS = 512;
 
 export type CloudflareConfig = {
@@ -60,26 +61,39 @@ async function runModel(
     model === DEFAULT_LLM_MODEL && isRecord(input) && Array.isArray(input.messages)
       ? { ...input, chat_template_kwargs: { enable_thinking: false } }
       : input;
-  const response = await fetch(
-    `https://api.cloudflare.com/client/v4/accounts/${config.accountId}/ai/run/${model}`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${config.apiToken}`,
-        "Content-Type": "application/json",
+  try {
+    const response = await fetch(
+      `https://api.cloudflare.com/client/v4/accounts/${config.accountId}/ai/run/${model}`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${config.apiToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestInput),
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+        cache: "no-store",
       },
-      body: JSON.stringify(requestInput),
-      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
-      cache: "no-store",
-    },
-  );
-  if (!response.ok) throw new Error(`Workers AI HTTP ${response.status}`);
+    );
+    if (!response.ok) throw new Error(`Workers AI HTTP ${response.status}`);
 
-  const payload: unknown = await response.json();
-  if (!isRecord(payload) || payload.success !== true || !isRecord(payload.result)) {
-    throw new Error("Workers AI returned an invalid response");
+    const payload: unknown = await response.json();
+    if (
+      !isRecord(payload) ||
+      payload.success !== true ||
+      !isRecord(payload.result)
+    ) {
+      throw new Error("Workers AI returned an invalid response");
+    }
+    return payload.result;
+  } catch (error) {
+    if (error instanceof Error && error.name === "TimeoutError") {
+      console.error(
+        `Workers AI request for ${model} timed out after ${REQUEST_TIMEOUT_MS}ms.`,
+      );
+    }
+    throw error;
   }
-  return payload.result;
 }
 
 function getModelText(result: Record<string, unknown>): string | null {
@@ -118,43 +132,57 @@ async function embed(config: CloudflareConfig, texts: string[]) {
   const vectors: number[][] = [];
   let dimensions: number | undefined;
 
+  const batches: string[][] = [];
+  for (let offset = 0; offset < texts.length; offset += MAX_EMBEDDING_BATCH_SIZE) {
+    batches.push(texts.slice(offset, offset + MAX_EMBEDDING_BATCH_SIZE));
+  }
+
   for (
     let offset = 0;
-    offset < texts.length;
-    offset += MAX_EMBEDDING_BATCH_SIZE
+    offset < batches.length;
+    offset += MAX_CONCURRENT_EMBED_BATCHES
   ) {
-    const batch = texts.slice(offset, offset + MAX_EMBEDDING_BATCH_SIZE);
-    const result = await runModel(config, EMBED_MODEL, { text: batch });
-    const data = result.data;
-    if (!Array.isArray(data) || data.length !== batch.length) {
-      throw new Error("Workers AI returned an invalid embedding count");
-    }
+    const batchGroup = batches.slice(offset, offset + MAX_CONCURRENT_EMBED_BATCHES);
+    const results = await Promise.all(
+      batchGroup.map((batch) =>
+        runModel(config, EMBED_MODEL, { text: batch }),
+      ),
+    );
 
-    const batchVectors = data.map((row): number[] => {
-      if (!Array.isArray(row) || row.length === 0) {
-        throw new Error("Workers AI returned an invalid embedding");
+    for (let index = 0; index < batchGroup.length; index += 1) {
+      const batch = batchGroup[index];
+      const data = results[index].data;
+      if (!Array.isArray(data) || data.length !== batch.length) {
+        throw new Error("Workers AI returned an invalid embedding count");
       }
 
-      return row.map((value) => {
-        if (typeof value !== "number" || !Number.isFinite(value)) {
-          throw new Error("Workers AI returned an invalid embedding value");
+      const batchVectors = data.map((row): number[] => {
+        if (!Array.isArray(row) || row.length === 0) {
+          throw new Error("Workers AI returned an invalid embedding");
         }
-        return value;
+
+        return row.map((value) => {
+          if (typeof value !== "number" || !Number.isFinite(value)) {
+            throw new Error("Workers AI returned an invalid embedding value");
+          }
+          return value;
+        });
       });
-    });
-    const batchDimensions = batchVectors[0].length;
-    if (
-      (dimensions !== undefined && batchDimensions !== dimensions) ||
-      batchVectors.some(
-        (vector) =>
-          vector.length !== batchDimensions ||
-          vector.every((value) => value === 0),
-      )
-    ) {
-      throw new Error("Workers AI returned inconsistent embeddings");
+
+      const batchDimensions = batchVectors[0].length;
+      if (
+        (dimensions !== undefined && batchDimensions !== dimensions) ||
+        batchVectors.some(
+          (vector) =>
+            vector.length !== batchDimensions ||
+            vector.every((value) => value === 0),
+        )
+      ) {
+        throw new Error("Workers AI returned inconsistent embeddings");
+      }
+      dimensions = batchDimensions;
+      vectors.push(...batchVectors);
     }
-    dimensions = batchDimensions;
-    vectors.push(...batchVectors);
   }
 
   return vectors;

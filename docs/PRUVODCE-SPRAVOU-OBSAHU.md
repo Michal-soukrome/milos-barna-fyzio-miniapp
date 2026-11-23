@@ -28,6 +28,10 @@ stránek, požádejte správce webu.
 4. Zdravotní doporučení, varovné příznaky a pokyny pacientům musí před
    zveřejněním zkontrolovat lékař.
 
+Pro předání základního kontextu projektu AI asistentovi můžete použít
+[stručný kontext webu pro AI asistenty](./KONTEXT-PRO-AI.md). Nevkládejte do
+AI skutečné údaje pacientů ani přístupové údaje.
+
 ## Důležité: uložení, zveřejnění a lékařská kontrola
 
 Jsou to tři různé věci:
