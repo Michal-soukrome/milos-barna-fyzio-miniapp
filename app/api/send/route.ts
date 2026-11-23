@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server.js";
 import { checkRateLimit } from "@vercel/firewall";
-import { isSanityConfigured } from "@/sanity/lib/client";
-import { getPatientGuideBySlug } from "@/sanity/lib/patient-guides";
+import { isSanityConfigured } from "../../../sanity/lib/client.ts";
+import { getPatientGuideBySlug } from "../../../sanity/lib/patient-guides.ts";
 
 // Very small email format check — good enough to catch typos, not meant to be
 // a full RFC validator.
@@ -12,18 +12,17 @@ export async function POST(req: NextRequest) {
   const rateLimitResponse = await checkEmailRateLimit(req);
   if (rateLimitResponse) return rateLimitResponse;
 
-  const contentLength = Number(req.headers.get("content-length"));
-  if (Number.isFinite(contentLength) && contentLength > MAX_REQUEST_BYTES) {
-    return NextResponse.json(
-      { error: "Požadavek je příliš velký." },
-      { status: 413 },
-    );
-  }
-
   let rawBody: string;
   try {
-    rawBody = await req.text();
+    rawBody = await readRequestBody(req);
   } catch (error) {
+    if (error instanceof RequestBodyTooLargeError) {
+      return NextResponse.json(
+        { error: "Požadavek je příliš velký." },
+        { status: 413 },
+      );
+    }
+
     console.error(
       "Email request body could not be read.",
       error instanceof Error ? error.name : "Unknown error",
@@ -31,13 +30,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       { error: "Požadavek se nepodařilo přečíst." },
       { status: 400 },
-    );
-  }
-
-  if (new TextEncoder().encode(rawBody).byteLength > MAX_REQUEST_BYTES) {
-    return NextResponse.json(
-      { error: "Požadavek je příliš velký." },
-      { status: 413 },
     );
   }
 
@@ -182,6 +174,47 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+async function readRequestBody(request: Request): Promise<string> {
+  const contentLength = Number(request.headers.get("content-length"));
+  if (Number.isFinite(contentLength) && contentLength > MAX_REQUEST_BYTES) {
+    throw new RequestBodyTooLargeError();
+  }
+
+  const reader = request.body?.getReader();
+  if (!reader) return "";
+
+  const bytes = new Uint8Array(MAX_REQUEST_BYTES);
+  let bytesRead = 0;
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      if (bytesRead + value.byteLength > MAX_REQUEST_BYTES) {
+        try {
+          await reader.cancel();
+        } catch (error) {
+          console.error(
+            "Email request body could not be cancelled after exceeding its size limit.",
+            error instanceof Error ? error.name : "Unknown error",
+          );
+        }
+        throw new RequestBodyTooLargeError();
+      }
+
+      bytes.set(value, bytesRead);
+      bytesRead += value.byteLength;
+    }
+  } finally {
+    reader.releaseLock();
+  }
+
+  return new TextDecoder().decode(bytes.subarray(0, bytesRead));
+}
+
+class RequestBodyTooLargeError extends Error {}
 
 async function checkEmailRateLimit(request: NextRequest) {
   if (process.env.VERCEL !== "1") return null;

@@ -28,16 +28,16 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 │   ├── konfigurator/
 │   ├── kontakt/
 │   │   └── page.tsx
-│   ├── navody/
-│   │   ├── page.tsx
-│   │   └── [slug]/
-│   │       └── page.tsx
 │   ├── not-found.tsx
 │   ├── o-mne/
 │   │   └── page.tsx
-│   ├── ordinace/
+│   ├── ochrana-osobnich-udaju/
 │   │   └── page.tsx
 │   ├── page.tsx
+│   ├── poradna/
+│   │   ├── page.tsx
+│   │   └── [slug]/
+│   │       └── page.tsx
 │   ├── pruvodce/
 │   │   └── page.tsx
 │   ├── studio/
@@ -55,6 +55,7 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 │   ├── PageContainer.tsx
 │   ├── PatientGuideBody.tsx
 │   ├── PatientNavigator.tsx
+│   ├── PrivacyConsent.tsx
 │   ├── Timeline.tsx
 │   ├── TopicActions.tsx
 │   └── TopicMatcher.tsx
@@ -93,10 +94,12 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 │   │   ├── client.ts
 │   │   ├── diagnoses.ts
 │   │   ├── diagnosis-categories.ts
+│   │   ├── match-ai.ts
 │   │   ├── patient-guide-matcher.ts
 │   │   ├── patient-guide-text.ts
 │   │   ├── patient-guides.ts
 │   │   ├── queries.ts
+│   │   ├── red-flags.ts
 │   │   ├── reviewed-content.ts
 │   │   └── types.ts
 │   └── schemas/
@@ -112,6 +115,8 @@ C:\Users\michal.jirak\Documents\GitHub\milos-barna-fyzio-miniapp
 ├── scripts/
 │   └── generate-tree.js
 ├── tests/
+│   ├── api-match.test.mts
+│   ├── api-security.test.mts
 │   ├── fixtures/
 │   │   └── configurator-cases.json
 │   └── patient-guide-matcher.test.mts

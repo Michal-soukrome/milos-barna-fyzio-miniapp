@@ -138,7 +138,7 @@ export default function DiagnosisBrowser({
           >
             <nav
               id="kategorie-navigation"
-              className="lg:max-h-[calc(100dvh-6rem)] lg:overflow-y-auto"
+              className="lg:max-h-[calc(75dvh)] lg:overflow-y-auto"
             >
               <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Podle kategorie

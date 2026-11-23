@@ -1,15 +1,15 @@
-import { sanityClient } from "./client";
-import { getSanityContentCacheTags } from "./cache-tags";
+import { sanityClient } from "./client.ts";
+import { getSanityContentCacheTags } from "./cache-tags.ts";
 import {
   DIAGNOSES_QUERY,
   DIAGNOSIS_QUERY,
   LATEST_DIAGNOSES_QUERY,
-} from "./queries";
+} from "./queries.ts";
 import type {
   DiagnosisSummary,
   LatestDiagnosisSummary,
   PublishedDiagnosis,
-} from "./types";
+} from "./types.ts";
 
 export const diagnosisRevalidateSeconds = 300;
 

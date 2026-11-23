@@ -1,13 +1,19 @@
 # Feedback and pre-launch follow-up
 
-Updated 2026-10-21 after clinician approval and implementation of the
-configurator safeguards.
+Updated 2026-11-23 after AI guide-matcher integration.
 
 ## Completed
 
-- **Matcher privacy:** guide matching runs locally in the browser. Free-text
-  descriptions are not sent to the app server or an AI provider. The
-  `/api/match` route and OpenAI configuration were removed.
+- **AI guide matcher:** `/api/match` ranks reviewed Sanity guides with
+  Cloudflare Workers AI and returns only existing guide summaries. On explicit
+  explanation requests, it searches reviewed guides, diagnoses, and articles,
+  then simplifies only the selected item's approved content. If no clinic
+  content fits, it can provide brief general health education without diagnosis
+  or treatment, exercise, or medication advice; unsafe or personal-symptom
+  questions receive no AI answer. General wording is not clinic content or
+  clinician-reviewed. No web search is performed. Guide search falls back to
+  local keyword matching if the route or AI service is unavailable. Questions
+  are not saved in the app database; the privacy notice discloses processing.
 - **Email privacy and abuse controls:** `/api/send` validates the guide against
   reviewed Sanity content, sends a generic subject and link-only message, and
   displays a Resend disclosure. Requests have a 2 KB body limit and a honeypot.
@@ -100,6 +106,18 @@ production host.
 - Configure the Vercel per-IP rate limit with ID `patient-guide-email` (the
   README recommends five requests per minute). Email sending fails closed
   with `503` until the rule is live.
+- Configure and verify the Vercel per-IP rate limit with ID
+  `patient-guide-match`; the route fails closed with `503` until it is live.
+- Replace the AI matcher's provisional red-flag patterns and notice with
+  clinician-approved rules and wording, and calibrate its similarity
+  threshold using clinician-reviewed Czech example questions before
+  production use.
+- Clinically review the clinic-content and general-education prompts and their
+  refusal/escalation behavior with symptom and injury examples before enabling
+  the opt-in explanation for patients.
+- Confirm the legal basis, privacy wording, Cloudflare Workers AI terms, and
+  retention details for processing free-text questions before enabling AI
+  matching.
 - When editing CMS content, confirm the automatically reset `reviewed` flag
   after the doctor's review before publishing the edited document.
 - Replace remaining placeholder biography and clinic contact details. Confirm

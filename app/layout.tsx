@@ -21,10 +21,23 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [latestDiagnoses, latestTips] = await Promise.all([
+  const [diagnosesResult, tipsResult] = await Promise.allSettled([
     getLatestDiagnoses(),
     getLatestPatientGuideSummaries(),
   ]);
+  const latestDiagnoses =
+    diagnosesResult.status === "fulfilled" ? diagnosesResult.value : [];
+  const latestTips = tipsResult.status === "fulfilled" ? tipsResult.value : [];
+
+  if (diagnosesResult.status === "rejected") {
+    console.error(
+      "Could not load optional footer diagnoses.",
+      diagnosesResult.reason,
+    );
+  }
+  if (tipsResult.status === "rejected") {
+    console.error("Could not load optional footer guides.", tipsResult.reason);
+  }
 
   return (
     <html lang="cs">

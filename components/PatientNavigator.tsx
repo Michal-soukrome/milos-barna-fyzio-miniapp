@@ -39,6 +39,7 @@ const secondaryBtn = `min-h-12 rounded-xl border border-slate-300 px-5 py-3 text
 const linkBtn = `min-h-12 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2 ${focusRing}`;
 const actionBar =
   "patient-navigator-action-bar sticky bottom-0 z-10 -mx-5 mt-6 border-t border-slate-200 bg-white/95 px-5 py-3 backdrop-blur sm:static sm:mx-0 sm:border-0 sm:bg-transparent sm:p-0 sm:backdrop-blur-none";
+const underlined = "text-teal-700 underline";
 
 /* ---------- helpers ---------- */
 
@@ -847,7 +848,7 @@ export default function PatientNavigator({
                     Některou předchozí otázku jste přeskočili, proto průvodce
                     nemůže najít přesnou shodu. Odpovědi můžete změnit nahoře
                     nebo{" "}
-                    <Link href="/poradna" className={linkBtn}>
+                    <Link href="/poradna" className={underlined}>
                       procházet všechny rady a tipy
                     </Link>
                     .

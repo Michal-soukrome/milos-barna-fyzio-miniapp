@@ -1,17 +1,17 @@
-import { sanityClient } from "./client";
-import { getSanityContentCacheTags } from "./cache-tags";
+import { sanityClient } from "./client.ts";
+import { getSanityContentCacheTags } from "./cache-tags.ts";
 import {
   PATIENT_GUIDES_QUERY,
   PATIENT_GUIDE_QUERY,
   PATIENT_GUIDE_SUMMARIES_QUERY,
   LATEST_PATIENT_GUIDES_QUERY,
-} from "./queries";
+} from "./queries.ts";
 import type {
   LatestPatientGuideSummary,
   PatientGuide,
   PatientGuideSummary,
-} from "./types";
-export { normalizePatientGuideText } from "./patient-guide-text";
+} from "./types.ts";
+export { normalizePatientGuideText } from "./patient-guide-text.ts";
 
 export const patientGuideRevalidateSeconds = 300;
 

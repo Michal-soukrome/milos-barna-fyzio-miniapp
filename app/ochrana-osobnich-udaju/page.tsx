@@ -63,11 +63,18 @@ export default function PrivacyPage() {
             Vyhledávání rad a tipů
           </h3>
           <p className={paragraphClass}>
-            Text zadaný do vyhledávače rad se zpracovává pouze ve vašem
-            prohlížeči. Web jej neodesílá na server ani do externí služby,
-            neukládá jej a nepoužívá k vytváření zdravotních doporučení.
-            Nezadávejte do něj jméno ani jiné údaje, podle kterých vás lze
-            určit.
+            Text zadaný do vyhledávače rad se odešle na server webu a při
+            dostupné konfiguraci může být předán službě Cloudflare Workers AI,
+            která při výslovném požadavku na vysvětlení hledá ve zveřejněných
+            pacientských radách, diagnózách a článcích. Pokud nenajde vhodný
+            obsah, může model nabídnout stručné obecné zdravotní informace;
+            nejsou obsahem kliniky ani ověřeny lékařem. Model nevytváří
+            diagnózu ani individuální léčebné, pohybové či lékové doporučení.
+            Při dotazu, na který nelze bezpečně odpovědět, se vysvětlení
+            nezobrazí. Nejde o vyhledávání na webu. Aplikace text neukládá do
+            vlastní databáze. Provozní záznamy serveru a poskytovatelů se řídí
+            jejich nastavením a aktuálními podmínkami. Nezadávejte jméno ani
+            jiné údaje, podle kterých vás lze určit.
           </p>
 
           <h3 className="mt-5 font-semibold text-slate-800">
@@ -126,7 +133,16 @@ export default function PrivacyPage() {
           <ul className={listClass}>
             <li>
               <strong>Vercel</strong> zajišťuje hosting a bezpečnostní ochranu
-              webu, včetně kontroly limitu požadavků při odesílání e-mailu.
+              webu, včetně zpracování požadavků vyhledávače a kontroly limitů
+              požadavků.
+            </li>
+            <li>
+              <strong>Cloudflare</strong> může prostřednictvím Workers AI
+              zpracovat text dotazu a veřejný text pacientských rad, diagnóz a
+              článků. Na výslovnou žádost může vysvětlit nalezený schválený
+              obsah, nebo při jeho nenalezení nabídnout obecné zdravotní
+              informace vytvořené AI, které nejsou obsahem kliniky ani
+              lékařsky ověřené.
             </li>
             <li>
               <strong>Resend</strong> zajišťuje doručení e-mailu, který si
@@ -156,11 +172,12 @@ export default function PrivacyPage() {
           </h2>
           <p className={paragraphClass}>
             Aplikace neuchovává e-mailové adresy použité k jednorázovému
-            odeslání odkazu ve vlastní databázi. Záznamy u Vercel a Resend se
-            řídí nastavením účtu a pravidly těchto služeb. Analytické údaje
-            Google Analytics se uchovávají po dobu nastavenou v příslušné
-            analytické službě. Volba cookies zůstává v localStorage, dokud ji
-            nezměníte nebo nevymažete data svého prohlížeče.
+            odeslání odkazu ani text vyhledávání ve vlastní databázi. Záznamy u
+            Vercel, Resend a Cloudflare se řídí nastavením účtů a pravidly
+            těchto služeb. Analytické údaje Google Analytics se uchovávají po
+            dobu nastavenou v příslušné analytické službě. Volba cookies
+            zůstává v localStorage, dokud ji nezměníte nebo nevymažete data
+            svého prohlížeče.
           </p>
         </section>
 

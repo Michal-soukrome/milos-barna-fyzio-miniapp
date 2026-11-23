@@ -1,11 +1,11 @@
-import { revalidateTag } from "next/cache";
-import { NextRequest, NextResponse } from "next/server";
+import { revalidateTag } from "next/cache.js";
+import { NextRequest, NextResponse } from "next/server.js";
 import { parseBody } from "next-sanity/webhook";
 import {
   getSanityRevalidationTags,
   isSanityContentSlug,
   type SanityPublicContentType,
-} from "@/sanity/lib/cache-tags";
+} from "../../../../sanity/lib/cache-tags.ts";
 
 export const runtime = "nodejs";
 

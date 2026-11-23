@@ -65,6 +65,24 @@ export const PATIENT_GUIDE_SUMMARIES_QUERY = defineQuery(`*[
   reviewed
 }`);
 
+export const REVIEWED_CLINIC_CONTENT_SEARCH_QUERY = defineQuery(`*[
+  _type in ["patientGuide", "diagnosis", "article"] &&
+  defined(slug.current) &&
+  reviewed == true
+] | order(title asc) {
+  _id,
+  "kind": _type,
+  title,
+  "slug": slug.current,
+  "bodyPart": coalesce(bodyPart, ""),
+  "summary": coalesce(summary, excerpt, ""),
+  "bodyText": coalesce(pt::text(body), ""),
+  "symptoms": coalesce(symptoms, []),
+  "contexts": coalesce(contexts, []),
+  "category": coalesce(category, ""),
+  "categories": coalesce(categories, [])
+}`);
+
 export const ARTICLES_QUERY = defineQuery(`*[
   _type == "article" &&
   reviewed == true &&
