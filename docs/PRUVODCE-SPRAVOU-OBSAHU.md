@@ -44,11 +44,12 @@ Jsou to tři různé věci:
 Po jakékoli změně dokumentu se pole **Lékařsky zkontrolováno** automaticky
 vypne. Platí to i pro změnu názvu, úvodu, kategorie nebo jiného pole, nejen pro
 změnu samotného zdravotního textu. Změnu proto musí lékař znovu zkontrolovat.
+Samotné publikování bez další úpravy obsahu kontrolu nevypne.
 
-**Nepublikujte změněný obsah, dokud není znovu odborně schválený.** Pokud
-publikujete dokument s vypnutým polem **Lékařsky zkontrolováno**, přestane se
-na webu zobrazovat. Dokud změněný dokument nepublikujete, zůstává na webu
-předchozí publikovaná verze.
+**Nepublikujte změněný obsah, dokud není znovu odborně schválený.** Studio
+nedovolí dokument publikovat, pokud je pole **Lékařsky zkontrolováno** vypnuté.
+Dokud změněný dokument nepublikujete, zůstává na webu předchozí publikovaná
+verze. Toto ověření platí ve Studiu; přímé změny přes API jej mohou obejít.
 
 ## Úprava již existujícího obsahu
 
@@ -115,7 +116,9 @@ lékařské kontroly nelze obejít.
 - **Krátký úvod** – stručně vysvětlete, čeho se diagnóza týká.
 - **Obsah diagnózy** – použijte jen části, které jsou pro danou diagnózu
   relevantní. Text můžete rozdělit nadpisy, například na význam diagnózy,
-  její typy, vyšetření, léčbu, operaci a následnou péči.
+  její typy, vyšetření, léčbu, operaci a následnou péči. Podle potřeby použijte
+  citaci nebo mezi části vložte více obrázků. U každého obrázku vyplňte povinný **Alternativní
+  text**; popisek je volitelný.
 
 ### Vzdělávací články
 
@@ -148,8 +151,9 @@ lékařské kontroly nelze obejít.
 - **Dokument na webu chybí:** ověřte, že je publikovaný, má vyplněnou adresu
   stránky a má zapnuté **Lékařsky zkontrolováno**.
 - **Po úpravě zmizel:** pravděpodobně byl publikován s vypnutým polem
-  **Lékařsky zkontrolováno**. Požádejte lékaře o kontrolu; po schválení pole
-  zapněte a dokument znovu publikujte.
+  **Lékařsky zkontrolováno** před zavedením kontroly nebo mimo Studio.
+  Požádejte lékaře o kontrolu; po schválení pole zapněte a dokument znovu
+  publikujte.
 - **Změna se ještě neukázala:** obnovte stránku a chvíli počkejte; web může
   obsah obnovovat se zpožděním až několika minut.
 - **Nemůžete dokument najít nebo publikovat:** nic nemažte ani nevytvářejte

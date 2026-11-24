@@ -11,7 +11,7 @@ import { getArticleBodyPartLabel } from "@/sanity/lib/article-taxonomy";
 import { getSanityContentCacheTags } from "@/sanity/lib/cache-tags";
 
 export const metadata: Metadata = {
-  title: "Zdravotní téma | Miloš Barna",
+  title: "Vzdělávací článek | Miloš Barna",
 };
 
 export const revalidate = 300;

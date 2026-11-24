@@ -94,7 +94,7 @@ export default async function ArticlesPage() {
           </div>
         ) : (
           <p className="mt-8 rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-600">
-            Zatím zde nejsou zveřejněná žádná články.
+            Zatím zde nejsou zveřejněné žádné články.
           </p>
         )}
       </section>

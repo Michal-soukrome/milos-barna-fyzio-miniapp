@@ -2,10 +2,19 @@ const SYSTEM_FIELDS = new Set([
   "_createdAt",
   "_id",
   "_rev",
+  "_system",
   "_type",
   "_updatedAt",
   "reviewed",
 ]);
+
+export function validateMedicalReview(
+  value: boolean | undefined,
+): true | string {
+  return value === true
+    ? true
+    : "Před publikováním musí lékař obsah zkontrolovat a zapnout toto pole.";
+}
 
 export function getReviewedContentSignature(value: unknown): string {
   if (!isRecord(value)) return "";

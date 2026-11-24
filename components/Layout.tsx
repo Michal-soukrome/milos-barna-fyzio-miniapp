@@ -15,6 +15,7 @@ const navigation = [
   { href: "/poradna", label: "Poradna" },
   { href: "/pruvodce", label: "Průvodce" },
   { href: "/diagnozy", label: "Diagnózy" },
+  { href: "/clanky", label: "Články" },
   { href: "/o-mne", label: "O mně" },
   { href: "/kontakt", label: "Kontakt" },
 ];

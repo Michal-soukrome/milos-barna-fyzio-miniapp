@@ -108,6 +108,6 @@ export type LatestDiagnosisSummary = Pick<
 >;
 
 export type PublishedDiagnosis = DiagnosisSummary & {
-  body?: PortableTextBlock[] | null;
+  body?: PatientGuideBodyBlock[] | null;
   relatedDiagnoses: DiagnosisSummary[];
 };

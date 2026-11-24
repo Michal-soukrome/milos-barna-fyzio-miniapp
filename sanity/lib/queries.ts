@@ -122,7 +122,19 @@ export const DIAGNOSIS_QUERY = defineQuery(`*[
   bodyPart,
   "category": coalesce(category, bodyPart),
   summary,
-  body,
+  body[]{
+    ...,
+    _type == "image" => {
+      ...,
+      "asset": {
+        "_ref": asset._ref,
+        "_type": "reference",
+        "metadata": asset->metadata{
+          "dimensions": dimensions{width, height}
+        }
+      }
+    }
+  },
   "relatedDiagnoses": *[
     _type == "diagnosis" &&
     reviewed == true &&

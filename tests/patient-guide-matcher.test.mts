@@ -12,7 +12,10 @@ import {
   getSanityRevalidationTags,
   isSanityContentSlug,
 } from "../sanity/lib/cache-tags.ts";
-import { getReviewedContentSignature } from "../sanity/lib/reviewed-content.ts";
+import {
+  getReviewedContentSignature,
+  validateMedicalReview,
+} from "../sanity/lib/reviewed-content.ts";
 import type { PatientGuideSummary } from "../sanity/lib/types.ts";
 
 type FixtureCase = {
@@ -136,6 +139,7 @@ test("review reset signatures ignore the flag but track content edits", () => {
   const baseline = getReviewedContentSignature({
     _id: "guide-1",
     _updatedAt: "2026-10-21T10:00:00Z",
+    _system: { base: { id: "guide-1", rev: "old-revision" } },
     reviewed: true,
     title: "Původní název",
     body: [],
@@ -145,6 +149,18 @@ test("review reset signatures ignore the flag but track content edits", () => {
     getReviewedContentSignature({
       _id: "guide-1",
       _updatedAt: "2026-10-21T10:05:00Z",
+      _system: { base: { id: "guide-1", rev: "published-revision" } },
+      reviewed: true,
+      title: "Původní název",
+      body: [],
+    }),
+  );
+  assert.equal(
+    baseline,
+    getReviewedContentSignature({
+      _id: "guide-1",
+      _updatedAt: "2026-10-21T10:05:00Z",
+      _system: { base: { id: "guide-1", rev: "published-revision" } },
       reviewed: false,
       title: "Původní název",
       body: [],
@@ -160,6 +176,12 @@ test("review reset signatures ignore the flag but track content edits", () => {
       body: [],
     }),
   );
+});
+
+test("publishing requires an explicit medical review", () => {
+  assert.equal(validateMedicalReview(true), true);
+  assert.equal(typeof validateMedicalReview(false), "string");
+  assert.equal(typeof validateMedicalReview(undefined), "string");
 });
 
 test("Sanity cache tags cover collections and old/new document slugs", () => {

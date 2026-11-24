@@ -2,6 +2,8 @@ import { defineField, defineType } from "sanity";
 import { ArticleSlugInput, createUniqueArticleSlug } from "./ArticleSlugInput";
 import { ARTICLE_BODY_PARTS } from "../lib/article-taxonomy";
 import { ReviewedInput } from "./ReviewedInput";
+import { BlockQuoteStyle } from "./BlockQuoteStyle";
+import { validateMedicalReview } from "../lib/reviewed-content";
 
 export const article = defineType({
   name: "article",
@@ -80,7 +82,11 @@ export const article = defineType({
             { title: "Odstavec", value: "normal" },
             { title: "Nadpis 2", value: "h2" },
             { title: "Nadpis 3", value: "h3" },
-            { title: "Citace", value: "blockquote" },
+            {
+              title: "Citace",
+              value: "blockquote",
+              component: BlockQuoteStyle,
+            },
           ],
           lists: [
             { title: "Odrážky", value: "bullet" },
@@ -106,7 +112,7 @@ export const article = defineType({
       initialValue: false,
       options: { aiAssist: { exclude: true } },
       components: { input: ReviewedInput },
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required().custom(validateMedicalReview),
     }),
   ],
   preview: {

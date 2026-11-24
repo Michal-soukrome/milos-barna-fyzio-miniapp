@@ -1,6 +1,8 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { GUIDE_CONTEXTS, GUIDE_CONTEXT_LABELS } from "../lib/types";
 import { ReviewedInput } from "./ReviewedInput";
+import { BlockQuoteStyle } from "./BlockQuoteStyle";
+import { validateMedicalReview } from "../lib/reviewed-content";
 
 export const patientGuide = defineType({
   name: "patientGuide",
@@ -96,7 +98,11 @@ export const patientGuide = defineType({
             { title: "Odstavec", value: "normal" },
             { title: "Nadpis 2", value: "h2" },
             { title: "Nadpis 3", value: "h3" },
-            { title: "Citace", value: "blockquote" },
+            {
+              title: "Citace",
+              value: "blockquote",
+              component: BlockQuoteStyle,
+            },
           ],
           lists: [
             { title: "Odrážky", value: "bullet" },
@@ -147,7 +153,7 @@ export const patientGuide = defineType({
       initialValue: false,
       options: { aiAssist: { exclude: true } },
       components: { input: ReviewedInput },
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required().custom(validateMedicalReview),
     }),
   ],
   preview: {
