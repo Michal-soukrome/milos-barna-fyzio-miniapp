@@ -41,7 +41,7 @@ export default async function DiagnosisPage({
           className="h-fit min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-10"
         >
           {categoryLabel && (
-            <p className="w-fit rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-800 border border-teal-200">
+            <p className="w-fit rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-800 border border-blue-200">
               {categoryLabel}
             </p>
           )}
@@ -88,7 +88,7 @@ export default async function DiagnosisPage({
                     href={`/diagnozy/${relatedDiagnosis.slug}`}
                     className="group block"
                   >
-                    <span className="font-serif-display mt-1 block text-lg leading-snug text-slate-800 group-hover:text-teal-800 group-hover:underline">
+                    <span className="font-serif-display mt-1 block text-lg leading-snug text-slate-800 group-hover:text-blue-800 group-hover:underline">
                       {relatedDiagnosis.title}
                     </span>
 
@@ -103,7 +103,7 @@ export default async function DiagnosisPage({
             </ul>
             <Link
               href="/diagnozy"
-              className="mt-5 inline-flex text-sm font-semibold text-teal-800 underline decoration-teal-300 underline-offset-4 hover:text-teal-950"
+              className="mt-5 inline-flex text-sm font-semibold text-blue-800 underline decoration-blue-300 underline-offset-4 hover:text-blue-950"
             >
               Všechny diagnózy
             </Link>

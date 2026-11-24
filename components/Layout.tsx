@@ -101,7 +101,7 @@ export default function Layout({
             onClick={() => setMenuOpen(false)}
           >
             <div className="min-w-0">
-              <div className="truncate text-xs font-bold tracking-[0.12em] text-teal-200 sm:text-sm sm:tracking-[0.18em]">
+              <div className="truncate text-xs font-bold tracking-[0.12em] text-blue-200 sm:text-sm sm:tracking-[0.18em]">
                 MUDr. Barna Miloš, Ph.D.
               </div>
               <div className="truncate text-xs text-slate-300">
@@ -113,7 +113,7 @@ export default function Layout({
           {/* Mobile menu button */}
           <button
             type="button"
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-slate-100 transition-colors hover:bg-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-300 lg:hidden"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-slate-100 transition-colors hover:bg-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 lg:hidden"
             aria-label={menuOpen ? "Zavřít menu" : "Otevřít menu"}
             aria-expanded={menuOpen}
             aria-controls="main-nav"
@@ -140,8 +140,8 @@ export default function Layout({
                   aria-current={isActive ? "page" : undefined}
                   className={`rounded-lg px-3 py-2 font-semibold transition-colors ${
                     isActive
-                      ? "bg-slate-700 text-teal-200"
-                      : "text-slate-100 hover:bg-slate-700 hover:text-teal-200"
+                      ? "bg-slate-700 text-blue-200"
+                      : "text-slate-100 hover:bg-slate-700 hover:text-blue-200"
                   }`}
                 >
                   {label}
@@ -169,8 +169,8 @@ export default function Layout({
                     aria-current={isActive ? "page" : undefined}
                     className={`flex min-h-12 items-center rounded-lg px-4 text-base font-semibold transition-colors ${
                       isActive
-                        ? "bg-slate-700 text-teal-200"
-                        : "text-slate-100 hover:bg-slate-700 hover:text-teal-200"
+                        ? "bg-slate-700 text-blue-200"
+                        : "text-slate-100 hover:bg-slate-700 hover:text-blue-200"
                     }`}
                   >
                     {label}
@@ -188,7 +188,7 @@ export default function Layout({
         <div className="safe-area-inline mx-auto grid w-full max-w-7xl gap-10 py-10 sm:py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
           <div>
             <Link href="/" className="inline-flex flex-col">
-              <span className="text-sm font-bold tracking-[0.16em] text-teal-200">
+              <span className="text-sm font-bold tracking-[0.16em] text-blue-200">
                 MUDr. Barna Miloš, Ph.D.
               </span>
               <span className="mt-1 text-sm text-slate-300">
@@ -199,7 +199,7 @@ export default function Layout({
 
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <nav aria-label="Navigace v zápatí">
-              <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-teal-200">
+              <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-blue-200">
                 Rychlé odkazy
               </h2>
               <ul className="mt-3 flex flex-col gap-2">
@@ -218,7 +218,7 @@ export default function Layout({
             </nav>
 
             <div>
-              <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-teal-200">
+              <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-blue-200">
                 Diagnózy
               </h2>
               {latestDiagnoses.length > 0 ? (
@@ -227,7 +227,7 @@ export default function Layout({
                     <li key={diagnosis._id}>
                       <Link
                         href={`/diagnozy/${diagnosis.slug}`}
-                        className="text-sm text-slate-300 transition-colors hover:text-teal-200 hover:underline"
+                        className="text-sm text-slate-300 transition-colors hover:text-blue-200 hover:underline"
                       >
                         {diagnosis.title}
                       </Link>
@@ -236,7 +236,7 @@ export default function Layout({
                   <li>
                     <Link
                       href="/diagnozy"
-                      className="text-sm text-slate-300 underline transition-colors hover:text-teal-200"
+                      className="text-sm text-slate-300 underline transition-colors hover:text-blue-200"
                     >
                       Zobrazit vše
                     </Link>
@@ -250,7 +250,7 @@ export default function Layout({
             </div>
 
             <div>
-              <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-teal-200">
+              <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-blue-200">
                 Nejnovější rady a tipy
               </h2>
               {latestTips.length > 0 ? (
@@ -259,7 +259,7 @@ export default function Layout({
                     <li key={tip._id}>
                       <Link
                         href={`/poradna/${tip.slug}`}
-                        className="text-sm text-slate-300 transition-colors hover:text-teal-200 hover:underline"
+                        className="text-sm text-slate-300 transition-colors hover:text-blue-200 hover:underline"
                       >
                         {tip.title}
                       </Link>
@@ -268,7 +268,7 @@ export default function Layout({
                   <li>
                     <Link
                       href="/poradna"
-                      className="text-sm text-slate-300 underline transition-colors hover:text-teal-200"
+                      className="text-sm text-slate-300 underline transition-colors hover:text-blue-200"
                     >
                       Zobrazit vše
                     </Link>

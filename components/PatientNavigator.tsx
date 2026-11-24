@@ -33,13 +33,13 @@ const STEP_LABELS: Record<Step, string> = {
 /* ---------- styling constants ---------- */
 
 const focusRing =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2";
-const primaryBtn = `min-h-12 rounded-xl bg-teal-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800 disabled:cursor-not-allowed disabled:opacity-50 ${focusRing}`;
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2";
+const primaryBtn = `min-h-12 rounded-xl bg-blue-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-50 ${focusRing}`;
 const secondaryBtn = `min-h-12 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-45 ${focusRing}`;
-const linkBtn = `min-h-12 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2 ${focusRing}`;
+const linkBtn = `min-h-12 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2 ${focusRing}`;
 const actionBar =
   "patient-navigator-action-bar sticky bottom-0 z-10 -mx-5 mt-6 border-t border-slate-200 bg-white/95 px-5 py-3 backdrop-blur sm:static sm:mx-0 sm:border-0 sm:bg-transparent sm:p-0 sm:backdrop-blur-none";
-const underlined = "text-teal-700 underline";
+const underlined = "text-blue-700 underline";
 
 /* ---------- helpers ---------- */
 
@@ -94,12 +94,12 @@ function ChoiceRadio({
 }) {
   return (
     <label
-      className={`flex min-h-14 items-center justify-between gap-3 rounded-xl border px-4 py-3 font-semibold transition-colors focus-within:ring-2 focus-within:ring-teal-700 focus-within:ring-offset-2 ${
+      className={`flex min-h-14 items-center justify-between gap-3 rounded-xl border px-4 py-3 font-semibold transition-colors focus-within:ring-2 focus-within:ring-blue-700 focus-within:ring-offset-2 ${
         disabled
           ? "cursor-not-allowed border-slate-200 text-slate-400 opacity-45"
           : checked
-            ? "cursor-pointer border-teal-700 bg-teal-50 text-teal-950"
-            : "cursor-pointer border-slate-200 text-slate-800 hover:border-teal-700"
+            ? "cursor-pointer border-blue-700 bg-blue-50 text-blue-950"
+            : "cursor-pointer border-slate-200 text-slate-800 hover:border-blue-700"
       }`}
     >
       <span className="flex items-center gap-3">
@@ -110,12 +110,12 @@ function ChoiceRadio({
           checked={checked}
           disabled={disabled}
           onChange={onChange}
-          className="h-4 w-4 accent-teal-700"
+          className="h-4 w-4 accent-blue-700"
         />
         {children}
       </span>
       {hint && (
-        <span className="text-teal-600 italic font-light">({hint})</span>
+        <span className="text-blue-600 italic font-light">({hint})</span>
       )}
     </label>
   );
@@ -136,12 +136,12 @@ function CheckOption({
 }) {
   return (
     <label
-      className={`flex min-h-12 items-center gap-3 rounded-xl border px-4 py-3 text-sm transition-colors focus-within:ring-2 focus-within:ring-teal-700 focus-within:ring-offset-2 ${
+      className={`flex min-h-12 items-center gap-3 rounded-xl border px-4 py-3 text-sm transition-colors focus-within:ring-2 focus-within:ring-blue-700 focus-within:ring-offset-2 ${
         disabled
           ? "cursor-not-allowed border-slate-200 text-slate-400 opacity-60"
           : checked
-            ? "cursor-pointer border-teal-700 bg-teal-50 text-teal-950"
-            : "cursor-pointer border-slate-200 text-slate-700 hover:border-teal-700"
+            ? "cursor-pointer border-blue-700 bg-blue-50 text-blue-950"
+            : "cursor-pointer border-slate-200 text-slate-700 hover:border-blue-700"
       }`}
     >
       <input
@@ -149,7 +149,7 @@ function CheckOption({
         checked={checked}
         disabled={disabled}
         onChange={onChange}
-        className="h-4 w-4 accent-teal-700"
+        className="h-4 w-4 accent-blue-700"
       />
       <span className="flex-1">{children}</span>
       {count !== undefined && (
@@ -464,7 +464,7 @@ export default function PatientNavigator({
           <div className="mt-4">
             <Link
               href="/poradna"
-              className="font-semibold text-teal-800 underline underline-offset-4"
+              className="font-semibold text-blue-800 underline underline-offset-4"
             >
               Procházet rady a tipy
             </Link>
@@ -483,7 +483,7 @@ export default function PatientNavigator({
                 className="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-200"
               >
                 <div
-                  className="h-full rounded-full bg-teal-700 transition-[width] motion-reduce:transition-none"
+                  className="h-full rounded-full bg-blue-700 transition-[width] motion-reduce:transition-none"
                   style={{
                     width: `${((currentStep + 1) / STEPS.length) * 100}%`,
                   }}
@@ -496,9 +496,9 @@ export default function PatientNavigator({
                 const isCurrent = index === currentStep;
                 const done = index <= reached && !isCurrent;
                 const circle = isCurrent
-                  ? "bg-teal-700 text-white"
+                  ? "bg-blue-700 text-white"
                   : done
-                    ? "bg-teal-100 text-teal-800"
+                    ? "bg-blue-100 text-blue-800"
                     : "bg-slate-100 text-slate-600";
                 const inner = (
                   <>
@@ -512,7 +512,7 @@ export default function PatientNavigator({
                         isCurrent
                           ? "text-slate-800"
                           : done
-                            ? "text-teal-800"
+                            ? "text-blue-800"
                             : "text-slate-600"
                       }`}
                     >
@@ -541,7 +541,7 @@ export default function PatientNavigator({
                       <span
                         aria-hidden="true"
                         className={`mx-3 h-px flex-1 ${
-                          index < reached ? "bg-teal-300" : "bg-slate-200"
+                          index < reached ? "bg-blue-300" : "bg-slate-200"
                         }`}
                       />
                     )}
@@ -570,10 +570,10 @@ export default function PatientNavigator({
                       type="button"
                       onClick={() => setStep(chip.step)}
                       aria-label={`Změnit: ${chip.label}`}
-                      className={`flex max-w-full items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-700 transition-colors hover:border-teal-700 hover:bg-teal-50 ${focusRing}`}
+                      className={`flex max-w-full items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-700 transition-colors hover:border-blue-700 hover:bg-blue-50 ${focusRing}`}
                     >
                       <span className="truncate">{chip.label}</span>
-                      <span className="shrink-0 font-normal text-teal-800 underline underline-offset-2">
+                      <span className="shrink-0 font-normal text-blue-800 underline underline-offset-2">
                         změnit
                       </span>
                     </button>
@@ -684,7 +684,7 @@ export default function PatientNavigator({
                     tipy. Změňte věkovou skupinu nebo{" "}
                     <Link
                       href="/poradna"
-                      className="font-semibold text-teal-800 underline underline-offset-4"
+                      className="font-semibold text-blue-800 underline underline-offset-4"
                     >
                       procházejte rady a tipy
                     </Link>
@@ -747,7 +747,7 @@ export default function PatientNavigator({
                       onChange={(event) => setSymptomQuery(event.target.value)}
                       placeholder="Hledat příznak"
                       autoComplete="off"
-                      className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/30"
+                      className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/30"
                     />
                   </div>
                 )}
@@ -946,13 +946,13 @@ export default function PatientNavigator({
                         <li key={topic._id}>
                           <Link
                             href={`/poradna/${topic.slug}`}
-                            className={`group flex items-center border-x border-slate-200 justify-between gap-4 p-3 transition-colors hover:bg-teal-50/60 ${focusRing}`}
+                            className={`group flex items-center border-x border-slate-200 justify-between gap-4 p-3 transition-colors hover:bg-blue-50/60 ${focusRing}`}
                           >
                             <span className="min-w-0">
-                              <span className="block text-xs font-semibold uppercase tracking-wide text-teal-700">
+                              <span className="block text-xs font-semibold uppercase tracking-wide text-blue-700">
                                 {topic.bodyPart}
                               </span>
-                              <span className="font-serif-display mt-1 block text-xl leading-snug text-slate-800 group-hover:text-teal-800 group-hover:underline">
+                              <span className="font-serif-display mt-1 block text-xl leading-snug text-slate-800 group-hover:text-blue-800 group-hover:underline">
                                 {topic.title}
                               </span>
                               {topic.summary && (
@@ -981,7 +981,7 @@ export default function PatientNavigator({
                             </span>
                             <span
                               aria-hidden="true"
-                              className="shrink-0 text-teal-600 transition-transform group-hover:translate-x-0.5"
+                              className="shrink-0 text-blue-600 transition-transform group-hover:translate-x-0.5"
                             >
                               →
                             </span>
@@ -995,14 +995,14 @@ export default function PatientNavigator({
                     {PATIENT_NAVIGATOR_NO_MATCH.copy}{" "}
                     <Link
                       href={PATIENT_NAVIGATOR_NO_MATCH.contactHref}
-                      className="font-semibold text-teal-800 underline underline-offset-4"
+                      className="font-semibold text-blue-800 underline underline-offset-4"
                     >
                       Napište mi
                     </Link>{" "}
                     nebo si{" "}
                     <Link
                       href={PATIENT_NAVIGATOR_NO_MATCH.libraryHref}
-                      className="font-semibold text-teal-800 underline underline-offset-4"
+                      className="font-semibold text-blue-800 underline underline-offset-4"
                     >
                       prohlédněte rady a tipy
                     </Link>
@@ -1010,7 +1010,7 @@ export default function PatientNavigator({
                     <button
                       type="button"
                       onClick={startOver}
-                      className="inline-block font-semibold text-teal-800 underline underline-offset-4"
+                      className="inline-block font-semibold text-blue-800 underline underline-offset-4"
                     >
                       začít znovu
                     </button>

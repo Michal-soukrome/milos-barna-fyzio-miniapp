@@ -208,14 +208,9 @@
     },
     "_type": "patientGuide",
     "_updatedAt": "2026-10-21T14:38:47Z",
-    "ageGroups": [
-      "adult",
-      "senior"
-    ],
+    "ageGroups": ["adult", "senior"],
     "bodyPart": "Koleno",
-    "contexts": [
-      "after-surgery"
-    ],
+    "contexts": ["after-surgery"],
     "reviewed": true,
     "sections": [
       {
@@ -230,10 +225,7 @@
       "current": "otok-po-operaci-kolena"
     },
     "summary": "Co je po operaci kolena normální vs. příznaky infekce/trombózy",
-    "symptoms": [
-      "otok",
-      "teplo"
-    ],
+    "symptoms": ["otok", "teplo"],
     "title": "Otok po operaci kolena",
     "warningSigns": [
       "Lékařsky ověřené varovné příznaky budou doplněny před zveřejněním."
@@ -251,15 +243,9 @@
     },
     "_type": "patientGuide",
     "_updatedAt": "2026-10-21T14:38:47Z",
-    "ageGroups": [
-      "child",
-      "adult",
-      "senior"
-    ],
+    "ageGroups": ["child", "adult", "senior"],
     "bodyPart": "Obecné",
-    "contexts": [
-      "using-crutches"
-    ],
+    "contexts": ["using-crutches"],
     "reviewed": true,
     "sections": [
       {
@@ -280,11 +266,7 @@
       "current": "bezpecne-pouzivani-berli"
     },
     "summary": "Správná výška, technika chůze, schody, jak se vyhnout pádu",
-    "symptoms": [
-      "berle",
-      "rovnováha",
-      "schody"
-    ],
+    "symptoms": ["berle", "rovnováha", "schody"],
     "title": "Bezpečné používání berlí",
     "warningSigns": [
       "Lékařsky ověřené varovné příznaky budou doplněny před zveřejněním."
@@ -522,14 +504,9 @@
     },
     "_type": "patientGuide",
     "_updatedAt": "2026-10-21T14:38:47Z",
-    "ageGroups": [
-      "adult",
-      "senior"
-    ],
+    "ageGroups": ["adult", "senior"],
     "bodyPart": "Kotník",
-    "contexts": [
-      "after-sprain"
-    ],
+    "contexts": ["after-sprain"],
     "reviewed": true,
     "sections": [
       {
@@ -550,11 +527,7 @@
       "current": "zotaveni-po-podvrtnuti-kotniku"
     },
     "summary": "Postup RICE, kdy začít zatěžovat nohu, návrat ke sportu",
-    "symptoms": [
-      "otok",
-      "modřina",
-      "bolest při chůzi"
-    ],
+    "symptoms": ["otok", "modřina", "bolest při chůzi"],
     "title": "Zotavení po podvrtnutí kotníku",
     "warningSigns": [
       "Lékařsky ověřené varovné příznaky budou doplněny před zveřejněním."
@@ -632,15 +605,9 @@
     },
     "_type": "patientGuide",
     "_updatedAt": "2026-10-21T14:38:47Z",
-    "ageGroups": [
-      "child",
-      "adult",
-      "senior"
-    ],
+    "ageGroups": ["child", "adult", "senior"],
     "bodyPart": "Obecné",
-    "contexts": [
-      "in-cast"
-    ],
+    "contexts": ["in-cast"],
     "reviewed": true,
     "sections": [
       {
@@ -667,11 +634,7 @@
       "current": "pece-o-sadru"
     },
     "summary": "Jak udržet sádru suchou a čistou, co znamená svědění a otok",
-    "symptoms": [
-      "sádra",
-      "otok",
-      "svědění"
-    ],
+    "symptoms": ["sádra", "otok", "svědění"],
     "title": "Péče o sádru",
     "warningSigns": [
       "Lékařsky ověřené varovné příznaky budou doplněny před zveřejněním."
@@ -728,9 +691,7 @@
       }
     ],
     "bodyPart": "noha-a-hlezno",
-    "categories": [
-      "Hallux valgus"
-    ],
+    "categories": ["Hallux valgus"],
     "excerpt": "Vbočený palec může postupně ovlivnit zatížení přednoží i pohodlí při chůzi. Přehled příznaků, vyšetření a možností úlevy, které lze probrat s ortopedem.",
     "publishedAt": "2026-10-20T19:36:54.867Z",
     "reviewed": true,
@@ -792,14 +753,9 @@
     },
     "_type": "patientGuide",
     "_updatedAt": "2026-10-21T14:38:47Z",
-    "ageGroups": [
-      "adult",
-      "senior"
-    ],
+    "ageGroups": ["adult", "senior"],
     "bodyPart": "Obecné",
-    "contexts": [
-      "after-surgery"
-    ],
+    "contexts": ["after-surgery"],
     "reviewed": true,
     "sections": [
       {
@@ -814,10 +770,7 @@
       "current": "pece-o-operacni-ranu"
     },
     "summary": "Převazy, sprchování, příznaky infekce",
-    "symptoms": [
-      "rána",
-      "obvaz"
-    ],
+    "symptoms": ["rána", "obvaz"],
     "title": "Péče o operační ránu",
     "warningSigns": [
       "Lékařsky ověřené varovné příznaky budou doplněny před zveřejněním."
@@ -835,15 +788,9 @@
     },
     "_type": "patientGuide",
     "_updatedAt": "2026-10-21T14:38:47Z",
-    "ageGroups": [
-      "child",
-      "adult",
-      "senior"
-    ],
+    "ageGroups": ["child", "adult", "senior"],
     "bodyPart": "Zápěstí / ruka",
-    "contexts": [
-      "after-fracture"
-    ],
+    "contexts": ["after-fracture"],
     "reviewed": true,
     "sections": [
       {
@@ -858,11 +805,7 @@
       "current": "po-zlomenine-zapesti"
     },
     "summary": "Péče o dlahu, pohyb prstů, očekávaná doba hojení",
-    "symptoms": [
-      "zlomenina",
-      "dlaha",
-      "otok"
-    ],
+    "symptoms": ["zlomenina", "dlaha", "otok"],
     "title": "Po zlomenině zápěstí",
     "warningSigns": [
       "Lékařsky ověřené varovné příznaky budou doplněny před zveřejněním."
@@ -2694,7 +2637,7 @@
   },
   {
     "_createdAt": "2026-10-21T18:10:10Z",
-    "_id": "diagnosis-import-trochantericka-bolestiva-burzitida-glutealni-tendinopatie",
+    "_id": "diagnosis-import-trochantericka-bolestiva-burzitida-glublueni-tendinopatie",
     "_rev": "THpfILlIZVlfPC2T7aFdZ8",
     "_type": "diagnosis",
     "_updatedAt": "2026-10-21T18:10:10Z",
@@ -2703,7 +2646,7 @@
     "reviewed": true,
     "slug": {
       "_type": "slug",
-      "current": "trochantericka-bolestiva-burzitida-glutealni-tendinopatie"
+      "current": "trochantericka-bolestiva-burzitida-glublueni-tendinopatie"
     },
     "summary": "bolest zevní strany kyčle, zhoršená ležením na boku.",
     "title": "Trochanterická bolestivá burzitida / gluteální tendinopatie"

@@ -141,7 +141,7 @@ export default function PrivacyConsent() {
           </p>
           <Link
             href="/ochrana-osobnich-udaju"
-            className="mt-2 inline-flex text-sm font-semibold text-teal-800 underline underline-offset-4"
+            className="mt-2 inline-flex text-sm font-semibold text-blue-800 underline underline-offset-4"
           >
             Podrobnosti o zpracování údajů
           </Link>
@@ -164,7 +164,7 @@ export default function PrivacyConsent() {
             <button
               type="button"
               onClick={() => saveChoice("granted")}
-              className="min-h-11 rounded-xl bg-teal-700 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-800"
+              className="min-h-11 rounded-xl bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800"
             >
               Povolit analytiku
             </button>

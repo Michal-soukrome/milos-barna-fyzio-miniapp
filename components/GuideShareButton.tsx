@@ -5,11 +5,7 @@ import { Share, X } from "lucide-react";
 import TopicActions from "@/components/TopicActions";
 import type { PatientGuide } from "@/sanity/lib/types";
 
-export default function GuideShareButton({
-  topic,
-}: {
-  topic: PatientGuide;
-}) {
+export default function GuideShareButton({ topic }: { topic: PatientGuide }) {
   const [isOpen, setIsOpen] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -60,7 +56,7 @@ export default function GuideShareButton({
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         onClick={() => setIsOpen(true)}
-        className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-teal-700 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-teal-800 focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2"
+        className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-blue-700 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-blue-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
       >
         <Share aria-hidden="true" className="h-4 w-4" />
         Sdílet
@@ -92,7 +88,7 @@ export default function GuideShareButton({
               ref={closeButtonRef}
               type="button"
               onClick={() => dialogRef.current?.close()}
-              className="absolute right-0 top-0 inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-700"
+              className="absolute right-0 top-0 inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-700"
             >
               <X className="h-4 w-4" />
             </button>

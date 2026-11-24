@@ -163,7 +163,7 @@ export default function TopicMatcher({
   }
 
   return (
-    <section className="mb-10 rounded-2xl border border-teal-200 bg-teal-50 p-5 shadow-sm sm:p-6">
+    <section className="mb-10 rounded-2xl border border-blue-200 bg-blue-50 p-5 shadow-sm sm:p-6">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h2 className="font-serif-display mt-1 text-2xl text-slate-800">
@@ -201,7 +201,7 @@ export default function TopicMatcher({
           rows={3}
           placeholder="Například: co mohu cvičit po operaci kolene"
           aria-describedby="patient-situation-note"
-          className="w-full resize-y rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none placeholder:text-slate-400 focus:border-teal-600 focus:ring-2 focus:ring-teal-100"
+          className="w-full resize-y rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
         />
         <p id="patient-situation-note" className="sr-only">
           Maximálně 500 znaků. Nezadávejte identifikační údaje.
@@ -218,7 +218,7 @@ export default function TopicMatcher({
           <button
             type="submit"
             disabled={!situation.trim() || loading || answerLoading}
-            className="min-h-11 rounded-xl bg-teal-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800 disabled:cursor-not-allowed disabled:opacity-40"
+            className="min-h-11 rounded-xl bg-blue-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-40"
           >
             {loading ? "Vyhledávám…" : "Vyhledat"}
           </button>
@@ -227,7 +227,7 @@ export default function TopicMatcher({
             onClick={requestAiAnswer}
             disabled={!situation.trim() || answerLoading || loading}
             aria-describedby="ai-answer-note"
-            className="min-h-11 rounded-xl bg-slate-800 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800 disabled:cursor-not-allowed disabled:opacity-40 flex items-center gap-2"
+            className="min-h-11 rounded-xl bg-slate-800 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-40 flex items-center gap-2"
           >
             <span className="flex h-4 w-4 items-center justify-center rounded-lg text-blue-100">
               <svg
@@ -396,7 +396,7 @@ export default function TopicMatcher({
         <section className="mt-5" aria-label="Výsledky z poradny">
           <div className="mb-3 flex items-center justify-between gap-3">
             <div className="flex items-center gap-2">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-100 text-teal-800">
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100 text-blue-800">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -421,7 +421,7 @@ export default function TopicMatcher({
               </div>
             </div>
 
-            <span className="rounded-full border border-teal-200 bg-teal-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-teal-800">
+            <span className="rounded-full border border-blue-200 bg-blue-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-blue-800">
               Vlastní obsah
             </span>
           </div>
@@ -430,10 +430,10 @@ export default function TopicMatcher({
             {results.map((result) => (
               <article
                 key={result._id}
-                className="flex flex-col rounded-xl border border-teal-200 bg-white p-4 transition-colors hover:border-teal-400"
+                className="flex flex-col rounded-xl border border-blue-200 bg-white p-4 transition-colors hover:border-blue-400"
               >
                 <div className="flex-1">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-teal-700">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-blue-700">
                     Publikovaná rada
                   </p>
 
@@ -448,7 +448,7 @@ export default function TopicMatcher({
 
                 <Link
                   href={`/poradna/${result.slug}`}
-                  className="mt-5 inline-flex min-h-11 w-fit items-center rounded-lg bg-teal-700 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-teal-800"
+                  className="mt-5 inline-flex min-h-11 w-fit items-center rounded-lg bg-blue-700 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-blue-800"
                 >
                   Přečíst celou radu →
                 </Link>

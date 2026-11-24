@@ -60,7 +60,7 @@ function TabButton({
     <button
       onClick={onClick}
       className={`flex-1 rounded-md py-2 text-sm font-medium transition-colors ${
-        active ? "bg-white text-teal-700 shadow-sm" : "text-slate-500"
+        active ? "bg-white text-blue-700 shadow-sm" : "text-slate-500"
       }`}
     >
       {children}
@@ -70,7 +70,7 @@ function TabButton({
 
 function QrPane({ url, title }: { url: string; title: string }) {
   return (
-    <div className="flex flex-col items-center rounded-2xl border border-slate-200 bg-teal-50/50 px-4 py-8">
+    <div className="flex flex-col items-center rounded-2xl border border-slate-200 bg-blue-50/50 px-4 py-8">
       <QRCodeSVG value={url} size={200} level="M" fgColor="#123247" />
 
       <p className="mt-1 break-all text-center text-xs text-slate-500">{url}</p>
@@ -113,8 +113,8 @@ function EmailPane({ topic }: { topic: PatientGuide }) {
 
   if (state === "sent") {
     return (
-      <div className="rounded-lg border border-teal-600 bg-teal-50 px-4 py-6 text-center">
-        <p className="font-medium text-teal-800">Odesláno na {email}</p>
+      <div className="rounded-lg border border-blue-600 bg-blue-50 px-4 py-6 text-center">
+        <p className="font-medium text-blue-800">Odesláno na {email}</p>
         <button
           onClick={() => {
             setState("idle");
@@ -131,7 +131,7 @@ function EmailPane({ topic }: { topic: PatientGuide }) {
   return (
     <form
       onSubmit={handleSend}
-      className="rounded-2xl border border-slate-200 bg-teal-50/50 px-4 py-6"
+      className="rounded-2xl border border-slate-200 bg-blue-50/50 px-4 py-6"
     >
       <label
         className="mb-1 block text-sm text-slate-500"
@@ -146,7 +146,7 @@ function EmailPane({ topic }: { topic: PatientGuide }) {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="pacient@example.com"
-        className="w-full rounded-md border border-slate-200 px-3 py-2.5 text-sm outline-none focus-visible:border-teal-600"
+        className="w-full rounded-md border border-slate-200 px-3 py-2.5 text-sm outline-none focus-visible:border-blue-600"
       />
       <div
         aria-hidden="true"
@@ -168,7 +168,7 @@ function EmailPane({ topic }: { topic: PatientGuide }) {
       <button
         type="submit"
         disabled={state === "sending"}
-        className="mt-3 w-full rounded-md bg-teal-700 py-2.5 text-sm font-medium text-white transition-opacity hover:bg-teal-800 disabled:opacity-60"
+        className="mt-3 w-full rounded-md bg-blue-700 py-2.5 text-sm font-medium text-white transition-opacity hover:bg-blue-800 disabled:opacity-60"
       >
         {state === "sending" ? "Odesílám…" : "Odeslat"}
       </button>

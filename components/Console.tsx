@@ -168,7 +168,7 @@ export default function Console({
                   type="button"
                   onClick={clearFilters}
                   disabled={!hasActiveFilters}
-                  className="mt-2 mb-4 text-xs font-semibold text-teal-800 underline decoration-teal-200 underline-offset-4 transition-opacity disabled:cursor-not-allowed disabled:opacity-35 flex items-center gap-1"
+                  className="mt-2 mb-4 text-xs font-semibold text-blue-800 underline decoration-blue-200 underline-offset-4 transition-opacity disabled:cursor-not-allowed disabled:opacity-35 flex items-center gap-1"
                 >
                   <FunnelX
                     aria-hidden="true"
@@ -217,7 +217,7 @@ export default function Console({
               <div>
                 <h2 className="font-serif-display text-2xl text-slate-800">
                   Všechny rady{" "}
-                  <span className="text-teal-600 italic font-light">
+                  <span className="text-blue-600 italic font-light">
                     ({filtered.length})
                   </span>
                 </h2>
@@ -233,7 +233,7 @@ export default function Console({
                   onChange={(e) => setQuery(e.target.value)}
                   aria-label="Hledat podle tématu, oblasti nebo příznaku"
                   placeholder="Hledat příznak nebo téma…"
-                  className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-sm outline-none transition-shadow focus:border-teal-600 focus:ring-2 focus:ring-teal-100"
+                  className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-sm outline-none transition-shadow focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
                 />
               </div>
             </div>
@@ -241,21 +241,21 @@ export default function Console({
             <ul className="grid gap-3 sm:grid-cols-2">
               {filtered.map((t) => (
                 <li key={t.slug} className="topic-card">
-                  <div className="flex min-h-52 w-full flex-col rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-all group hover:border-teal-600 hover:shadow-md sm:p-5">
+                  <div className="flex min-h-52 w-full flex-col rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-all group hover:border-blue-600 hover:shadow-md sm:p-5">
                     <Link
                       href={`/poradna/${t.slug}`}
-                      className="group flex flex-1 flex-col rounded-xl p-1 text-left focus-visible:ring-2 focus-visible:ring-teal-600"
+                      className="group flex flex-1 flex-col rounded-xl p-1 text-left focus-visible:ring-2 focus-visible:ring-blue-600"
                     >
                       <div className="mb-5 flex items-center justify-between">
-                        <span className="rounded-full bg-teal-50 px-2.5 py-1 text-xs font-bold text-teal-800">
+                        <span className="rounded-full bg-blue-50 px-2.5 py-1 text-xs font-bold text-blue-800">
                           {t.bodyPart}
                         </span>
                         <ArrowRight
                           aria-hidden="true"
-                          className="h-5 w-5 text-teal-700 transition-transform group-hover:translate-x-1"
+                          className="h-5 w-5 text-blue-700 transition-transform group-hover:translate-x-1"
                         />
                       </div>
-                      <span className="font-serif-display text-xl leading-tight text-slate-800 group-hover:text-teal-800 group-hover:underline">
+                      <span className="font-serif-display text-xl leading-tight text-slate-800 group-hover:text-blue-800 group-hover:underline">
                         {t.title}
                       </span>
                       <span className="mt-2 text-sm leading-relaxed text-slate-500">
@@ -265,7 +265,7 @@ export default function Console({
                     <div className="mt-3 flex items-center gap-3">
                       <Link
                         href={`/poradna/${t.slug}`}
-                        className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-slate-700 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-800 focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2"
+                        className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-slate-700 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
                       >
                         Přečíst
                       </Link>
@@ -276,7 +276,7 @@ export default function Console({
                           shareTriggerRef.current = event.currentTarget;
                           setSelected(t);
                         }}
-                        className="flex-1 min-h-11 w-full rounded-xl bg-teal-700 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-800 focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2 flex items-center gap-1 justify-center"
+                        className="flex-1 min-h-11 w-full rounded-xl bg-blue-700 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 flex items-center gap-1 justify-center"
                       >
                         <Share className="h-4 w-4" />
                         Sdílet
@@ -321,7 +321,7 @@ export default function Console({
               ref={closeButtonRef}
               type="button"
               onClick={() => shareDialogRef.current?.close()}
-              className="absolute top-0 right-0 inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-700"
+              className="absolute top-0 right-0 inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-700"
             >
               <X className="h-4 w-4" />
             </button>
@@ -350,8 +350,8 @@ function FilterChip({
       disabled={disabled}
       className={`rounded-lg border px-3 py-1.5 text-left text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
         active
-          ? "border-teal-600 bg-teal-50 font-semibold text-teal-800"
-          : "border-slate-200 bg-white text-slate-500 hover:border-teal-600 hover:text-teal-800"
+          ? "border-blue-600 bg-blue-50 font-semibold text-blue-800"
+          : "border-slate-200 bg-white text-slate-500 hover:border-blue-600 hover:text-blue-800"
       }`}
     >
       {label}

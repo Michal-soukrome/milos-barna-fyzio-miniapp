@@ -19,7 +19,7 @@ const components: PortableTextComponents<PatientGuideBodyBlock> = {
       <h3 className="mb-2 mt-6 text-lg font-bold text-slate-800">{children}</h3>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="my-5 border-l-4 border-teal-600 pl-4 italic text-slate-600">
+      <blockquote className="my-5 border-l-4 border-blue-600 pl-4 italic text-slate-600">
         {children}
       </blockquote>
     ),

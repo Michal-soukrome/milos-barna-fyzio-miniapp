@@ -62,7 +62,7 @@ export default async function ArticlesPage() {
                     className="font-serif-display text-2xl text-slate-800"
                   >
                     {group.label}{" "}
-                    <span className="text-teal-600 italic font-light">
+                    <span className="text-blue-600 italic font-light">
                       ({group.articles.length})
                     </span>
                   </h2>
@@ -72,14 +72,14 @@ export default async function ArticlesPage() {
                     <li key={article._id}>
                       <Link
                         href={`/clanky/${article.slug}`}
-                        className="group block h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all  hover:border-teal-600 hover:shadow-md"
+                        className="group block h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all  hover:border-blue-600 hover:shadow-md"
                       >
-                        <p className="text-xs font-semibold text-teal-700">
+                        <p className="text-xs font-semibold text-blue-700">
                           {new Date(article.publishedAt).toLocaleDateString(
                             "cs-CZ",
                           )}
                         </p>
-                        <h3 className="font-serif-display mt-2 text-2xl leading-tight text-slate-800 group-hover:text-teal-800 group-hover:underline">
+                        <h3 className="font-serif-display mt-2 text-2xl leading-tight text-slate-800 group-hover:text-blue-800 group-hover:underline">
                           {article.title}
                         </h3>
                         <p className="mt-3 text-sm leading-relaxed text-slate-600">

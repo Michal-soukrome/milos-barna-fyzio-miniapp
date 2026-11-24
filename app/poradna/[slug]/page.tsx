@@ -54,7 +54,7 @@ export default async function PatientGuidePage({
           aria-labelledby={`poradna-detail-${slug}`}
           className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-10 h-fit"
         >
-          <span className="mb-1 text-xs font-semibold text-teal-700">
+          <span className="mb-1 text-xs font-semibold text-blue-700">
             {topic.bodyPart}
           </span>
           <h1
@@ -125,11 +125,11 @@ export default async function PatientGuidePage({
                     className="group block"
                   >
                     <span className="flex flex-wrap items-center gap-2">
-                      <span className="text-xs font-semibold text-teal-700">
+                      <span className="text-xs font-semibold text-blue-700">
                         {relatedGuide.bodyPart}
                       </span>
                     </span>
-                    <span className="font-serif-display mt-1 block text-lg leading-snug text-slate-800 group-hover:text-teal-800 group-hover:underline">
+                    <span className="font-serif-display mt-1 block text-lg leading-snug text-slate-800 group-hover:text-blue-800 group-hover:underline">
                       {relatedGuide.title}
                     </span>
 
@@ -142,7 +142,7 @@ export default async function PatientGuidePage({
             </ul>
             <Link
               href="/poradna"
-              className="mt-5 inline-flex text-sm font-semibold text-teal-800 underline decoration-teal-300 underline-offset-4 hover:text-teal-950"
+              className="mt-5 inline-flex text-sm font-semibold text-blue-800 underline decoration-blue-300 underline-offset-4 hover:text-blue-950"
             >
               Všechny rady a tipy
             </Link>

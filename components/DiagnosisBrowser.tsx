@@ -93,13 +93,13 @@ export default function DiagnosisBrowser({
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Např. bolest paty nebo kotníku"
             autoComplete="off"
-            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 pr-24 text-base text-slate-800 shadow-sm placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/30"
+            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 pr-24 text-base text-slate-800 shadow-sm placeholder:text-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/30"
           />
           {query && (
             <button
               type="button"
               onClick={() => setQuery("")}
-              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg px-3 py-1.5 text-sm font-semibold text-teal-800 hover:bg-teal-50 focus:outline-none focus:ring-2 focus:ring-teal-600/40"
+              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg px-3 py-1.5 text-sm font-semibold text-blue-800 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-600/40"
             >
               Smazat
             </button>
@@ -122,7 +122,7 @@ export default function DiagnosisBrowser({
             <button
               type="button"
               onClick={() => setQuery("")}
-              className="ml-1 text-teal-800 underline"
+              className="ml-1 text-blue-800 underline"
             >
               nové hledání
             </button>
@@ -148,11 +148,11 @@ export default function DiagnosisBrowser({
                   <li key={group.key}>
                     <a
                       href={`#kategorie-${group.key}`}
-                      className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-semibold text-teal-800 transition-colors hover:border-teal-600 hover:bg-teal-50 lg:border-transparent lg:bg-transparent lg:py-2"
+                      className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-semibold text-blue-800 transition-colors hover:border-blue-600 hover:bg-blue-50 lg:border-transparent lg:bg-transparent lg:py-2"
                     >
                       <span>
                         {group.label}{" "}
-                        <span className="text-teal-600 italic font-light">
+                        <span className="text-blue-600 italic font-light">
                           ({group.diagnoses.length})
                         </span>
                       </span>
@@ -178,7 +178,7 @@ export default function DiagnosisBrowser({
                 >
                   {group.label}{" "}
                   <span>
-                    <span className="text-teal-600 italic font-light">
+                    <span className="text-blue-600 italic font-light">
                       ({group.diagnoses.length})
                     </span>
                   </span>
@@ -188,10 +188,10 @@ export default function DiagnosisBrowser({
                     <li key={diagnosis._id}>
                       <Link
                         href={`/diagnozy/${diagnosis.slug}`}
-                        className="group flex items-center justify-between gap-4 px-2 py-3 transition-colors hover:bg-teal-50/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600/40"
+                        className="group flex items-center justify-between gap-4 px-2 py-3 transition-colors hover:bg-blue-50/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/40"
                       >
                         <span className="min-w-0">
-                          <span className="block text-lg font-semibold text-teal-800 group-hover:underline">
+                          <span className="block text-lg font-semibold text-blue-800 group-hover:underline">
                             {diagnosis.title}
                           </span>
                           {diagnosis.summary && (
@@ -202,7 +202,7 @@ export default function DiagnosisBrowser({
                         </span>
                         <span
                           aria-hidden="true"
-                          className="shrink-0 text-teal-600 transition-transform group-hover:translate-x-0.5"
+                          className="shrink-0 text-blue-600 transition-transform group-hover:translate-x-0.5"
                         >
                           →
                         </span>

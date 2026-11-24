@@ -62,13 +62,13 @@ export default async function ArticlePage({
         <article className="min-w-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
           <div className="flex flex-wrap items-center gap-2">
             {getArticleBodyPartLabel(article.bodyPart) && (
-              <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-800 border border-teal-200">
+              <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-800 border border-blue-200">
                 {getArticleBodyPartLabel(article.bodyPart)}
               </span>
             )}
             <time
               dateTime={article.publishedAt}
-              className="text-xs font-semibold text-teal-700"
+              className="text-xs font-semibold text-blue-700"
             >
               {new Date(article.publishedAt).toLocaleDateString("cs-CZ")}
             </time>
@@ -103,12 +103,12 @@ export default async function ArticlePage({
                     href={`/clanky/${relatedArticle.slug}`}
                     className="group block"
                   >
-                    <span className="text-xs font-semibold text-teal-700">
+                    <span className="text-xs font-semibold text-blue-700">
                       {new Date(relatedArticle.publishedAt).toLocaleDateString(
                         "cs-CZ",
                       )}
                     </span>
-                    <span className="font-serif-display mt-1 block text-lg leading-snug text-slate-800 group-hover:text-teal-800">
+                    <span className="font-serif-display mt-1 block text-lg leading-snug text-slate-800 group-hover:text-blue-800">
                       {relatedArticle.title}
                     </span>
                     <span className="mt-2 block min-w-0 truncate text-sm leading-relaxed text-slate-600">
@@ -126,7 +126,7 @@ export default async function ArticlePage({
 
           <Link
             href="/clanky"
-            className="mt-5 inline-flex text-sm font-semibold text-teal-800 underline decoration-teal-300 underline-offset-4 hover:text-teal-950"
+            className="mt-5 inline-flex text-sm font-semibold text-blue-800 underline decoration-blue-300 underline-offset-4 hover:text-blue-950"
           >
             Všechny články
           </Link>

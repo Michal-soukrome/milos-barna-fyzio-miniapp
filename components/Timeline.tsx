@@ -64,7 +64,7 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
             className="grid grid-cols-[5.5rem_2.5rem_1fr] gap-x-3 sm:grid-cols-[8rem_2.5rem_1fr] sm:gap-x-5"
           >
             {/* Years */}
-            <p className="font-serif-display flex h-10 items-center justify-end whitespace-nowrap text-base text-teal-800 tabular-nums sm:text-xl">
+            <p className="font-serif-display flex h-10 items-center justify-end whitespace-nowrap text-base text-blue-800 tabular-nums sm:text-xl">
               {item.years}
             </p>
 
@@ -73,15 +73,15 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
               <span
                 className={
                   current
-                    ? "flex size-10 shrink-0 items-center justify-center rounded-full bg-teal-700 text-white ring-4 ring-teal-100"
-                    : "flex size-10 shrink-0 items-center justify-center rounded-full border border-teal-200 bg-teal-50 text-teal-700"
+                    ? "flex size-10 shrink-0 items-center justify-center rounded-full bg-blue-700 text-white ring-4 ring-blue-100"
+                    : "flex size-10 shrink-0 items-center justify-center rounded-full border border-blue-200 bg-blue-50 text-blue-700"
                 }
               >
                 {icons[item.kind]}
               </span>
               <span
                 aria-hidden="true"
-                className="my-1.5 w-0.5 flex-1 rounded-full bg-teal-100 [li:last-child_&]:hidden"
+                className="my-1.5 w-0.5 flex-1 rounded-full bg-blue-100 [li:last-child_&]:hidden"
               />
             </div>
 
@@ -94,11 +94,11 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
                 <p className="text-sm text-slate-600">{item.place}</p>
               )}
               <p className="mt-2">
-                <span className="inline-block rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-semibold text-teal-800">
+                <span className="inline-block rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-blue-800">
                   {item.kind}
                 </span>
                 {current && (
-                  <span className="ml-2 inline-block rounded-full bg-teal-700 px-2.5 py-0.5 text-xs font-semibold text-white">
+                  <span className="ml-2 inline-block rounded-full bg-blue-700 px-2.5 py-0.5 text-xs font-semibold text-white">
                     Současnost
                   </span>
                 )}

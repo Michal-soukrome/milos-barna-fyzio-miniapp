@@ -68,13 +68,13 @@ export default function PrivacyPage() {
             která při výslovném požadavku na vysvětlení hledá ve zveřejněných
             pacientských radách, diagnózách a článcích. Pokud nenajde vhodný
             obsah, může model nabídnout stručné obecné zdravotní informace;
-            nejsou obsahem kliniky ani ověřeny lékařem. Model nevytváří
-            diagnózu ani individuální léčebné, pohybové či lékové doporučení.
-            Při dotazu, na který nelze bezpečně odpovědět, se vysvětlení
-            nezobrazí. Nejde o vyhledávání na webu. Aplikace text neukládá do
-            vlastní databáze. Provozní záznamy serveru a poskytovatelů se řídí
-            jejich nastavením a aktuálními podmínkami. Nezadávejte jméno ani
-            jiné údaje, podle kterých vás lze určit.
+            nejsou obsahem kliniky ani ověřeny lékařem. Model nevytváří diagnózu
+            ani individuální léčebné, pohybové či lékové doporučení. Při dotazu,
+            na který nelze bezpečně odpovědět, se vysvětlení nezobrazí. Nejde o
+            vyhledávání na webu. Aplikace text neukládá do vlastní databáze.
+            Provozní záznamy serveru a poskytovatelů se řídí jejich nastavením a
+            aktuálními podmínkami. Nezadávejte jméno ani jiné údaje, podle
+            kterých vás lze určit.
           </p>
 
           <h3 className="mt-5 font-semibold text-slate-800">
@@ -141,8 +141,8 @@ export default function PrivacyPage() {
               zpracovat text dotazu a veřejný text pacientských rad, diagnóz a
               článků. Na výslovnou žádost může vysvětlit nalezený schválený
               obsah, nebo při jeho nenalezení nabídnout obecné zdravotní
-              informace vytvořené AI, které nejsou obsahem kliniky ani
-              lékařsky ověřené.
+              informace vytvořené AI, které nejsou obsahem kliniky ani lékařsky
+              ověřené.
             </li>
             <li>
               <strong>Resend</strong> zajišťuje doručení e-mailu, který si
@@ -175,9 +175,9 @@ export default function PrivacyPage() {
             odeslání odkazu ani text vyhledávání ve vlastní databázi. Záznamy u
             Vercel, Resend a Cloudflare se řídí nastavením účtů a pravidly
             těchto služeb. Analytické údaje Google Analytics se uchovávají po
-            dobu nastavenou v příslušné analytické službě. Volba cookies
-            zůstává v localStorage, dokud ji nezměníte nebo nevymažete data
-            svého prohlížeče.
+            dobu nastavenou v příslušné analytické službě. Volba cookies zůstává
+            v localStorage, dokud ji nezměníte nebo nevymažete data svého
+            prohlížeče.
           </p>
         </section>
 
@@ -199,7 +199,7 @@ export default function PrivacyPage() {
               href="https://uoou.gov.cz/"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-teal-800 underline underline-offset-4"
+              className="font-semibold text-blue-800 underline underline-offset-4"
             >
               Úřadu pro ochranu osobních údajů
             </a>

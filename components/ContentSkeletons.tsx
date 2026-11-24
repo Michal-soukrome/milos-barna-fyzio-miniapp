@@ -41,7 +41,7 @@ export function PatientGuideListSkeleton() {
       </header>
 
       <div className="space-y-6">
-        <section className="rounded-2xl border border-teal-200 bg-teal-50 p-5 shadow-sm sm:p-6">
+        <section className="rounded-2xl border border-blue-200 bg-blue-50 p-5 shadow-sm sm:p-6">
           <SkeletonBlock className="h-7 w-1/2 max-w-xs" />
           <SkeletonBlock className="mt-4 h-4 w-full" />
           <SkeletonBlock className="mt-2 h-4 w-5/6" />

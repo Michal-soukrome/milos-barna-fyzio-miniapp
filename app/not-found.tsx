@@ -14,13 +14,13 @@ export default function NotFound() {
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link
             href="/"
-            className="inline-flex min-h-11 items-center rounded-xl bg-teal-800 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-900"
+            className="inline-flex min-h-11 items-center rounded-xl bg-blue-800 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-900"
           >
             Zpět na úvod
           </Link>
           <Link
             href="/poradna"
-            className="inline-flex min-h-11 items-center rounded-xl border border-teal-800 px-5 py-3 text-sm font-bold text-teal-900 transition-colors hover:bg-teal-50"
+            className="inline-flex min-h-11 items-center rounded-xl border border-blue-800 px-5 py-3 text-sm font-bold text-blue-900 transition-colors hover:bg-blue-50"
           >
             Rady a tipy
           </Link>
