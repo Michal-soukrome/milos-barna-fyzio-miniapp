@@ -41,7 +41,7 @@ export default async function DiagnosisPage({
           className="h-fit min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-10"
         >
           {categoryLabel && (
-            <p className="text-sm font-semibold text-teal-700">
+            <p className="w-fit rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-800 border border-teal-200">
               {categoryLabel}
             </p>
           )}

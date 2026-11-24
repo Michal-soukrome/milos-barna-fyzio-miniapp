@@ -62,13 +62,13 @@ export default async function ArticlePage({
         <article className="min-w-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
           <div className="flex flex-wrap items-center gap-2">
             {getArticleBodyPartLabel(article.bodyPart) && (
-              <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-800">
+              <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-800 border border-teal-200">
                 {getArticleBodyPartLabel(article.bodyPart)}
               </span>
             )}
             <time
               dateTime={article.publishedAt}
-              className="text-sm font-semibold text-teal-700"
+              className="text-xs font-semibold text-teal-700"
             >
               {new Date(article.publishedAt).toLocaleDateString("cs-CZ")}
             </time>
